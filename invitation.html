@@ -171,36 +171,57 @@
     .lt-timeline-event { font-size:0.8rem; color:var(--text); font-weight:500; }
 
     /* ── ENTOURAGE ── */
-    #entourage { background: #e8e0d5; }
-    #entourage .lt-section-header { background: linear-gradient(135deg, #2a1a0e, #4a3020); }
+    #entourage { background: linear-gradient(160deg,#c8e6d0 0%,#a8d4b8 40%,#c0e0cc 100%); }
+    #entourage .lt-section-header { background: linear-gradient(135deg, #0d3322, #1e5238); }
     .ent-card-wrap { padding: 1.5rem 1rem 2rem; max-width: 600px; margin: 0 auto; }
     .ent-card {
-      background: #fdf8f0;
-      border: 1px solid rgba(74,50,30,0.12);
-      border-radius: 4px;
+      background: rgba(255,255,255,0.92);
+      border: 1.5px solid rgba(74,122,90,0.2);
+      border-radius: 6px;
       padding: 2rem 1.5rem;
-      box-shadow: 0 4px 24px rgba(74,50,30,0.12), inset 0 0 0 6px rgba(74,50,30,0.04);
+      box-shadow: 0 8px 40px rgba(13,51,34,0.15), inset 0 0 0 6px rgba(74,122,90,0.04);
       display: flex; flex-direction: column; align-items: center; gap: 1.4rem;
     }
-    .ent-script { font-family:'Great Vibes',cursive; font-size:clamp(1.3rem,4vw,1.8rem); color:#3a2010; line-height:1; text-align:center; }
-    .ent-name-line { font-size:clamp(0.78rem,2vw,0.92rem); color:#2a1a0e; text-align:center; line-height:1.6; }
-    .ent-rule { width:min(260px,70%); height:1px; background:linear-gradient(to right,transparent,rgba(74,50,30,0.2),transparent); }
-    .ent-sponsor-title { font-size:0.62rem; font-weight:700; letter-spacing:0.25em; text-transform:uppercase; color:#4a3020; text-align:center; }
+    .ent-script { font-family:'Great Vibes',cursive; font-size:clamp(1.3rem,4vw,1.8rem); color:#0d3322; line-height:1; text-align:center; }
+    .ent-name-line { font-size:clamp(0.78rem,2vw,0.92rem); color:#1e5238; text-align:center; line-height:1.6; }
+    .ent-rule { width:min(260px,70%); height:1px; background:linear-gradient(to right,transparent,rgba(74,122,90,0.3),transparent); }
+    .ent-sponsor-title { font-size:0.62rem; font-weight:700; letter-spacing:0.25em; text-transform:uppercase; color:#1e5238; text-align:center; }
     .ent-two-col { display:grid; grid-template-columns:1fr 1fr; gap:0.3rem 2rem; width:100%; }
-    .ent-two-col-header { font-family:'Great Vibes',cursive; font-size:1.2rem; color:#4a3020; text-align:center; grid-column:span 1; padding-bottom:0.3rem; border-bottom:1px solid rgba(74,50,30,0.15); }
-    .ent-two-col-name { font-size:0.8rem; color:#2a1a0e; text-align:center; padding:0.15rem 0; }
+    .ent-two-col-header { font-family:'Great Vibes',cursive; font-size:1.2rem; color:#1e5238; text-align:center; grid-column:span 1; padding-bottom:0.3rem; border-bottom:1px solid rgba(74,122,90,0.2); }
+    .ent-two-col-name { font-size:0.8rem; color:#0d3322; text-align:center; padding:0.15rem 0; }
     .ent-side-by-side { display:grid; grid-template-columns:1fr 1fr; gap:1rem; width:100%; }
     .ent-role-block { display:flex; flex-direction:column; align-items:center; gap:0.3rem; }
-    .ent-role-label { font-family:'Great Vibes',cursive; font-size:1.25rem; color:#4a3020; }
-    .ent-role-name { font-size:0.82rem; color:#2a1a0e; text-align:center; line-height:1.5; }
+    .ent-role-label { font-family:'Great Vibes',cursive; font-size:1.25rem; color:#1e5238; }
+    .ent-role-name { font-size:0.82rem; color:#0d3322; text-align:center; line-height:1.5; }
     .ent-kids-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:0.8rem; width:100%; }
     .ent-kid-block { display:flex; flex-direction:column; align-items:center; gap:0.2rem; }
-    .ent-kid-label { font-family:'Great Vibes',cursive; font-size:1rem; color:#4a3020; text-align:center; }
-    .ent-kid-name { font-size:0.75rem; color:#2a1a0e; text-align:center; line-height:1.5; }
+    .ent-kid-label { font-family:'Great Vibes',cursive; font-size:1rem; color:#1e5238; text-align:center; }
+    .ent-kid-name { font-size:0.75rem; color:#0d3322; text-align:center; line-height:1.5; }
     .ent-secondary { display:grid; grid-template-columns:repeat(3,1fr); gap:0.8rem; width:100%; }
     .ent-sec-block { display:flex; flex-direction:column; align-items:center; gap:0.2rem; }
-    .ent-sec-label { font-family:'Great Vibes',cursive; font-size:1rem; color:#4a3020; }
-    .ent-sec-name { font-size:0.75rem; color:#2a1a0e; text-align:center; line-height:1.5; }
+    .ent-sec-label { font-family:'Great Vibes',cursive; font-size:1rem; color:#1e5238; }
+    .ent-sec-name { font-size:0.75rem; color:#0d3322; text-align:center; line-height:1.5; }
+
+    /* ── ATTIRE GUIDE ── */
+    #attire { background: linear-gradient(160deg,#edf7f0 0%,#f4faf5 50%,#edf7f0 100%); scroll-margin-top:52px; }
+    .attire-card-wrap { padding: 1.5rem 1rem 2.5rem; max-width: 560px; margin: 0 auto; }
+    .attire-card {
+      background: #fff; border-radius: 6px; padding: 2rem 1.5rem;
+      border: 1px solid rgba(74,122,90,0.15);
+      box-shadow: 0 6px 30px rgba(13,51,34,0.08);
+      display: flex; flex-direction: column; align-items: center; gap: 1.2rem; text-align: center;
+    }
+    .attire-script { font-family:'Great Vibes',cursive; font-size:clamp(2rem,6vw,2.8rem); color:#0d3322; line-height:1; }
+    .attire-text { font-size:0.88rem; color:var(--text-mid); line-height:1.8; max-width:380px; }
+    .attire-swatches { display:flex; gap:0.5rem; align-items:center; justify-content:center; margin:0.4rem 0; }
+    .attire-swatch { width:44px; height:44px; border-radius:6px; box-shadow:0 2px 8px rgba(0,0,0,0.12); }
+    .attire-palette-labels { display:flex; gap:0.5rem; }
+    .attire-swatch-label { font-size:0.5rem; text-align:center; color:var(--text-mid); width:44px; letter-spacing:0.05em; }
+    .attire-note { font-size:0.78rem; color:var(--text-mid); font-style:italic; padding:0.8rem 1rem; background:rgba(74,122,90,0.05); border-radius:12px; border-left:3px solid var(--rose-light); text-align:left; width:100%; }
+    .attire-people { display:flex; gap:1.5rem; justify-content:center; flex-wrap:wrap; margin-top:0.4rem; }
+    .attire-person { display:flex; flex-direction:column; align-items:center; gap:0.4rem; }
+    .attire-person-icon { font-size:2.8rem; line-height:1; }
+    .attire-person-label { font-size:0.65rem; font-weight:600; letter-spacing:0.1em; text-transform:uppercase; color:var(--rose); }
     /* keep these for other sections */
     .lt-party-name-pill { font-size:0.88rem; color:var(--wine); padding:0.3rem 0; border-bottom:1px solid rgba(74,122,90,0.06); display:block; }
     .lt-party-name-pill:last-child { border-bottom:none; }
@@ -353,6 +374,7 @@
   <a href="#details"><i class="fa-solid fa-circle-info"></i> Details</a>
   <a href="#entourage"><i class="fa-solid fa-people-group"></i> Entourage</a>
   <a href="#lt-rsvp"><i class="fa-solid fa-envelope-open-text"></i> RSVP</a>
+  <a href="#attire"><i class="fa-solid fa-shirt"></i> Attire</a>
   <a href="#faq"><i class="fa-solid fa-circle-question"></i> FAQ</a>
 </nav>
 
@@ -611,6 +633,57 @@
   </div>
 </section>
 
+<!-- ── ATTIRE GUIDE ── -->
+<section id="attire">
+  <div class="lt-section-header">
+    <span class="lt-eyebrow">dress to impress</span>
+    <h2><i class="fa-solid fa-shirt"></i> Attire Guide</h2>
+  </div>
+  <div class="attire-card-wrap">
+    <div class="attire-card">
+      <p class="attire-script reveal">Dress Code</p>
+      <p class="attire-text reveal">We invite our family and friends to dress in our color palette for cohesive and beautiful photos together! 💚</p>
+
+      <!-- Color swatches -->
+      <div class="reveal" style="display:flex;flex-direction:column;align-items:center;gap:0.5rem;">
+        <div class="attire-swatches">
+          <div class="attire-swatch" style="background:#8fba9a;" title="Light Sage"></div>
+          <div class="attire-swatch" style="background:#6a9a7a;" title="Sage Green"></div>
+          <div class="attire-swatch" style="background:#4a7a5a;" title="Forest Green"></div>
+          <div class="attire-swatch" style="background:#35583d;" title="Dark Forest"></div>
+          <div class="attire-swatch" style="background:#0d4433;" title="Deep Green"></div>
+        </div>
+        <div class="attire-palette-labels">
+          <span class="attire-swatch-label">Light<br>Sage</span>
+          <span class="attire-swatch-label">Sage<br>Green</span>
+          <span class="attire-swatch-label">Forest<br>Green</span>
+          <span class="attire-swatch-label">Dark<br>Forest</span>
+          <span class="attire-swatch-label">Deep<br>Green</span>
+        </div>
+      </div>
+
+      <!-- People icons -->
+      <div class="attire-people reveal">
+        <div class="attire-person">
+          <span class="attire-person-icon" style="color:#35583d;">👔</span>
+          <span class="attire-person-label">Gentlemen</span>
+          <span style="font-size:0.72rem;color:var(--text-mid);">Barong / Polo / Suit</span>
+        </div>
+        <div class="attire-person">
+          <span class="attire-person-icon" style="color:#6a9a7a;">👗</span>
+          <span class="attire-person-label">Ladies</span>
+          <span style="font-size:0.72rem;color:var(--text-mid);">Dress / Gown / Terno</span>
+        </div>
+      </div>
+
+      <p class="attire-note reveal"><i class="fa-solid fa-circle-info" style="color:var(--rose);margin-right:0.4rem;"></i><strong>Please avoid white</strong> — reserved for the bride. Any shade of green from the palette above is most welcome! 🌿</p>
+
+      <div class="ent-rule reveal"></div>
+      <p class="attire-text reveal" style="font-size:0.78rem;"><i class="fa-solid fa-star" style="color:var(--gold);margin-right:0.3rem;"></i> Attire: <strong>Smart Casual to Formal</strong></p>
+    </div>
+  </div>
+</section>
+
 <!-- ── FAQ ── -->
 <section id="faq" style="scroll-margin-top:52px;background:linear-gradient(160deg,#f9fdf9 0%,#edf7f0 50%,#f9fdf9 100%);">
   <div class="lt-section-header">
@@ -818,7 +891,7 @@ reveals.forEach(el=>io.observe(el));
 
 // ── ACTIVE NAV ──
 const navLinks = document.querySelectorAll('#pill-nav a[href^="#"]');
-const sectionIds = ['welcome','story','gallery','details','entourage','lt-rsvp','faq','save-the-date'];
+const sectionIds = ['welcome','story','gallery','details','entourage','lt-rsvp','attire','faq','save-the-date'];
 const sections = sectionIds.map(id=>document.getElementById(id)).filter(Boolean);
 const navIO = new IntersectionObserver(entries=>{
   entries.forEach(e=>{
