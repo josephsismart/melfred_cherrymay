@@ -274,19 +274,86 @@
     .lt-swatch-name { font-size:0.55rem; font-weight:600; letter-spacing:0.1em; text-transform:uppercase; color:var(--text-mid); }
 
     /* ── ENTOURAGE ── */
-    .lt-ent-group-title { font-size:0.7rem; font-weight:700; letter-spacing:0.2em; text-transform:uppercase; color:var(--rose); margin-bottom:0.8rem; }
-    .lt-ent-parents { display:grid; grid-template-columns:1fr 1fr; gap:1rem; width:100%; }
-    .lt-ent-card { background:#fff; border-radius:16px; padding:1.5rem; text-align:center; box-shadow:0 4px 20px rgba(212,84,122,0.08); border:1px solid rgba(212,84,122,0.1); }
-    .lt-ent-card-title { font-size:0.6rem; font-weight:700; letter-spacing:0.2em; text-transform:uppercase; color:var(--rose); margin-bottom:0.5rem; }
-    .lt-ent-card-name { font-family:'Playfair Display',serif; font-size:0.95rem; font-weight:700; color:var(--wine); line-height:1.5; }
-    .lt-sponsors-grid { display:grid; grid-template-columns:1fr 1fr; gap:0.4rem 2rem; width:100%; max-width:480px; text-align:left; }
-    .lt-sponsor-name { font-size:0.9rem; color:var(--text-mid); padding:0.3rem 0; border-bottom:1px solid rgba(212,84,122,0.08); display:flex; align-items:center; gap:0.5rem; }
-    .lt-sponsor-name i { color:var(--rose); font-size:0.65rem; }
-    .lt-bridal-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(140px,1fr)); gap:1rem; width:100%; }
-    .lt-bridal-card { background:#fff; border-radius:16px; padding:1.2rem; text-align:center; box-shadow:0 4px 16px rgba(212,84,122,0.07); border:1px solid rgba(212,84,122,0.1); }
-    .lt-bridal-card .role { font-size:0.58rem; font-weight:700; letter-spacing:0.15em; text-transform:uppercase; color:var(--rose); margin-bottom:0.4rem; }
-    .lt-bridal-card .name { font-size:0.88rem; color:var(--wine); line-height:1.5; font-weight:500; }
-    .lt-ent-divider { width:100%; height:1px; background:rgba(212,84,122,0.1); margin:1.2rem 0; }
+    .lt-ent-group-title {
+      font-size:0.75rem; font-weight:700; letter-spacing:0.25em; text-transform:uppercase;
+      color:var(--rose); margin-bottom:1rem;
+      display:inline-flex; align-items:center; gap:0.5rem;
+      background:rgba(212,84,122,0.07); padding:0.5rem 1.4rem; border-radius:50px;
+      border:1px solid rgba(212,84,122,0.15);
+    }
+    .lt-ent-parents { display:grid; grid-template-columns:1fr 1fr; gap:1.2rem; width:100%; }
+    .lt-ent-card {
+      background:linear-gradient(135deg,#fff 60%,#fef0f4);
+      border-radius:20px; padding:1.8rem 1.5rem; text-align:center;
+      box-shadow:0 6px 28px rgba(212,84,122,0.1); border:1px solid rgba(212,84,122,0.12);
+      transition:transform 0.3s,box-shadow 0.3s;
+    }
+    .lt-ent-card:hover { transform:translateY(-4px); box-shadow:0 12px 36px rgba(212,84,122,0.18); }
+    .lt-ent-card-title { font-size:0.65rem; font-weight:700; letter-spacing:0.2em; text-transform:uppercase; color:var(--rose); margin-bottom:0.7rem; }
+    .lt-ent-card-name { font-family:'Playfair Display',serif; font-size:1.05rem; font-weight:700; color:var(--wine); line-height:1.6; }
+
+    /* Sponsors — pair layout */
+    .lt-sponsors-pairs { display:flex; flex-direction:column; gap:0.6rem; width:100%; max-width:560px; }
+    .lt-sponsor-pair { display:grid; grid-template-columns:1fr 1fr; gap:0.6rem; }
+    .lt-sponsor-pill {
+      background:#fff; border-radius:50px; padding:0.55rem 1rem;
+      font-size:0.92rem; color:var(--text-mid); font-weight:500;
+      box-shadow:0 2px 10px rgba(212,84,122,0.07); border:1px solid rgba(212,84,122,0.1);
+      display:flex; align-items:center; gap:0.5rem; transition:all 0.25s;
+    }
+    .lt-sponsor-pill:hover { background:rgba(212,84,122,0.06); border-color:rgba(212,84,122,0.3); transform:scale(1.02); }
+    .lt-sponsor-pill i { color:var(--rose); font-size:0.6rem; flex-shrink:0; }
+    .lt-sponsor-pair-label { font-size:0.58rem; font-weight:700; letter-spacing:0.15em; text-transform:uppercase; color:rgba(212,84,122,0.5); text-align:center; margin-bottom:0.2rem; }
+
+    /* Bridal party — individual cards */
+    .lt-bridal-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(155px,1fr)); gap:1rem; width:100%; }
+    .lt-bridal-card {
+      background:linear-gradient(160deg,#fff 60%,#fef5f8);
+      border-radius:20px; padding:1.4rem 1rem; text-align:center;
+      box-shadow:0 4px 18px rgba(212,84,122,0.08); border:1px solid rgba(212,84,122,0.1);
+      transition:transform 0.3s,box-shadow 0.3s;
+    }
+    .lt-bridal-card:hover { transform:translateY(-5px) rotate(0.5deg); box-shadow:0 10px 30px rgba(212,84,122,0.18); }
+    .lt-bridal-card .role {
+      font-size:0.6rem; font-weight:700; letter-spacing:0.18em; text-transform:uppercase;
+      color:var(--rose); margin-bottom:0.6rem;
+      background:rgba(212,84,122,0.08); padding:0.25rem 0.7rem; border-radius:50px;
+      display:inline-block;
+    }
+    .lt-bridal-card .name { font-size:0.95rem; color:var(--wine); line-height:1.7; font-weight:600; font-family:'Playfair Display',serif; }
+
+    /* Groomsmen/Bridesmaids individual pill list */
+    .lt-party-grid { display:grid; grid-template-columns:1fr 1fr; gap:1.2rem; width:100%; }
+    .lt-party-card {
+      background:linear-gradient(135deg,#fff,#fef0f4);
+      border-radius:20px; padding:1.5rem; text-align:center;
+      box-shadow:0 4px 20px rgba(212,84,122,0.09); border:1px solid rgba(212,84,122,0.12);
+    }
+    .lt-party-card .role {
+      font-size:0.65rem; font-weight:700; letter-spacing:0.2em; text-transform:uppercase;
+      color:var(--rose); margin-bottom:1rem;
+      border-bottom:1px solid rgba(212,84,122,0.12); padding-bottom:0.6rem;
+      display:flex; align-items:center; justify-content:center; gap:0.4rem;
+    }
+    .lt-party-name-pill {
+      font-size:0.9rem; color:var(--wine); font-weight:500;
+      padding:0.35rem 0; border-bottom:1px solid rgba(212,84,122,0.06);
+      display:block; transition:color 0.2s;
+    }
+    .lt-party-name-pill:last-child { border-bottom:none; }
+    .lt-party-name-pill:hover { color:var(--rose); }
+
+    .lt-ent-divider {
+      width:100%; display:flex; align-items:center; gap:1rem; margin:1.4rem 0;
+    }
+    .lt-ent-divider::before,.lt-ent-divider::after { content:''; flex:1; height:1px; background:linear-gradient(to right,transparent,rgba(212,84,122,0.2),transparent); }
+    .lt-ent-divider-icon { color:var(--rose); font-size:0.8rem; opacity:0.6; }
+
+    /* SCROLL ANIMATIONS */
+    .reveal-left { opacity:0; transform:translateX(-40px); transition:opacity 0.8s ease,transform 0.8s ease; }
+    .reveal-right { opacity:0; transform:translateX(40px); transition:opacity 0.8s ease,transform 0.8s ease; }
+    .reveal-scale { opacity:0; transform:scale(0.88); transition:opacity 0.7s ease,transform 0.7s ease; }
+    .reveal-left.visible,.reveal-right.visible,.reveal-scale.visible { opacity:1; transform:none; }
 
     /* ── FAQ ── */
     .lt-faq-list { display:flex; flex-direction:column; gap:1rem; width:100%; max-width:620px; text-align:left; }
@@ -660,7 +727,7 @@
 
     <!-- Music -->
     <div class="music-btn-wrap">
-      <span class="music-arc-text"><i class="fa-solid fa-music"></i> &nbsp; TAP THE SOUND &nbsp; <i class="fa-solid fa-music"></i></span>
+      <span class="music-arc-text"><i class="fa-solid fa-music"></i> &nbsp; One Love · Acel Bisa &nbsp; <i class="fa-solid fa-music"></i></span>
       <button class="music-btn" id="musicBtn" onclick="toggleMusic()"><i class="fa-solid fa-play" id="musicIcon"></i></button>
     </div>
 
@@ -712,9 +779,9 @@
         <div class="lt-detail-card">
           <div class="lt-detail-card-icon"><i class="fa-solid fa-church"></i></div>
           <div class="lt-detail-card-title">Ceremony Venue</div>
-          <div class="lt-detail-card-name">Saint Joseph Cathedral</div>
+          <div class="lt-detail-card-name">Birhen sa Kasilak<br>Mindanao Shrine Parish</div>
           <div class="lt-detail-card-addr">Butuan City, Agusan del Norte<br>Philippines</div>
-          <a class="lt-map-btn" href="https://maps.google.com/?q=Saint+Joseph+Cathedral+Butuan+City" target="_blank"><i class="fa-solid fa-location-dot"></i> View Map</a>
+          <a class="lt-map-btn" href="https://maps.google.com/?q=Birhen+sa+Kasilak+Mindanao+Shrine+Parish+Butuan+City" target="_blank"><i class="fa-solid fa-location-dot"></i> View Map</a>
         </div>
         <div class="lt-detail-card">
           <div class="lt-detail-card-icon"><i class="fa-solid fa-champagne-glasses"></i></div>
@@ -727,10 +794,10 @@
 
       <p class="lt-eyebrow reveal"><i class="fa-regular fa-clock"></i> &nbsp; Event Timeline</p>
       <div class="lt-timeline reveal">
-        <div class="lt-tl-item"><div class="lt-tl-time">1:30 PM</div><div class="lt-tl-dot"></div><div class="lt-tl-event">Guest Arrival</div></div>
-        <div class="lt-tl-item"><div class="lt-tl-time">2:00 PM</div><div class="lt-tl-dot"></div><div class="lt-tl-event">Wedding Ceremony</div></div>
-        <div class="lt-tl-item"><div class="lt-tl-time">3:30 PM</div><div class="lt-tl-dot"></div><div class="lt-tl-event">Church Photo Session</div></div>
-        <div class="lt-tl-item"><div class="lt-tl-time">4:00 PM</div><div class="lt-tl-dot"></div><div class="lt-tl-event">Reception at The Pavilion at the Watergate</div></div>
+        <div class="lt-tl-item"><div class="lt-tl-time">12:30 PM</div><div class="lt-tl-dot"></div><div class="lt-tl-event">Guest Arrival</div></div>
+        <div class="lt-tl-item"><div class="lt-tl-time">1:00 PM</div><div class="lt-tl-dot"></div><div class="lt-tl-event">Wedding Ceremony</div></div>
+        <div class="lt-tl-item"><div class="lt-tl-time">2:30 PM</div><div class="lt-tl-dot"></div><div class="lt-tl-event">Church Photo Session</div></div>
+        <div class="lt-tl-item"><div class="lt-tl-time">3:30 PM</div><div class="lt-tl-dot"></div><div class="lt-tl-event">Reception at The Pavilion at the Watergate</div></div>
         <div class="lt-tl-item"><div class="lt-tl-time">7:00 PM</div><div class="lt-tl-dot"></div><div class="lt-tl-event">Send Off 🎊</div></div>
       </div>
 
@@ -749,51 +816,146 @@
   <section id="entourage">
     <div class="lt-section-header"><h2><i class="fa-solid fa-people-group"></i> Entourage</h2></div>
     <div class="lt-content">
-      <p class="lt-ent-group-title reveal"><i class="fa-solid fa-users"></i> &nbsp; Parents of the Groom &amp; Bride</p>
-      <div class="lt-ent-parents reveal">
-        <div class="lt-ent-card"><div class="lt-ent-card-title"><i class="fa-solid fa-ring"></i> Parents of the Groom</div><div class="lt-ent-card-name">Mr. Freddie T. Espijon<br>&amp; Mrs. Imelda J. Espijon</div></div>
-        <div class="lt-ent-card"><div class="lt-ent-card-title"><i class="fa-solid fa-heart"></i> Parents of the Bride</div><div class="lt-ent-card-name">Mr. Rogelio G. Malig-on<br>&amp; the late Mrs. Josephine B. Malig-on</div></div>
+
+      <!-- Parents -->
+      <p class="lt-ent-group-title reveal-scale"><i class="fa-solid fa-house-heart"></i> &nbsp; Parents</p>
+      <div class="lt-ent-parents">
+        <div class="lt-ent-card reveal-left">
+          <div class="lt-ent-card-title"><i class="fa-solid fa-ring"></i> Parents of the Groom</div>
+          <div class="lt-ent-card-name">Mr. Freddie T. Espijon<br>&amp; Mrs. Imelda J. Espijon</div>
+        </div>
+        <div class="lt-ent-card reveal-right">
+          <div class="lt-ent-card-title"><i class="fa-solid fa-heart"></i> Parents of the Bride</div>
+          <div class="lt-ent-card-name">Mr. Rogelio G. Malig-on<br>&amp; the late Mrs. Josephine B. Malig-on</div>
+        </div>
       </div>
 
-      <div class="lt-ent-divider"></div>
-      <p class="lt-ent-group-title reveal"><i class="fa-solid fa-star"></i> &nbsp; Principal Sponsors</p>
-      <div class="lt-sponsors-grid reveal">
-        <div class="lt-sponsor-name"><i class="fa-solid fa-circle-dot"></i> Gregorio Amora</div>
-        <div class="lt-sponsor-name"><i class="fa-solid fa-circle-dot"></i> Cecilia Amora</div>
-        <div class="lt-sponsor-name"><i class="fa-solid fa-circle-dot"></i> Dominador Cabiguing</div>
-        <div class="lt-sponsor-name"><i class="fa-solid fa-circle-dot"></i> Flordeliza Cabiguing</div>
-        <div class="lt-sponsor-name"><i class="fa-solid fa-circle-dot"></i> Jonathan Tiongson</div>
-        <div class="lt-sponsor-name"><i class="fa-solid fa-circle-dot"></i> Rebecca Gingo</div>
-        <div class="lt-sponsor-name"><i class="fa-solid fa-circle-dot"></i> Feliciano Culdora</div>
-        <div class="lt-sponsor-name"><i class="fa-solid fa-circle-dot"></i> Lorna Culdora</div>
-        <div class="lt-sponsor-name"><i class="fa-solid fa-circle-dot"></i> Fernan Rivero</div>
-        <div class="lt-sponsor-name"><i class="fa-solid fa-circle-dot"></i> Nathalie Pasa</div>
-        <div class="lt-sponsor-name"><i class="fa-solid fa-circle-dot"></i> Romulo Bayotas</div>
-        <div class="lt-sponsor-name"><i class="fa-solid fa-circle-dot"></i> Marichu Cabiguin</div>
+      <div class="lt-ent-divider reveal"><span class="lt-ent-divider-icon"><i class="fa-solid fa-star"></i></span></div>
+
+      <!-- Principal Sponsors -->
+      <p class="lt-ent-group-title reveal-scale"><i class="fa-solid fa-star"></i> &nbsp; Principal Sponsors (Ninong &amp; Ninang)</p>
+      <div class="lt-sponsors-pairs reveal">
+        <p style="font-size:0.6rem;letter-spacing:0.2em;text-transform:uppercase;color:rgba(212,84,122,0.5);margin-bottom:0.3rem;text-align:center">Ninong &nbsp;·&nbsp; Ninang</p>
+        <div class="lt-sponsor-pair">
+          <div class="lt-sponsor-pill"><i class="fa-solid fa-circle-dot"></i> Gregorio Amora</div>
+          <div class="lt-sponsor-pill"><i class="fa-solid fa-circle-dot"></i> Cecilia Amora</div>
+        </div>
+        <div class="lt-sponsor-pair">
+          <div class="lt-sponsor-pill"><i class="fa-solid fa-circle-dot"></i> Dominador Cabiguing</div>
+          <div class="lt-sponsor-pill"><i class="fa-solid fa-circle-dot"></i> Flordeliza Cabiguing</div>
+        </div>
+        <div class="lt-sponsor-pair">
+          <div class="lt-sponsor-pill"><i class="fa-solid fa-circle-dot"></i> Jonathan Tiongson</div>
+          <div class="lt-sponsor-pill"><i class="fa-solid fa-circle-dot"></i> Rebecca Gingo</div>
+        </div>
+        <div class="lt-sponsor-pair">
+          <div class="lt-sponsor-pill"><i class="fa-solid fa-circle-dot"></i> Feliciano Culdora</div>
+          <div class="lt-sponsor-pill"><i class="fa-solid fa-circle-dot"></i> Lorna Culdora</div>
+        </div>
+        <div class="lt-sponsor-pair">
+          <div class="lt-sponsor-pill"><i class="fa-solid fa-circle-dot"></i> Fernan Rivero</div>
+          <div class="lt-sponsor-pill"><i class="fa-solid fa-circle-dot"></i> Nathalie Pasa</div>
+        </div>
+        <div class="lt-sponsor-pair">
+          <div class="lt-sponsor-pill"><i class="fa-solid fa-circle-dot"></i> Romulo Bayotas</div>
+          <div class="lt-sponsor-pill"><i class="fa-solid fa-circle-dot"></i> Marichu Cabiguin</div>
+        </div>
       </div>
 
-      <div class="lt-ent-divider"></div>
-      <p class="lt-ent-group-title reveal"><i class="fa-solid fa-wand-sparkles"></i> &nbsp; Bridal Party</p>
+      <div class="lt-ent-divider reveal"><span class="lt-ent-divider-icon"><i class="fa-solid fa-crown"></i></span></div>
+
+      <!-- Best Man & Maid of Honor -->
+      <p class="lt-ent-group-title reveal-scale"><i class="fa-solid fa-crown"></i> &nbsp; Honor Attendants</p>
+      <div class="lt-bridal-grid reveal" style="max-width:400px;">
+        <div class="lt-bridal-card">
+          <div class="role"><i class="fa-solid fa-crown"></i> Best Man</div>
+          <div class="name">Gilbert Gaballo</div>
+        </div>
+        <div class="lt-bridal-card">
+          <div class="role"><i class="fa-solid fa-crown"></i> Maid of Honor</div>
+          <div class="name">Charise Malig-on</div>
+        </div>
+      </div>
+
+      <div class="lt-ent-divider reveal"><span class="lt-ent-divider-icon"><i class="fa-solid fa-wand-sparkles"></i></span></div>
+
+      <!-- Groomsmen & Bridesmaids -->
+      <p class="lt-ent-group-title reveal-scale"><i class="fa-solid fa-wand-sparkles"></i> &nbsp; Bridal Party</p>
+      <div class="lt-party-grid reveal">
+        <div class="lt-party-card">
+          <div class="role"><i class="fa-solid fa-user-tie"></i> Groomsmen</div>
+          <span class="lt-party-name-pill">Ralph Gorgonio</span>
+          <span class="lt-party-name-pill">John Jewell Diño</span>
+          <span class="lt-party-name-pill">Ronald Estrada</span>
+          <span class="lt-party-name-pill">Frenzel Bluez Malig-on</span>
+          <span class="lt-party-name-pill">Freddie Espijon Jr</span>
+          <span class="lt-party-name-pill">Jay Mclain Digamon</span>
+          <span class="lt-party-name-pill">Richie Tampan</span>
+          <span class="lt-party-name-pill">Gyro Culdora</span>
+        </div>
+        <div class="lt-party-card">
+          <div class="role"><i class="fa-solid fa-spa"></i> Bridesmaids</div>
+          <span class="lt-party-name-pill">Emmylou Grace Berdera</span>
+          <span class="lt-party-name-pill">Faye Sibayan</span>
+          <span class="lt-party-name-pill">Dianna Rose Castillo</span>
+          <span class="lt-party-name-pill">Mary Grace Ramira</span>
+          <span class="lt-party-name-pill">Rose Ann Baron</span>
+          <span class="lt-party-name-pill">Jeandy Espijon</span>
+          <span class="lt-party-name-pill">Vanessa Endozo</span>
+          <span class="lt-party-name-pill">Joliza Navin Malig-on</span>
+        </div>
+      </div>
+
+      <div class="lt-ent-divider reveal"><span class="lt-ent-divider-icon"><i class="fa-solid fa-child"></i></span></div>
+
+      <!-- Secondary Sponsors -->
+      <p class="lt-ent-group-title reveal-scale"><i class="fa-solid fa-link"></i> &nbsp; Secondary Sponsors</p>
       <div class="lt-bridal-grid reveal">
-        <div class="lt-bridal-card"><div class="role"><i class="fa-solid fa-crown"></i> Best Man</div><div class="name">Gilbert Gaballo</div></div>
-        <div class="lt-bridal-card"><div class="role"><i class="fa-solid fa-crown"></i> Maid of Honor</div><div class="name">Charise Malig-on</div></div>
-        <div class="lt-bridal-card"><div class="role"><i class="fa-solid fa-user-tie"></i> Groomsmen</div><div class="name">Ralph Gorgonio<br>John Jewell Diño<br>Ronald Estrada<br>Frenzel Bluez Malig-on<br>Freddie Espijon Jr<br>Jay Mclain Digamon<br>Richie Tampan<br>Gyro Culdora</div></div>
-        <div class="lt-bridal-card"><div class="role"><i class="fa-solid fa-spa"></i> Bridesmaids</div><div class="name">Emmylou Grace Berdera<br>Faye Sibayan<br>Dianna Rose Castillo<br>Mary Grace Ramira<br>Rose Ann Baron<br>Jeandy Espijon<br>Vanessa Endozo<br>Joliza Navin Malig-on</div></div>
+        <div class="lt-bridal-card">
+          <div class="role"><i class="fa-solid fa-link"></i> Cord</div>
+          <div class="name">Mr. Ariel Amora<br><span style="font-size:0.8em;opacity:0.7">&amp; Mrs. Carenna Amora</span></div>
+        </div>
+        <div class="lt-bridal-card">
+          <div class="role"><i class="fa-solid fa-vest"></i> Veil</div>
+          <div class="name">Mr. Jared Culdora<br><span style="font-size:0.8em;opacity:0.7">&amp; Mrs. Amor Culdora</span></div>
+        </div>
+        <div class="lt-bridal-card">
+          <div class="role"><i class="fa-solid fa-fire-flame-curved"></i> Candle</div>
+          <div class="name">Mr. Malvin Malig-on<br><span style="font-size:0.8em;opacity:0.7">&amp; Mrs. Nadine Vera Malig-on</span></div>
+        </div>
       </div>
 
-      <div class="lt-ent-divider"></div>
-      <p class="lt-ent-group-title reveal"><i class="fa-solid fa-child"></i> &nbsp; Secondary Sponsors &amp; Kids</p>
+      <div class="lt-ent-divider reveal"><span class="lt-ent-divider-icon"><i class="fa-solid fa-star"></i></span></div>
+
+      <!-- Kids -->
+      <p class="lt-ent-group-title reveal-scale"><i class="fa-solid fa-child"></i> &nbsp; Kids Entourage</p>
       <div class="lt-bridal-grid reveal">
-        <div class="lt-bridal-card"><div class="role"><i class="fa-solid fa-link"></i> Cord</div><div class="name">Mr. Ariel Amora<br>&amp; Mrs. Carenna Amora</div></div>
-        <div class="lt-bridal-card"><div class="role"><i class="fa-solid fa-veil"></i> Veil</div><div class="name">Mr. Jared Culdora<br>&amp; Mrs. Amor Culdora</div></div>
-        <div class="lt-bridal-card"><div class="role"><i class="fa-solid fa-fire-flame-curved"></i> Candle</div><div class="name">Mr. Malvin Malig-on<br>&amp; Mrs. Nadine Vera Malig-on</div></div>
-        <div class="lt-bridal-card"><div class="role"><i class="fa-solid fa-ring"></i> Ring Bearer</div><div class="name">Gabe Sefrie Sismar</div></div>
-        <div class="lt-bridal-card"><div class="role"><i class="fa-solid fa-coins"></i> Coin Bearer</div><div class="name">Ethan Caleb Halina</div></div>
-        <div class="lt-bridal-card"><div class="role"><i class="fa-solid fa-book-bible"></i> Bible Bearer</div><div class="name">Bennison Paul Malig-on</div></div>
-        <div class="lt-bridal-card"><div class="role"><i class="fa-solid fa-seedling"></i> Little Groom</div><div class="name">Jhonrex Espijon</div></div>
-        <div class="lt-bridal-card"><div class="role"><i class="fa-solid fa-star"></i> Little Bride</div><div class="name">Brianna Grace Nutiu</div></div>
-        <div class="lt-bridal-card"><div class="role"><i class="fa-solid fa-spa"></i> Flower Girls</div><div class="name">Salina Noelle Nutiu<br>Ameerah Olivia Homecillo<br>Ma. Celestine Aurea Cabusao</div></div>
+        <div class="lt-bridal-card">
+          <div class="role"><i class="fa-solid fa-seedling"></i> Little Groom</div>
+          <div class="name">Jhonrex Espijon</div>
+        </div>
+        <div class="lt-bridal-card">
+          <div class="role"><i class="fa-solid fa-star"></i> Little Bride</div>
+          <div class="name">Brianna Grace Nutiu</div>
+        </div>
+        <div class="lt-bridal-card">
+          <div class="role"><i class="fa-solid fa-ring"></i> Ring Bearer</div>
+          <div class="name">Gabe Sefrie Sismar</div>
+        </div>
+        <div class="lt-bridal-card">
+          <div class="role"><i class="fa-solid fa-coins"></i> Coin Bearer</div>
+          <div class="name">Ethan Caleb Halina</div>
+        </div>
+        <div class="lt-bridal-card">
+          <div class="role"><i class="fa-solid fa-book-bible"></i> Bible Bearer</div>
+          <div class="name">Bennison Paul Malig-on</div>
+        </div>
+        <div class="lt-bridal-card">
+          <div class="role"><i class="fa-solid fa-spa"></i> Flower Girls</div>
+          <div class="name">Salina Noelle Nutiu<br>Ameerah Olivia Homecillo<br>Ma. Celestine Aurea Cabusao</div>
+        </div>
       </div>
+
     </div>
   </section>
 
@@ -802,7 +964,7 @@
     <div class="lt-section-header"><h2><i class="fa-solid fa-circle-question"></i> FAQ</h2></div>
     <div class="lt-content">
       <div class="lt-faq-list">
-        <div class="lt-faq-item reveal"><div class="lt-faq-q"><i class="fa-regular fa-clock"></i> What time should I arrive?</div><div class="lt-faq-a">Please arrive by <strong>1:30 PM</strong> — at least 30 minutes before the ceremony starts at 2:00 PM. Early birds get the best seats! 😄</div></div>
+        <div class="lt-faq-item reveal"><div class="lt-faq-q"><i class="fa-regular fa-clock"></i> What time should I arrive?</div><div class="lt-faq-a">Please arrive by <strong>12:30 PM</strong> — at least 30 minutes before the ceremony starts at 1:00 PM. Early birds get the best seats! 😄</div></div>
         <div class="lt-faq-item reveal"><div class="lt-faq-q"><i class="fa-solid fa-user-plus"></i> Can I bring a plus one?</div><div class="lt-faq-a">We're keeping things intimate! If a plus one was included in your invite, their name will be specified. We appreciate your understanding. 🙏</div></div>
         <div class="lt-faq-item reveal"><div class="lt-faq-q"><i class="fa-solid fa-shirt"></i> What should I wear?</div><div class="lt-faq-a">Formal attire please! Stick to our palette — champagne, mocha, ivory, or dark formal — for gorgeous group photos. 📸</div></div>
         <div class="lt-faq-item reveal"><div class="lt-faq-q"><i class="fa-solid fa-location-dot"></i> Where is the reception?</div><div class="lt-faq-a">At <strong>The Pavilion at the Watergate</strong>, Butuan City. We'll guide guests from the cathedral after the photo session! 🥂</div></div>
@@ -849,12 +1011,12 @@
       <p class="lt-rsvp-deadline reveal"><i class="fa-regular fa-calendar-check"></i> &nbsp; Kindly confirm on or before August 20, 2026</p>
       <div class="lt-rsvp-contacts reveal">
         <div class="lt-rsvp-contact">
-          <strong>Melfred</strong>
-          <span><i class="fa-solid fa-phone"></i> [Contact Number]</span>
+          <strong>Fred (Groom)</strong>
+          <span><i class="fa-solid fa-phone"></i> 0995 738 4128</span>
         </div>
         <div class="lt-rsvp-contact">
-          <strong>Cherry May</strong>
-          <span><i class="fa-solid fa-phone"></i> [Contact Number]</span>
+          <strong>Chem (Bride)</strong>
+          <span><i class="fa-solid fa-phone"></i> 0910 343 3223</span>
         </div>
       </div>
       <a class="lt-rsvp-btn reveal" href="mailto:josephsismart@gmail.com?subject=RSVP - Melfred %26 Cherry May Wedding">
@@ -1001,8 +1163,9 @@ function launchConfetti(){
   }
 }
 
-// ── SCROLL REVEAL ──
-const reveals = document.querySelectorAll('.reveal');
+// ── SCROLL REVEAL (all directions) ──
+const allRevealSelectors = '.reveal,.reveal-left,.reveal-right,.reveal-scale';
+const reveals = document.querySelectorAll(allRevealSelectors);
 const io = new IntersectionObserver(entries=>{
   entries.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('visible'); io.unobserve(e.target); } });
 },{threshold:0.08});
