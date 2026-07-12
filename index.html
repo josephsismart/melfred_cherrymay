@@ -593,8 +593,7 @@
 <div id="dark-intro">
   <nav id="dark-nav">
     <a href="#hero"><i class="fa-solid fa-house"></i> Home</a>
-    <a href="#countdown"><i class="fa-regular fa-clock"></i> Countdown</a>
-    <a href="#envelope-section"><i class="fa-solid fa-envelope-open-text"></i> Invitation</a>
+    <a href="#envelope-section"><i class="fa-solid fa-envelope-open-text"></i> Open Invitation</a>
   </nav>
 
   <!-- HERO -->
@@ -602,9 +601,9 @@
     <span class="hero-tag"><i class="fa-solid fa-heart"></i> &nbsp; Wedding Invitation &nbsp; <i class="fa-solid fa-heart"></i></span>
     <p class="hero-sub">Joyfully invite you to the wedding of</p>
     <div class="hero-names">
-      <span class="hero-name">Melfred</span>
+      <span class="hero-name">Fred</span>
       <span class="hero-amp">&amp;</span>
-      <span class="hero-name">Cherry May</span>
+      <span class="hero-name">Chem</span>
     </div>
     <div class="hero-date-pill">
       <i class="fa-regular fa-calendar-heart"></i> &nbsp; September 5, 2026 &nbsp; · &nbsp; Butuan City, Philippines
@@ -612,19 +611,7 @@
     <p class="scroll-hint"><i class="fa-solid fa-chevron-down"></i> &nbsp; scroll down &nbsp; <i class="fa-solid fa-chevron-down"></i></p>
   </section>
 
-  <!-- COUNTDOWN -->
-  <section id="countdown">
-    <p class="section-tag"><i class="fa-solid fa-hourglass-half"></i> &nbsp; Counting Down to Forever</p>
-    <div class="cd-grid">
-      <div class="cd-unit"><div class="cd-num" id="cd-days">0</div><div class="cd-lbl">Days</div></div>
-      <div class="cd-sep">:</div>
-      <div class="cd-unit"><div class="cd-num" id="cd-hours">00</div><div class="cd-lbl">Hours</div></div>
-      <div class="cd-sep">:</div>
-      <div class="cd-unit"><div class="cd-num" id="cd-mins">00</div><div class="cd-lbl">Mins</div></div>
-      <div class="cd-sep">:</div>
-      <div class="cd-unit"><div class="cd-num" id="cd-secs">00</div><div class="cd-lbl">Secs</div></div>
-    </div>
-  </section>
+  <!-- countdown removed from homepage -->
 
   <!-- ENVELOPE -->
   <section id="envelope-section">
@@ -1093,7 +1080,7 @@ animateHearts();
 const wedding = new Date('2026-09-05T13:00:00');
 function pad(n,l=2){ return String(Math.max(0,n)).padStart(l,'0'); }
 function pop(el){ el.classList.remove('pop'); void el.offsetWidth; el.classList.add('pop'); }
-const els = {d:document.getElementById('cd-days'),h:document.getElementById('cd-hours'),m:document.getElementById('cd-mins'),s:document.getElementById('cd-secs')};
+const els = {}; // countdown removed from hero — only Save the Date section shows it
 const stdEls = {d:document.getElementById('std-days'),h:document.getElementById('std-hours'),m:document.getElementById('std-mins'),s:document.getElementById('std-secs')};
 function tick(){
   const diff = wedding - new Date();
