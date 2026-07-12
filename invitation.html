@@ -4,9 +4,16 @@
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Fred & May — Wedding Invitation | Sept 5, 2026</title>
-  <meta property="og:title" content="💍 Fred & May — Wedding Invitation"/>
-  <meta property="og:description" content="You're invited! September 5, 2026 · Butuan City, Philippines 💌"/>
+  <meta property="og:title" content="💍 Fred & May — Wedding Invitation | Sept 5, 2026"/>
+  <meta property="og:description" content="You're invited! Join us as Fred and May say 'I Do' on September 5, 2026 in Butuan City, Philippines 💌"/>
+  <meta property="og:type" content="website"/>
+  <meta property="og:url" content="https://mc-wedding-2026.vercel.app/invitation.html"/>
   <meta property="og:image" content="https://mc-wedding-2026.vercel.app/og-image.jpg"/>
+  <meta property="og:image:width" content="1200"/>
+  <meta property="og:image:height" content="630"/>
+  <meta property="og:site_name" content="Fred & May Wedding"/>
+  <meta name="twitter:card" content="summary_large_image"/>
+  <meta name="twitter:image" content="https://mc-wedding-2026.vercel.app/og-image.jpg"/>
   <link rel="icon" type="image/png" href="/favicon.png"/>
   <link rel="apple-touch-icon" href="/apple-touch-icon.png"/>
   <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet"/>
@@ -77,6 +84,7 @@
       transition: all 0.25s; white-space: nowrap;
     }
     #pill-nav a:hover { background: var(--rose); color: #fff; border-color: var(--rose); transform: translateY(-1px); }
+    #pill-nav a.active { background: var(--wine); color: #fff; border-color: var(--wine); box-shadow: 0 3px 12px rgba(13,51,34,0.25); }
 
     /* ── SECTIONS ── */
     #welcome, #story, #gallery, #details, #entourage, #lt-rsvp, #save-the-date {
@@ -163,28 +171,39 @@
     .lt-timeline-event { font-size:0.8rem; color:var(--text); font-weight:500; }
 
     /* ── ENTOURAGE ── */
-    #entourage { background:linear-gradient(160deg,#f9fdf9 0%,#f0faf2 50%,#f9fdf9 100%); }
-    .lt-entourage-content { padding:2rem 1.5rem; max-width:720px; margin:0 auto; display:flex; flex-direction:column; align-items:center; gap:1.2rem; }
-    .lt-ent-group-title { font-size:0.7rem; font-weight:700; letter-spacing:0.2em; text-transform:uppercase; color:var(--rose); display:flex; align-items:center; gap:0.5rem; }
-    .lt-ent-parents { display:grid; grid-template-columns:1fr 1fr; gap:1rem; width:100%; }
-    .lt-parent-card { background:#fff; border-radius:16px; padding:1.2rem; text-align:center; box-shadow:0 4px 16px rgba(74,122,90,0.07); border:1px solid rgba(74,122,90,0.1); }
-    .lt-parent-card .role { font-size:0.55rem; font-weight:700; letter-spacing:0.2em; text-transform:uppercase; color:var(--rose); margin-bottom:0.4rem; }
-    .lt-parent-card .name { font-family:'Playfair Display',serif; font-size:0.9rem; color:var(--wine); font-weight:600; line-height:1.4; }
-    .lt-parent-card .sub { font-size:0.7rem; color:var(--text-mid); margin-top:0.2rem; }
-    .lt-ent-divider { width:100%; display:flex; align-items:center; gap:1rem; margin:0.8rem 0; }
-    .lt-ent-divider::before,.lt-ent-divider::after { content:''; flex:1; height:1px; background:linear-gradient(to right,transparent,rgba(74,122,90,0.2),transparent); }
-    .lt-ent-divider-icon { color:var(--rose); font-size:0.8rem; opacity:0.6; }
-    .lt-party-grid { display:grid; grid-template-columns:1fr 1fr; gap:1.2rem; width:100%; }
-    .lt-party-card { background:linear-gradient(135deg,#fff,#edf7f0); border-radius:20px; padding:1.4rem; box-shadow:0 6px 20px rgba(74,122,90,0.08); border:1px solid rgba(74,122,90,0.1); }
-    .lt-party-card .role { font-size:0.58rem; font-weight:700; letter-spacing:0.2em; text-transform:uppercase; color:var(--rose); margin-bottom:0.8rem; display:flex; align-items:center; gap:0.4rem; }
+    #entourage { background: #e8e0d5; }
+    #entourage .lt-section-header { background: linear-gradient(135deg, #2a1a0e, #4a3020); }
+    .ent-card-wrap { padding: 1.5rem 1rem 2rem; max-width: 600px; margin: 0 auto; }
+    .ent-card {
+      background: #fdf8f0;
+      border: 1px solid rgba(74,50,30,0.12);
+      border-radius: 4px;
+      padding: 2rem 1.5rem;
+      box-shadow: 0 4px 24px rgba(74,50,30,0.12), inset 0 0 0 6px rgba(74,50,30,0.04);
+      display: flex; flex-direction: column; align-items: center; gap: 1.4rem;
+    }
+    .ent-script { font-family:'Great Vibes',cursive; font-size:clamp(1.3rem,4vw,1.8rem); color:#3a2010; line-height:1; text-align:center; }
+    .ent-name-line { font-size:clamp(0.78rem,2vw,0.92rem); color:#2a1a0e; text-align:center; line-height:1.6; }
+    .ent-rule { width:min(260px,70%); height:1px; background:linear-gradient(to right,transparent,rgba(74,50,30,0.2),transparent); }
+    .ent-sponsor-title { font-size:0.62rem; font-weight:700; letter-spacing:0.25em; text-transform:uppercase; color:#4a3020; text-align:center; }
+    .ent-two-col { display:grid; grid-template-columns:1fr 1fr; gap:0.3rem 2rem; width:100%; }
+    .ent-two-col-header { font-family:'Great Vibes',cursive; font-size:1.2rem; color:#4a3020; text-align:center; grid-column:span 1; padding-bottom:0.3rem; border-bottom:1px solid rgba(74,50,30,0.15); }
+    .ent-two-col-name { font-size:0.8rem; color:#2a1a0e; text-align:center; padding:0.15rem 0; }
+    .ent-side-by-side { display:grid; grid-template-columns:1fr 1fr; gap:1rem; width:100%; }
+    .ent-role-block { display:flex; flex-direction:column; align-items:center; gap:0.3rem; }
+    .ent-role-label { font-family:'Great Vibes',cursive; font-size:1.25rem; color:#4a3020; }
+    .ent-role-name { font-size:0.82rem; color:#2a1a0e; text-align:center; line-height:1.5; }
+    .ent-kids-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:0.8rem; width:100%; }
+    .ent-kid-block { display:flex; flex-direction:column; align-items:center; gap:0.2rem; }
+    .ent-kid-label { font-family:'Great Vibes',cursive; font-size:1rem; color:#4a3020; text-align:center; }
+    .ent-kid-name { font-size:0.75rem; color:#2a1a0e; text-align:center; line-height:1.5; }
+    .ent-secondary { display:grid; grid-template-columns:repeat(3,1fr); gap:0.8rem; width:100%; }
+    .ent-sec-block { display:flex; flex-direction:column; align-items:center; gap:0.2rem; }
+    .ent-sec-label { font-family:'Great Vibes',cursive; font-size:1rem; color:#4a3020; }
+    .ent-sec-name { font-size:0.75rem; color:#2a1a0e; text-align:center; line-height:1.5; }
+    /* keep these for other sections */
     .lt-party-name-pill { font-size:0.88rem; color:var(--wine); padding:0.3rem 0; border-bottom:1px solid rgba(74,122,90,0.06); display:block; }
     .lt-party-name-pill:last-child { border-bottom:none; }
-    .lt-bridal-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:0.8rem; width:100%; }
-    .lt-bridal-card { background:#fff; border-radius:14px; padding:1rem 0.7rem; text-align:center; box-shadow:0 3px 12px rgba(74,122,90,0.07); border:1px solid rgba(74,122,90,0.1); }
-    .lt-bridal-card .role { font-size:0.52rem; font-weight:700; letter-spacing:0.15em; text-transform:uppercase; color:var(--rose); margin-bottom:0.4rem; }
-    .lt-bridal-card .name { font-size:0.8rem; color:var(--wine); font-weight:600; line-height:1.4; }
-    .lt-sponsors-pairs { display:flex; flex-direction:column; gap:0.6rem; width:100%; max-width:560px; }
-    .lt-sponsor-pair { display:grid; grid-template-columns:1fr 1fr; gap:0.6rem; }
     .lt-sponsor-pill { background:#fff; border-radius:50px; padding:0.5rem 1rem; font-size:0.88rem; color:var(--wine); text-align:center; box-shadow:0 3px 10px rgba(74,122,90,0.06); border:1px solid rgba(74,122,90,0.1); }
 
     /* ── RSVP ── */
@@ -431,87 +450,122 @@
 
 <!-- ── ENTOURAGE ── -->
 <section id="entourage">
-  <div class="lt-section-header">
-    <span class="lt-eyebrow">our beloved</span>
-    <h2><i class="fa-solid fa-people-group"></i> Entourage</h2>
+  <div class="lt-section-header" style="background:linear-gradient(135deg,#2a1a0e,#4a3020);">
+    <span class="lt-eyebrow" style="color:rgba(230,210,180,0.6);">our beloved</span>
+    <h2 style="color:#f5ede0;letter-spacing:0.25em;"><i class="fa-solid fa-people-group"></i> THE ENTOURAGE</h2>
   </div>
-  <div class="lt-entourage-content">
-    <p class="lt-ent-group-title reveal-scale"><i class="fa-solid fa-users"></i> &nbsp; Parents</p>
-    <div class="lt-ent-parents reveal">
-      <div class="lt-parent-card"><div class="role"><i class="fa-solid fa-ring"></i> Parents of the Groom</div><div class="name">Mr. Freddie T. Espijon<br>&amp; Mrs. Imelda J. Espijon</div></div>
-      <div class="lt-parent-card"><div class="role"><i class="fa-solid fa-spa"></i> Parents of the Bride</div><div class="name">Mr. Rogelio G. Malig-on<br>&amp; the late Mrs. Josephine B. Malig-on</div></div>
-    </div>
+  <div class="ent-card-wrap">
+    <div class="ent-card">
 
-    <div class="lt-ent-divider reveal"><span class="lt-ent-divider-icon"><i class="fa-solid fa-star"></i></span></div>
-    <p class="lt-ent-group-title reveal-scale"><i class="fa-solid fa-crown"></i> &nbsp; Principal Sponsors</p>
-    <div class="lt-sponsors-pairs reveal" style="width:100%;max-width:640px;">
-      <div style="display:grid;grid-template-columns:1fr 1fr;gap:0.5rem 1.5rem;width:100%;padding:0.5rem 0 0.3rem;">
-        <div style="text-align:center;font-size:0.6rem;font-weight:700;letter-spacing:0.2em;color:var(--rose);text-transform:uppercase;padding-bottom:0.3rem;border-bottom:1.5px solid rgba(74,122,90,0.15);">
-          <i class="fa-solid fa-user-tie"></i> Ninong
+      <!-- Parents -->
+      <div class="reveal" style="display:flex;flex-direction:column;align-items:center;gap:0.6rem;width:100%;">
+        <p class="ent-script">Parents of the Groom</p>
+        <p class="ent-name-line">Mr. Freddie T. Espijon &amp; Mrs. Imelda J. Espijon</p>
+        <div class="ent-rule"></div>
+        <p class="ent-script">Parents of the Bride</p>
+        <p class="ent-name-line">Mr. Rogelio G. Malig-on<br>and the late Mrs. Josephine B. Malig-on</p>
+      </div>
+
+      <div class="ent-rule reveal"></div>
+
+      <!-- Principal Sponsors -->
+      <div class="reveal" style="display:flex;flex-direction:column;align-items:center;gap:0.8rem;width:100%;">
+        <p class="ent-sponsor-title"><i class="fa-solid fa-crown"></i> &nbsp; PRINCIPAL SPONSORS</p>
+        <div class="ent-two-col" style="max-width:480px;">
+          <p class="ent-two-col-header">Ninong</p>
+          <p class="ent-two-col-header">Ninang</p>
+          <p class="ent-two-col-name">Gregorio Amora</p><p class="ent-two-col-name">Cecilia Amora</p>
+          <p class="ent-two-col-name">Dominador Cabiguing</p><p class="ent-two-col-name">Flordeliza Cabiguing</p>
+          <p class="ent-two-col-name">Jonathan Tiongson</p><p class="ent-two-col-name">Rebecca Gingo</p>
+          <p class="ent-two-col-name">Feliciano Culdora</p><p class="ent-two-col-name">Lorna Culdora</p>
+          <p class="ent-two-col-name">Fernan Rivero</p><p class="ent-two-col-name">Nathalie Pasa</p>
+          <p class="ent-two-col-name">Romulo Bayotas</p><p class="ent-two-col-name">Marichu Cabiguin</p>
         </div>
-        <div style="text-align:center;font-size:0.6rem;font-weight:700;letter-spacing:0.2em;color:var(--rose);text-transform:uppercase;padding-bottom:0.3rem;border-bottom:1.5px solid rgba(74,122,90,0.15);">
-          <i class="fa-solid fa-spa"></i> Ninang
+      </div>
+
+      <div class="ent-rule reveal"></div>
+
+      <!-- Secondary Sponsors -->
+      <div class="reveal" style="display:flex;flex-direction:column;align-items:center;gap:0.8rem;width:100%;">
+        <p class="ent-sponsor-title"><i class="fa-solid fa-link"></i> &nbsp; SECONDARY SPONSORS</p>
+        <div class="ent-secondary">
+          <div class="ent-sec-block">
+            <span class="ent-sec-label">Cord</span>
+            <span class="ent-sec-name">Mr. Ariel Amora<br>&amp; Mrs. Carenna Amora</span>
+          </div>
+          <div class="ent-sec-block">
+            <span class="ent-sec-label">Candle</span>
+            <span class="ent-sec-name">Mr. Malvin Malig-on<br>&amp; Mrs. Nadine Vera Malig-on</span>
+          </div>
+          <div class="ent-sec-block">
+            <span class="ent-sec-label">Veil</span>
+            <span class="ent-sec-name">Mr. Jared Culdora<br>&amp; Mrs. Amor Culdora</span>
+          </div>
         </div>
-        <div class="lt-sponsor-pill">Gregorio Amora</div><div class="lt-sponsor-pill">Cecilia Amora</div>
-        <div class="lt-sponsor-pill">Dominador Cabiguing</div><div class="lt-sponsor-pill">Flordeliza Cabiguing</div>
-        <div class="lt-sponsor-pill">Jonathan Tiongson</div><div class="lt-sponsor-pill">Rebecca Gingo</div>
-        <div class="lt-sponsor-pill">Feliciano Culdora</div><div class="lt-sponsor-pill">Lorna Culdora</div>
-        <div class="lt-sponsor-pill">Fernan Rivero</div><div class="lt-sponsor-pill">Nathalie Pasa</div>
-        <div class="lt-sponsor-pill">Romulo Bayotas</div><div class="lt-sponsor-pill">Marichu Cabiguin</div>
       </div>
-    </div>
 
-    <div class="lt-ent-divider reveal"><span class="lt-ent-divider-icon"><i class="fa-solid fa-heart"></i></span></div>
-    <p class="lt-ent-group-title reveal-scale"><i class="fa-solid fa-user-tie"></i> &nbsp; Best Man &amp; Maid of Honor</p>
-    <div class="lt-ent-parents reveal">
-      <div class="lt-parent-card"><div class="role"><i class="fa-solid fa-user-tie"></i> Best Man</div><div class="name">Gilbert Gaballo</div></div>
-      <div class="lt-parent-card"><div class="role"><i class="fa-solid fa-spa"></i> Maid of Honor</div><div class="name">Charise Malig-on</div></div>
-    </div>
+      <div class="ent-rule reveal"></div>
 
-    <div class="lt-ent-divider reveal"><span class="lt-ent-divider-icon"><i class="fa-solid fa-star"></i></span></div>
-    <p class="lt-ent-group-title reveal-scale"><i class="fa-solid fa-people-group"></i> &nbsp; Groomsmen &amp; Bridesmaids</p>
-    <div class="lt-party-grid reveal">
-      <div class="lt-party-card">
-        <div class="role"><i class="fa-solid fa-user-tie"></i> Groomsmen</div>
-        <span class="lt-party-name-pill">Ralph Gorgonio</span>
-        <span class="lt-party-name-pill">John Jewell Diño</span>
-        <span class="lt-party-name-pill">Ronald Estrada</span>
-        <span class="lt-party-name-pill">Frenzel Bluez Malig-on</span>
-        <span class="lt-party-name-pill">Freddie Espijon Jr</span>
-        <span class="lt-party-name-pill">Jay Mclain Digamon</span>
-        <span class="lt-party-name-pill">Richie Tampan</span>
-        <span class="lt-party-name-pill">Gyro Culdora</span>
+      <!-- Best Man & Maid of Honor -->
+      <div class="reveal ent-side-by-side">
+        <div class="ent-role-block">
+          <span class="ent-role-label">Best Man</span>
+          <span class="ent-role-name">Gilbert Gaballo</span>
+        </div>
+        <div class="ent-role-block">
+          <span class="ent-role-label">Maid of Honor</span>
+          <span class="ent-role-name">Charise Malig-on</span>
+        </div>
       </div>
-      <div class="lt-party-card">
-        <div class="role"><i class="fa-solid fa-spa"></i> Bridesmaids</div>
-        <span class="lt-party-name-pill">Emmylou Grace Berdera</span>
-        <span class="lt-party-name-pill">Faye Sibayan</span>
-        <span class="lt-party-name-pill">Dianna Rose Castillo</span>
-        <span class="lt-party-name-pill">Mary Grace Ramira</span>
-        <span class="lt-party-name-pill">Rose Ann Baron</span>
-        <span class="lt-party-name-pill">Jeandy Espijon</span>
-        <span class="lt-party-name-pill">Vanessa Endozo</span>
-        <span class="lt-party-name-pill">Joliza Navin Malig-on</span>
+
+      <div class="ent-rule reveal"></div>
+
+      <!-- Groomsmen & Bridesmaids -->
+      <div class="reveal ent-side-by-side" style="align-items:start;">
+        <div class="ent-role-block">
+          <span class="ent-role-label">Groomsmen</span>
+          <span class="ent-role-name">Ralph Gorgonio<br>John Jewell Diño<br>Ronald Estrada<br>Frenzel Bluez Malig-on<br>Freddie Espijon Jr<br>Jay Mclain Digamon<br>Richie Tampan<br>Gyro Culdora</span>
+        </div>
+        <div class="ent-role-block">
+          <span class="ent-role-label">Bridesmaids</span>
+          <span class="ent-role-name">Emmylou Grace Berdera<br>Faye Sibayan<br>Dianna Rose Castillo<br>Mary Grace Ramira<br>Rose Ann Baron<br>Jeandy Espijon<br>Vanessa Endozo<br>Joliza Navin Malig-on</span>
+        </div>
       </div>
-    </div>
 
-    <div class="lt-ent-divider reveal"><span class="lt-ent-divider-icon"><i class="fa-solid fa-link"></i></span></div>
-    <p class="lt-ent-group-title reveal-scale"><i class="fa-solid fa-link"></i> &nbsp; Secondary Sponsors</p>
-    <div class="lt-bridal-grid reveal">
-      <div class="lt-bridal-card"><div class="role"><i class="fa-solid fa-link"></i> Cord</div><div class="name">Mr. Ariel Amora<br><span style="font-size:0.75em;opacity:0.7">&amp; Mrs. Carenna Amora</span></div></div>
-      <div class="lt-bridal-card"><div class="role"><i class="fa-solid fa-vest"></i> Veil</div><div class="name">Mr. Jared Culdora<br><span style="font-size:0.75em;opacity:0.7">&amp; Mrs. Amor Culdora</span></div></div>
-      <div class="lt-bridal-card"><div class="role"><i class="fa-solid fa-fire-flame-curved"></i> Candle</div><div class="name">Mr. Malvin Malig-on<br><span style="font-size:0.75em;opacity:0.7">&amp; Mrs. Nadine Vera Malig-on</span></div></div>
-    </div>
+      <div class="ent-rule reveal"></div>
 
-    <div class="lt-ent-divider reveal"><span class="lt-ent-divider-icon"><i class="fa-solid fa-child"></i></span></div>
-    <p class="lt-ent-group-title reveal-scale"><i class="fa-solid fa-child"></i> &nbsp; Kids Entourage</p>
-    <div class="lt-bridal-grid reveal">
-      <div class="lt-bridal-card"><div class="role"><i class="fa-solid fa-seedling"></i> Little Groom</div><div class="name">Jhonrex Espijon</div></div>
-      <div class="lt-bridal-card"><div class="role"><i class="fa-solid fa-star"></i> Little Bride</div><div class="name">Brianna Grace Nutiu</div></div>
-      <div class="lt-bridal-card"><div class="role"><i class="fa-solid fa-ring"></i> Ring Bearer</div><div class="name">Gabe Sefrie Sismar</div></div>
-      <div class="lt-bridal-card"><div class="role"><i class="fa-solid fa-coins"></i> Coin Bearer</div><div class="name">Ethan Caleb Halina</div></div>
-      <div class="lt-bridal-card"><div class="role"><i class="fa-solid fa-book-bible"></i> Bible Bearer</div><div class="name">Bennison Paul Malig-on</div></div>
-      <div class="lt-bridal-card"><div class="role"><i class="fa-solid fa-spa"></i> Flower Girls</div><div class="name">Salina Noelle Nutiu<br>Ameerah Olivia Homecillo<br>Ma. Celestine Aurea Cabusao</div></div>
+      <!-- Kids Entourage -->
+      <div class="reveal" style="display:flex;flex-direction:column;align-items:center;gap:0.8rem;width:100%;">
+        <div class="ent-side-by-side" style="max-width:320px;">
+          <div class="ent-kid-block">
+            <span class="ent-kid-label">Little Groom</span>
+            <span class="ent-kid-name">Jhonrex Espijon</span>
+          </div>
+          <div class="ent-kid-block">
+            <span class="ent-kid-label">Little Bride</span>
+            <span class="ent-kid-name">Brianna Grace Nutiu</span>
+          </div>
+        </div>
+        <div class="ent-kids-grid">
+          <div class="ent-kid-block">
+            <span class="ent-kid-label">Ring Bearer</span>
+            <span class="ent-kid-name">Gabe Sefrie Sismar</span>
+          </div>
+          <div class="ent-kid-block">
+            <span class="ent-kid-label">Coin Bearer</span>
+            <span class="ent-kid-name">Ethan Caleb Halina</span>
+          </div>
+          <div class="ent-kid-block">
+            <span class="ent-kid-label">Bible Bearer</span>
+            <span class="ent-kid-name">Bennison Paul Malig-on</span>
+          </div>
+        </div>
+        <div class="ent-kid-block">
+          <span class="ent-kid-label">Flower Girls</span>
+          <span class="ent-kid-name">Salina Noelle Nutiu &nbsp;·&nbsp; Ameerah Olivia Homecillo &nbsp;·&nbsp; Ma. Celestine Aurea Cabusao</span>
+        </div>
+      </div>
+
     </div>
   </div>
 </section>
@@ -755,6 +809,22 @@ function launchConfetti(){
 const reveals=document.querySelectorAll('.reveal,.reveal-left,.reveal-right,.reveal-scale');
 const io=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');io.unobserve(e.target);}});},{threshold:0.08});
 reveals.forEach(el=>io.observe(el));
+
+// ── ACTIVE NAV ──
+const navLinks = document.querySelectorAll('#pill-nav a[href^="#"]');
+const sectionIds = ['welcome','story','gallery','details','entourage','lt-rsvp','faq','save-the-date'];
+const sections = sectionIds.map(id=>document.getElementById(id)).filter(Boolean);
+const navIO = new IntersectionObserver(entries=>{
+  entries.forEach(e=>{
+    if(e.isIntersecting){
+      navLinks.forEach(a=>a.classList.remove('active'));
+      const id=e.target.id;
+      const match=document.querySelector(`#pill-nav a[href="#${id}"]`);
+      if(match)match.classList.add('active');
+    }
+  });
+},{threshold:0.35,rootMargin:'-52px 0px 0px 0px'});
+sections.forEach(s=>navIO.observe(s));
 
 // ── DOUBLE TAP BURST ──
 let lastTap=0;
