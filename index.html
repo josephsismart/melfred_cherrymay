@@ -43,9 +43,11 @@
     #dark-intro {
       position: relative; z-index: 1;
       background: linear-gradient(160deg, #051a0a 0%, #0d3322 50%, #051a0a 100%);
-      min-height: 100vh; /* keeps it at least full screen but sections are now compact */
+      min-height: 100vh;
       display: flex; flex-direction: column; justify-content: center;
     }
+    /* Sections in dark-intro are compact — no min-height forcing */
+    #dark-intro > * { flex-shrink: 0; }
     #dark-intro.hidden { display: none; }
 
     /* ── NAV (dark) ── */
@@ -64,9 +66,9 @@
 
     /* ── HERO ── */
     #hero {
-      min-height: 60vh; display: flex; flex-direction: column;
+      min-height: auto; display: flex; flex-direction: column;
       align-items: center; justify-content: center;
-      text-align: center; padding: 5rem 2rem 2rem; gap: 0.5rem;
+      text-align: center; padding: 4rem 2rem 1.5rem; gap: 0.5rem;
     }
     .hero-tag {
       background: rgba(74,122,90,0.2); border: 1px solid rgba(74,122,90,0.4);
@@ -177,6 +179,11 @@
       transition: all 0.25s; white-space: nowrap;
     }
     #pill-nav a:hover { background: var(--rose); color: #fff; border-color: var(--rose); transform: translateY(-1px); box-shadow: 0 4px 12px rgba(74,122,90,0.3); }
+
+    /* ── SCROLL MARGIN for sticky nav ── */
+    #welcome, #story, #gallery, #details, #entourage, #faq, #lt-rsvp, #save-the-date {
+      scroll-margin-top: 52px;
+    }
 
     /* ── WELCOME ── */
     #welcome {
@@ -654,7 +661,7 @@
 
   <!-- PILL NAV -->
   <nav id="pill-nav">
-    <a href="#welcome"><i class="fa-solid fa-house-heart"></i> Home</a>
+    <a href="#welcome" onclick="document.getElementById('welcome').scrollIntoView({behavior:'smooth',block:'start'});return false;"><i class="fa-solid fa-house-heart"></i> Home</a>
     <a href="#story"><i class="fa-solid fa-book-heart"></i> Our Story</a>
     <a href="#gallery"><i class="fa-solid fa-images"></i> Gallery</a>
     <a href="#details"><i class="fa-solid fa-circle-info"></i> Details</a>
@@ -1061,7 +1068,8 @@
 </div>
 
 <audio id="bgMusic" loop>
-  <source src="https://www.bensound.com/bensound-music/bensound-romantic.mp3" type="audio/mpeg">
+  <source src="https://cdn.pixabay.com/audio/2022/05/16/audio_1812ef4059.mp3" type="audio/mpeg">
+  <source src="https://cdn.pixabay.com/audio/2021/11/25/audio_5d68ceaabb.mp3" type="audio/mpeg">
 </audio>
 
 <script>
@@ -1104,8 +1112,19 @@ function openEnvelope(){
   const wrap = document.getElementById('envelopeWrap');
   if(wrap.classList.contains('opened')) return;
   wrap.classList.add('opened');
+  // Start music on this user interaction (bypasses autoplay block)
+  const aud = document.getElementById('bgMusic');
+  aud.volume = 0.4;
+  aud.play().then(()=>{
+    musicPlaying = true;
+    const icon = document.getElementById('musicIcon');
+    const btn = document.getElementById('musicBtn');
+    if(icon) icon.className = 'fa-solid fa-pause';
+    if(btn) btn.classList.add('playing');
+  }).catch(()=>{});
   setTimeout(()=>{
     document.getElementById('dark-intro').classList.add('hidden');
+    document.body.classList.add('opened');
     const interior = document.getElementById('invitation-interior');
     interior.classList.add('visible');
     document.getElementById('pill-nav').classList.add('visible');
