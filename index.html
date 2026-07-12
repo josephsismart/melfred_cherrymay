@@ -3,14 +3,14 @@
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Melfred & Cherry May — Forever Begins Here | Sept 5, 2026</title>
-  <meta name="description" content="You're invited! 💍 Join us as Melfred and Cherry May say 'I Do' on September 5, 2026 at the Parish of Christ the Eucharistic King, Tagum City."/>
-  <meta property="og:title" content="💍 Melfred & Cherry May — Forever Begins Here"/>
+  <title>Fred & May — Forever Begins Here | Sept 5, 2026</title>
+  <meta name="description" content="You're invited! 💍 Join us as Fred and May say 'I Do' on September 5, 2026 at the Parish of Christ the Eucharistic King, Tagum City."/>
+  <meta property="og:title" content="💍 Fred & May — Forever Begins Here"/>
   <meta property="og:description" content="You're invited to our wedding! September 5, 2026 · Parish of Christ the Eucharistic King, Butuan City, Philippines. Click to open our digital invitation 💌"/>
   <meta property="og:type" content="website"/>
   <meta property="og:url" content="https://mc-wedding-2026.vercel.app/"/>
   <meta property="og:image" content="https://mc-wedding-2026.vercel.app/og-image.jpg"/>
-  <meta property="og:site_name" content="Melfred & Cherry May Wedding"/>
+  <meta property="og:site_name" content="Fred & May Wedding"/>
   <meta name="twitter:card" content="summary_large_image"/>
 
   <link rel="icon" type="image/png" href="/favicon.png"/>
@@ -65,10 +65,10 @@
     body.opened #dark-nav { opacity: 0; visibility: hidden; }
 
     /* ── HERO ── */
-    #hero {
+    #welcome {
       min-height: auto; display: flex; flex-direction: column;
       align-items: center; justify-content: center;
-      text-align: center; padding: 4rem 2rem 1.5rem; gap: 0.5rem;
+      text-align: center; padding: 2.5rem 2rem 0.8rem; gap: 0.4rem;
     }
     .hero-tag {
       background: rgba(74,122,90,0.2); border: 1px solid rgba(74,122,90,0.4);
@@ -83,12 +83,12 @@
       opacity: 0; animation: fadeUp 1s 0.7s forwards;
     }
     .hero-name {
-      font-family: 'Great Vibes', cursive; font-size: clamp(3rem, 10vw, 6.5rem);
+      font-family: 'Great Vibes', cursive; font-size: clamp(2.4rem, 8vw, 5rem);
       line-height: 0.9; color: #fff;
       text-shadow: 0 0 60px rgba(74,122,90,0.7), 0 4px 30px rgba(0,0,0,0.5);
     }
     .hero-amp {
-      font-family: 'Great Vibes', cursive; font-size: clamp(1.5rem, 4vw, 2.8rem);
+      font-family: 'Great Vibes', cursive; font-size: clamp(1.2rem, 3vw, 2.2rem);
       color: var(--rose-light); line-height: 1;
     }
     .hero-date-pill {
@@ -130,14 +130,14 @@
     /* ── ENVELOPE ── */
     #envelope-section {
       min-height: auto; display: flex; flex-direction: column; align-items: center;
-      justify-content: center; padding: 2rem 2rem 3rem; gap: 1.2rem; text-align: center;
+      justify-content: center; padding: 0.5rem 2rem 1.5rem; gap: 0.8rem; text-align: center;
     }
     .click-hint {
       font-size: clamp(0.7rem, 1.8vw, 0.85rem); color: rgba(200,230,208,0.8);
       font-weight: 500; letter-spacing: 0.1em;
     }
     .click-hint i { color: var(--rose-light); margin-right: 0.4rem; }
-    .envelope-wrap { position: relative; width: min(480px, 88vw); cursor: pointer; perspective: 800px; }
+    .envelope-wrap { position: relative; width: min(340px, 75vw); cursor: pointer; perspective: 800px; }
     .envelope { position: relative; width: 100%; padding-bottom: 68%; transition: transform 0.3s; }
     .envelope-wrap:hover .envelope { transform: scale(1.02) translateY(-4px); }
     .env-body { position: absolute; inset: 0; background: linear-gradient(160deg,#c8e6d0,#edf7f0 50%,#c8e6d0); border-radius: 8px; box-shadow: 0 20px 60px rgba(74,122,90,0.3), 0 4px 20px rgba(0,0,0,0.2); }
@@ -181,7 +181,7 @@
     #pill-nav a:hover { background: var(--rose); color: #fff; border-color: var(--rose); transform: translateY(-1px); box-shadow: 0 4px 12px rgba(74,122,90,0.3); }
 
     /* ── SCROLL MARGIN for sticky nav ── */
-    #welcome, #story, #gallery, #details, #entourage, #faq, #lt-rsvp, #save-the-date {
+    #inv-welcome, #story, #gallery, #details, #entourage, #faq, #lt-rsvp, #save-the-date {
       scroll-margin-top: 52px;
     }
 
@@ -592,23 +592,22 @@
 <!-- ══ DARK INTRO ══ -->
 <div id="dark-intro">
   <nav id="dark-nav">
-    <a href="#hero"><i class="fa-solid fa-house"></i> Home</a>
+    <a href="#welcome"><i class="fa-solid fa-house"></i> Home</a>
     <a href="#envelope-section"><i class="fa-solid fa-envelope-open-text"></i> Open Invitation</a>
   </nav>
 
   <!-- HERO -->
-  <section id="hero">
+  <section id="welcome">
     <span class="hero-tag"><i class="fa-solid fa-heart"></i> &nbsp; Wedding Invitation &nbsp; <i class="fa-solid fa-heart"></i></span>
     <p class="hero-sub">Joyfully invite you to the wedding of</p>
     <div class="hero-names">
       <span class="hero-name">Fred</span>
       <span class="hero-amp">&amp;</span>
-      <span class="hero-name">Chem</span>
+      <span class="hero-name">May</span>
     </div>
     <div class="hero-date-pill">
       <i class="fa-regular fa-calendar-heart"></i> &nbsp; September 5, 2026 &nbsp; · &nbsp; Butuan City, Philippines
     </div>
-    <p class="scroll-hint"><i class="fa-solid fa-chevron-down"></i> &nbsp; scroll down &nbsp; <i class="fa-solid fa-chevron-down"></i></p>
   </section>
 
   <!-- countdown removed from homepage -->
@@ -635,7 +634,7 @@
             <circle cx="100" cy="100" r="72" fill="url(#si)"/>
             <!-- Heart -->
             <path d="M100 130 C100 130 60 108 60 82 C60 68 72 60 84 65 C90 67 96 72 100 78 C104 72 110 67 116 65 C128 60 140 68 140 82 C140 108 100 130 100 130Z" fill="rgba(255,255,255,0.85)"/>
-            <text x="100" y="150" text-anchor="middle" font-family="Georgia,serif" font-size="22" font-style="italic" fill="rgba(255,255,255,0.7)" letter-spacing="1">MC</text>
+            <text x="100" y="150" text-anchor="middle" font-family="Georgia,serif" font-size="22" font-style="italic" fill="rgba(255,255,255,0.7)" letter-spacing="1">FM</text>
           </svg>
         </div>
       </div>
@@ -648,7 +647,7 @@
 
   <!-- PILL NAV -->
   <nav id="pill-nav">
-    <a href="#welcome" onclick="document.getElementById('welcome').scrollIntoView({behavior:'smooth',block:'start'});return false;"><i class="fa-solid fa-house-heart"></i> Home</a>
+    <a href="#welcome" onclick="document.getElementById('inv-welcome').scrollIntoView({behavior:'smooth',block:'start'});return false;"><i class="fa-solid fa-house-heart"></i> Home</a>
     <a href="#story"><i class="fa-solid fa-book-heart"></i> Our Story</a>
     <a href="#gallery"><i class="fa-solid fa-images"></i> Gallery</a>
     <a href="#details"><i class="fa-solid fa-circle-info"></i> Details</a>
@@ -688,10 +687,10 @@
 
       <!-- Photo placeholder -->
       <div class="photo-placeholder">
-        <img id="couple-photo" src="" alt="Melfred & Cherry May"/>
+        <img id="couple-photo" src="" alt="Fred & May"/>
         <div class="photo-placeholder-text" id="photo-placeholder-text">
           <i class="fa-regular fa-image" style="font-size:2rem;color:rgba(160,48,85,0.25);display:block;margin-bottom:0.5rem"></i>
-          Photo of<br><strong style="color:rgba(122,31,61,0.5)">Melfred &<br>Cherry May</strong><br><span style="font-size:0.65rem;opacity:0.5">(coming soon)</span>
+          Photo of<br><strong style="color:rgba(122,31,61,0.5)">Fred &<br>May</strong><br><span style="font-size:0.65rem;opacity:0.5">(coming soon)</span>
         </div>
       </div>
 
@@ -729,7 +728,7 @@
 
     <div class="lt-divider"><span><i class="fa-solid fa-heart"></i></span></div>
     <p class="welcome-heading"><i class="fa-solid fa-champagne-glasses"></i> &nbsp; Welcome</p>
-    <p class="welcome-script">Melfred &amp; Cherry May</p>
+    <p class="welcome-script">Fred &amp; May</p>
     <div class="lt-divider"><span><i class="fa-solid fa-star"></i></span></div>
     <p class="welcome-text">With hearts full of love and gratitude, we invite you to witness and celebrate the beginning of our forever. Your presence makes this day even more beautiful. 💕</p>
     <p style="font-size:0.75rem;font-weight:600;letter-spacing:0.2em;text-transform:uppercase;color:var(--rose)">
@@ -742,7 +741,7 @@
     <div class="lt-section-header"><h2><i class="fa-solid fa-book-heart"></i> Our Story</h2></div>
     <div class="lt-content">
       <div class="lt-story-card reveal">
-        <p class="lt-story-text">What started as a simple hello grew into a love story written by God's hand. Through the years, Melfred and Cherry May held on to each other through every season — through laughter and tears, through distance and closeness, through ordinary days that became extraordinary because they faced them together.</p>
+        <p class="lt-story-text">What started as a simple hello grew into a love story written by God's hand. Through the years, Fred and May held on to each other through every season — through laughter and tears, through distance and closeness, through ordinary days that became extraordinary because they faced them together.</p>
         <br>
         <p class="lt-story-text">Love is not just found in life's happiest moments, but in the quiet strength of choosing each other every single day. And now, after years of faith, patience, and countless blessings, they stand together — ready to say <em>"I do"</em> and begin forever. 🥹</p>
         <p class="lt-story-quote"><i class="fa-solid fa-quote-left"></i> &nbsp; "And now these three remain: faith, hope and love. But the greatest of these is love." &nbsp; <i class="fa-solid fa-quote-right"></i><br><span style="font-size:0.8rem;opacity:0.7">— 1 Corinthians 13:13</span></p>
@@ -977,7 +976,7 @@
         <div class="lt-rsvp-contact"><strong>Fred (Groom)</strong><span><i class="fa-solid fa-phone"></i> 0995 738 4128</span></div>
         <div class="lt-rsvp-contact"><strong>Chem (Bride)</strong><span><i class="fa-solid fa-phone"></i> 0910 343 3223</span></div>
       </div>
-      <a class="lt-rsvp-btn reveal" href="mailto:josephsismart@gmail.com?subject=RSVP - Melfred %26 Cherry May Wedding">
+      <a class="lt-rsvp-btn reveal" href="mailto:josephsismart@gmail.com?subject=RSVP - Fred %26 May Wedding">
         <i class="fa-solid fa-paper-plane"></i> Send RSVP via Email
       </a>
       <p class="reveal" style="font-size:0.8rem;color:var(--text-mid);font-style:italic"><i class="fa-brands fa-facebook"></i> Or message us directly on Facebook 💌</p>
@@ -1011,9 +1010,9 @@
       <div class="std-inner">
         <p class="std-sub">The Wedding of</p>
         <div class="std-names">
-          <span class="std-name">Melfred</span>
+          <span class="std-name">Fred</span>
           <span class="std-and">and</span>
-          <span class="std-name">Cherry May</span>
+          <span class="std-name">May</span>
         </div>
         <div class="std-date-row">
           <span class="std-month">SEPTEMBER</span>
@@ -1049,15 +1048,14 @@
 
   <footer id="lt-footer">
     <span class="footer-hearts">💚 💍 💚</span>
-    <p>Melfred &amp; Cherry May &nbsp;·&nbsp; September 5, 2026 &nbsp;·&nbsp; Butuan City, Philippines</p>
+    <p>Fred &amp; May &nbsp;·&nbsp; September 5, 2026 &nbsp;·&nbsp; Butuan City, Philippines</p>
     <p style="margin-top:0.4rem;opacity:0.5">Made with <i class="fa-solid fa-heart" style="color:#6aaa7a"></i> — Digital Wedding Invitation</p>
   </footer>
 </div>
 
-<audio id="bgMusic" loop>
-  <source src="https://cdn.pixabay.com/audio/2022/05/16/audio_1812ef4059.mp3" type="audio/mpeg">
-  <source src="https://cdn.pixabay.com/audio/2021/11/25/audio_5d68ceaabb.mp3" type="audio/mpeg">
-</audio>
+<!-- Hidden YouTube player for background music -->
+<div id="yt-player" style="position:fixed;left:-9999px;top:-9999px;width:1px;height:1px;pointer-events:none;"></div>
+<script src="https://www.youtube.com/iframe_api"></script>
 
 <script>
 // ── FLOATING HEARTS ──
@@ -1099,16 +1097,8 @@ function openEnvelope(){
   const wrap = document.getElementById('envelopeWrap');
   if(wrap.classList.contains('opened')) return;
   wrap.classList.add('opened');
-  // Start music on this user interaction (bypasses autoplay block)
-  const aud = document.getElementById('bgMusic');
-  aud.volume = 0.4;
-  aud.play().then(()=>{
-    musicPlaying = true;
-    const icon = document.getElementById('musicIcon');
-    const btn = document.getElementById('musicBtn');
-    if(icon) icon.className = 'fa-solid fa-pause';
-    if(btn) btn.classList.add('playing');
-  }).catch(()=>{});
+  // Start music on this user interaction with fade-in
+  setTimeout(fadeInMusic, 800);
   setTimeout(()=>{
     document.getElementById('dark-intro').classList.add('hidden');
     document.body.classList.add('opened');
@@ -1119,14 +1109,52 @@ function openEnvelope(){
   }, 1000);
 }
 
-// ── MUSIC ──
+// ── YOUTUBE MUSIC (One Love - Acel Bisa) ──
 let musicPlaying = false;
-const audio = document.getElementById('bgMusic');
+let ytPlayer = null;
+let ytReady = false;
+function onYouTubeIframeAPIReady(){
+  ytPlayer = new YT.Player('yt-player', {
+    videoId: 'R5Dl5m6_ePU',
+    playerVars:{ autoplay:0, controls:0, disablekb:1, fs:0, iv_load_policy:3, modestbranding:1, rel:0, showinfo:0, start:82, loop:1, playlist:'R5Dl5m6_ePU' },
+    events:{
+      onReady: function(e){ ytReady=true; e.target.setVolume(0); },
+      onStateChange: function(e){
+        if(e.data===YT.PlayerState.ENDED){ ytPlayer.seekTo(82); ytPlayer.playVideo(); }
+      }
+    }
+  });
+}
+function fadeInMusic(){
+  if(!ytPlayer||!ytReady) return;
+  ytPlayer.seekTo(82); ytPlayer.playVideo();
+  let vol=0;
+  const fade=setInterval(()=>{
+    vol=Math.min(vol+2,40);
+    ytPlayer.setVolume(vol);
+    if(vol>=40) clearInterval(fade);
+  },100);
+  musicPlaying=true;
+  const icon=document.getElementById('musicIcon');
+  const btn=document.getElementById('musicBtn');
+  if(icon) icon.className='fa-solid fa-pause';
+  if(btn) btn.classList.add('playing');
+}
 function toggleMusic(){
-  const icon = document.getElementById('musicIcon');
-  const btn = document.getElementById('musicBtn');
-  if(musicPlaying){ audio.pause(); icon.className='fa-solid fa-play'; btn.classList.remove('playing'); musicPlaying=false; }
-  else { audio.play().catch(()=>{}); icon.className='fa-solid fa-pause'; btn.classList.add('playing'); musicPlaying=true; }
+  const icon=document.getElementById('musicIcon');
+  const btn=document.getElementById('musicBtn');
+  if(!ytPlayer||!ytReady) return;
+  if(musicPlaying){
+    ytPlayer.pauseVideo();
+    if(icon) icon.className='fa-solid fa-play';
+    if(btn) btn.classList.remove('playing');
+    musicPlaying=false;
+  } else {
+    ytPlayer.playVideo();
+    if(icon) icon.className='fa-solid fa-pause';
+    if(btn) btn.classList.add('playing');
+    musicPlaying=true;
+  }
 }
 
 // ── RSVP ──
@@ -1305,7 +1333,4 @@ document.querySelectorAll('.std-spark').forEach((el,i)=>{
   font-size: 1rem; display: flex; align-items: center; justify-content: center;
   box-shadow: 0 4px 16px rgba(13,51,34,0.3); transition: transform 0.3s, box-shadow 0.3s;
 }
-.std-top-btn:hover { transform: translateX(50%) translateY(-3px); box-shadow: 0 8px 24px rgba(13,51,34,0.4); }
-</style>
-</body>
-</html>
+.std-top-btn:hover { transform: translateX(50%) translateY(-3px); box-shadow: 0 8px 24px rgba
