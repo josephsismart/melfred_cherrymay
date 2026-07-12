@@ -440,10 +440,112 @@
     .reveal { opacity:0; transform:translateY(32px); transition:opacity 0.8s ease,transform 0.8s ease; }
     .reveal.visible { opacity:1; transform:translateY(0); }
 
-    @media(max-width:480px) {
-      .lt-ent-parents { grid-template-columns:1fr; }
-      .floral-left,.floral-right { width:90px; }
-      .rsvp-btns { flex-direction:column; align-items:center; }
+    /* ══════════════════════════════════════════
+       MOBILE STYLES (≤ 600px)
+    ══════════════════════════════════════════ */
+    @media(max-width:600px) {
+
+      /* ── Dark nav ── */
+      #dark-nav { gap:1rem; padding:0.7rem 1rem; }
+      #dark-nav a { font-size:0.55rem; letter-spacing:0.12em; }
+
+      /* ── Hero ── */
+      #welcome { padding:0.8rem 1.2rem 0.4rem; gap:0.2rem; }
+      .hero-tag { font-size:0.55rem; padding:0.25rem 0.9rem; }
+      .hero-sub { font-size:0.75rem; }
+      .hero-name { font-size:clamp(2rem,14vw,3rem) !important; }
+      .hero-amp { font-size:clamp(1rem,5vw,1.5rem) !important; }
+      .hero-date-pill { font-size:0.6rem; padding:0.45rem 1.2rem; margin-top:0.3rem; }
+
+      /* ── Envelope ── */
+      #envelope-section { padding:0.2rem 1rem 0.5rem; gap:0.4rem; }
+      .envelope-wrap { width:min(240px,70vw) !important; }
+      .click-hint { font-size:0.7rem; }
+
+      /* ── Pill nav (invitation) ── */
+      #pill-nav { gap:0.25rem; padding:0.5rem 0.5rem; }
+      #pill-nav a { font-size:0.48rem; padding:0.3rem 0.6rem; letter-spacing:0.06em; }
+
+      /* ── Section padding ── */
+      .lt-content { padding:1.2rem 1rem; }
+      .lt-section-header { padding:1.5rem 1rem 0.8rem; }
+      .lt-section-header h2 { font-size:1rem; letter-spacing:0.1em; }
+
+      /* ── Welcome section ── */
+      #inv-welcome { padding:2rem 1rem 1.5rem; gap:0.8rem; }
+      .welcome-script { font-size:clamp(2.2rem,10vw,3.5rem); }
+      .welcome-text { font-size:0.85rem; line-height:1.8; }
+      .photo-placeholder { width:min(240px,70vw) !important; height:min(300px,85vw) !important; }
+      .floral-left,.floral-right { width:70px; }
+
+      /* ── Story ── */
+      .lt-story-text { font-size:0.9rem; line-height:1.8; }
+      .lt-story-quote { font-size:0.82rem; }
+
+      /* ── Gallery grid ── */
+      .lt-gallery-grid { grid-template-columns:1fr 1fr; gap:0.6rem; }
+      .gallery-item { border-radius:12px; }
+
+      /* ── Details ── */
+      .lt-details-grid { grid-template-columns:1fr !important; gap:1rem; }
+      .lt-detail-card { padding:1.2rem 1rem; }
+      .lt-detail-card-name { font-size:1rem; }
+      .lt-timeline-item { gap:0.6rem; }
+      .lt-timeline-time { font-size:0.6rem; min-width:60px; }
+      .lt-timeline-event { font-size:0.75rem; }
+
+      /* ── Entourage ── */
+      .lt-entourage-content { padding:1.2rem 0.8rem; }
+      .lt-ent-group-title { font-size:0.75rem; }
+      .lt-ent-parents { grid-template-columns:1fr !important; gap:0.6rem; }
+      .lt-parent-card { padding:0.8rem; }
+      .lt-sponsor-pair { grid-template-columns:1fr !important; }
+      .lt-party-grid { grid-template-columns:1fr !important; gap:0.8rem; }
+      .lt-party-card { padding:1rem; }
+      .lt-bridal-grid { grid-template-columns:1fr 1fr; gap:0.6rem; }
+      .lt-bridal-card { padding:0.8rem 0.5rem; }
+      .lt-bridal-card .role { font-size:0.55rem; }
+      .lt-bridal-card .name { font-size:0.75rem; }
+      .lt-sponsors-pairs { max-width:100%; }
+
+      /* ── FAQ ── */
+      .lt-faq-item { padding:1rem; }
+      .lt-faq-q { font-size:0.82rem; }
+      .lt-faq-a { font-size:0.8rem; }
+
+      /* ── RSVP ── */
+      .lt-rsvp-content { padding:2rem 1rem; gap:1rem; }
+      .rsvp-card { padding:1.5rem 1rem; border-radius:18px; }
+      .rsvp-btns { flex-direction:column; align-items:center; gap:0.7rem; }
+      .rsvp-yes,.rsvp-no { min-width:160px; padding:1rem 1.5rem; }
+      .lt-rsvp-contacts { flex-direction:column; align-items:center; }
+      .lt-rsvp-contact { width:100%; max-width:260px; }
+
+      /* ── Save the Date ── */
+      .std-body { flex-direction:column; align-items:center; padding:2rem 1rem; }
+      .std-floral { width:120px; height:130px; }
+      .std-inner { align-items:center; text-align:center; }
+      .std-name { font-size:clamp(2.4rem,12vw,3.5rem); }
+      .std-and { font-size:clamp(1.2rem,5vw,1.8rem); }
+      .std-photo-area { width:min(200px,65vw); height:min(260px,82vw); }
+      .std-countdown { padding:0.6rem 0.8rem; }
+      .std-cd-num { font-size:1.2rem; }
+      .std-cd-lbl { font-size:0.4rem; }
+      .std-cd-sep { font-size:1rem; }
+
+      /* ── Footer ── */
+      #lt-footer { padding:2rem 1rem; font-size:0.55rem; }
+
+      /* ── Music button ── */
+      .music-btn { width:48px; height:48px; font-size:1.1rem; }
+    }
+
+    /* ── Extra small (≤ 380px) ── */
+    @media(max-width:380px) {
+      .hero-name { font-size:clamp(1.8rem,13vw,2.8rem) !important; }
+      .envelope-wrap { width:min(210px,72vw) !important; }
+      #pill-nav a { font-size:0.44rem; padding:0.25rem 0.45rem; }
+      .lt-bridal-grid { grid-template-columns:1fr; }
     }
 
     /* ── PARALLAX SECTION BACKGROUNDS ── */
