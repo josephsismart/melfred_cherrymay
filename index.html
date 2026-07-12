@@ -328,6 +328,8 @@
     .rsvp-resp-emoji { font-size:3rem; }
     .rsvp-resp-text { font-family:'Playfair Display',serif; font-size:1.2rem; font-weight:700; color:var(--wine); }
     .rsvp-resp-sub { font-size:0.85rem; color:var(--text-mid); }
+    .rsvp-change-btn { margin-top:0.6rem; background:none; border:1.5px solid rgba(212,84,122,0.3); color:var(--rose); font-family:'Poppins',sans-serif; font-size:0.75rem; font-weight:600; padding:0.45rem 1.2rem; border-radius:50px; cursor:pointer; transition:all 0.25s; letter-spacing:0.05em; }
+    .rsvp-change-btn:hover { background:rgba(212,84,122,0.08); border-color:var(--rose); }
 
     /* Contacts + send btn */
     .lt-rsvp-deadline { font-size:0.7rem; font-weight:600; letter-spacing:0.2em; text-transform:uppercase; color:var(--rose); }
@@ -691,12 +693,14 @@
           <div class="rsvp-resp-emoji">🎊💕🎉</div>
           <div class="rsvp-resp-text">Yay! We can't wait to see you!</div>
           <div class="rsvp-resp-sub">Please also confirm via the contact details below. See you on September 5! 🥂</div>
+          <button class="rsvp-change-btn" onclick="resetRsvp()"><i class="fa-solid fa-rotate-left"></i> Change my answer</button>
         </div>
         <!-- No response -->
         <div class="rsvp-response no-resp" id="noResp">
           <div class="rsvp-resp-emoji">😢💔</div>
           <div class="rsvp-resp-text">Aww, we'll miss you so much!</div>
           <div class="rsvp-resp-sub">We'll be thinking of you on our big day. Thank you for letting us know! 🙏</div>
+          <button class="rsvp-change-btn" onclick="resetRsvp()"><i class="fa-solid fa-rotate-left"></i> Change my answer</button>
         </div>
       </div>
 
@@ -827,6 +831,12 @@ function rsvpAnswer(coming){
   } else {
     document.getElementById('noResp').classList.add('show');
   }
+}
+
+function resetRsvp(){
+  document.getElementById('yesResp').classList.remove('show');
+  document.getElementById('noResp').classList.remove('show');
+  document.getElementById('rsvpBtns').style.display = '';
 }
 
 function launchConfetti(){
