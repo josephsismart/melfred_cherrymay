@@ -22,6 +22,43 @@
     body { background: var(--cream); font-family: 'Poppins', sans-serif; overflow-x: hidden; color: var(--text); }
     #hearts-canvas { position: fixed; inset: 0; z-index: 0; pointer-events: none; }
 
+    /* ── ENVELOPE OVERLAY ── */
+    #envelope-overlay {
+      position: fixed; inset: 0; z-index: 9999;
+      background: linear-gradient(160deg, #051a0a 0%, #0d3322 45%, #162e1f 75%, #051a0a 100%);
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      gap: 1.5rem; cursor: pointer; transition: opacity 0.8s ease;
+    }
+    #envelope-overlay.opening { animation: envelopeOpen 0.8s ease forwards; }
+    @keyframes envelopeOpen {
+      0%   { opacity: 1; transform: scale(1); }
+      40%  { opacity: 1; transform: scale(1.04); }
+      100% { opacity: 0; transform: scale(1.1); pointer-events: none; }
+    }
+    .env-stars { position: absolute; inset: 0; overflow: hidden; pointer-events: none; }
+    .env-star { position: absolute; background: #fff; border-radius: 50%;
+      animation: envStarTwinkle var(--dur, 3s) var(--delay, 0s) infinite alternate; }
+    @keyframes envStarTwinkle { 0%{opacity:0.05} 100%{opacity:0.4} }
+    .env-wax {
+      width: 90px; height: 90px; border-radius: 50%;
+      background: radial-gradient(circle at 38% 35%, #4a7a5a, #0d3322);
+      box-shadow: 0 8px 30px rgba(0,0,0,0.5), inset 0 2px 8px rgba(200,230,208,0.15);
+      display: flex; align-items: center; justify-content: center;
+      animation: envWaxPulse 2s infinite alternate;
+    }
+    @keyframes envWaxPulse { 0%{box-shadow:0 8px 30px rgba(0,0,0,0.5),0 0 0 0 rgba(74,122,90,0.4)} 100%{box-shadow:0 8px 30px rgba(0,0,0,0.5),0 0 0 18px rgba(74,122,90,0)} }
+    .env-wax svg { width: 70px; height: 70px; }
+    .env-title { font-family: 'Great Vibes', cursive; font-size: clamp(2.5rem, 8vw, 4rem); color: #fff; text-align: center; line-height: 1.2; }
+    .env-date { font-size: 0.65rem; font-weight: 600; letter-spacing: 0.3em; text-transform: uppercase; color: rgba(200,230,208,0.6); }
+    .env-tap {
+      display: flex; flex-direction: column; align-items: center; gap: 0.5rem;
+      margin-top: 1rem; animation: envTapPulse 1.5s infinite alternate;
+    }
+    @keyframes envTapPulse { 0%{opacity:0.5;transform:scale(0.95)} 100%{opacity:1;transform:scale(1.05)} }
+    .env-tap-icon { font-size: 2rem; color: var(--rose-light); }
+    .env-tap-text { font-size: 0.6rem; font-weight: 700; letter-spacing: 0.25em; text-transform: uppercase; color: rgba(200,230,208,0.55); }
+    .env-hearts { display: flex; gap: 0.3rem; font-size: 0.9rem; margin-top: 0.3rem; opacity: 0.5; }
+
     /* ── PILL NAV ── */
     #pill-nav {
       position: sticky; top: 0; z-index: 100;
@@ -268,6 +305,26 @@
 <body>
 <canvas id="hearts-canvas"></canvas>
 
+<!-- ── ENVELOPE OVERLAY ── -->
+<div id="envelope-overlay" onclick="openEnvelope()">
+  <div class="env-stars" id="envStars"></div>
+  <div class="env-wax">
+    <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="50" cy="50" r="48" fill="none" stroke="rgba(200,230,208,0.2)" stroke-width="1.5"/>
+      <text x="50" y="38" text-anchor="middle" font-family="Georgia,serif" font-size="10" fill="rgba(200,230,208,0.5)" letter-spacing="3">FRED</text>
+      <text x="50" y="55" text-anchor="middle" font-family="Great Vibes,Georgia,serif" font-size="26" font-style="italic" fill="rgba(255,255,255,0.85)" letter-spacing="1">FM</text>
+      <text x="50" y="70" text-anchor="middle" font-family="Georgia,serif" font-size="10" fill="rgba(200,230,208,0.5)" letter-spacing="3">MAY</text>
+    </svg>
+  </div>
+  <div class="env-title">Fred &amp; May</div>
+  <div class="env-date"><i class="fa-solid fa-calendar-heart"></i> &nbsp; September 5, 2026 &nbsp; · &nbsp; Butuan City</div>
+  <div class="env-tap">
+    <i class="fa-solid fa-envelope-open-text env-tap-icon"></i>
+    <span class="env-tap-text">Tap to open your invitation</span>
+    <div class="env-hearts">💚 💍 💚</div>
+  </div>
+</div>
+
 <!-- ── PILL NAV ── -->
 <nav id="pill-nav">
   <a href="/"><i class="fa-solid fa-house-heart"></i> Home</a>
@@ -296,11 +353,9 @@
       </div>
     </div>
   </div>
-  <div class="music-btn-wrap reveal">
-    <span class="music-arc-text">One Love · Acel Bisa</span>
-    <button class="music-btn" onclick="toggleMusic()" title="Toggle music">
-      <i class="fa-solid fa-play" id="musicIcon"></i>
-    </button>
+  <div class="music-btn-wrap reveal" style="cursor:pointer;" onclick="toggleMusic()" title="Toggle music">
+    <span class="music-arc-text"><i class="fa-solid fa-music"></i> &nbsp; One Love · Acel Bisa</span>
+    <div class="music-btn" id="musicBtn"><i class="fa-solid fa-pause" id="musicIcon"></i></div>
   </div>
 </section>
 
@@ -381,17 +436,36 @@
     <h2><i class="fa-solid fa-people-group"></i> Entourage</h2>
   </div>
   <div class="lt-entourage-content">
-    <p class="lt-ent-group-title reveal-scale"><i class="fa-solid fa-crown"></i> &nbsp; Principal Sponsors</p>
+    <p class="lt-ent-group-title reveal-scale"><i class="fa-solid fa-users"></i> &nbsp; Parents</p>
     <div class="lt-ent-parents reveal">
-      <div class="lt-parent-card"><div class="role">Parents of the Groom</div><div class="name">Mr. & Mrs. Sismar</div></div>
-      <div class="lt-parent-card"><div class="role">Parents of the Bride</div><div class="name">Mr. & Mrs. Halina</div></div>
+      <div class="lt-parent-card"><div class="role"><i class="fa-solid fa-ring"></i> Parents of the Groom</div><div class="name">Mr. Freddie T. Espijon<br>&amp; Mrs. Imelda J. Espijon</div></div>
+      <div class="lt-parent-card"><div class="role"><i class="fa-solid fa-spa"></i> Parents of the Bride</div><div class="name">Mr. Rogelio G. Malig-on<br>&amp; the late Mrs. Josephine B. Malig-on</div></div>
+    </div>
+
+    <div class="lt-ent-divider reveal"><span class="lt-ent-divider-icon"><i class="fa-solid fa-star"></i></span></div>
+    <p class="lt-ent-group-title reveal-scale"><i class="fa-solid fa-crown"></i> &nbsp; Principal Sponsors</p>
+    <div class="lt-sponsors-pairs reveal" style="width:100%;max-width:640px;">
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:0.5rem 1.5rem;width:100%;padding:0.5rem 0 0.3rem;">
+        <div style="text-align:center;font-size:0.6rem;font-weight:700;letter-spacing:0.2em;color:var(--rose);text-transform:uppercase;padding-bottom:0.3rem;border-bottom:1.5px solid rgba(74,122,90,0.15);">
+          <i class="fa-solid fa-user-tie"></i> Ninong
+        </div>
+        <div style="text-align:center;font-size:0.6rem;font-weight:700;letter-spacing:0.2em;color:var(--rose);text-transform:uppercase;padding-bottom:0.3rem;border-bottom:1.5px solid rgba(74,122,90,0.15);">
+          <i class="fa-solid fa-spa"></i> Ninang
+        </div>
+        <div class="lt-sponsor-pill">Gregorio Amora</div><div class="lt-sponsor-pill">Cecilia Amora</div>
+        <div class="lt-sponsor-pill">Dominador Cabiguing</div><div class="lt-sponsor-pill">Flordeliza Cabiguing</div>
+        <div class="lt-sponsor-pill">Jonathan Tiongson</div><div class="lt-sponsor-pill">Rebecca Gingo</div>
+        <div class="lt-sponsor-pill">Feliciano Culdora</div><div class="lt-sponsor-pill">Lorna Culdora</div>
+        <div class="lt-sponsor-pill">Fernan Rivero</div><div class="lt-sponsor-pill">Nathalie Pasa</div>
+        <div class="lt-sponsor-pill">Romulo Bayotas</div><div class="lt-sponsor-pill">Marichu Cabiguin</div>
+      </div>
     </div>
 
     <div class="lt-ent-divider reveal"><span class="lt-ent-divider-icon"><i class="fa-solid fa-heart"></i></span></div>
     <p class="lt-ent-group-title reveal-scale"><i class="fa-solid fa-user-tie"></i> &nbsp; Best Man &amp; Maid of Honor</p>
     <div class="lt-ent-parents reveal">
-      <div class="lt-parent-card"><div class="role"><i class="fa-solid fa-user-tie"></i> Best Man</div><div class="name">—</div></div>
-      <div class="lt-parent-card"><div class="role"><i class="fa-solid fa-spa"></i> Maid of Honor</div><div class="name">—</div></div>
+      <div class="lt-parent-card"><div class="role"><i class="fa-solid fa-user-tie"></i> Best Man</div><div class="name">Gilbert Gaballo</div></div>
+      <div class="lt-parent-card"><div class="role"><i class="fa-solid fa-spa"></i> Maid of Honor</div><div class="name">Charise Malig-on</div></div>
     </div>
 
     <div class="lt-ent-divider reveal"><span class="lt-ent-divider-icon"><i class="fa-solid fa-star"></i></span></div>
@@ -399,7 +473,14 @@
     <div class="lt-party-grid reveal">
       <div class="lt-party-card">
         <div class="role"><i class="fa-solid fa-user-tie"></i> Groomsmen</div>
-        <span class="lt-party-name-pill">—</span>
+        <span class="lt-party-name-pill">Ralph Gorgonio</span>
+        <span class="lt-party-name-pill">John Jewell Diño</span>
+        <span class="lt-party-name-pill">Ronald Estrada</span>
+        <span class="lt-party-name-pill">Frenzel Bluez Malig-on</span>
+        <span class="lt-party-name-pill">Freddie Espijon Jr</span>
+        <span class="lt-party-name-pill">Jay Mclain Digamon</span>
+        <span class="lt-party-name-pill">Richie Tampan</span>
+        <span class="lt-party-name-pill">Gyro Culdora</span>
       </div>
       <div class="lt-party-card">
         <div class="role"><i class="fa-solid fa-spa"></i> Bridesmaids</div>
@@ -422,7 +503,7 @@
       <div class="lt-bridal-card"><div class="role"><i class="fa-solid fa-fire-flame-curved"></i> Candle</div><div class="name">Mr. Malvin Malig-on<br><span style="font-size:0.75em;opacity:0.7">&amp; Mrs. Nadine Vera Malig-on</span></div></div>
     </div>
 
-    <div class="lt-ent-divider reveal"><span class="lt-ent-divider-icon"><i class="fa-solid fa-star"></i></span></div>
+    <div class="lt-ent-divider reveal"><span class="lt-ent-divider-icon"><i class="fa-solid fa-child"></i></span></div>
     <p class="lt-ent-group-title reveal-scale"><i class="fa-solid fa-child"></i> &nbsp; Kids Entourage</p>
     <div class="lt-bridal-grid reveal">
       <div class="lt-bridal-card"><div class="role"><i class="fa-solid fa-seedling"></i> Little Groom</div><div class="name">Jhonrex Espijon</div></div>
@@ -568,6 +649,52 @@
 <script src="https://www.youtube.com/iframe_api"></script>
 
 <script>
+// ── ENVELOPE STARS ──
+const envStarsEl = document.getElementById('envStars');
+for(let i=0;i<60;i++){
+  const s=document.createElement('div'); s.className='env-star';
+  const sz=(Math.random()*2.5+0.5).toFixed(1);
+  s.style.cssText=`width:${sz}px;height:${sz}px;top:${Math.random()*100}%;left:${Math.random()*100}%;--dur:${(Math.random()*3+1.5).toFixed(1)}s;--delay:${(Math.random()*3).toFixed(1)}s;`;
+  envStarsEl.appendChild(s);
+}
+
+// ── ENVELOPE OPEN ──
+let envelopeOpened=false;
+function openEnvelope(){
+  if(envelopeOpened)return; envelopeOpened=true;
+  const ov=document.getElementById('envelope-overlay');
+  ov.classList.add('opening');
+  // burst hearts
+  for(let i=0;i<20;i++){setTimeout(()=>{const h=document.createElement('span');h.textContent=['💚','🌿','💍','💗','✨'][Math.floor(Math.random()*5)];h.style.cssText=`position:fixed;left:${30+Math.random()*40}%;top:${30+Math.random()*40}%;font-size:${1.5+Math.random()*2}rem;pointer-events:none;z-index:99999;animation:burstHeart 1.2s ease forwards;--dx:${(Math.random()-0.5)*180}px;--dy:${-(Math.random()*150+60)}px;`;document.body.appendChild(h);setTimeout(()=>h.remove(),1300);},i*60);}
+  setTimeout(()=>{ov.style.display='none'; autoPlayMusic();},850);
+}
+function autoPlayMusic(){
+  if(!ytPlayer||!ytReady){setTimeout(autoPlayMusic,300);return;}
+  ytPlayer.seekTo(82);ytPlayer.playVideo();
+  let vol=0;const fade=setInterval(()=>{vol=Math.min(vol+2,40);ytPlayer.setVolume(vol);if(vol>=40)clearInterval(fade);},120);
+  musicPlaying=true;
+  document.getElementById('musicIcon').className='fa-solid fa-pause';
+  if(document.getElementById('musicBtn')) document.getElementById('musicBtn').classList.add('playing');
+}
+
+// ── PARALLAX ──
+const parallaxSections=[
+  {el:document.getElementById('story'), speed:0.25},
+  {el:document.getElementById('gallery'), speed:0.2},
+  {el:document.getElementById('details'), speed:0.2},
+  {el:document.getElementById('entourage'), speed:0.15},
+];
+function applyParallax(){
+  const sy=window.scrollY;
+  parallaxSections.forEach(({el,speed})=>{
+    if(!el)return;
+    const rect=el.getBoundingClientRect();
+    const center=rect.top+rect.height/2-window.innerHeight/2;
+    el.style.backgroundPositionY=`calc(50% + ${center*speed*-1}px)`;
+  });
+}
+window.addEventListener('scroll',applyParallax,{passive:true});
+
 // ── HEARTS ──
 const hc=document.getElementById('hearts-canvas');
 const hx=hc.getContext('2d');
@@ -606,10 +733,10 @@ function onYouTubeIframeAPIReady(){
 }
 function toggleMusic(){
   const icon=document.getElementById('musicIcon');
-  const btn=document.querySelector('.music-btn');
+  const btn=document.getElementById('musicBtn');
   if(!ytPlayer||!ytReady)return;
-  if(musicPlaying){ytPlayer.pauseVideo();icon.className='fa-solid fa-play';btn.classList.remove('playing');musicPlaying=false;}
-  else{ytPlayer.playVideo();let vol=0;const fade=setInterval(()=>{vol=Math.min(vol+2,40);ytPlayer.setVolume(vol);if(vol>=40)clearInterval(fade);},100);icon.className='fa-solid fa-pause';btn.classList.add('playing');musicPlaying=true;}
+  if(musicPlaying){ytPlayer.pauseVideo();icon.className='fa-solid fa-play';if(btn)btn.classList.remove('playing');musicPlaying=false;}
+  else{ytPlayer.playVideo();let vol=0;const fade=setInterval(()=>{vol=Math.min(vol+2,40);ytPlayer.setVolume(vol);if(vol>=40)clearInterval(fade);},100);icon.className='fa-solid fa-pause';if(btn)btn.classList.add('playing');musicPlaying=true;}
 }
 
 // ── RSVP ──
