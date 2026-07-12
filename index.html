@@ -112,12 +112,15 @@
       margin-top: 0.5rem; opacity: 0; animation: fadeUp 1s 0.55s forwards;
     }
     .hero-names {
-      font-family: 'Great Vibes', cursive; font-size: clamp(4.5rem, 13vw, 10rem);
-      line-height: 0.85; color: #f5e6c8;
-      text-shadow: 0 0 80px rgba(212,168,75,0.55), 0 4px 20px rgba(0,0,0,0.7);
+      display: flex; flex-direction: column; align-items: center; gap: 0;
       opacity: 0; animation: fadeUp 1.2s 0.75s forwards; margin-top: 0.3rem;
     }
-    .hero-and { font-family: 'Great Vibes', cursive; font-size: clamp(2rem, 5vw, 3.5rem); color: var(--gold); display: block; line-height: 1; }
+    .hero-name-text {
+      font-family: 'Great Vibes', cursive; font-size: clamp(4.5rem, 13vw, 10rem);
+      line-height: 0.9; color: #f5e6c8;
+      text-shadow: 0 0 80px rgba(212,168,75,0.55), 0 4px 20px rgba(0,0,0,0.7);
+    }
+    .hero-and { font-family: 'Great Vibes', cursive; font-size: clamp(2rem, 5vw, 3.5rem); color: var(--gold); line-height: 1; }
     .hero-divider {
       display: flex; align-items: center; gap: 1rem; margin: 1rem 0; width: min(300px, 60vw);
       opacity: 0; animation: fadeUp 1s 1.4s forwards;
@@ -434,9 +437,9 @@
   <p class="hero-eyebrow">✦ &nbsp; Two Hearts, One Promise &nbsp; ✦</p>
   <p class="hero-tagline">Joyfully invite you to the wedding of</p>
   <div class="hero-names">
-    Melfred<br>
-    <span class="hero-and">&amp;</span><br>
-    Cherry May
+    <span class="hero-name-text">Melfred</span>
+    <span class="hero-and">&amp;</span>
+    <span class="hero-name-text">Cherry May</span>
   </div>
   <div class="hero-divider"><span>♥</span></div>
   <p class="hero-date">September 5 &nbsp;·&nbsp; 2026</p>
