@@ -103,8 +103,10 @@
     .lt-content { padding: 2.5rem 2rem; max-width: 700px; margin: 0 auto; }
 
     /* ── REVEAL ANIMATIONS ── */
-    .reveal { opacity:0; transform:translateY(28px); transition:opacity 0.8s ease,transform 0.8s ease; }
+    .reveal { opacity:0; transform:translateY(20px); transition:opacity 0.5s ease,transform 0.5s ease; }
     .reveal.visible { opacity:1; transform:none; }
+    /* Ensure page is never stuck blank — fallback after 1s */
+    body.content-ready .reveal { opacity:1 !important; transform:none !important; }
     .reveal-left { opacity:0; transform:translateX(-36px); transition:opacity 0.8s,transform 0.8s; }
     .reveal-right { opacity:0; transform:translateX(36px); transition:opacity 0.8s,transform 0.8s; }
     .reveal-scale { opacity:0; transform:scale(0.88); transition:opacity 0.7s,transform 0.7s; }
@@ -807,8 +809,10 @@ function launchConfetti(){
 
 // ── SCROLL REVEAL ──
 const reveals=document.querySelectorAll('.reveal,.reveal-left,.reveal-right,.reveal-scale');
-const io=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');io.unobserve(e.target);}});},{threshold:0.08});
+const io=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');io.unobserve(e.target);}});},{threshold:0.05});
 reveals.forEach(el=>io.observe(el));
+// Failsafe: if anything is still invisible after 1.2s, force show all
+setTimeout(()=>{ document.body.classList.add('content-ready'); }, 1200);
 
 // ── ACTIVE NAV ──
 const navLinks = document.querySelectorAll('#pill-nav a[href^="#"]');
