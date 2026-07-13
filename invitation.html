@@ -107,6 +107,11 @@
     .reveal.visible { opacity:1; transform:none; }
     /* Ensure page is never stuck blank — fallback after 1s */
     body.content-ready .reveal { opacity:1 !important; transform:none !important; }
+    @keyframes celebFloat {
+      0%   { opacity:1; transform:translate(0,0) scale(1) rotate(0deg); }
+      60%  { opacity:0.9; }
+      100% { opacity:0; transform:translate(var(--dx),var(--dy)) scale(0.4) rotate(360deg); }
+    }
     .reveal-left { opacity:0; transform:translateX(-36px); transition:opacity 0.8s,transform 0.8s; }
     .reveal-right { opacity:0; transform:translateX(36px); transition:opacity 0.8s,transform 0.8s; }
     .reveal-scale { opacity:0; transform:scale(0.88); transition:opacity 0.7s,transform 0.7s; }
@@ -465,26 +470,26 @@
         <img src="/attire-guide.png" alt="Attire Guide Illustration" style="width:90%;max-width:380px;display:block;margin:0 auto;border-radius:12px;">
         <!-- Color swatches with names -->
         <div style="display:flex;flex-direction:column;align-items:center;gap:0.5rem;width:100%;">
-          <div style="display:flex;gap:0.6rem;align-items:flex-end;justify-content:center;flex-wrap:wrap;">
-            <div style="display:flex;flex-direction:column;align-items:center;gap:0.3rem;">
-              <div style="width:38px;height:38px;border-radius:8px;background:#dceee2;box-shadow:0 2px 8px rgba(0,0,0,0.1);"></div>
-              <span style="font-size:0.5rem;color:var(--text-mid);letter-spacing:0.06em;text-align:center;">Cream</span>
+          <div style="display:flex;gap:clamp(0.4rem,2vw,0.8rem);align-items:flex-end;justify-content:center;flex-wrap:wrap;">
+            <div style="display:flex;flex-direction:column;align-items:center;gap:0.4rem;">
+              <div style="width:clamp(40px,10vw,52px);height:clamp(40px,10vw,52px);border-radius:10px;background:#dceee2;box-shadow:0 2px 8px rgba(0,0,0,0.1);"></div>
+              <span style="font-size:clamp(0.5rem,1.8vw,0.62rem);color:var(--text-mid);letter-spacing:0.06em;text-align:center;">Cream</span>
             </div>
-            <div style="display:flex;flex-direction:column;align-items:center;gap:0.3rem;">
-              <div style="width:38px;height:38px;border-radius:8px;background:#8fba9a;box-shadow:0 2px 8px rgba(0,0,0,0.1);"></div>
-              <span style="font-size:0.5rem;color:var(--text-mid);letter-spacing:0.06em;text-align:center;">Sage</span>
+            <div style="display:flex;flex-direction:column;align-items:center;gap:0.4rem;">
+              <div style="width:clamp(40px,10vw,52px);height:clamp(40px,10vw,52px);border-radius:10px;background:#8fba9a;box-shadow:0 2px 8px rgba(0,0,0,0.1);"></div>
+              <span style="font-size:clamp(0.5rem,1.8vw,0.62rem);color:var(--text-mid);letter-spacing:0.06em;text-align:center;">Sage</span>
             </div>
-            <div style="display:flex;flex-direction:column;align-items:center;gap:0.3rem;">
-              <div style="width:38px;height:44px;border-radius:8px;background:#4a7a5a;box-shadow:0 2px 8px rgba(0,0,0,0.1);"></div>
-              <span style="font-size:0.5rem;color:var(--text-mid);letter-spacing:0.06em;text-align:center;">Forest</span>
+            <div style="display:flex;flex-direction:column;align-items:center;gap:0.4rem;">
+              <div style="width:clamp(40px,10vw,52px);height:clamp(40px,10vw,52px);border-radius:10px;background:#4a7a5a;box-shadow:0 2px 8px rgba(0,0,0,0.1);"></div>
+              <span style="font-size:clamp(0.5rem,1.8vw,0.62rem);color:var(--text-mid);letter-spacing:0.06em;text-align:center;">Forest</span>
             </div>
-            <div style="display:flex;flex-direction:column;align-items:center;gap:0.3rem;">
-              <div style="width:38px;height:50px;border-radius:8px;background:#1e5238;box-shadow:0 2px 8px rgba(0,0,0,0.1);"></div>
-              <span style="font-size:0.5rem;color:var(--text-mid);letter-spacing:0.06em;text-align:center;">Emerald</span>
+            <div style="display:flex;flex-direction:column;align-items:center;gap:0.4rem;">
+              <div style="width:clamp(40px,10vw,52px);height:clamp(40px,10vw,52px);border-radius:10px;background:#1e5238;box-shadow:0 2px 8px rgba(0,0,0,0.1);"></div>
+              <span style="font-size:clamp(0.5rem,1.8vw,0.62rem);color:var(--text-mid);letter-spacing:0.06em;text-align:center;">Emerald</span>
             </div>
-            <div style="display:flex;flex-direction:column;align-items:center;gap:0.3rem;">
-              <div style="width:38px;height:56px;border-radius:8px;background:#0d3322;box-shadow:0 2px 8px rgba(0,0,0,0.1);"></div>
-              <span style="font-size:0.5rem;color:var(--text-mid);letter-spacing:0.06em;text-align:center;">Hunter</span>
+            <div style="display:flex;flex-direction:column;align-items:center;gap:0.4rem;">
+              <div style="width:clamp(40px,10vw,52px);height:clamp(40px,10vw,52px);border-radius:10px;background:#0d3322;box-shadow:0 2px 8px rgba(0,0,0,0.1);"></div>
+              <span style="font-size:clamp(0.5rem,1.8vw,0.62rem);color:var(--text-mid);letter-spacing:0.06em;text-align:center;">Hunter</span>
             </div>
           </div>
           <p style="font-size:0.72rem;color:var(--text-mid);font-style:italic;margin-top:0.3rem;">Any shade of green is most welcome!</p>
@@ -761,7 +766,39 @@ function autoPlayMusic(){
   document.getElementById('musicIcon').className='fa-solid fa-pause';
   if(document.getElementById('musicBtn')) document.getElementById('musicBtn').classList.add('playing');
 }
-window.addEventListener('load', () => setTimeout(autoPlayMusic, 800));
+
+// ── CELEBRATION BURST on load ──
+const celebIcons = [
+  'fa-heart','fa-heart','fa-heart',
+  'fa-ring','fa-ring',
+  'fa-champagne-glasses',
+  'fa-dove',
+  'fa-star','fa-star',
+  'fa-music',
+  'fa-leaf','fa-leaf',
+  'fa-sparkles','fa-face-smile-beam'
+];
+const celebColors = ['#6aaa7a','#4a7a5a','#c8e6d0','#aad4bc','#fff','#d4edda','#f8e1e8','#ffd700'];
+function burstCelebration(){
+  for(let i=0;i<28;i++){
+    setTimeout(()=>{
+      const el=document.createElement('i');
+      const icon=celebIcons[Math.floor(Math.random()*celebIcons.length)];
+      el.className=`fa-solid ${icon}`;
+      const size=(1+Math.random()*1.8).toFixed(1);
+      const left=(10+Math.random()*80).toFixed(0);
+      const dur=(1.2+Math.random()*1.2).toFixed(1);
+      const dx=((Math.random()-0.5)*220).toFixed(0);
+      const dy=(-(Math.random()*260+80)).toFixed(0);
+      el.style.cssText=`position:fixed;left:${left}%;top:55%;font-size:${size}rem;color:${celebColors[Math.floor(Math.random()*celebColors.length)]};pointer-events:none;z-index:99999;filter:drop-shadow(0 2px 6px rgba(0,0,0,0.18));animation:celebFloat ${dur}s ease-out forwards;--dx:${dx}px;--dy:${dy}px;`;
+      document.body.appendChild(el);
+      setTimeout(()=>el.remove(),parseFloat(dur)*1000+200);
+    },i*55);
+  }
+}
+window.addEventListener('load', ()=>{
+  setTimeout(()=>{ burstCelebration(); autoPlayMusic(); }, 400);
+});
 
 // ── PARALLAX ──
 const parallaxSections=[
