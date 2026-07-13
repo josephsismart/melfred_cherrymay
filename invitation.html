@@ -720,18 +720,8 @@
 <script src="https://www.youtube.com/iframe_api"></script>
 
 <script>
-// ── ENVELOPE STARS ──
-const envStarsEl = document.getElementById('envStars');
-for(let i=0;i<60;i++){
-  const s=document.createElement('div'); s.className='env-star';
-  const sz=(Math.random()*2.5+0.5).toFixed(1);
-  s.style.cssText=`width:${sz}px;height:${sz}px;top:${Math.random()*100}%;left:${Math.random()*100}%;--dur:${(Math.random()*3+1.5).toFixed(1)}s;--delay:${(Math.random()*3).toFixed(1)}s;`;
-  envStarsEl.appendChild(s);
-}
-
-// ── ENVELOPE OPEN (auto on load) ──
-function openEnvelope(){ autoPlayMusic(); }
-window.addEventListener('load', () => setTimeout(autoPlayMusic, 800));
+// ── YOUTUBE MUSIC (declared first so autoPlayMusic can reference them) ──
+let musicPlaying=false,ytPlayer=null,ytReady=false;
 function autoPlayMusic(){
   if(!ytPlayer||!ytReady){setTimeout(autoPlayMusic,300);return;}
   ytPlayer.seekTo(82);ytPlayer.playVideo();
@@ -740,6 +730,7 @@ function autoPlayMusic(){
   document.getElementById('musicIcon').className='fa-solid fa-pause';
   if(document.getElementById('musicBtn')) document.getElementById('musicBtn').classList.add('playing');
 }
+window.addEventListener('load', () => setTimeout(autoPlayMusic, 800));
 
 // ── PARALLAX ──
 const parallaxSections=[
@@ -784,7 +775,6 @@ function tick(){
 tick();setInterval(tick,1000);
 
 // ── YOUTUBE MUSIC ──
-let musicPlaying=false,ytPlayer=null,ytReady=false;
 function onYouTubeIframeAPIReady(){
   ytPlayer=new YT.Player('yt-player',{
     videoId:'R5Dl5m6_ePU',
