@@ -133,23 +133,47 @@
     .cd-lbl { font-size: 0.45rem; letter-spacing: 0.15em; text-transform: uppercase; color: rgba(200,230,208,0.5); margin-top:0.2rem; }
     .cd-sep { font-size: 1.2rem; color: rgba(106,170,122,0.5); margin-bottom: 0.6rem; }
 
-    /* Open invitation button */
+    /* Open invitation folder button */
     .open-btn {
-      margin-top: 1.2rem;
-      display: inline-flex; align-items: center; gap: 0.7rem;
-      font-family: 'Poppins', sans-serif; font-weight: 600;
-      font-size: clamp(0.75rem, 2.5vw, 0.9rem);
-      letter-spacing: 0.12em; text-transform: uppercase;
-      color: #fff; text-decoration: none;
-      background: linear-gradient(135deg, var(--rose-light), var(--rose));
-      padding: clamp(0.7rem,2vw,1rem) clamp(1.5rem,4vw,2.5rem);
-      border-radius: 50px;
-      box-shadow: 0 8px 32px rgba(74,122,90,0.45), 0 0 0 0 rgba(106,170,122,0.4);
-      animation: fadeIn 1s 1.3s both, pulse 2.5s 2.5s infinite;
-      transition: transform 0.3s, box-shadow 0.3s;
+      margin-top: 1.4rem;
+      display: inline-flex; flex-direction: column; align-items: center; gap: 0.4rem;
+      text-decoration: none; cursor: pointer;
+      animation: fadeIn 1s 1.3s both;
     }
-    .open-btn:hover { transform: translateY(-3px) scale(1.04); box-shadow: 0 14px 40px rgba(74,122,90,0.65); }
-    .open-btn i { font-size: 1.1rem; }
+    .folder-wrap { position: relative; width: clamp(90px,22vw,120px); }
+    .folder-back {
+      width: 100%; aspect-ratio: 1/0.75;
+      background: linear-gradient(160deg, #5a9a6a, #2d6644);
+      border-radius: 0 8px 8px 8px;
+      position: relative;
+      box-shadow: 0 8px 28px rgba(0,0,0,0.35);
+      transition: transform 0.3s;
+    }
+    .folder-back::before {
+      content: '';
+      position: absolute; top: -14%; left: 0;
+      width: 42%; height: 16%;
+      background: linear-gradient(160deg, #6aaa7a, #3d7654);
+      border-radius: 6px 6px 0 0;
+    }
+    .folder-front {
+      position: absolute; bottom: 0; left: 0; right: 0;
+      height: 62%;
+      background: linear-gradient(160deg, #6aaa7a, #3d7654);
+      border-radius: 0 0 8px 8px;
+      display: flex; align-items: center; justify-content: center;
+      transform-origin: bottom center;
+      transition: transform 0.35s ease;
+    }
+    .folder-front svg { width: 36%; opacity: 0.85; }
+    .open-btn:hover .folder-front { transform: rotateX(-40deg); }
+    .open-btn:hover .folder-back { transform: translateY(-4px); }
+    .folder-label {
+      font-family: 'Poppins', sans-serif; font-weight: 600;
+      font-size: clamp(0.65rem, 2vw, 0.78rem);
+      letter-spacing: 0.14em; text-transform: uppercase;
+      color: rgba(200,230,208,0.85);
+    }
     @keyframes pulse {
       0%,100%{box-shadow:0 8px 32px rgba(74,122,90,0.45),0 0 0 0 rgba(106,170,122,0.3)}
       50%{box-shadow:0 8px 32px rgba(74,122,90,0.45),0 0 0 12px rgba(106,170,122,0)}
@@ -229,7 +253,16 @@
   </div>
 
   <a class="open-btn" href="/invitation.html">
-    <i class="fa-solid fa-envelope-open-text"></i> Open Invitation
+    <div class="folder-wrap">
+      <div class="folder-back"></div>
+      <div class="folder-front">
+        <svg viewBox="0 0 40 30" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M4 8 L20 18 L36 8" stroke="white" stroke-width="2.5" stroke-linecap="round"/>
+          <rect x="2" y="6" width="36" height="22" rx="2" stroke="white" stroke-width="2.5" fill="none"/>
+        </svg>
+      </div>
+    </div>
+    <span class="folder-label">Open Invitation</span>
   </a>
 </div>
 
