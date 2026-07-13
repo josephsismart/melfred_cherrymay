@@ -133,92 +133,126 @@
     .cd-lbl { font-size: 0.45rem; letter-spacing: 0.15em; text-transform: uppercase; color: rgba(200,230,208,0.5); margin-top:0.2rem; }
     .cd-sep { font-size: 1.2rem; color: rgba(106,170,122,0.5); margin-bottom: 0.6rem; }
 
-    /* Envelope button */
+    /* ── BIG ENVELOPE ── */
     .env-btn {
-      margin-top: 1.6rem;
-      display: inline-flex; flex-direction: column; align-items: center; gap: 0.7rem;
-      text-decoration: none; cursor: pointer;
+      margin-top: 1.8rem;
+      display: inline-flex; flex-direction: column; align-items: center; gap: 0.9rem;
+      cursor: pointer; -webkit-tap-highlight-color: transparent;
       animation: fadeIn 1s 1.3s both;
-      -webkit-tap-highlight-color: transparent;
     }
-    .env-wrap {
+    .env-scene {
       position: relative;
-      width: clamp(160px, 42vw, 220px);
-      perspective: 600px;
+      width: clamp(220px, 58vw, 300px);
+      perspective: 900px;
     }
-    /* Envelope body */
+    /* Body */
     .env-body {
-      width: 100%; aspect-ratio: 1.6/1;
-      background: linear-gradient(145deg, #e8f5ec, #cde8d4);
-      border-radius: 4px 4px 10px 10px;
+      width: 100%; aspect-ratio: 1.55/1;
+      border-radius: 6px 6px 14px 14px;
       position: relative;
-      box-shadow: 0 12px 40px rgba(0,0,0,0.35), 0 2px 8px rgba(0,0,0,0.2);
-      overflow: hidden;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.45), 0 4px 16px rgba(0,0,0,0.25);
+      overflow: visible;
+      background: linear-gradient(150deg,#dff2e6,#c2e0cc);
     }
-    /* V fold bottom interior */
-    .env-body::before {
-      content:'';
-      position:absolute; bottom:0; left:0; right:0; top:0;
-      background: linear-gradient(160deg,#b8d8c0,#9ec8aa);
-      clip-path: polygon(0 100%, 50% 52%, 100% 100%);
+    /* Bottom V fold */
+    .env-v {
+      position: absolute; inset: 0;
+      background: linear-gradient(160deg,#aacfb8,#8fc0a0);
+      clip-path: polygon(0 100%, 50% 54%, 100% 100%);
+      border-radius: 0 0 14px 14px;
     }
-    /* Left & right inner triangles */
-    .env-body::after {
-      content:'';
-      position:absolute; bottom:0; left:0; right:0; top:0;
-      background: linear-gradient(160deg,#cce6d2,#b0d4bc);
-      clip-path: polygon(0 0,0 100%,50% 52%) , polygon(100% 0,100% 100%,50% 52%);
+    /* Side triangles */
+    .env-l { position:absolute;inset:0;background:linear-gradient(145deg,#c8e8d2,#aacfb8);clip-path:polygon(0 0,0 100%,50% 54%); }
+    .env-r { position:absolute;inset:0;background:linear-gradient(145deg,#c0e2ca,#a2c8b0);clip-path:polygon(100% 0,100% 100%,50% 54%); }
+    /* Wax seal */
+    .env-seal {
+      position:absolute; bottom:-18px; left:50%; transform:translateX(-50%);
+      width:48px; height:48px; border-radius:50%;
+      background:radial-gradient(circle at 38% 35%,#4a7a5a,#0d3322);
+      box-shadow:0 4px 16px rgba(0,0,0,0.4),0 0 0 3px rgba(200,230,208,0.2);
+      display:flex; align-items:center; justify-content:center;
+      z-index:20;
+      transition: transform 0.4s, opacity 0.4s;
     }
+    .env-seal svg { width:34px; height:34px; }
     /* Flap */
     .env-flap {
-      position: absolute;
-      top: 0; left: 0; right: 0;
-      height: 52%;
-      transform-origin: top center;
-      transform-style: preserve-3d;
-      transition: transform 0.55s cubic-bezier(0.4,0,0.2,1);
-      z-index: 10;
+      position:absolute; top:0; left:0; right:0; height:54%;
+      transform-origin:top center;
+      transform-style:preserve-3d;
+      transition:transform 0.6s cubic-bezier(0.4,0,0.2,1);
+      z-index:15;
     }
-    .env-flap-face {
-      position: absolute; inset: 0;
-      background: linear-gradient(145deg,#d6eedd,#b8d8c0);
-      clip-path: polygon(0 0, 100% 0, 50% 90%);
-      border-top-left-radius: 4px; border-top-right-radius: 4px;
+    .env-flap-inner {
+      position:absolute; inset:0;
+      background:linear-gradient(160deg,#d0ecda,#b4d4c0);
+      clip-path:polygon(0 0,100% 0,50% 88%);
+      border-radius:6px 6px 0 0;
     }
-    /* Letter peeking out */
+    .env-flap-inner::after {
+      content:'';
+      position:absolute; inset:0;
+      background:linear-gradient(160deg,rgba(255,255,255,0.25),transparent 60%);
+      clip-path:polygon(0 0,100% 0,50% 88%);
+    }
+    /* Letter */
     .env-letter {
-      position: absolute;
-      bottom: 10%; left: 15%; right: 15%;
-      height: 70%;
-      background: linear-gradient(160deg,#fff,#f0faf3);
-      border-radius: 3px;
-      box-shadow: 0 -4px 16px rgba(0,0,0,0.12);
-      display: flex; align-items: center; justify-content: center;
-      transform: translateY(0);
-      transition: transform 0.5s 0.2s cubic-bezier(0.4,0,0.2,1);
-      z-index: 5;
+      position:absolute; bottom:12%; left:12%; right:12%;
+      height:72%;
+      background:linear-gradient(170deg,#fff,#f2fbf5);
+      border-radius:4px;
+      box-shadow:0 -6px 24px rgba(0,0,0,0.15);
+      display:flex; flex-direction:column; align-items:center; justify-content:center; gap:5px;
+      padding:0 14px;
+      transform:translateY(4px);
+      transition:transform 0.55s 0.15s cubic-bezier(0.4,0,0.2,1);
+      z-index:6;
+      overflow:hidden;
     }
-    .env-letter-lines { display:flex; flex-direction:column; gap:4px; padding: 12px; width:100%; }
-    .env-letter-line { height:2px; background:#4a7a5a; border-radius:2px; opacity:0.4; }
-    .env-letter-line:first-child { width:60%; opacity:0.6; margin:0 auto 4px; height:3px; }
+    .env-letter::before {
+      content:'F & M';
+      font-family:'Great Vibes',cursive; font-size:1.6rem;
+      color:rgba(74,122,90,0.35); margin-bottom:4px;
+    }
+    .env-line { height:2px; width:100%; background:rgba(74,122,90,0.18); border-radius:2px; }
+    .env-line:nth-child(3){ width:75%; }
+    .env-line:nth-child(4){ width:88%; }
+    .env-line:nth-child(5){ width:60%; }
 
     /* Opened state */
-    .env-btn.opened .env-flap { transform: rotateX(-170deg); }
-    .env-btn.opened .env-letter { transform: translateY(-65%); }
+    .env-btn.opened .env-flap { transform:rotateX(-175deg); }
+    .env-btn.opened .env-letter { transform:translateY(-72%); }
+    .env-btn.opened .env-seal { transform:translateX(-50%) scale(0.8); opacity:0; }
 
+    /* Floating sparkles */
+    .env-sparkle {
+      position:absolute; font-size:1rem; pointer-events:none; opacity:0;
+      animation: sparkleFloat 3s ease-in-out infinite;
+    }
+    @keyframes sparkleFloat {
+      0%{opacity:0;transform:translateY(0) scale(0.5)}
+      30%{opacity:0.8}
+      100%{opacity:0;transform:translateY(-40px) scale(1.2)}
+    }
+    /* Label */
     .env-label {
-      font-family: 'Poppins', sans-serif; font-weight: 500;
-      font-size: clamp(0.68rem, 2.2vw, 0.82rem);
-      letter-spacing: 0.16em; text-transform: uppercase;
-      color: rgba(200,230,208,0.75);
-      transition: opacity 0.3s;
+      font-family:'Poppins',sans-serif; font-weight:500;
+      font-size:clamp(0.68rem,2.2vw,0.82rem);
+      letter-spacing:0.2em; text-transform:uppercase;
+      color:rgba(200,230,208,0.7);
+      transition:opacity 0.4s;
     }
-    .env-btn.opened .env-label { opacity: 0; }
+    .env-btn.opened .env-label { opacity:0; }
+    /* Glow pulse */
+    @keyframes envGlow {
+      0%,100%{filter:drop-shadow(0 10px 28px rgba(74,122,90,0.35))}
+      50%{filter:drop-shadow(0 16px 44px rgba(106,170,122,0.65))}
+    }
+    .env-scene { animation: envGlow 2.6s 2s infinite; }
     @keyframes pulse {
-      0%,100%{filter:drop-shadow(0 8px 20px rgba(74,122,90,0.4))}
-      50%{filter:drop-shadow(0 12px 32px rgba(106,170,122,0.6))}
+      0%,100%{box-shadow:0 8px 32px rgba(74,122,90,0.45),0 0 0 0 rgba(106,170,122,0.3)}
+      50%{box-shadow:0 8px 32px rgba(74,122,90,0.45),0 0 0 12px rgba(106,170,122,0)}
     }
-    .env-wrap { animation: pulse 2.8s 2s infinite; }
 
     /* Music button */
 
@@ -294,25 +328,40 @@
   </div>
 
   <div class="env-btn" id="envBtn">
-    <div class="env-wrap">
+    <div class="env-scene">
+      <!-- sparkles -->
+      <span class="env-sparkle" style="left:8%;top:30%;animation-delay:0s">✨</span>
+      <span class="env-sparkle" style="right:10%;top:20%;animation-delay:1s">💚</span>
+      <span class="env-sparkle" style="left:20%;top:10%;animation-delay:2s">🌿</span>
       <div class="env-body">
+        <div class="env-l"></div>
+        <div class="env-r"></div>
+        <div class="env-v"></div>
         <div class="env-letter">
-          <div class="env-letter-lines">
-            <div class="env-letter-line"></div>
-            <div class="env-letter-line" style="width:80%"></div>
-            <div class="env-letter-line" style="width:90%"></div>
-            <div class="env-letter-line" style="width:70%"></div>
-          </div>
+          <div class="env-line"></div>
+          <div class="env-line"></div>
+          <div class="env-line"></div>
+          <div class="env-line"></div>
         </div>
-        <div class="env-flap"><div class="env-flap-face"></div></div>
+        <div class="env-flap"><div class="env-flap-inner"></div></div>
+        <div class="env-seal">
+          <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="50" cy="50" r="46" fill="none" stroke="rgba(200,230,208,0.25)" stroke-width="1.5"/>
+            <text x="50" y="58" text-anchor="middle" font-family="Great Vibes,Georgia,serif" font-size="34" font-style="italic" fill="rgba(255,255,255,0.9)">FM</text>
+          </svg>
+        </div>
       </div>
     </div>
-    <span class="env-label">Tap to Open Invitation</span>
+    <span class="env-label">✉ Tap to Open Invitation</span>
   </div>
   <script>
-    document.getElementById('envBtn').addEventListener('click', function() {
+    const envBtn = document.getElementById('envBtn');
+    let envClicked = false;
+    envBtn.addEventListener('click', function() {
+      if(envClicked) return;
+      envClicked = true;
       this.classList.add('opened');
-      setTimeout(() => { window.location.href = '/invitation.html'; }, 900);
+      setTimeout(() => { window.location.href = '/invitation.html'; }, 700);
     });
   </script>
 </div>
