@@ -133,51 +133,92 @@
     .cd-lbl { font-size: 0.45rem; letter-spacing: 0.15em; text-transform: uppercase; color: rgba(200,230,208,0.5); margin-top:0.2rem; }
     .cd-sep { font-size: 1.2rem; color: rgba(106,170,122,0.5); margin-bottom: 0.6rem; }
 
-    /* Open invitation folder button */
-    .open-btn {
-      margin-top: 1.4rem;
-      display: inline-flex; flex-direction: column; align-items: center; gap: 0.4rem;
+    /* Envelope button */
+    .env-btn {
+      margin-top: 1.6rem;
+      display: inline-flex; flex-direction: column; align-items: center; gap: 0.7rem;
       text-decoration: none; cursor: pointer;
       animation: fadeIn 1s 1.3s both;
+      -webkit-tap-highlight-color: transparent;
     }
-    .folder-wrap { position: relative; width: clamp(90px,22vw,120px); }
-    .folder-back {
-      width: 100%; aspect-ratio: 1/0.75;
-      background: linear-gradient(160deg, #5a9a6a, #2d6644);
-      border-radius: 0 8px 8px 8px;
+    .env-wrap {
       position: relative;
-      box-shadow: 0 8px 28px rgba(0,0,0,0.35);
-      transition: transform 0.3s;
+      width: clamp(160px, 42vw, 220px);
+      perspective: 600px;
     }
-    .folder-back::before {
-      content: '';
-      position: absolute; top: -14%; left: 0;
-      width: 42%; height: 16%;
-      background: linear-gradient(160deg, #6aaa7a, #3d7654);
-      border-radius: 6px 6px 0 0;
+    /* Envelope body */
+    .env-body {
+      width: 100%; aspect-ratio: 1.6/1;
+      background: linear-gradient(145deg, #e8f5ec, #cde8d4);
+      border-radius: 4px 4px 10px 10px;
+      position: relative;
+      box-shadow: 0 12px 40px rgba(0,0,0,0.35), 0 2px 8px rgba(0,0,0,0.2);
+      overflow: hidden;
     }
-    .folder-front {
-      position: absolute; bottom: 0; left: 0; right: 0;
-      height: 62%;
-      background: linear-gradient(160deg, #6aaa7a, #3d7654);
-      border-radius: 0 0 8px 8px;
+    /* V fold bottom interior */
+    .env-body::before {
+      content:'';
+      position:absolute; bottom:0; left:0; right:0; top:0;
+      background: linear-gradient(160deg,#b8d8c0,#9ec8aa);
+      clip-path: polygon(0 100%, 50% 52%, 100% 100%);
+    }
+    /* Left & right inner triangles */
+    .env-body::after {
+      content:'';
+      position:absolute; bottom:0; left:0; right:0; top:0;
+      background: linear-gradient(160deg,#cce6d2,#b0d4bc);
+      clip-path: polygon(0 0,0 100%,50% 52%) , polygon(100% 0,100% 100%,50% 52%);
+    }
+    /* Flap */
+    .env-flap {
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 52%;
+      transform-origin: top center;
+      transform-style: preserve-3d;
+      transition: transform 0.55s cubic-bezier(0.4,0,0.2,1);
+      z-index: 10;
+    }
+    .env-flap-face {
+      position: absolute; inset: 0;
+      background: linear-gradient(145deg,#d6eedd,#b8d8c0);
+      clip-path: polygon(0 0, 100% 0, 50% 90%);
+      border-top-left-radius: 4px; border-top-right-radius: 4px;
+    }
+    /* Letter peeking out */
+    .env-letter {
+      position: absolute;
+      bottom: 10%; left: 15%; right: 15%;
+      height: 70%;
+      background: linear-gradient(160deg,#fff,#f0faf3);
+      border-radius: 3px;
+      box-shadow: 0 -4px 16px rgba(0,0,0,0.12);
       display: flex; align-items: center; justify-content: center;
-      transform-origin: bottom center;
-      transition: transform 0.35s ease;
+      transform: translateY(0);
+      transition: transform 0.5s 0.2s cubic-bezier(0.4,0,0.2,1);
+      z-index: 5;
     }
-    .folder-front svg { width: 36%; opacity: 0.85; }
-    .open-btn:hover .folder-front { transform: rotateX(-40deg); }
-    .open-btn:hover .folder-back { transform: translateY(-4px); }
-    .folder-label {
-      font-family: 'Poppins', sans-serif; font-weight: 600;
-      font-size: clamp(0.65rem, 2vw, 0.78rem);
-      letter-spacing: 0.14em; text-transform: uppercase;
-      color: rgba(200,230,208,0.85);
+    .env-letter-lines { display:flex; flex-direction:column; gap:4px; padding: 12px; width:100%; }
+    .env-letter-line { height:2px; background:#4a7a5a; border-radius:2px; opacity:0.4; }
+    .env-letter-line:first-child { width:60%; opacity:0.6; margin:0 auto 4px; height:3px; }
+
+    /* Opened state */
+    .env-btn.opened .env-flap { transform: rotateX(-170deg); }
+    .env-btn.opened .env-letter { transform: translateY(-65%); }
+
+    .env-label {
+      font-family: 'Poppins', sans-serif; font-weight: 500;
+      font-size: clamp(0.68rem, 2.2vw, 0.82rem);
+      letter-spacing: 0.16em; text-transform: uppercase;
+      color: rgba(200,230,208,0.75);
+      transition: opacity 0.3s;
     }
+    .env-btn.opened .env-label { opacity: 0; }
     @keyframes pulse {
-      0%,100%{box-shadow:0 8px 32px rgba(74,122,90,0.45),0 0 0 0 rgba(106,170,122,0.3)}
-      50%{box-shadow:0 8px 32px rgba(74,122,90,0.45),0 0 0 12px rgba(106,170,122,0)}
+      0%,100%{filter:drop-shadow(0 8px 20px rgba(74,122,90,0.4))}
+      50%{filter:drop-shadow(0 12px 32px rgba(106,170,122,0.6))}
     }
+    .env-wrap { animation: pulse 2.8s 2s infinite; }
 
     /* Music button */
 
@@ -252,18 +293,28 @@
     <div class="cd-unit"><div class="cd-num" id="cd-secs">00</div><div class="cd-lbl">Sec</div></div>
   </div>
 
-  <a class="open-btn" href="/invitation.html">
-    <div class="folder-wrap">
-      <div class="folder-back"></div>
-      <div class="folder-front">
-        <svg viewBox="0 0 40 30" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path d="M4 8 L20 18 L36 8" stroke="white" stroke-width="2.5" stroke-linecap="round"/>
-          <rect x="2" y="6" width="36" height="22" rx="2" stroke="white" stroke-width="2.5" fill="none"/>
-        </svg>
+  <div class="env-btn" id="envBtn">
+    <div class="env-wrap">
+      <div class="env-body">
+        <div class="env-letter">
+          <div class="env-letter-lines">
+            <div class="env-letter-line"></div>
+            <div class="env-letter-line" style="width:80%"></div>
+            <div class="env-letter-line" style="width:90%"></div>
+            <div class="env-letter-line" style="width:70%"></div>
+          </div>
+        </div>
+        <div class="env-flap"><div class="env-flap-face"></div></div>
       </div>
     </div>
-    <span class="folder-label">Open Invitation</span>
-  </a>
+    <span class="env-label">Tap to Open Invitation</span>
+  </div>
+  <script>
+    document.getElementById('envBtn').addEventListener('click', function() {
+      this.classList.add('opened');
+      setTimeout(() => { window.location.href = '/invitation.html'; }, 900);
+    });
+  </script>
 </div>
 
 
