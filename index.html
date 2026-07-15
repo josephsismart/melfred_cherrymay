@@ -156,7 +156,7 @@
       border-radius: 6px 6px 14px 14px;
       position: relative;
       box-shadow: 0 20px 60px rgba(0,0,0,0.45), 0 4px 16px rgba(0,0,0,0.25);
-      overflow: hidden;
+      overflow: visible;
       background: linear-gradient(150deg,#dff2e6,#c2e0cc);
     }
     /* Bottom V fold */
@@ -165,6 +165,7 @@
       background: linear-gradient(160deg,#aacfb8,#8fc0a0);
       clip-path: polygon(0 100%, 50% 54%, 100% 100%);
       border-radius: 0 0 14px 14px;
+      z-index: 8;
     }
     /* Side triangles */
     .env-l { position:absolute;inset:0;background:linear-gradient(145deg,#c8e8d2,#aacfb8);clip-path:polygon(0 0,0 100%,50% 54%); }
@@ -202,14 +203,14 @@
     }
     /* Letter card */
     .env-letter {
-      position:absolute; bottom:-5%; left:12%; right:12%;
+      position:absolute; top:48%; left:12%; right:12%;
       height:72%;
       background:linear-gradient(170deg,#fff,#f2fbf5);
       border-radius:4px;
       box-shadow:0 -6px 24px rgba(0,0,0,0.15);
       display:flex; flex-direction:column; align-items:center; justify-content:center; gap:5px;
       padding:0 14px;
-      transform:translateY(0);
+      transform:none;
       transition:transform 0.55s 0.15s cubic-bezier(0.4,0,0.2,1);
       z-index:6;
       overflow:hidden;
@@ -226,7 +227,7 @@
 
     /* Opened state */
     .env-btn.opened .env-flap { transform:rotateX(-175deg); z-index:4; }
-    .env-btn.opened .env-letter { transform:translateY(-72%); }
+    .env-btn.opened .env-letter { transform:translateY(-90%); }
     .env-btn.opened .env-seal { transform:translateX(-50%) scale(0.8); opacity:0; }
 
     /* Floating sparkles */
