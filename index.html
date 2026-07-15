@@ -165,10 +165,11 @@
       background: linear-gradient(160deg,#aacfb8,#8fc0a0);
       clip-path: polygon(0 100%, 50% 54%, 100% 100%);
       border-radius: 0 0 14px 14px;
+      z-index: 10;
     }
     /* Side triangles */
-    .env-l { position:absolute;inset:0;background:linear-gradient(145deg,#c8e8d2,#aacfb8);clip-path:polygon(0 0,0 100%,50% 54%); }
-    .env-r { position:absolute;inset:0;background:linear-gradient(145deg,#c0e2ca,#a2c8b0);clip-path:polygon(100% 0,100% 100%,50% 54%); }
+    .env-l { position:absolute;inset:0;background:linear-gradient(145deg,#c8e8d2,#aacfb8);clip-path:polygon(0 0,0 100%,50% 54%);z-index:2; }
+    .env-r { position:absolute;inset:0;background:linear-gradient(145deg,#c0e2ca,#a2c8b0);clip-path:polygon(100% 0,100% 100%,50% 54%);z-index:2; }
     /* Wax seal */
     .env-seal {
       position:absolute; bottom:-18px; left:50%; transform:translateX(-50%);
