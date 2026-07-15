@@ -156,7 +156,7 @@
       border-radius: 6px 6px 14px 14px;
       position: relative;
       box-shadow: 0 20px 60px rgba(0,0,0,0.45), 0 4px 16px rgba(0,0,0,0.25);
-      overflow: visible;
+      overflow: hidden;
       background: linear-gradient(150deg,#dff2e6,#c2e0cc);
     }
     /* Bottom V fold */
@@ -165,11 +165,10 @@
       background: linear-gradient(160deg,#aacfb8,#8fc0a0);
       clip-path: polygon(0 100%, 50% 54%, 100% 100%);
       border-radius: 0 0 14px 14px;
-      z-index: 10;
     }
     /* Side triangles */
-    .env-l { position:absolute;inset:0;background:linear-gradient(145deg,#c8e8d2,#aacfb8);clip-path:polygon(0 0,0 100%,50% 54%);z-index:2; }
-    .env-r { position:absolute;inset:0;background:linear-gradient(145deg,#c0e2ca,#a2c8b0);clip-path:polygon(100% 0,100% 100%,50% 54%);z-index:2; }
+    .env-l { position:absolute;inset:0;background:linear-gradient(145deg,#c8e8d2,#aacfb8);clip-path:polygon(0 0,0 100%,50% 54%); }
+    .env-r { position:absolute;inset:0;background:linear-gradient(145deg,#c0e2ca,#a2c8b0);clip-path:polygon(100% 0,100% 100%,50% 54%); }
     /* Wax seal */
     .env-seal {
       position:absolute; bottom:-18px; left:50%; transform:translateX(-50%);
@@ -203,14 +202,14 @@
     }
     /* Letter card */
     .env-letter {
-      position:absolute; bottom:12%; left:12%; right:12%;
+      position:absolute; bottom:-5%; left:12%; right:12%;
       height:72%;
       background:linear-gradient(170deg,#fff,#f2fbf5);
       border-radius:4px;
       box-shadow:0 -6px 24px rgba(0,0,0,0.15);
       display:flex; flex-direction:column; align-items:center; justify-content:center; gap:5px;
       padding:0 14px;
-      transform:translateY(4px);
+      transform:translateY(0);
       transition:transform 0.55s 0.15s cubic-bezier(0.4,0,0.2,1);
       z-index:6;
       overflow:hidden;
@@ -350,12 +349,12 @@
           <div class="env-line"></div>
         </div>
         <div class="env-flap"><div class="env-flap-inner"></div></div>
-        <div class="env-seal">
-          <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-            <circle cx="50" cy="50" r="46" fill="none" stroke="rgba(200,230,208,0.25)" stroke-width="1.5"/>
-            <text x="50" y="58" text-anchor="middle" font-family="Great Vibes,Georgia,serif" font-size="34" font-style="italic" fill="rgba(255,255,255,0.9)">FM</text>
-          </svg>
-        </div>
+      </div>
+      <div class="env-seal">
+        <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="50" cy="50" r="46" fill="none" stroke="rgba(200,230,208,0.25)" stroke-width="1.5"/>
+          <text x="50" y="58" text-anchor="middle" font-family="Great Vibes,Georgia,serif" font-size="34" font-style="italic" fill="rgba(255,255,255,0.9)">FM</text>
+        </svg>
       </div>
     </div>
     <span class="env-label">✉ Tap to Open Invitation</span>
