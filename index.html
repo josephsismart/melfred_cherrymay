@@ -201,7 +201,7 @@
       background:linear-gradient(160deg,rgba(255,255,255,0.25),transparent 60%);
       clip-path:polygon(0 0,100% 0,50% 88%);
     }
-    /* Letter */
+    /* Letter card */
     .env-letter {
       position:absolute; bottom:12%; left:12%; right:12%;
       height:72%;
@@ -226,7 +226,7 @@
     .env-line:nth-child(5){ width:60%; }
 
     /* Opened state */
-    .env-btn.opened .env-flap { transform:rotateX(-175deg); }
+    .env-btn.opened .env-flap { transform:rotateX(-175deg); z-index:4; }
     .env-btn.opened .env-letter { transform:translateY(-72%); }
     .env-btn.opened .env-seal { transform:translateX(-50%) scale(0.8); opacity:0; }
 
