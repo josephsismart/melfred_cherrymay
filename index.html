@@ -36,10 +36,16 @@
       min-height: 100dvh; position: relative;
       padding: 2rem 1rem;
     }
+
+    /* Floating hearts canvas */
     #hearts-canvas { position: fixed; inset: 0; z-index: 0; pointer-events: none; }
+
+    /* Corner florals */
     .corner-svg { position: fixed; pointer-events: none; opacity: 0.18; }
     .corner-svg.tl { top: 0; left: 0; }
     .corner-svg.br { bottom: 0; right: 0; transform: rotate(180deg); }
+
+    /* Stars */
     .stars { position: fixed; inset: 0; z-index: 0; pointer-events: none; }
     .star {
       position: absolute; border-radius: 50%;
@@ -47,6 +53,8 @@
       animation: twinkle var(--dur, 3s) var(--delay, 0s) infinite alternate;
     }
     @keyframes twinkle { 0%{opacity:0.1;transform:scale(0.8)} 100%{opacity:0.9;transform:scale(1.2)} }
+
+    /* Main card */
     .home-card {
       position: relative; z-index: 1;
       display: flex; flex-direction: column;
@@ -55,6 +63,8 @@
       animation: fadeIn 1.2s ease both;
     }
     @keyframes fadeIn { from{opacity:0;transform:translateY(20px)} to{opacity:1;transform:translateY(0)} }
+
+    /* ── BIG ENVELOPE ── */
     .env-btn {
       display: inline-flex; flex-direction: column; align-items: center; gap: 0.9rem;
       cursor: pointer; -webkit-tap-highlight-color: transparent;
@@ -65,6 +75,7 @@
       width: clamp(240px, 65vw, 320px);
       perspective: 900px;
     }
+    /* Body */
     .env-body {
       width: 100%; aspect-ratio: 1.55/1;
       border-radius: 6px 6px 14px 14px;
@@ -73,14 +84,17 @@
       overflow: hidden;
       background: linear-gradient(150deg,#dff2e6,#c2e0cc);
     }
+    /* Bottom V fold */
     .env-v {
       position: absolute; inset: 0;
       background: linear-gradient(160deg,#aacfb8,#8fc0a0);
       clip-path: polygon(0 100%, 50% 54%, 100% 100%);
       border-radius: 0 0 14px 14px;
     }
+    /* Side triangles */
     .env-l { position:absolute;inset:0;background:linear-gradient(145deg,#c8e8d2,#aacfb8);clip-path:polygon(0 0,0 100%,50% 54%); }
     .env-r { position:absolute;inset:0;background:linear-gradient(145deg,#c0e2ca,#a2c8b0);clip-path:polygon(100% 0,100% 100%,50% 54%); }
+    /* Letter */
     .env-letter {
       position:absolute; bottom:-5%; left:12%; right:12%;
       height:72%;
@@ -104,6 +118,7 @@
     .env-line:nth-child(3){ width:75%; }
     .env-line:nth-child(4){ width:88%; }
     .env-line:nth-child(5){ width:60%; }
+    /* Wax seal — outside env-body so overflow:hidden doesn't clip it */
     .env-seal {
       position:absolute; bottom:-22px; left:50%; transform:translateX(-50%);
       width:48px; height:48px; border-radius:50%;
@@ -114,6 +129,7 @@
       transition: transform 0.4s, opacity 0.4s;
     }
     .env-seal svg { width:34px; height:34px; }
+    /* Flap */
     .env-flap {
       position:absolute; top:0; left:0; right:0; height:54%;
       transform-origin:top center;
@@ -132,9 +148,13 @@
       background:linear-gradient(160deg,rgba(255,255,255,0.25),transparent 60%);
       clip-path:polygon(0 0,100% 0,50% 88%);
     }
+
+    /* Opened state */
     .env-btn.opened .env-flap { transform:rotateX(-175deg); z-index:4; }
     .env-btn.opened .env-letter { transform:translateY(-72%); opacity:1; }
     .env-btn.opened .env-seal { transform:translateX(-50%) scale(0.8); opacity:0; }
+
+    /* Floating sparkles */
     .env-sparkle {
       position:absolute; font-size:1rem; pointer-events:none; opacity:0;
       animation: sparkleFloat 3s ease-in-out infinite;
@@ -144,6 +164,7 @@
       30%{opacity:0.8}
       100%{opacity:0;transform:translateY(-40px) scale(1.2)}
     }
+    /* Label */
     .env-label {
       font-family:'Poppins',sans-serif; font-weight:500;
       font-size:clamp(0.68rem,2.2vw,0.82rem);
@@ -153,19 +174,141 @@
       margin-top:0.6rem;
     }
     .env-btn.opened .env-label { opacity:0; }
+    /* Glow pulse */
     @keyframes envGlow {
       0%,100%{filter:drop-shadow(0 10px 28px rgba(74,122,90,0.35))}
       50%{filter:drop-shadow(0 16px 44px rgba(106,170,122,0.65))}
     }
     .env-scene { animation: envGlow 2.6s 2s infinite; }
+
     @keyframes burstHeart { 0%{transform:translate(0,0) scale(1);opacity:1} 100%{transform:translate(var(--dx),var(--dy)) scale(0.3);opacity:0} }
+
+    /* Mobile */
     @media(max-width:600px) {
       .corner-svg { width: 140px; }
     }
+
+    /* ── SNEAK PEEK OVERLAY ── */
+    #sneak-peek {
+      position: fixed; inset: 0; z-index: 100;
+      background: linear-gradient(160deg, #051a0a 0%, #0d3322 45%, #162e1f 75%, #051a0a 100%);
+      display: flex; align-items: center; justify-content: center;
+      opacity: 0; pointer-events: none;
+      transition: opacity 0.5s ease;
+    }
+    #sneak-peek.visible { opacity: 1; pointer-events: all; }
+
+    .sneak-card {
+      position: relative;
+      background: linear-gradient(160deg, #0d2e1a, #162e1f);
+      border: 1px solid rgba(200,230,208,0.15);
+      border-radius: 20px;
+      padding: 2rem 1.8rem 2.2rem;
+      max-width: 340px; width: 90%;
+      text-align: center;
+      box-shadow: 0 30px 80px rgba(0,0,0,0.6), 0 0 0 1px rgba(106,170,122,0.1);
+      animation: sneakSlideIn 0.5s 0.1s cubic-bezier(0.34,1.56,0.64,1) both;
+    }
+    @keyframes sneakSlideIn {
+      from { transform: translateY(30px) scale(0.95); opacity: 0; }
+      to   { transform: translateY(0) scale(1); opacity: 1; }
+    }
+
+    .sneak-tag {
+      font-family: 'Poppins', sans-serif;
+      font-size: 0.62rem; letter-spacing: 0.25em; text-transform: uppercase;
+      color: var(--gold); margin-bottom: 1rem;
+    }
+
+    .sneak-photo {
+      width: 140px; height: 140px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 3px solid rgba(200,230,208,0.3);
+      box-shadow: 0 8px 32px rgba(0,0,0,0.4);
+      margin: 0 auto 1.2rem;
+      display: block;
+      background: linear-gradient(135deg, #1e5238, #0d3322);
+    }
+    /* Placeholder if no photo yet */
+    .sneak-photo-placeholder {
+      width: 140px; height: 140px;
+      border-radius: 50%;
+      border: 3px solid rgba(200,230,208,0.3);
+      box-shadow: 0 8px 32px rgba(0,0,0,0.4);
+      margin: 0 auto 1.2rem;
+      display: flex; align-items: center; justify-content: center;
+      background: linear-gradient(135deg, #1e5238, #0d3322);
+      font-family: 'Great Vibes', cursive;
+      font-size: 2.4rem;
+      color: rgba(200,230,208,0.6);
+    }
+
+    .sneak-names {
+      font-family: 'Great Vibes', cursive;
+      font-size: clamp(2rem, 8vw, 2.6rem);
+      color: #c8e6d0;
+      line-height: 1.1;
+      margin-bottom: 0.5rem;
+    }
+    .sneak-ampersand { color: var(--gold); }
+
+    .sneak-divider {
+      width: 60px; height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(212,168,75,0.6), transparent);
+      margin: 0.8rem auto;
+    }
+
+    .sneak-date {
+      font-family: 'Playfair Display', serif;
+      font-size: 0.85rem; letter-spacing: 0.12em;
+      color: rgba(200,230,208,0.75);
+      margin-bottom: 0.3rem;
+    }
+    .sneak-location {
+      font-family: 'Poppins', sans-serif;
+      font-size: 0.7rem; letter-spacing: 0.1em;
+      color: rgba(200,230,208,0.45);
+      margin-bottom: 1.5rem;
+    }
+
+    .sneak-letter-lines {
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(200,230,208,0.1);
+      border-radius: 8px;
+      padding: 0.9rem 1rem;
+      margin-bottom: 1.5rem;
+    }
+    .sneak-line {
+      height: 2px; border-radius: 2px;
+      background: rgba(200,230,208,0.15);
+      margin: 5px 0;
+    }
+    .sneak-line:nth-child(2){ width: 75%; margin: 5px auto; }
+    .sneak-line:nth-child(3){ width: 90%; margin: 5px auto; }
+    .sneak-line:nth-child(4){ width: 60%; margin: 5px auto; }
+
+    .sneak-cta {
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      background: linear-gradient(135deg, #4a7a5a, #2a5a3a);
+      color: #c8e6d0; border: none; border-radius: 50px;
+      padding: 0.75rem 1.8rem;
+      font-family: 'Poppins', sans-serif;
+      font-size: 0.8rem; font-weight: 600;
+      letter-spacing: 0.08em; text-transform: uppercase;
+      cursor: pointer; -webkit-tap-highlight-color: transparent;
+      box-shadow: 0 8px 24px rgba(74,122,90,0.4);
+      transition: transform 0.2s, box-shadow 0.2s;
+      width: 100%;
+      justify-content: center;
+    }
+    .sneak-cta:active { transform: scale(0.97); box-shadow: 0 4px 12px rgba(74,122,90,0.3); }
   </style>
 </head>
 <body>
 <canvas id="hearts-canvas"></canvas>
+
+<!-- Corner florals -->
 <svg class="corner-svg tl" width="200" height="200" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" fill="none">
   <circle cx="30" cy="30" r="28" fill="#6aaa7a" opacity="0.5"/>
   <circle cx="80" cy="15" r="18" fill="#4a7a5a" opacity="0.4"/>
@@ -185,7 +328,11 @@
   <ellipse cx="80" cy="15" rx="8" ry="14" fill="#c8e6d0" opacity="0.5" transform="rotate(20 80 15)"/>
   <ellipse cx="15" cy="80" rx="8" ry="14" fill="#c8e6d0" opacity="0.5" transform="rotate(-60 15 80)"/>
 </svg>
+
+<!-- Stars -->
 <div class="stars" id="stars"></div>
+
+<!-- Main content — envelope only -->
 <div class="home-card">
   <div class="env-btn" id="envBtn">
     <div class="env-scene">
@@ -204,6 +351,7 @@
         </div>
         <div class="env-flap"><div class="env-flap-inner"></div></div>
       </div>
+      <!-- Seal outside env-body so overflow:hidden doesn't clip it -->
       <div class="env-seal">
         <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
           <circle cx="50" cy="50" r="46" fill="none" stroke="rgba(200,230,208,0.25)" stroke-width="1.5"/>
@@ -214,15 +362,40 @@
     <span class="env-label">✉ Tap to Open Invitation</span>
   </div>
 </div>
+
+<!-- Sneak Peek Overlay -->
+<div id="sneak-peek">
+  <div class="sneak-card">
+    <p class="sneak-tag">✦ Wedding Invitation ✦</p>
+    <div class="sneak-photo-placeholder">F&C</div>
+    <div class="sneak-names">Fred <span class="sneak-ampersand">&</span> Chem</div>
+    <div class="sneak-divider"></div>
+    <div class="sneak-date">September 5, 2026</div>
+    <div class="sneak-location">Butuan City, Philippines</div>
+    <div class="sneak-letter-lines">
+      <div class="sneak-line"></div>
+      <div class="sneak-line"></div>
+      <div class="sneak-line"></div>
+      <div class="sneak-line"></div>
+    </div>
+    <button class="sneak-cta" onclick="window.location.href='/invitation.html'">
+      Tap to View Details &nbsp;→
+    </button>
+  </div>
+</div>
+
 <script>
 const envBtn = document.getElementById('envBtn');
+const sneakPeek = document.getElementById('sneak-peek');
 let envClicked = false;
 envBtn.addEventListener('click', function() {
   if(envClicked) return;
   envClicked = true;
   this.classList.add('opened');
-  setTimeout(() => { window.location.href = '/invitation.html'; }, 700);
+  setTimeout(() => { sneakPeek.classList.add('visible'); }, 700);
 });
+
+// ── STARS ──
 const starsEl = document.getElementById('stars');
 for(let i=0;i<55;i++){
   const s=document.createElement('div'); s.className='star';
@@ -230,6 +403,8 @@ for(let i=0;i<55;i++){
   s.style.cssText=`width:${size}px;height:${size}px;top:${Math.random()*100}%;left:${Math.random()*100}%;--dur:${(Math.random()*3+2).toFixed(1)}s;--delay:${(Math.random()*4).toFixed(1)}s;`;
   starsEl.appendChild(s);
 }
+
+// ── FLOATING HEARTS ──
 const hc=document.getElementById('hearts-canvas');
 const hx=hc.getContext('2d');
 let W,H;
@@ -244,6 +419,8 @@ class Heart{
 const hearts=Array.from({length:35},(_,i)=>new Heart(true));
 function animateHearts(){hx.clearRect(0,0,W,H);hearts.forEach(h=>{h.update();h.draw();});requestAnimationFrame(animateHearts);}
 animateHearts();
+
+// ── DOUBLE TAP BURST ──
 let lastTap=0;
 document.addEventListener('click',(e)=>{
   const now=Date.now();
