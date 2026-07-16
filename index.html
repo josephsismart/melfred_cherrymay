@@ -33,9 +33,6 @@
     }
 
     #hearts-canvas { position: fixed; inset: 0; z-index: 0; pointer-events: none; }
-    .corner-svg { position: fixed; pointer-events: none; opacity: 0.18; }
-    .corner-svg.tl { top: 0; left: 0; }
-    .corner-svg.br { bottom: 0; right: 0; transform: rotate(180deg); }
     .stars { position: fixed; inset: 0; z-index: 0; pointer-events: none; }
     .star {
       position: absolute; border-radius: 50%; background: rgba(255,255,255,0.7);
@@ -43,36 +40,84 @@
     }
     @keyframes twinkle { 0%{opacity:0.1;transform:scale(0.8)} 100%{opacity:0.9;transform:scale(1.2)} }
 
+    /* ── CORNER FLOWERS (static decoration) ── */
+    .corner-deco {
+      position: fixed; pointer-events: none; z-index: 1; font-size: 1.8rem;
+      opacity: 0.25; animation: cornerFloat var(--fdur, 4s) var(--fdelay, 0s) ease-in-out infinite alternate;
+    }
+    .corner-deco.tl { top: 12px; left: 12px; }
+    .corner-deco.tr { top: 12px; right: 12px; }
+    .corner-deco.bl { bottom: 12px; left: 12px; }
+    .corner-deco.br { bottom: 12px; right: 12px; }
+    @keyframes cornerFloat { 0%{transform:translateY(0) rotate(0deg)} 100%{transform:translateY(-8px) rotate(12deg)} }
+
+    /* ── PAGE TITLE ── */
+    .page-title {
+      position: relative; z-index: 2; text-align: center; margin-bottom: 1.6rem;
+      animation: fadeIn 1s ease both;
+    }
+    .page-title-script {
+      font-family: 'Great Vibes', cursive;
+      font-size: clamp(2.4rem, 9vw, 3.6rem);
+      color: #c8e6d0; line-height: 1;
+      text-shadow: 0 0 60px rgba(106,170,122,0.5);
+    }
+    .page-title-date {
+      font-size: clamp(0.58rem, 1.8vw, 0.72rem);
+      letter-spacing: 0.28em; text-transform: uppercase;
+      color: rgba(200,230,208,0.45); margin-top: 4px;
+    }
+
     /* ── ENVELOPE ── */
     .home-card {
-      position: relative; z-index: 1;
+      position: relative; z-index: 2;
       display: flex; flex-direction: column; align-items: center; text-align: center;
       animation: fadeIn 1.2s ease both;
     }
     @keyframes fadeIn { from{opacity:0;transform:translateY(20px)} to{opacity:1;transform:translateY(0)} }
 
     .env-btn {
-      display: inline-flex; flex-direction: column; align-items: center; gap: 0.9rem;
+      display: inline-flex; flex-direction: column; align-items: center; gap: 1rem;
       cursor: pointer; -webkit-tap-highlight-color: transparent;
       animation: fadeIn 1s 0.4s both;
     }
+
+    /* ── WIGGLE ANIMATION (loops every 3.5s) ── */
+    @keyframes envWiggle {
+      0%, 60%, 100% { transform: rotate(0deg) scale(1); }
+      63%  { transform: rotate(-5deg) scale(1.03); }
+      67%  { transform: rotate(5deg)  scale(1.03); }
+      71%  { transform: rotate(-4deg) scale(1.02); }
+      75%  { transform: rotate(4deg)  scale(1.02); }
+      79%  { transform: rotate(-2deg) scale(1.01); }
+      83%  { transform: rotate(2deg)  scale(1.01); }
+      87%  { transform: rotate(0deg)  scale(1); }
+    }
+
     .env-scene {
       position: relative;
-      width: clamp(260px, 70vw, 320px);
+      width: clamp(300px, 82vw, 400px); /* BIGGER */
       perspective: 900px;
+      animation: envWiggle 3.5s 1.8s infinite, envGlow 2.6s 2s infinite;
+      transform-origin: center center;
     }
+    /* Stop wiggle once opened */
+    .env-btn.opened .env-scene {
+      animation: envGlow 2.6s infinite;
+    }
+
     .env-body {
       width: 100%; aspect-ratio: 1.55/1;
-      border-radius: 6px 6px 14px 14px; position: relative;
-      box-shadow: 0 20px 60px rgba(0,0,0,0.45), 0 4px 16px rgba(0,0,0,0.25);
+      border-radius: 6px 6px 18px 18px; position: relative;
+      box-shadow: 0 24px 70px rgba(0,0,0,0.5), 0 6px 20px rgba(0,0,0,0.3);
       overflow: hidden;
       background: linear-gradient(150deg,#dff2e6,#c2e0cc);
     }
-    .env-v { position:absolute;inset:0;background:linear-gradient(160deg,#aacfb8,#8fc0a0);clip-path:polygon(0 100%,50% 54%,100% 100%);border-radius:0 0 14px 14px; }
+    .env-v { position:absolute;inset:0;background:linear-gradient(160deg,#aacfb8,#8fc0a0);clip-path:polygon(0 100%,50% 54%,100% 100%);border-radius:0 0 18px 18px; }
     .env-l { position:absolute;inset:0;background:linear-gradient(145deg,#c8e8d2,#aacfb8);clip-path:polygon(0 0,0 100%,50% 54%); }
     .env-r { position:absolute;inset:0;background:linear-gradient(145deg,#c0e2ca,#a2c8b0);clip-path:polygon(100% 0,100% 100%,50% 54%); }
 
-    /* The letter that peeks out — purely decorative */
+    /* The letter that peeks out */
     .env-peek {
       position:absolute; bottom:0; left:12%; right:12%; height:65%;
       background:linear-gradient(170deg,#fff,#f2fbf5);
@@ -84,20 +129,20 @@
       display:flex; flex-direction:column; align-items:center; justify-content:center; gap:4px; padding:10px;
       overflow:hidden;
     }
-    .env-peek::before { content:'F & C'; font-family:'Great Vibes',cursive; font-size:1.4rem; color:rgba(74,122,90,0.4); }
+    .env-peek::before { content:'F & C'; font-family:'Great Vibes',cursive; font-size:1.6rem; color:rgba(74,122,90,0.4); }
     .env-peek-line { height:2px; background:rgba(74,122,90,0.15); border-radius:2px; width:80%; }
     .env-peek-line:nth-child(3){width:60%;}
     .env-peek-line:nth-child(4){width:72%;}
 
     .env-seal {
-      position:absolute; bottom:-22px; left:50%; transform:translateX(-50%);
-      width:48px; height:48px; border-radius:50%;
+      position:absolute; bottom:-26px; left:50%; transform:translateX(-50%);
+      width:56px; height:56px; border-radius:50%;
       background:radial-gradient(circle at 38% 35%,#4a7a5a,#0d3322);
-      box-shadow:0 4px 16px rgba(0,0,0,0.4),0 0 0 3px rgba(200,230,208,0.2);
+      box-shadow:0 4px 20px rgba(0,0,0,0.45),0 0 0 4px rgba(200,230,208,0.2);
       display:flex; align-items:center; justify-content:center; z-index:20;
       transition:transform 0.4s, opacity 0.4s;
     }
-    .env-seal svg { width:34px; height:34px; }
+    .env-seal svg { width:40px; height:40px; }
     .env-flap {
       position:absolute; top:0; left:0; right:0; height:54%;
       transform-origin:top center;
@@ -106,172 +151,184 @@
     .env-flap-inner { position:absolute;inset:0;background:linear-gradient(160deg,#d0ecda,#b4d4c0);clip-path:polygon(0 0,100% 0,50% 88%);border-radius:6px 6px 0 0; }
     .env-flap-inner::after { content:'';position:absolute;inset:0;background:linear-gradient(160deg,rgba(255,255,255,0.25),transparent 60%);clip-path:polygon(0 0,100% 0,50% 88%); }
 
-    .env-sparkle { position:absolute;font-size:1rem;pointer-events:none;opacity:0;animation:sparkleFloat 3s ease-in-out infinite; }
-    @keyframes sparkleFloat { 0%{opacity:0;transform:translateY(0) scale(0.5)} 30%{opacity:0.8} 100%{opacity:0;transform:translateY(-40px) scale(1.2)} }
+    .env-sparkle { position:absolute;font-size:1.1rem;pointer-events:none;opacity:0;animation:sparkleFloat 3s ease-in-out infinite; }
+    @keyframes sparkleFloat { 0%{opacity:0;transform:translateY(0) scale(0.5)} 30%{opacity:0.9} 100%{opacity:0;transform:translateY(-50px) scale(1.3)} }
 
+    /* TAP LABEL */
     .env-label {
       font-family:'Poppins',sans-serif; font-weight:500;
-      font-size:clamp(0.68rem,2.2vw,0.82rem); letter-spacing:0.2em; text-transform:uppercase;
-      color:rgba(200,230,208,0.7); transition:opacity 0.4s; margin-top:0.6rem;
+      font-size:clamp(0.7rem,2.2vw,0.85rem); letter-spacing:0.2em; text-transform:uppercase;
+      color:rgba(200,230,208,0.75); transition:opacity 0.4s; margin-top: 0.3rem;
     }
-    @keyframes envGlow {
-      0%,100%{filter:drop-shadow(0 10px 28px rgba(74,122,90,0.35))}
-      50%{filter:drop-shadow(0 16px 44px rgba(106,170,122,0.65))}
+    .env-tap-hint {
+      display: flex; align-items: center; gap: 0.4rem;
+      font-size: 0.8rem; color: rgba(200,230,208,0.45);
+      animation: tapPulse 1.8s ease-in-out infinite;
     }
-    .env-scene { animation:envGlow 2.6s 2s infinite; }
+    .env-tap-hint .tap-finger { font-size: 1.2rem; animation: fingerBounce 1.8s ease-in-out infinite; }
+    @keyframes tapPulse { 0%,100%{opacity:0.5} 50%{opacity:1} }
+    @keyframes fingerBounce { 0%,100%{transform:translateY(0)} 50%{transform:translateY(4px)} }
 
-    /* OPENED: flap folds back, peek letter rises */
+    @keyframes envGlow {
+      0%,100%{filter:drop-shadow(0 12px 32px rgba(74,122,90,0.4))}
+      50%{filter:drop-shadow(0 20px 52px rgba(106,170,122,0.75))}
+    }
+
+    /* OPENED: flap folds back */
     .env-btn.opened .env-flap { transform:rotateX(-175deg); z-index:4; }
     .env-btn.opened .env-peek { transform:translateY(-30%); opacity:1; }
     .env-btn.opened .env-seal { transform:translateX(-50%) scale(0.8); opacity:0; }
     .env-btn.opened .env-label { opacity:0; }
+    .env-btn.opened .env-tap-hint { opacity:0; }
 
-    /* ── BOTTOM SHEET CARD ── */
+    /* ── FLOWER BURST ANIMATION ── */
+    @keyframes flowerBurst {
+      0%   { opacity:1; transform:translate(0,0) scale(0.2) rotate(0deg); }
+      70%  { opacity:1; }
+      100% { opacity:0; transform:translate(var(--fdx),var(--fdy)) scale(1.4) rotate(var(--frot)); }
+    }
+    .flower-burst {
+      position: fixed; pointer-events: none; z-index: 9998;
+      animation: flowerBurst var(--fdur, 1s) var(--fdelay, 0s) ease-out forwards;
+      font-size: var(--fsize, 1.5rem);
+    }
+
+    /* ── BOTTOM SHEET ── */
     #invite-sheet {
       position: fixed; inset: 0; z-index: 50;
       pointer-events: none;
     }
-
-    /* Dark scrim */
     #invite-sheet .scrim {
       position: absolute; inset: 0;
-      background: rgba(0,0,0,0); /* fades in */
+      background: rgba(0,0,0,0);
       transition: background 0.4s;
     }
-    #invite-sheet.show .scrim {
-      background: rgba(0,0,0,0.5);
-    }
-
-    /* The card panel */
+    #invite-sheet.show .scrim { background: rgba(0,0,0,0.55); }
     #invite-sheet .sheet-card {
       position: absolute; bottom: 0; left: 0; right: 0;
-      background: linear-gradient(175deg, #0d2e1a 0%, #162e1f 100%);
-      border-radius: 24px 24px 0 0;
-      padding: 12px 24px 40px;
+      background: linear-gradient(175deg, #071e10 0%, #0d2e1a 40%, #162e1f 100%);
+      border-radius: 28px 28px 0 0;
+      padding: 10px 24px 44px;
       transform: translateY(100%);
       transition: transform 0.6s cubic-bezier(0.32, 0.72, 0, 1);
-      box-shadow: 0 -8px 40px rgba(0,0,0,0.5);
+      box-shadow: 0 -10px 50px rgba(0,0,0,0.6);
       text-align: center;
     }
-    #invite-sheet.show .sheet-card {
-      transform: translateY(0);
-    }
-    #invite-sheet.show {
-      pointer-events: all;
-    }
+    #invite-sheet.show .sheet-card { transform: translateY(0); }
+    #invite-sheet.show { pointer-events: all; }
 
-    /* Drag handle */
     .sheet-handle {
-      width: 40px; height: 4px;
-      background: rgba(200,230,208,0.25); border-radius: 2px;
-      margin: 0 auto 20px;
+      width: 44px; height: 4px;
+      background: rgba(200,230,208,0.2); border-radius: 2px;
+      margin: 0 auto 18px; cursor: pointer;
     }
 
-    /* Photo circle */
-    .sheet-photo {
-      width: 110px; height: 110px; border-radius: 50%;
-      margin: 0 auto 16px;
+    /* Couple photo — arched */
+    .sheet-photo-wrap {
+      width: min(130px, 38vw); height: min(160px, 46vw);
+      border-radius: 80px 80px 60px 60px;
+      margin: 0 auto 14px;
       border: 3px solid rgba(200,230,208,0.3);
-      box-shadow: 0 8px 32px rgba(0,0,0,0.4);
+      box-shadow: 0 10px 40px rgba(0,0,0,0.5), 0 0 0 6px rgba(74,122,90,0.15);
       overflow: hidden;
       background: linear-gradient(135deg, #1e5238, #0d3322);
       display: flex; align-items: center; justify-content: center;
     }
-    .sheet-photo img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .sheet-photo-wrap img { width:100%; height:100%; object-fit:cover; display:none; }
     .sheet-photo-placeholder {
       font-family: 'Great Vibes', cursive;
-      font-size: 2rem; color: rgba(200,230,208,0.6);
+      font-size: 2.2rem; color: rgba(200,230,208,0.55);
     }
 
     .sheet-tag {
-      font-size: 0.6rem; letter-spacing: 0.25em; text-transform: uppercase;
-      color: var(--gold); margin-bottom: 10px;
+      font-size: 0.58rem; letter-spacing: 0.28em; text-transform: uppercase;
+      color: var(--gold); margin-bottom: 12px; opacity: 0.9;
     }
-
     .sheet-names {
       font-family: 'Great Vibes', cursive;
-      font-size: clamp(2.4rem, 8vw, 3rem);
+      font-size: clamp(2.4rem, 9vw, 3.2rem);
       color: #c8e6d0; line-height: 1; margin-bottom: 10px;
     }
     .sheet-amp { color: var(--gold); }
 
     .sheet-divider {
       width: 60px; height: 1px;
-      background: linear-gradient(90deg, transparent, rgba(212,168,75,0.6), transparent);
-      margin: 0 auto 10px;
+      background: linear-gradient(90deg, transparent, rgba(212,168,75,0.5), transparent);
+      margin: 0 auto 14px;
     }
 
-    .sheet-date {
-      font-family: 'Playfair Display', serif;
-      font-size: 0.9rem; letter-spacing: 0.12em;
-      color: rgba(200,230,208,0.8); margin-bottom: 4px;
+    /* Sneak peek details */
+    .sheet-details {
+      display: flex; flex-direction: column; gap: 6px;
+      margin-bottom: 22px;
     }
-    .sheet-location {
-      font-size: 0.72rem; letter-spacing: 0.08em;
-      color: rgba(200,230,208,0.45); margin-bottom: 28px;
+    .sheet-detail-row {
+      display: flex; align-items: center; justify-content: center; gap: 6px;
+      font-size: 0.76rem; color: rgba(200,230,208,0.7);
     }
+    .sheet-detail-row .detail-icon { font-size: 0.8rem; color: var(--gold); }
+    .sheet-detail-row .detail-text { letter-spacing: 0.04em; }
+    .sheet-detail-row strong { color: rgba(200,230,208,0.92); font-weight:600; }
 
     .sheet-cta {
-      display: block; width: 100%;
+      display: block; width: 100%; max-width: 320px; margin: 0 auto;
       background: linear-gradient(135deg, #4a7a5a, #2a5a3a);
       color: #c8e6d0; border: none; border-radius: 50px;
       padding: 1rem 2rem;
       font-family: 'Poppins', sans-serif;
       font-size: 0.82rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase;
       cursor: pointer; -webkit-tap-highlight-color: transparent;
-      box-shadow: 0 8px 24px rgba(74,122,90,0.4);
+      box-shadow: 0 8px 28px rgba(74,122,90,0.45);
       transition: transform 0.15s, box-shadow 0.15s;
+      animation: ctaPulse 2s 0.5s ease-in-out infinite;
     }
-    .sheet-cta:active { transform: scale(0.97); box-shadow: 0 4px 12px rgba(74,122,90,0.3); }
+    @keyframes ctaPulse {
+      0%,100%{box-shadow:0 8px 28px rgba(74,122,90,0.45)}
+      50%{box-shadow:0 8px 40px rgba(106,170,122,0.7),0 0 0 6px rgba(74,122,90,0.15)}
+    }
+    .sheet-cta:active { transform: scale(0.97); }
 
     .sheet-close {
-      position: absolute; top: 16px; right: 18px;
+      position: absolute; top: 18px; right: 20px;
       background: rgba(200,230,208,0.1); border: none;
       color: rgba(200,230,208,0.5); font-size: 1.1rem;
-      width: 30px; height: 30px; border-radius: 50%;
+      width: 32px; height: 32px; border-radius: 50%;
       cursor: pointer; display: flex; align-items: center; justify-content: center;
       transition: background 0.2s, color 0.2s;
     }
-    .sheet-close:hover { background: rgba(200,230,208,0.2); color: rgba(200,230,208,0.9); }
+    .sheet-close:hover { background: rgba(200,230,208,0.22); color: rgba(200,230,208,0.9); }
 
     @keyframes burstHeart { 0%{transform:translate(0,0) scale(1);opacity:1} 100%{transform:translate(var(--dx),var(--dy)) scale(0.3);opacity:0} }
-    @media(max-width:600px) { .corner-svg { width:140px; } }
   </style>
 </head>
 <body>
 <canvas id="hearts-canvas"></canvas>
-
-<svg class="corner-svg tl" width="200" height="200" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" fill="none">
-  <circle cx="30" cy="30" r="28" fill="#6aaa7a" opacity="0.5"/>
-  <circle cx="80" cy="15" r="18" fill="#4a7a5a" opacity="0.4"/>
-  <circle cx="15" cy="80" r="18" fill="#4a7a5a" opacity="0.4"/>
-  <ellipse cx="30" cy="30" rx="12" ry="20" fill="#c8e6d0" opacity="0.6" transform="rotate(-30 30 30)"/>
-  <ellipse cx="80" cy="15" rx="8" ry="14" fill="#c8e6d0" opacity="0.5" transform="rotate(20 80 15)"/>
-  <ellipse cx="15" cy="80" rx="8" ry="14" fill="#c8e6d0" opacity="0.5" transform="rotate(-60 15 80)"/>
-</svg>
-<svg class="corner-svg br" width="200" height="200" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" fill="none">
-  <circle cx="30" cy="30" r="28" fill="#6aaa7a" opacity="0.5"/>
-  <circle cx="80" cy="15" r="18" fill="#4a7a5a" opacity="0.4"/>
-  <circle cx="15" cy="80" r="18" fill="#4a7a5a" opacity="0.4"/>
-  <ellipse cx="30" cy="30" rx="12" ry="20" fill="#c8e6d0" opacity="0.6" transform="rotate(-30 30 30)"/>
-  <ellipse cx="80" cy="15" rx="8" ry="14" fill="#c8e6d0" opacity="0.5" transform="rotate(20 80 15)"/>
-  <ellipse cx="15" cy="80" rx="8" ry="14" fill="#c8e6d0" opacity="0.5" transform="rotate(-60 15 80)"/>
-</svg>
-
 <div class="stars" id="stars"></div>
+
+<!-- Static corner flower decorations -->
+<div class="corner-deco tl" style="--fdur:4s;--fdelay:0s">🌸</div>
+<div class="corner-deco tr" style="--fdur:5s;--fdelay:0.7s">🌺</div>
+<div class="corner-deco bl" style="--fdur:4.5s;--fdelay:1.2s">🌿</div>
+<div class="corner-deco br" style="--fdur:3.8s;--fdelay:0.4s">🍀</div>
+
+<!-- Page title -->
+<div class="page-title">
+  <div class="page-title-script">Fred &amp; Chem</div>
+  <div class="page-title-date">September 5, 2026 &nbsp;·&nbsp; Butuan City, Philippines</div>
+</div>
 
 <!-- Envelope -->
 <div class="home-card">
   <div class="env-btn" id="envBtn">
     <div class="env-scene">
-      <span class="env-sparkle" style="left:8%;top:30%;animation-delay:0s">✨</span>
-      <span class="env-sparkle" style="right:10%;top:20%;animation-delay:1s">💚</span>
-      <span class="env-sparkle" style="left:20%;top:10%;animation-delay:2s">🌿</span>
+      <span class="env-sparkle" style="left:6%;top:28%;animation-delay:0s">✨</span>
+      <span class="env-sparkle" style="right:8%;top:18%;animation-delay:1.1s">💚</span>
+      <span class="env-sparkle" style="left:18%;top:8%;animation-delay:2.1s">🌿</span>
+      <span class="env-sparkle" style="right:16%;top:40%;animation-delay:0.6s">✦</span>
       <div class="env-body">
         <div class="env-l"></div>
         <div class="env-r"></div>
         <div class="env-v"></div>
-        <!-- Decorative peek of letter inside -->
         <div class="env-peek">
           <div class="env-peek-line"></div>
           <div class="env-peek-line"></div>
@@ -282,11 +339,15 @@
       <div class="env-seal">
         <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
           <circle cx="50" cy="50" r="46" fill="none" stroke="rgba(200,230,208,0.25)" stroke-width="1.5"/>
-          <text x="50" y="58" text-anchor="middle" font-family="Great Vibes,Georgia,serif" font-size="34" font-style="italic" fill="rgba(255,255,255,0.9)">FC</text>
+          <text x="50" y="60" text-anchor="middle" font-family="Great Vibes,Georgia,serif" font-size="36" font-style="italic" fill="rgba(255,255,255,0.9)">FC</text>
         </svg>
       </div>
     </div>
-    <span class="env-label">✉ Tap to Open Invitation</span>
+    <span class="env-label">✉ &nbsp; You Have a Special Invitation</span>
+    <div class="env-tap-hint">
+      <span class="tap-finger">👆</span>
+      <span>Tap to open</span>
+    </div>
   </div>
 </div>
 
@@ -295,87 +356,154 @@
   <div class="scrim" id="scrim"></div>
   <div class="sheet-card">
     <button class="sheet-close" id="sheetClose">✕</button>
-    <div class="sheet-handle"></div>
-    <p class="sheet-tag">✦ You're Invited ✦</p>
-    <div class="sheet-photo">
-      <!-- Replace src with real photo URL -->
+    <div class="sheet-handle" id="sheetHandle"></div>
+    <p class="sheet-tag">✦ &nbsp; You're Invited &nbsp; ✦</p>
+
+    <div class="sheet-photo-wrap">
+      <img id="couplePhoto" src="" alt="Fred &amp; Chem"/>
       <div class="sheet-photo-placeholder">F&C</div>
     </div>
-    <div class="sheet-names">Fred <span class="sheet-amp">&</span> Chem</div>
+
+    <div class="sheet-names">Fred <span class="sheet-amp">&amp;</span> Chem</div>
     <div class="sheet-divider"></div>
-    <div class="sheet-date">September 5, 2026</div>
-    <div class="sheet-location">Butuan City, Philippines</div>
-    <button class="sheet-cta" id="viewDetailsBtn">Open Invitation &nbsp;→</button>
+
+    <!-- Sneak peek details -->
+    <div class="sheet-details">
+      <div class="sheet-detail-row">
+        <span class="detail-icon">📅</span>
+        <span class="detail-text"><strong>September 5, 2026</strong> &nbsp;·&nbsp; Saturday, 1:00 PM</span>
+      </div>
+      <div class="sheet-detail-row">
+        <span class="detail-icon">⛪</span>
+        <span class="detail-text">Birhen sa Kasilak Mindanao Shrine Parish</span>
+      </div>
+      <div class="sheet-detail-row">
+        <span class="detail-icon">🥂</span>
+        <span class="detail-text">The Pavilion at the Watergate</span>
+      </div>
+      <div class="sheet-detail-row">
+        <span class="detail-icon">📍</span>
+        <span class="detail-text">Butuan City, Agusan del Norte, Philippines</span>
+      </div>
+    </div>
+
+    <button class="sheet-cta" id="viewDetailsBtn">
+      Tap to View Details &nbsp; →
+    </button>
   </div>
 </div>
 
 <script>
-const envBtn       = document.getElementById('envBtn');
-const inviteSheet  = document.getElementById('invite-sheet');
+const envBtn        = document.getElementById('envBtn');
+const inviteSheet   = document.getElementById('invite-sheet');
 const viewDetailsBtn = document.getElementById('viewDetailsBtn');
 let envClicked = false;
 
+// ── FLOWER BURST from all 4 corners ──
+const flowerEmojis = ['🌸','🌺','🌹','🌷','🌼','🌻','🍀','🌿','💐','✿','🌱','🪷'];
+
+function burstFlowers() {
+  const vw = window.innerWidth;
+  const vh = window.innerHeight;
+  const corners = [
+    { x: 0,  y: 0,   dxRange: [60, 220],  dyRange: [60, 220]  },  // top-left → down-right
+    { x: vw, y: 0,   dxRange: [-220, -60], dyRange: [60, 220]  },  // top-right → down-left
+    { x: 0,  y: vh,  dxRange: [60, 220],  dyRange: [-220, -60] },  // bottom-left → up-right
+    { x: vw, y: vh,  dxRange: [-220, -60], dyRange: [-220, -60] }, // bottom-right → up-left
+  ];
+
+  corners.forEach((corner, ci) => {
+    const count = 10 + Math.floor(Math.random() * 5);
+    for (let i = 0; i < count; i++) {
+      const el = document.createElement('span');
+      el.className = 'flower-burst';
+      el.textContent = flowerEmojis[Math.floor(Math.random() * flowerEmojis.length)];
+      const dx = corner.dxRange[0] + Math.random() * (corner.dxRange[1] - corner.dxRange[0]);
+      const dy = corner.dyRange[0] + Math.random() * (corner.dyRange[1] - corner.dyRange[0]);
+      const size = 1.1 + Math.random() * 1.6;
+      const dur  = 0.7 + Math.random() * 0.8;
+      const delay = ci * 0.06 + Math.random() * 0.25;
+      const rot  = (Math.random() - 0.5) * 540;
+      el.style.left = corner.x + 'px';
+      el.style.top  = corner.y + 'px';
+      el.style.setProperty('--fdx', dx + 'px');
+      el.style.setProperty('--fdy', dy + 'px');
+      el.style.setProperty('--fdur', dur + 's');
+      el.style.setProperty('--fdelay', delay + 's');
+      el.style.setProperty('--fsize', size + 'rem');
+      el.style.setProperty('--frot', rot + 'deg');
+      document.body.appendChild(el);
+      setTimeout(() => el.remove(), (dur + delay) * 1000 + 200);
+    }
+  });
+}
+
 function closeSheet() {
-  // 1. Slide sheet down
   inviteSheet.classList.remove('show');
-  // 2. After sheet is gone, close the envelope
   setTimeout(() => {
     envBtn.classList.remove('opened');
-    // Allow re-opening after envelope closes
     setTimeout(() => { envClicked = false; }, 700);
   }, 450);
 }
 
-// Tap envelope → open flap + show bottom sheet after flap animation
-envBtn.addEventListener('click', function() {
-  if(envClicked) return;
+// Tap envelope → open + flowers + bottom sheet
+envBtn.addEventListener('click', function () {
+  if (envClicked) return;
   envClicked = true;
   this.classList.add('opened');
-  setTimeout(() => { inviteSheet.classList.add('show'); }, 700);
+  // Flowers burst right when flap starts opening
+  setTimeout(() => burstFlowers(), 150);
+  // Sheet slides up after flap finishes
+  setTimeout(() => inviteSheet.classList.add('show'), 700);
 });
 
-// Tap "Open Invitation" → go to invitation page
 viewDetailsBtn.addEventListener('click', () => {
   window.location.href = '/invitation.html';
 });
 
-// Tap scrim → close sheet AND reset envelope
 document.getElementById('scrim').addEventListener('click', closeSheet);
-
-document.querySelector('.sheet-handle').addEventListener('click', closeSheet);
+document.getElementById('sheetHandle').addEventListener('click', closeSheet);
 document.getElementById('sheetClose').addEventListener('click', closeSheet);
 
 // ── STARS ──
 const starsEl = document.getElementById('stars');
-for(let i=0;i<55;i++){
-  const s=document.createElement('div'); s.className='star';
-  const sz=(Math.random()*2+0.8).toFixed(1);
-  s.style.cssText=`width:${sz}px;height:${sz}px;top:${Math.random()*100}%;left:${Math.random()*100}%;--dur:${(Math.random()*3+2).toFixed(1)}s;--delay:${(Math.random()*4).toFixed(1)}s;`;
+for (let i = 0; i < 60; i++) {
+  const s = document.createElement('div'); s.className = 'star';
+  const sz = (Math.random() * 2 + 0.8).toFixed(1);
+  s.style.cssText = `width:${sz}px;height:${sz}px;top:${Math.random()*100}%;left:${Math.random()*100}%;--dur:${(Math.random()*3+2).toFixed(1)}s;--delay:${(Math.random()*4).toFixed(1)}s;`;
   starsEl.appendChild(s);
 }
 
 // ── FLOATING HEARTS ──
-const hc=document.getElementById('hearts-canvas');
-const hx=hc.getContext('2d');
-let W,H;
-function resize(){W=hc.width=window.innerWidth;H=hc.height=window.innerHeight;}
-resize(); window.addEventListener('resize',resize);
-const COLORS=['#c8e6d0','#6aaa7a','#4a7a5a','#aad8b8','#d0eedd'];
-class Heart{
-  constructor(init){this.x=Math.random()*W;this.y=init?Math.random()*H:H+20;this.size=Math.random()*10+4;this.speed=Math.random()*0.5+0.15;this.opacity=Math.random()*0.25+0.04;this.wobble=Math.random()*Math.PI*2;this.wobbleSpeed=Math.random()*0.02+0.005;this.color=COLORS[Math.floor(Math.random()*COLORS.length)];}
-  update(){this.y-=this.speed;this.wobble+=this.wobbleSpeed;this.x+=Math.sin(this.wobble)*0.5;if(this.y<-20){this.y=H+20;this.x=Math.random()*W;}}
-  draw(){hx.save();hx.globalAlpha=this.opacity;hx.fillStyle=this.color;hx.translate(this.x,this.y);const s=this.size/10;hx.beginPath();hx.moveTo(0,-2*s);hx.bezierCurveTo(5*s,-7*s,10*s,0,0,8*s);hx.bezierCurveTo(-10*s,0,-5*s,-7*s,0,-2*s);hx.fill();hx.restore();}
+const hc = document.getElementById('hearts-canvas');
+const hx = hc.getContext('2d');
+let W, H;
+function resize() { W = hc.width = window.innerWidth; H = hc.height = window.innerHeight; }
+resize(); window.addEventListener('resize', resize);
+const COLORS = ['#c8e6d0','#6aaa7a','#4a7a5a','#aad8b8','#d0eedd'];
+class Heart {
+  constructor(init) { this.x=Math.random()*W; this.y=init?Math.random()*H:H+20; this.size=Math.random()*10+4; this.speed=Math.random()*0.5+0.15; this.opacity=Math.random()*0.25+0.04; this.wobble=Math.random()*Math.PI*2; this.wobbleSpeed=Math.random()*0.02+0.005; this.color=COLORS[Math.floor(Math.random()*COLORS.length)]; }
+  update() { this.y-=this.speed; this.wobble+=this.wobbleSpeed; this.x+=Math.sin(this.wobble)*0.5; if(this.y<-20){this.y=H+20;this.x=Math.random()*W;} }
+  draw() { hx.save(); hx.globalAlpha=this.opacity; hx.fillStyle=this.color; hx.translate(this.x,this.y); const s=this.size/10; hx.beginPath(); hx.moveTo(0,-2*s); hx.bezierCurveTo(5*s,-7*s,10*s,0,0,8*s); hx.bezierCurveTo(-10*s,0,-5*s,-7*s,0,-2*s); hx.fill(); hx.restore(); }
 }
-const hearts=Array.from({length:35},(_,i)=>new Heart(true));
-function animateHearts(){hx.clearRect(0,0,W,H);hearts.forEach(h=>{h.update();h.draw();});requestAnimationFrame(animateHearts);}
+const hearts = Array.from({length:35}, (_, i) => new Heart(true));
+function animateHearts() { hx.clearRect(0,0,W,H); hearts.forEach(h=>{h.update();h.draw();}); requestAnimationFrame(animateHearts); }
 animateHearts();
 
 // ── DOUBLE TAP BURST ──
-let lastTap=0;
-document.addEventListener('click',(e)=>{
-  const now=Date.now();
-  if(now-lastTap<400){for(let i=0;i<12;i++){const h=document.createElement('span');h.textContent=['💚','🌿','✨','💗','🌸'][Math.floor(Math.random()*5)];h.style.cssText=`position:fixed;left:${e.clientX}px;top:${e.clientY}px;font-size:${1+Math.random()*1.5}rem;pointer-events:none;z-index:9999;animation:burstHeart 0.9s ease forwards;--dx:${(Math.random()-0.5)*120}px;--dy:${-(Math.random()*100+40)}px;`;document.body.appendChild(h);setTimeout(()=>h.remove(),950);}}
-  lastTap=now;
+let lastTap = 0;
+document.addEventListener('click', (e) => {
+  const now = Date.now();
+  if (now - lastTap < 400) {
+    for (let i = 0; i < 12; i++) {
+      const h = document.createElement('span');
+      h.textContent = ['💚','🌿','✨','💗','🌸'][Math.floor(Math.random()*5)];
+      h.style.cssText = `position:fixed;left:${e.clientX}px;top:${e.clientY}px;font-size:${1+Math.random()*1.5}rem;pointer-events:none;z-index:9999;animation:burstHeart 0.9s ease forwards;--dx:${(Math.random()-0.5)*120}px;--dy:${-(Math.random()*100+40)}px;`;
+      document.body.appendChild(h);
+      setTimeout(() => h.remove(), 950);
+    }
+  }
+  lastTap = now;
 });
 </script>
 </body>
