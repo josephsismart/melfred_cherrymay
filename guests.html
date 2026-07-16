@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Guest List — Fred &amp; Chem Wedding</title>
+  <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Playfair+Display:wght@400;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --rose: #4a7a5a; --rose-light: #6aaa7a; --wine: #0d3322; --wine-mid: #1e5238;
+      --cream: #f4faf5; --text: #0d2e1a; --text-mid: #3a6a4a;
+    }
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(160deg,#051a0a,#0d3322 50%,#051a0a);
+      min-height: 100dvh; display: flex; align-items: center; justify-content: center;
+      padding: 1.5rem 1rem;
+    }
+
+    /* ── PASSCODE GATE ── */
+    #gate {
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(200,230,208,0.15);
+      border-radius: 24px;
+      padding: 3rem 2.5rem;
+      max-width: 380px; width: 100%;
+      text-align: center;
+      display: flex; flex-direction: column; align-items: center; gap: 1.5rem;
+      backdrop-filter: blur(12px);
+    }
+    .gate-logo { font-family: 'Great Vibes', cursive; font-size: 2.8rem; color: #fff; }
+    .gate-title { font-family: 'Playfair Display', serif; font-size: 1rem; color: rgba(200,230,208,0.8); font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; }
+    .gate-sub { font-size: 0.78rem; color: rgba(200,230,208,0.45); }
+    .gate-input {
+      width: 100%; padding: 0.85rem 1.2rem; border-radius: 50px;
+      border: 2px solid rgba(200,230,208,0.2);
+      background: rgba(255,255,255,0.06); color: #fff;
+      font-family: 'Poppins', sans-serif; font-size: 1rem;
+      text-align: center; letter-spacing: 0.15em; outline: none;
+      transition: border-color 0.2s;
+    }
+    .gate-input:focus { border-color: var(--rose-light); }
+    .gate-input::placeholder { color: rgba(200,230,208,0.3); letter-spacing: 0.1em; font-size: 0.85rem; }
+    .gate-btn {
+      width: 100%; padding: 0.9rem; border-radius: 50px; border: none; cursor: pointer;
+      background: linear-gradient(135deg, var(--rose), var(--wine));
+      color: #fff; font-family: 'Poppins', sans-serif; font-weight: 600; font-size: 0.9rem;
+      letter-spacing: 0.1em; transition: all 0.25s;
+      box-shadow: 0 6px 20px rgba(74,122,90,0.35);
+    }
+    .gate-btn:hover { transform: translateY(-2px); }
+    .gate-error { color: #ff8888; font-size: 0.78rem; display: none; }
+
+    /* ── GUEST LIST PAGE ── */
+    #listPage {
+      display: none; width: 100%; max-width: 700px;
+    }
+    .list-header {
+      text-align: center; margin-bottom: 2rem;
+    }
+    .list-title { font-family: 'Great Vibes', cursive; font-size: 2.5rem; color: #fff; }
+    .list-sub { font-size: 0.72rem; color: rgba(200,230,208,0.45); letter-spacing: 0.15em; text-transform: uppercase; margin-top: 0.3rem; }
+
+    /* Stats */
+    .list-stats {
+      display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; margin-bottom: 2rem;
+    }
+    .stat-card {
+      background: rgba(255,255,255,0.06); border: 1px solid rgba(200,230,208,0.12);
+      border-radius: 16px; padding: 1.2rem 1rem; text-align: center;
+      backdrop-filter: blur(8px);
+    }
+    .stat-num { font-family: 'Playfair Display', serif; font-size: 2rem; font-weight: 700; color: #fff; }
+    .stat-lbl { font-size: 0.6rem; letter-spacing: 0.15em; text-transform: uppercase; color: rgba(200,230,208,0.4); margin-top: 0.2rem; }
+    .stat-coming .stat-num { color: #6aaa7a; }
+    .stat-notcoming .stat-num { color: #ff8888; }
+
+    /* Table */
+    .list-table-wrap {
+      background: rgba(255,255,255,0.04); border: 1px solid rgba(200,230,208,0.1);
+      border-radius: 20px; overflow: hidden;
+    }
+    .list-table { width: 100%; border-collapse: collapse; }
+    .list-table th {
+      background: rgba(74,122,90,0.3); color: rgba(200,230,208,0.7);
+      font-size: 0.58rem; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase;
+      padding: 0.9rem 1.2rem; text-align: left;
+    }
+    .list-table td {
+      padding: 0.85rem 1.2rem; font-size: 0.85rem; color: rgba(200,230,208,0.85);
+      border-top: 1px solid rgba(200,230,208,0.06);
+    }
+    .list-table tr:hover td { background: rgba(255,255,255,0.03); }
+    .badge {
+      display: inline-flex; align-items: center; gap: 0.3rem;
+      font-size: 0.65rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase;
+      padding: 0.25rem 0.7rem; border-radius: 50px;
+    }
+    .badge-yes { background: rgba(106,170,122,0.2); color: #6aaa7a; border: 1px solid rgba(106,170,122,0.3); }
+    .badge-no { background: rgba(255,136,136,0.15); color: #ff9999; border: 1px solid rgba(255,136,136,0.2); }
+    .empty-state {
+      text-align: center; padding: 3rem 1rem; color: rgba(200,230,208,0.3);
+      font-size: 0.88rem;
+    }
+    .empty-state i { font-size: 2rem; display: block; margin-bottom: 0.8rem; }
+    .list-refresh {
+      margin-top: 1.5rem; text-align: center;
+    }
+    .refresh-btn {
+      background: none; border: 1.5px solid rgba(200,230,208,0.2); color: rgba(200,230,208,0.5);
+      font-family: 'Poppins', sans-serif; font-size: 0.75rem; padding: 0.5rem 1.5rem;
+      border-radius: 50px; cursor: pointer; transition: all 0.25s;
+    }
+    .refresh-btn:hover { border-color: var(--rose-light); color: var(--rose-light); }
+    .back-link {
+      display: inline-flex; align-items: center; gap: 0.4rem;
+      color: rgba(200,230,208,0.4); font-size: 0.72rem; text-decoration: none;
+      margin-top: 1.5rem; transition: color 0.2s;
+    }
+    .back-link:hover { color: var(--rose-light); }
+    .loading { color: rgba(200,230,208,0.4); font-size: 0.85rem; text-align: center; padding: 2rem; }
+
+    @media(max-width:480px) {
+      .list-stats { grid-template-columns: 1fr 1fr; }
+      .list-table th, .list-table td { padding: 0.7rem 0.8rem; font-size: 0.78rem; }
+      #gate { padding: 2rem 1.5rem; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ── PASSCODE GATE ── -->
+<div id="gate">
+  <div class="gate-logo">F &amp; C</div>
+  <div>
+    <div class="gate-title">Guest List</div>
+    <div class="gate-sub">Fred &amp; Chem · Sept 5, 2026</div>
+  </div>
+  <p style="font-size:0.8rem;color:rgba(200,230,208,0.5);">Enter passcode to view the RSVP responses</p>
+  <input class="gate-input" id="passInput" type="password" placeholder="Enter passcode" autocomplete="off"/>
+  <button class="gate-btn" onclick="checkPass()">
+    <i class="fa-solid fa-unlock-keyhole"></i> &nbsp; Access Guest List
+  </button>
+  <p class="gate-error" id="gateError"><i class="fa-solid fa-circle-exclamation"></i> Incorrect passcode. Try again.</p>
+  <a href="/invitation.html" style="font-size:0.72rem;color:rgba(200,230,208,0.3);text-decoration:none;margin-top:0.5rem;">← Back to invitation</a>
+</div>
+
+<!-- ── GUEST LIST ── -->
+<div id="listPage">
+  <div class="list-header">
+    <div class="list-title">Guest List 💚</div>
+    <div class="list-sub">Fred &amp; Chem · September 5, 2026 · Butuan City</div>
+  </div>
+
+  <div class="list-stats" id="statsRow">
+    <div class="stat-card">
+      <div class="stat-num" id="statTotal">—</div>
+      <div class="stat-lbl">Total RSVPs</div>
+    </div>
+    <div class="stat-card stat-coming">
+      <div class="stat-num" id="statComing">—</div>
+      <div class="stat-lbl">Coming 🎉</div>
+    </div>
+    <div class="stat-card stat-notcoming">
+      <div class="stat-num" id="statNotComing">—</div>
+      <div class="stat-lbl">Can't Make It</div>
+    </div>
+  </div>
+
+  <div class="list-table-wrap">
+    <div class="loading" id="tableLoading"><i class="fa-solid fa-spinner fa-spin"></i> Loading...</div>
+    <table class="list-table" id="guestTable" style="display:none;">
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Name</th>
+          <th>Attending</th>
+          <th>Submitted</th>
+        </tr>
+      </thead>
+      <tbody id="guestBody"></tbody>
+    </table>
+    <div class="empty-state" id="emptyState" style="display:none;">
+      <i class="fa-regular fa-envelope-open"></i>
+      No RSVPs yet — share the invitation link!
+    </div>
+  </div>
+
+  <div class="list-refresh">
+    <button class="refresh-btn" onclick="loadGuests()">
+      <i class="fa-solid fa-rotate"></i> Refresh
+    </button>
+  </div>
+  <div style="text-align:center;">
+    <a href="/invitation.html" class="back-link">
+      <i class="fa-solid fa-arrow-left"></i> Back to Invitation
+    </a>
+  </div>
+</div>
+
+<script>
+let savedCode = '';
+
+// Allow Enter key on password input
+document.getElementById('passInput').addEventListener('keydown', function(e){
+  if(e.key === 'Enter') checkPass();
+});
+
+function checkPass(){
+  const code = document.getElementById('passInput').value.trim();
+  const err = document.getElementById('gateError');
+  if(!code){ err.style.display='block'; return; }
+
+  // Quick client-side check (real enforcement is in API)
+  if(code !== 'melchem2026'){
+    err.style.display = 'block';
+    document.getElementById('passInput').value = '';
+    return;
+  }
+
+  savedCode = code;
+  err.style.display = 'none';
+  document.getElementById('gate').style.display = 'none';
+  document.getElementById('listPage').style.display = 'block';
+  loadGuests();
+}
+
+function formatDate(iso){
+  try {
+    const d = new Date(iso);
+    return d.toLocaleDateString('en-PH', { month:'short', day:'numeric', year:'numeric' })
+      + ' ' + d.toLocaleTimeString('en-PH', { hour:'2-digit', minute:'2-digit' });
+  } catch(e){ return iso || '—'; }
+}
+
+async function loadGuests(){
+  const loading = document.getElementById('tableLoading');
+  const table = document.getElementById('guestTable');
+  const empty = document.getElementById('emptyState');
+  const body = document.getElementById('guestBody');
+
+  loading.style.display = 'block';
+  table.style.display = 'none';
+  empty.style.display = 'none';
+
+  try {
+    const res = await fetch(`/api/rsvp?code=${encodeURIComponent(savedCode)}`);
+    const data = await res.json();
+
+    if(!res.ok){ throw new Error(data.error || 'Failed to load'); }
+
+    loading.style.display = 'none';
+
+    if(!Array.isArray(data) || data.length === 0){
+      empty.style.display = 'block';
+      document.getElementById('statTotal').textContent = '0';
+      document.getElementById('statComing').textContent = '0';
+      document.getElementById('statNotComing').textContent = '0';
+      return;
+    }
+
+    const coming = data.filter(r=>r.attending).length;
+    const notComing = data.filter(r=>!r.attending).length;
+    document.getElementById('statTotal').textContent = data.length;
+    document.getElementById('statComing').textContent = coming;
+    document.getElementById('statNotComing').textContent = notComing;
+
+    body.innerHTML = data.map((r,i) => `
+      <tr>
+        <td style="color:rgba(200,230,208,0.3);font-size:0.72rem;">${i+1}</td>
+        <td style="font-weight:500;color:#fff;">${escHtml(r.name || '—')}</td>
+        <td>
+          ${r.attending
+            ? '<span class="badge badge-yes"><i class="fa-solid fa-check"></i> Coming</span>'
+            : '<span class="badge badge-no"><i class="fa-solid fa-xmark"></i> Can\'t Make It</span>'}
+        </td>
+        <td style="font-size:0.72rem;color:rgba(200,230,208,0.4);">${formatDate(r.timestamp)}</td>
+      </tr>
+    `).join('');
+
+    table.style.display = 'table';
+
+  } catch(err) {
+    loading.innerHTML = `<i class="fa-solid fa-triangle-exclamation" style="color:#ff8888"></i> ${err.message}`;
+  }
+}
+
+function escHtml(str){
+  return str.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+}
+</script>
+</body>
+</html>
