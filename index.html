@@ -29,6 +29,7 @@
       background: linear-gradient(160deg, #051a0a 0%, #0d3322 45%, #162e1f 75%, #051a0a 100%);
       display: flex; flex-direction: column; align-items: center; justify-content: center;
       min-height: 100dvh; position: relative; padding: 2rem 1rem;
+      overflow: hidden;
     }
 
     #hearts-canvas { position: fixed; inset: 0; z-index: 0; pointer-events: none; }
@@ -42,7 +43,7 @@
     }
     @keyframes twinkle { 0%{opacity:0.1;transform:scale(0.8)} 100%{opacity:0.9;transform:scale(1.2)} }
 
-    /* ── ENVELOPE SCENE ── */
+    /* ── ENVELOPE ── */
     .home-card {
       position: relative; z-index: 1;
       display: flex; flex-direction: column; align-items: center; text-align: center;
@@ -55,183 +56,175 @@
       cursor: pointer; -webkit-tap-highlight-color: transparent;
       animation: fadeIn 1s 0.4s both;
     }
-
-    /* Scene has padding-top = space where card rises into */
     .env-scene {
       position: relative;
       width: clamp(260px, 70vw, 320px);
-      padding-top: clamp(190px, 28vw, 240px); /* reserved space for card */
       perspective: 900px;
     }
-
-    /* ── PHOTO CARD (rises from envelope) ── */
-    .env-card {
-      position: absolute;
-      top: 8px;           /* resting position once risen */
-      left: 8%; right: 8%;
-      background: linear-gradient(170deg, #ffffff, #f4fbf6);
-      border-radius: 12px;
-      box-shadow: 0 -6px 30px rgba(0,0,0,0.22), 0 2px 8px rgba(0,0,0,0.1);
-      display: flex; flex-direction: column; align-items: center; justify-content: flex-start;
-      padding: 18px 14px 14px;
-      gap: 7px;
-      /* Hidden: pushed down into the envelope */
-      opacity: 0;
-      transform: translateY(clamp(190px, 28vw, 240px));
-      transition:
-        transform 0.85s 0.3s cubic-bezier(0.22, 1.5, 0.36, 1),
-        opacity   0.2s  0.35s ease;
-      z-index: 5;
-      pointer-events: none;
-      overflow: hidden;
-    }
-
-    /* Tag line */
-    .env-card-tag {
-      font-family: 'Poppins', sans-serif;
-      font-size: 0.52rem; letter-spacing: 0.24em; text-transform: uppercase;
-      color: var(--gold); margin-bottom: 2px;
-    }
-
-    /* Photo circle */
-    .env-card-photo {
-      width: 80px; height: 80px; border-radius: 50%;
-      border: 2.5px solid rgba(74,122,90,0.3);
-      box-shadow: 0 4px 16px rgba(0,0,0,0.12);
-      overflow: hidden; flex-shrink: 0;
-      background: linear-gradient(135deg, #c8e6d0, #8fc0a0);
-      display: flex; align-items: center; justify-content: center;
-    }
-    .env-card-photo img { width: 100%; height: 100%; object-fit: cover; }
-    .env-card-photo-placeholder {
-      font-family: 'Great Vibes', cursive;
-      font-size: 1.5rem; color: rgba(74,122,90,0.7);
-    }
-
-    /* Names */
-    .env-card-names {
-      font-family: 'Great Vibes', cursive;
-      font-size: 1.6rem; line-height: 1.1;
-      color: #1a4a2a;
-    }
-    .env-card-amp { color: var(--gold); }
-
-    .env-card-divider {
-      width: 50px; height: 1px;
-      background: linear-gradient(90deg, transparent, var(--gold), transparent);
-    }
-
-    .env-card-date {
-      font-family: 'Playfair Display', serif;
-      font-size: 0.68rem; letter-spacing: 0.12em;
-      color: #2a5a3a;
-    }
-    .env-card-location {
-      font-family: 'Poppins', sans-serif;
-      font-size: 0.52rem; letter-spacing: 0.09em;
-      color: rgba(42,90,58,0.55);
-    }
-
-    /* Tap hint — fades in after card finishes rising */
-    .env-card-hint {
-      margin-top: 6px;
-      font-family: 'Poppins', sans-serif;
-      font-size: 0.56rem; font-weight: 600;
-      letter-spacing: 0.14em; text-transform: uppercase;
-      color: var(--green); opacity: 0;
-      transition: opacity 0.5s 1.3s;
-      border: 1px solid rgba(74,122,90,0.25);
-      border-radius: 20px; padding: 5px 14px;
-    }
-
-    /* OPENED STATE — card slides up into the reserved space */
-    .env-btn.opened .env-card {
-      transform: translateY(0);
-      opacity: 1;
-      pointer-events: all;
-      cursor: pointer;
-    }
-    .env-btn.opened .env-card .env-card-hint { opacity: 1; }
-
-    /* ── ENVELOPE BODY ── */
     .env-body {
       width: 100%; aspect-ratio: 1.55/1;
-      border-radius: 6px 6px 14px 14px;
-      position: relative;
+      border-radius: 6px 6px 14px 14px; position: relative;
       box-shadow: 0 20px 60px rgba(0,0,0,0.45), 0 4px 16px rgba(0,0,0,0.25);
       overflow: hidden;
       background: linear-gradient(150deg,#dff2e6,#c2e0cc);
-      z-index: 10; /* sits on top of card bottom → looks like card comes from inside */
     }
-    .env-v {
-      position: absolute; inset: 0;
-      background: linear-gradient(160deg,#aacfb8,#8fc0a0);
-      clip-path: polygon(0 100%, 50% 54%, 100% 100%);
-      border-radius: 0 0 14px 14px;
-    }
+    .env-v { position:absolute;inset:0;background:linear-gradient(160deg,#aacfb8,#8fc0a0);clip-path:polygon(0 100%,50% 54%,100% 100%);border-radius:0 0 14px 14px; }
     .env-l { position:absolute;inset:0;background:linear-gradient(145deg,#c8e8d2,#aacfb8);clip-path:polygon(0 0,0 100%,50% 54%); }
     .env-r { position:absolute;inset:0;background:linear-gradient(145deg,#c0e2ca,#a2c8b0);clip-path:polygon(100% 0,100% 100%,50% 54%); }
 
-    /* Wax seal */
+    /* The letter that peeks out — purely decorative */
+    .env-peek {
+      position:absolute; bottom:0; left:12%; right:12%; height:65%;
+      background:linear-gradient(170deg,#fff,#f2fbf5);
+      border-radius:4px 4px 0 0;
+      box-shadow:0 -4px 16px rgba(0,0,0,0.1);
+      opacity:0; transform:translateY(100%);
+      transition: transform 0.7s 0.2s cubic-bezier(0.34,1.3,0.64,1), opacity 0.2s 0.25s;
+      z-index:6;
+      display:flex; flex-direction:column; align-items:center; justify-content:center; gap:4px; padding:10px;
+      overflow:hidden;
+    }
+    .env-peek::before { content:'F & C'; font-family:'Great Vibes',cursive; font-size:1.4rem; color:rgba(74,122,90,0.4); }
+    .env-peek-line { height:2px; background:rgba(74,122,90,0.15); border-radius:2px; width:80%; }
+    .env-peek-line:nth-child(3){width:60%;}
+    .env-peek-line:nth-child(4){width:72%;}
+
     .env-seal {
       position:absolute; bottom:-22px; left:50%; transform:translateX(-50%);
       width:48px; height:48px; border-radius:50%;
       background:radial-gradient(circle at 38% 35%,#4a7a5a,#0d3322);
       box-shadow:0 4px 16px rgba(0,0,0,0.4),0 0 0 3px rgba(200,230,208,0.2);
-      display:flex; align-items:center; justify-content:center;
-      z-index:20; transition: transform 0.4s, opacity 0.4s;
+      display:flex; align-items:center; justify-content:center; z-index:20;
+      transition:transform 0.4s, opacity 0.4s;
     }
     .env-seal svg { width:34px; height:34px; }
-
-    /* Flap */
     .env-flap {
       position:absolute; top:0; left:0; right:0; height:54%;
       transform-origin:top center;
-      transition:transform 0.65s cubic-bezier(0.4,0,0.2,1);
-      z-index:15;
+      transition:transform 0.65s cubic-bezier(0.4,0,0.2,1); z-index:15;
     }
-    .env-flap-inner {
-      position:absolute; inset:0;
-      background:linear-gradient(160deg,#d0ecda,#b4d4c0);
-      clip-path:polygon(0 0,100% 0,50% 88%);
-      border-radius:6px 6px 0 0;
-    }
-    .env-flap-inner::after {
-      content:''; position:absolute; inset:0;
-      background:linear-gradient(160deg,rgba(255,255,255,0.25),transparent 60%);
-      clip-path:polygon(0 0,100% 0,50% 88%);
-    }
+    .env-flap-inner { position:absolute;inset:0;background:linear-gradient(160deg,#d0ecda,#b4d4c0);clip-path:polygon(0 0,100% 0,50% 88%);border-radius:6px 6px 0 0; }
+    .env-flap-inner::after { content:'';position:absolute;inset:0;background:linear-gradient(160deg,rgba(255,255,255,0.25),transparent 60%);clip-path:polygon(0 0,100% 0,50% 88%); }
 
-    /* Sparkles */
-    .env-sparkle {
-      position:absolute; font-size:1rem; pointer-events:none; opacity:0;
-      animation: sparkleFloat 3s ease-in-out infinite;
-    }
-    @keyframes sparkleFloat {
-      0%{opacity:0;transform:translateY(0) scale(0.5)} 30%{opacity:0.8} 100%{opacity:0;transform:translateY(-40px) scale(1.2)}
-    }
+    .env-sparkle { position:absolute;font-size:1rem;pointer-events:none;opacity:0;animation:sparkleFloat 3s ease-in-out infinite; }
+    @keyframes sparkleFloat { 0%{opacity:0;transform:translateY(0) scale(0.5)} 30%{opacity:0.8} 100%{opacity:0;transform:translateY(-40px) scale(1.2)} }
 
-    /* Label */
     .env-label {
       font-family:'Poppins',sans-serif; font-weight:500;
-      font-size:clamp(0.68rem,2.2vw,0.82rem);
-      letter-spacing:0.2em; text-transform:uppercase;
+      font-size:clamp(0.68rem,2.2vw,0.82rem); letter-spacing:0.2em; text-transform:uppercase;
       color:rgba(200,230,208,0.7); transition:opacity 0.4s; margin-top:0.6rem;
     }
-
-    /* OPENED STATES */
-    .env-btn.opened .env-flap { transform:rotateX(-175deg); z-index:4; }
-    .env-btn.opened .env-seal { transform:translateX(-50%) scale(0.8); opacity:0; }
-    .env-btn.opened .env-label { opacity:0; }
-
     @keyframes envGlow {
       0%,100%{filter:drop-shadow(0 10px 28px rgba(74,122,90,0.35))}
       50%{filter:drop-shadow(0 16px 44px rgba(106,170,122,0.65))}
     }
-    .env-scene { animation: envGlow 2.6s 2s infinite; }
+    .env-scene { animation:envGlow 2.6s 2s infinite; }
+
+    /* OPENED: flap folds back, peek letter rises */
+    .env-btn.opened .env-flap { transform:rotateX(-175deg); z-index:4; }
+    .env-btn.opened .env-peek { transform:translateY(-30%); opacity:1; }
+    .env-btn.opened .env-seal { transform:translateX(-50%) scale(0.8); opacity:0; }
+    .env-btn.opened .env-label { opacity:0; }
+
+    /* ── BOTTOM SHEET CARD ── */
+    #invite-sheet {
+      position: fixed; inset: 0; z-index: 50;
+      pointer-events: none;
+    }
+
+    /* Dark scrim */
+    #invite-sheet .scrim {
+      position: absolute; inset: 0;
+      background: rgba(0,0,0,0); /* fades in */
+      transition: background 0.4s;
+    }
+    #invite-sheet.show .scrim {
+      background: rgba(0,0,0,0.5);
+    }
+
+    /* The card panel */
+    #invite-sheet .sheet-card {
+      position: absolute; bottom: 0; left: 0; right: 0;
+      background: linear-gradient(175deg, #0d2e1a 0%, #162e1f 100%);
+      border-radius: 24px 24px 0 0;
+      padding: 12px 24px 40px;
+      transform: translateY(100%);
+      transition: transform 0.6s cubic-bezier(0.32, 0.72, 0, 1);
+      box-shadow: 0 -8px 40px rgba(0,0,0,0.5);
+      text-align: center;
+    }
+    #invite-sheet.show .sheet-card {
+      transform: translateY(0);
+    }
+    #invite-sheet.show {
+      pointer-events: all;
+    }
+
+    /* Drag handle */
+    .sheet-handle {
+      width: 40px; height: 4px;
+      background: rgba(200,230,208,0.25); border-radius: 2px;
+      margin: 0 auto 20px;
+    }
+
+    /* Photo circle */
+    .sheet-photo {
+      width: 110px; height: 110px; border-radius: 50%;
+      margin: 0 auto 16px;
+      border: 3px solid rgba(200,230,208,0.3);
+      box-shadow: 0 8px 32px rgba(0,0,0,0.4);
+      overflow: hidden;
+      background: linear-gradient(135deg, #1e5238, #0d3322);
+      display: flex; align-items: center; justify-content: center;
+    }
+    .sheet-photo img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .sheet-photo-placeholder {
+      font-family: 'Great Vibes', cursive;
+      font-size: 2rem; color: rgba(200,230,208,0.6);
+    }
+
+    .sheet-tag {
+      font-size: 0.6rem; letter-spacing: 0.25em; text-transform: uppercase;
+      color: var(--gold); margin-bottom: 10px;
+    }
+
+    .sheet-names {
+      font-family: 'Great Vibes', cursive;
+      font-size: clamp(2.4rem, 8vw, 3rem);
+      color: #c8e6d0; line-height: 1; margin-bottom: 10px;
+    }
+    .sheet-amp { color: var(--gold); }
+
+    .sheet-divider {
+      width: 60px; height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(212,168,75,0.6), transparent);
+      margin: 0 auto 10px;
+    }
+
+    .sheet-date {
+      font-family: 'Playfair Display', serif;
+      font-size: 0.9rem; letter-spacing: 0.12em;
+      color: rgba(200,230,208,0.8); margin-bottom: 4px;
+    }
+    .sheet-location {
+      font-size: 0.72rem; letter-spacing: 0.08em;
+      color: rgba(200,230,208,0.45); margin-bottom: 28px;
+    }
+
+    .sheet-cta {
+      display: block; width: 100%;
+      background: linear-gradient(135deg, #4a7a5a, #2a5a3a);
+      color: #c8e6d0; border: none; border-radius: 50px;
+      padding: 1rem 2rem;
+      font-family: 'Poppins', sans-serif;
+      font-size: 0.82rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase;
+      cursor: pointer; -webkit-tap-highlight-color: transparent;
+      box-shadow: 0 8px 24px rgba(74,122,90,0.4);
+      transition: transform 0.15s, box-shadow 0.15s;
+    }
+    .sheet-cta:active { transform: scale(0.97); box-shadow: 0 4px 12px rgba(74,122,90,0.3); }
 
     @keyframes burstHeart { 0%{transform:translate(0,0) scale(1);opacity:1} 100%{transform:translate(var(--dx),var(--dy)) scale(0.3);opacity:0} }
-
     @media(max-width:600px) { .corner-svg { width:140px; } }
   </style>
 </head>
@@ -257,36 +250,25 @@
 
 <div class="stars" id="stars"></div>
 
+<!-- Envelope -->
 <div class="home-card">
   <div class="env-btn" id="envBtn">
     <div class="env-scene">
       <span class="env-sparkle" style="left:8%;top:30%;animation-delay:0s">✨</span>
       <span class="env-sparkle" style="right:10%;top:20%;animation-delay:1s">💚</span>
       <span class="env-sparkle" style="left:20%;top:10%;animation-delay:2s">🌿</span>
-
-      <!-- Photo card — lives inside scene, rises up on open -->
-      <div class="env-card" id="envCard">
-        <p class="env-card-tag">✦ Wedding Invitation ✦</p>
-        <div class="env-card-photo">
-          <!-- Swap src with real photo URL later -->
-          <div class="env-card-photo-placeholder">F&C</div>
-        </div>
-        <div class="env-card-names">Fred <span class="env-card-amp">&</span> Chem</div>
-        <div class="env-card-divider"></div>
-        <div class="env-card-date">September 5, 2026</div>
-        <div class="env-card-location">Butuan City, Philippines</div>
-        <p class="env-card-hint">✦ Tap to view details ✦</p>
-      </div>
-
-      <!-- Envelope body (renders ON TOP of card bottom so card looks inside) -->
       <div class="env-body">
         <div class="env-l"></div>
         <div class="env-r"></div>
         <div class="env-v"></div>
+        <!-- Decorative peek of letter inside -->
+        <div class="env-peek">
+          <div class="env-peek-line"></div>
+          <div class="env-peek-line"></div>
+          <div class="env-peek-line"></div>
+        </div>
         <div class="env-flap"><div class="env-flap-inner"></div></div>
       </div>
-
-      <!-- Seal outside env-body -->
       <div class="env-seal">
         <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
           <circle cx="50" cy="50" r="46" fill="none" stroke="rgba(200,230,208,0.25)" stroke-width="1.5"/>
@@ -298,30 +280,55 @@
   </div>
 </div>
 
+<!-- Bottom sheet sneak peek -->
+<div id="invite-sheet">
+  <div class="scrim" id="scrim"></div>
+  <div class="sheet-card">
+    <div class="sheet-handle"></div>
+    <p class="sheet-tag">✦ You're Invited ✦</p>
+    <div class="sheet-photo">
+      <!-- Replace src with real photo URL -->
+      <div class="sheet-photo-placeholder">F&C</div>
+    </div>
+    <div class="sheet-names">Fred <span class="sheet-amp">&</span> Chem</div>
+    <div class="sheet-divider"></div>
+    <div class="sheet-date">September 5, 2026</div>
+    <div class="sheet-location">Butuan City, Philippines</div>
+    <button class="sheet-cta" id="viewDetailsBtn">Open Invitation &nbsp;→</button>
+  </div>
+</div>
+
 <script>
-const envBtn  = document.getElementById('envBtn');
-const envCard = document.getElementById('envCard');
+const envBtn       = document.getElementById('envBtn');
+const inviteSheet  = document.getElementById('invite-sheet');
+const viewDetailsBtn = document.getElementById('viewDetailsBtn');
 let envClicked = false;
 
-// Tap envelope → open flap + card rises
-envBtn.addEventListener('click', function(e) {
+// Tap envelope → open flap + show bottom sheet after flap animation
+envBtn.addEventListener('click', function() {
   if(envClicked) return;
   envClicked = true;
   this.classList.add('opened');
+  // Show the bottom sheet after flap finishes
+  setTimeout(() => { inviteSheet.classList.add('show'); }, 700);
 });
 
-// Tap risen card → go to invitation
-envCard.addEventListener('click', function(e) {
-  e.stopPropagation();
+// Tap "Open Invitation" → go to invitation page
+viewDetailsBtn.addEventListener('click', () => {
   window.location.href = '/invitation.html';
+});
+
+// Tap scrim → close sheet (optional)
+document.getElementById('scrim').addEventListener('click', () => {
+  inviteSheet.classList.remove('show');
 });
 
 // ── STARS ──
 const starsEl = document.getElementById('stars');
 for(let i=0;i<55;i++){
   const s=document.createElement('div'); s.className='star';
-  const size=(Math.random()*2+0.8).toFixed(1);
-  s.style.cssText=`width:${size}px;height:${size}px;top:${Math.random()*100}%;left:${Math.random()*100}%;--dur:${(Math.random()*3+2).toFixed(1)}s;--delay:${(Math.random()*4).toFixed(1)}s;`;
+  const sz=(Math.random()*2+0.8).toFixed(1);
+  s.style.cssText=`width:${sz}px;height:${sz}px;top:${Math.random()*100}%;left:${Math.random()*100}%;--dur:${(Math.random()*3+2).toFixed(1)}s;--delay:${(Math.random()*4).toFixed(1)}s;`;
   starsEl.appendChild(s);
 }
 
