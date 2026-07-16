@@ -50,7 +50,7 @@
     #pill-nav a.active { background: var(--wine); color: #fff; border-color: var(--wine); box-shadow: 0 3px 12px rgba(13,51,34,0.25); }
 
     /* ── SECTIONS ── */
-    #welcome, #details, #entourage, #story, #gallery, #lt-rsvp, #faq, #save-the-date {
+    #welcome, #welcome-msg, #details, #entourage, #story, #gallery, #lt-rsvp, #faq, #save-the-date {
       scroll-margin-top: 80px;
     }
     .lt-section-header {
@@ -125,6 +125,42 @@
     }
     .scroll-down-btn i { font-size: 1.2rem; color: var(--rose-light); }
     @keyframes scrollBounce { 0%,100%{transform:translateY(0)} 50%{transform:translateY(6px)} }
+
+    /* ── WELCOME MESSAGE SECTION ── */
+    #welcome-msg {
+      background: linear-gradient(160deg, #edf7f0 0%, #f4faf5 50%, #edf7f0 100%);
+      position: relative; overflow: hidden;
+    }
+    .welcome-msg-body {
+      padding: 3.5rem 2rem 3rem; max-width: 680px; margin: 0 auto;
+      display: flex; flex-direction: column; align-items: center; gap: 1.8rem; text-align: center;
+    }
+    .welcome-msg-tag {
+      font-size: 0.58rem; font-weight: 700; letter-spacing: 0.3em; text-transform: uppercase;
+      color: var(--rose); border: 1px solid rgba(74,122,90,0.3); padding: 0.3rem 1rem;
+      border-radius: 50px;
+    }
+    .welcome-msg-script {
+      font-family: 'Great Vibes', cursive;
+      font-size: clamp(2rem, 7vw, 3.2rem);
+      color: var(--wine); line-height: 1.1;
+    }
+    .welcome-msg-divider {
+      display: flex; align-items: center; gap: 0.8rem; width: min(200px, 55vw);
+    }
+    .welcome-msg-divider::before, .welcome-msg-divider::after {
+      content: ''; flex: 1; height: 1px;
+      background: linear-gradient(to right, transparent, rgba(74,122,90,0.3), transparent);
+    }
+    .welcome-msg-divider span { color: var(--rose); font-size: 0.75rem; }
+    .welcome-msg-text {
+      font-size: clamp(0.9rem, 2vw, 1rem); line-height: 1.95;
+      color: var(--text-mid); max-width: 560px;
+    }
+    .welcome-msg-sig {
+      font-family: 'Great Vibes', cursive; font-size: clamp(1.4rem, 4vw, 1.8rem);
+      color: var(--wine); opacity: 0.85;
+    }
 
     /* ── STORY ── */
     #story { background:linear-gradient(180deg,#f0fff4 0%,#f4faf5 50%,#eef8f0 100%); position:relative; overflow:hidden; }
@@ -205,42 +241,79 @@
     .lt-party-name-pill { font-size:0.88rem; color:var(--wine); padding:0.3rem 0; border-bottom:1px solid rgba(74,122,90,0.06); display:block; }
     .lt-party-name-pill:last-child { border-bottom:none; }
 
-    /* ── RSVP ── */
-    #lt-rsvp { background:linear-gradient(160deg,#edf7f0 0%,#d0eedd 100%); }
-    .lt-rsvp-content { padding:3.5rem 2rem; text-align:center; display:flex; flex-direction:column; align-items:center; gap:1.5rem; }
-    .rsvp-card { background:#fff; border-radius:24px; padding:2.5rem 2rem; box-shadow:0 12px 50px rgba(74,122,90,0.15); border:1px solid rgba(74,122,90,0.1); width:100%; max-width:500px; display:flex; flex-direction:column; align-items:center; gap:1.2rem; }
-    .rsvp-question { font-family:'Playfair Display',serif; font-size:clamp(1.4rem,4vw,2rem); font-weight:700; color:var(--wine); line-height:1.3; }
-    .rsvp-sub { font-size:0.85rem; color:var(--text-mid); }
-    .rsvp-name-wrap { width:100%; max-width:340px; }
-    .rsvp-name-input {
-      width:100%; padding:0.75rem 1rem; font-family:'Poppins',sans-serif; font-size:0.9rem;
-      border:2px solid rgba(74,122,90,0.25); border-radius:50px; outline:none;
-      transition:border-color 0.2s; color:var(--text); background:#fafff9;
-      text-align:center;
+    /* ── RSVP (new card-style design) ── */
+    #lt-rsvp { background: linear-gradient(160deg,#edf7f0 0%,#d0eedd 100%); }
+    .lt-rsvp-content { padding: 0; }
+    .rsvp-card-new {
+      max-width: 480px; margin: 0 auto; background: #fff;
+      box-shadow: 0 16px 60px rgba(13,51,34,0.15);
+      overflow: hidden;
     }
-    .rsvp-name-input:focus { border-color:var(--rose); }
-    .rsvp-name-input::placeholder { color:rgba(74,122,90,0.4); }
-    .rsvp-btns { display:flex; gap:1rem; flex-wrap:wrap; justify-content:center; }
-    .rsvp-yes,.rsvp-no { display:flex; flex-direction:column; align-items:center; gap:0.5rem; padding:1.2rem 2rem; border-radius:20px; border:none; cursor:pointer; font-family:'Poppins',sans-serif; font-weight:600; font-size:0.9rem; transition:all 0.3s; min-width:130px; }
-    .rsvp-yes { background:linear-gradient(135deg,var(--rose),var(--wine)); color:#fff; box-shadow:0 6px 24px rgba(74,122,90,0.4); }
-    .rsvp-yes:hover { transform:translateY(-3px) scale(1.04); }
-    .rsvp-yes:disabled,.rsvp-no:disabled { opacity:0.5; cursor:not-allowed; transform:none; }
-    .rsvp-yes i,.rsvp-no i { font-size:2rem; }
-    .rsvp-no { background:#fff; color:var(--text-mid); border:2px solid rgba(74,122,90,0.2); box-shadow:0 4px 16px rgba(0,0,0,0.06); }
-    .rsvp-no:hover { transform:translateY(-3px); border-color:var(--rose); }
+    .rsvp-card-header {
+      background: var(--wine); padding: 1.1rem 1.5rem;
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .rsvp-card-header-title {
+      font-family: 'Playfair Display', serif; font-size: clamp(1.2rem,4vw,1.6rem);
+      font-weight: 700; color: #fff; letter-spacing: 0.1em;
+    }
+    .rsvp-card-header-leaf { color: rgba(200,230,208,0.5); font-size: 1.2rem; }
+    .rsvp-card-body { padding: 2rem 1.8rem 2.5rem; display: flex; flex-direction: column; align-items: center; gap: 1.6rem; }
+    .rsvp-title-block { text-align: center; }
+    .rsvp-title-big { font-family: 'Playfair Display', serif; font-size: clamp(2rem,7vw,3rem); font-weight: 700; color: var(--wine); }
+    .rsvp-deadline { font-size: 0.82rem; color: var(--text-mid); margin-top: 0.3rem; }
+    .rsvp-rule { width: 100%; height: 1px; background: linear-gradient(to right, transparent, rgba(74,122,90,0.2), transparent); }
+    .rsvp-attending-label { font-size: 0.85rem; font-weight: 600; color: var(--text); text-align: center; }
+    .rsvp-attending-label span { color: #e74c3c; }
+    .rsvp-attend-btns { display: flex; gap: 1.2rem; justify-content: center; flex-wrap: wrap; }
+    .rsvp-attend-btn {
+      display: flex; flex-direction: column; align-items: center; gap: 0.5rem;
+      padding: 1.2rem 1.6rem; border-radius: 16px;
+      border: 2px solid rgba(74,122,90,0.2); background: #fff;
+      cursor: pointer; transition: all 0.25s; min-width: 120px;
+      font-family: 'Poppins', sans-serif;
+    }
+    .rsvp-attend-btn i { font-size: 2rem; transition: color 0.2s; }
+    .rsvp-attend-btn .btn-label { font-size: 0.75rem; font-weight: 600; color: var(--text-mid); text-align: center; line-height: 1.3; }
+    .rsvp-attend-btn.yes-btn i { color: #b0c8b8; }
+    .rsvp-attend-btn.no-btn i { color: #ccc; }
+    .rsvp-attend-btn.yes-btn.selected { border-color: var(--rose); background: rgba(74,122,90,0.06); box-shadow: 0 4px 16px rgba(74,122,90,0.2); }
+    .rsvp-attend-btn.yes-btn.selected i { color: var(--rose); }
+    .rsvp-attend-btn.no-btn.selected { border-color: #c0392b; background: rgba(192,57,43,0.04); box-shadow: 0 4px 16px rgba(192,57,43,0.12); }
+    .rsvp-attend-btn.no-btn.selected i { color: #c0392b; }
+    .rsvp-attend-btn:hover { transform: translateY(-2px); }
+    .rsvp-field-wrap { width: 100%; display: flex; flex-direction: column; gap: 0.4rem; }
+    .rsvp-field-label { font-size: 0.78rem; font-weight: 600; color: var(--text); }
+    .rsvp-field-label span { color: #e74c3c; }
+    .rsvp-input {
+      width: 100%; padding: 0.75rem 1rem; font-family: 'Poppins', sans-serif; font-size: 0.88rem;
+      border: 1.5px solid rgba(74,122,90,0.25); border-radius: 8px; outline: none;
+      transition: border-color 0.2s; color: var(--text); background: #fafff9;
+    }
+    .rsvp-input:focus { border-color: var(--rose); }
+    .rsvp-input::placeholder { color: rgba(74,122,90,0.35); }
+    textarea.rsvp-input { resize: vertical; min-height: 80px; }
+    .rsvp-submit-btn {
+      width: 100%; padding: 0.9rem; border: none; border-radius: 8px;
+      background: var(--wine); color: #fff; font-family: 'Poppins', sans-serif;
+      font-size: 0.95rem; font-weight: 700; letter-spacing: 0.05em;
+      cursor: pointer; transition: all 0.25s;
+    }
+    .rsvp-submit-btn:hover { background: var(--wine-mid); transform: translateY(-1px); box-shadow: 0 6px 20px rgba(13,51,34,0.3); }
+    .rsvp-submit-btn:disabled { opacity: 0.6; cursor: not-allowed; transform: none; }
+    .rsvp-contact-block { text-align: center; padding-top: 0.5rem; }
+    .rsvp-contact-block .contact-label { font-size: 0.65rem; font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase; color: var(--text-mid); margin-bottom: 0.3rem; }
+    .rsvp-contact-block .contact-name { font-size: 0.82rem; color: var(--text); }
+    .rsvp-contact-block .contact-num { font-size: 0.82rem; color: var(--text-mid); }
+    /* RSVP response state */
     .rsvp-response { display:none; flex-direction:column; align-items:center; gap:0.8rem; padding:1.5rem; border-radius:16px; width:100%; }
     .rsvp-response.yes-resp { background:linear-gradient(135deg,rgba(74,122,90,0.08),rgba(13,51,34,0.04)); }
     .rsvp-response.no-resp { background:rgba(0,0,0,0.03); }
     .rsvp-response.show { display:flex; animation:fadeUp 0.5s ease; }
     .rsvp-resp-emoji { font-size:3rem; }
-    .rsvp-resp-text { font-family:'Playfair Display',serif; font-size:1.2rem; font-weight:700; color:var(--wine); }
-    .rsvp-resp-sub { font-size:0.85rem; color:var(--text-mid); }
+    .rsvp-resp-text { font-family:'Playfair Display',serif; font-size:1.2rem; font-weight:700; color:var(--wine); text-align:center; }
+    .rsvp-resp-sub { font-size:0.85rem; color:var(--text-mid); text-align:center; }
     .rsvp-change-btn { margin-top:0.6rem; background:none; border:1.5px solid rgba(74,122,90,0.3); color:var(--rose); font-family:'Poppins',sans-serif; font-size:0.75rem; font-weight:600; padding:0.45rem 1.2rem; border-radius:50px; cursor:pointer; transition:all 0.25s; }
-    .lt-rsvp-deadline { font-size:0.7rem; font-weight:600; letter-spacing:0.2em; text-transform:uppercase; color:var(--rose); }
-    .lt-rsvp-contacts { display:flex; flex-wrap:wrap; gap:1rem; justify-content:center; }
-    .lt-rsvp-contact { background:#fff; border-radius:16px; padding:1rem 1.5rem; font-size:0.9rem; color:var(--text); box-shadow:0 4px 16px rgba(74,122,90,0.08); border:1px solid rgba(74,122,90,0.1); display:flex; flex-direction:column; gap:0.2rem; align-items:center; }
-    .lt-rsvp-contact strong { color:var(--wine); }
-    .lt-rsvp-contact i { color:var(--rose); margin-right:0.3rem; }
 
     /* ── SAVE THE DATE ── */
     #save-the-date { background:linear-gradient(160deg,#f4faf5 0%,#edf7f0 50%,#f0faf4 100%); position:relative; overflow:hidden; }
@@ -302,10 +375,8 @@
       .lt-details-grid { grid-template-columns:1fr !important; gap:0.8rem; }
       .lt-detail-card { padding:1.2rem 1rem; }
       .lt-gallery-grid { grid-template-columns:1fr 1fr; gap:0.5rem; }
-      .lt-rsvp-content { padding:2rem 1rem; }
-      .rsvp-card { padding:1.5rem 1rem; }
-      .rsvp-btns { flex-direction:column; align-items:center; }
-      .lt-rsvp-contacts { flex-direction:column; align-items:center; }
+      .rsvp-card-body { padding: 1.5rem 1.2rem 2rem; }
+      .rsvp-attend-btns { flex-direction: row; }
       .std-body { flex-direction:column; align-items:center; padding:2rem 1rem; min-height:auto; }
       .std-inner { align-items:center; text-align:center; }
       .std-photo-area { width:min(200px,60vw); height:min(260px,78vw); }
@@ -325,12 +396,13 @@
 <nav id="pill-nav">
   <a href="/"><i class="fa-solid fa-house-heart"></i> Home</a>
   <a href="#welcome"><i class="fa-solid fa-heart"></i> Welcome</a>
-  <a href="#details"><i class="fa-solid fa-circle-info"></i> Details</a>
-  <a href="#entourage"><i class="fa-solid fa-people-group"></i> Entourage</a>
   <a href="#story"><i class="fa-solid fa-book-heart"></i> Story</a>
   <a href="#gallery"><i class="fa-solid fa-images"></i> Gallery</a>
-  <a href="#lt-rsvp"><i class="fa-solid fa-envelope-open-text"></i> RSVP</a>
+  <a href="#details"><i class="fa-solid fa-circle-info"></i> Details</a>
+  <a href="#entourage"><i class="fa-solid fa-people-group"></i> Entourage</a>
   <a href="#faq"><i class="fa-solid fa-circle-question"></i> FAQs</a>
+  <a href="#lt-rsvp"><i class="fa-solid fa-envelope-open-text"></i> RSVP</a>
+  <a href="#save-the-date"><i class="fa-solid fa-calendar-heart"></i> Save the Date</a>
 </nav>
 
 <!-- ── WELCOME / HERO ── -->
@@ -367,15 +439,75 @@
 
   <!-- Music button -->
   <div class="music-btn-wrap reveal" style="cursor:pointer;" onclick="toggleMusic()" title="Toggle music">
-    <span class="music-arc-text"><i class="fa-solid fa-music"></i> &nbsp; One Love · Acel Bisa</span>
+    <span class="music-arc-text"><i class="fa-solid fa-music"></i> &nbsp; To The Bone · Pamungkas</span>
     <div class="music-btn" id="musicBtn"><i class="fa-solid fa-play" id="musicIcon"></i></div>
   </div>
 
   <!-- Scroll down CTA -->
-  <button class="scroll-down-btn reveal" onclick="document.getElementById('details').scrollIntoView({behavior:'smooth'})">
+  <button class="scroll-down-btn reveal" onclick="document.getElementById('welcome-msg').scrollIntoView({behavior:'smooth'})">
     Tap to see all details
     <i class="fa-solid fa-chevron-down"></i>
   </button>
+</section>
+
+<!-- ── WELCOME MESSAGE ── -->
+<section id="welcome-msg">
+  <div class="welcome-msg-body">
+    <span class="welcome-msg-tag reveal"><i class="fa-solid fa-leaf"></i> &nbsp; A Message from the Couple &nbsp; <i class="fa-solid fa-leaf"></i></span>
+    <p class="welcome-msg-script reveal">With Love &amp; Gratitude</p>
+    <div class="welcome-msg-divider reveal"><span>✦</span></div>
+    <p class="welcome-msg-text reveal">
+      With hearts full of gratitude, we warmly invite you to witness and celebrate the love we have found from the beautiful gift of friendship.
+    </p>
+    <p class="welcome-msg-text reveal">
+      Your presence will make this occasion even more meaningful as we begin a new chapter sealed in faith, love, and the promise of forever before God and our loved ones.
+    </p>
+    <div class="welcome-msg-divider reveal"><span>✦</span></div>
+    <p class="welcome-msg-sig reveal">Fred &amp; Chem</p>
+  </div>
+</section>
+
+<!-- ── STORY ── -->
+<section id="story">
+  <div class="lt-section-header">
+    <span class="lt-eyebrow">their journey</span>
+    <h2><i class="fa-solid fa-book-heart"></i> Our Story</h2>
+  </div>
+  <div class="lt-content">
+    <p class="lt-story-text reveal">Our story began with a simple friendship. We were just two people who shared laughter, hopes, dreams, and even life's challenges together.</p>
+    <br>
+    <p class="lt-story-text reveal">Without realizing it, those ordinary moments became our most treasured memories. The person who was once simply a friend became the one we turned to in every season of life.</p>
+    <br>
+    <p class="lt-story-text reveal">In each other, we found space where our hearts felt safe. We didn't simply fall in love — we fell in love with the way we could be completely ourselves.</p>
+    <br>
+    <p class="lt-story-text reveal">Today, we are grateful not only for the love that brought us here, but also for the journey that shaped it. Every step, every shared experience, and every shared moment has led us into something deeper.</p>
+    <br>
+    <p class="lt-story-text reveal" style="font-style:italic;color:var(--rose);font-family:'Playfair Display',serif;">
+      From friendship came trust.<br>
+      From trust came love.<br>
+      And from love comes a lifetime of beautiful moments yet to unfold.
+    </p>
+    <p class="lt-story-quote reveal">"Two are better than one, because they have a good return for their labor: If either of them falls down, one can help the other up." — Ecclesiastes 4:9–10</p>
+  </div>
+</section>
+
+<!-- ── GALLERY ── -->
+<section id="gallery">
+  <div class="lt-section-header">
+    <span class="lt-eyebrow">moments together</span>
+    <h2><i class="fa-solid fa-images"></i> Gallery</h2>
+  </div>
+  <div class="lt-content">
+    <div class="lt-gallery-grid">
+      <div class="gallery-item reveal"><i class="fa-regular fa-image gallery-item-icon"></i><span class="gallery-item-label">Photo 1</span></div>
+      <div class="gallery-item reveal"><i class="fa-regular fa-image gallery-item-icon"></i><span class="gallery-item-label">Photo 2</span></div>
+      <div class="gallery-item reveal"><i class="fa-regular fa-image gallery-item-icon"></i><span class="gallery-item-label">Photo 3</span></div>
+      <div class="gallery-item reveal"><i class="fa-regular fa-image gallery-item-icon"></i><span class="gallery-item-label">Photo 4</span></div>
+      <div class="gallery-item reveal"><i class="fa-regular fa-image gallery-item-icon"></i><span class="gallery-item-label">Photo 5</span></div>
+      <div class="gallery-item reveal"><i class="fa-regular fa-image gallery-item-icon"></i><span class="gallery-item-label">Photo 6</span></div>
+    </div>
+    <p style="text-align:center;font-size:0.72rem;color:rgba(200,230,208,0.4);margin-top:1.2rem;letter-spacing:0.1em;">📸 Photos coming soon</p>
+  </div>
 </section>
 
 <!-- ── DETAILS ── -->
@@ -386,6 +518,14 @@
   </div>
   <div class="lt-content" style="display:flex;flex-direction:column;align-items:center;gap:2rem;">
     <div class="lt-details-grid reveal" style="width:100%;">
+      <!-- Date & Time FIRST -->
+      <div class="lt-detail-card">
+        <div class="lt-detail-card-icon"><i class="fa-solid fa-clock"></i></div>
+        <div class="lt-detail-card-title">Date &amp; Time</div>
+        <div class="lt-detail-card-name">September 5, 2026</div>
+        <div class="lt-detail-card-addr">Saturday<br>Ceremony at 1:00 PM</div>
+      </div>
+      <!-- Ceremony SECOND -->
       <div class="lt-detail-card">
         <div class="lt-detail-card-icon"><i class="fa-solid fa-church"></i></div>
         <div class="lt-detail-card-title">Ceremony</div>
@@ -395,12 +535,7 @@
           <i class="fa-solid fa-location-dot"></i> Get Directions
         </a>
       </div>
-      <div class="lt-detail-card">
-        <div class="lt-detail-card-icon"><i class="fa-solid fa-clock"></i></div>
-        <div class="lt-detail-card-title">Date &amp; Time</div>
-        <div class="lt-detail-card-name">September 5, 2026</div>
-        <div class="lt-detail-card-addr">Saturday<br>Ceremony at 1:00 PM</div>
-      </div>
+      <!-- Reception THIRD -->
       <div class="lt-detail-card">
         <div class="lt-detail-card-icon"><i class="fa-solid fa-champagne-glasses"></i></div>
         <div class="lt-detail-card-title">Reception</div>
@@ -503,12 +638,12 @@
             <span class="ent-sec-name">Mr. Ariel Amora<br>&amp; Mrs. Carenna Amora</span>
           </div>
           <div class="ent-sec-block">
-            <span class="ent-sec-label">Candle</span>
-            <span class="ent-sec-name">Mr. Malvin Malig-on<br>&amp; Mrs. Nadine Vera Malig-on</span>
-          </div>
-          <div class="ent-sec-block">
             <span class="ent-sec-label">Veil</span>
             <span class="ent-sec-name">Mr. Jared Culdora<br>&amp; Mrs. Amor Culdora</span>
+          </div>
+          <div class="ent-sec-block">
+            <span class="ent-sec-label">Candle</span>
+            <span class="ent-sec-name">Mr. Malvin Malig-on<br>&amp; Mrs. Nadine Vera Malig-on</span>
           </div>
         </div>
       </div>
@@ -533,11 +668,11 @@
       <div class="reveal ent-side-by-side" style="align-items:start;">
         <div class="ent-role-block">
           <span class="ent-role-label">Groomsmen</span>
-          <span class="ent-role-name">Ralph Gorgonio<br>John Jewell Diño<br>Ronald Estrada<br>Frenzel Bluez Malig-on<br>Freddie Espijon Jr<br>Jay Mclain Digamon<br>Richie Tampan<br>Gyro Culdora</span>
+          <span class="ent-role-name">Gyro Culdora<br>Jay Mclain Digamon<br>Ronald Estrada<br>Richie Tampan<br>Frenzel Bluez Malig-on<br>Ralph Gorgonio<br>John Jewell Diño</span>
         </div>
         <div class="ent-role-block">
           <span class="ent-role-label">Bridesmaids</span>
-          <span class="ent-role-name">Emmylou Grace Berdera<br>Faye Sibayan<br>Dianna Rose Castillo<br>Mary Grace Ramira<br>Rose Ann Baron<br>Jeandy Espijon<br>Vanessa Endozo<br>Joliza Navin Malig-on</span>
+          <span class="ent-role-name">Joliza Navin Malig-on<br>Faye Sibayan<br>Dianna Rose Castillo<br>Rose Ann Baron<br>Mary Grace Ramira<br>Emmylou Grace Berdera<br>Jeandy Espijon</span>
         </div>
       </div>
 
@@ -579,74 +714,6 @@
   </div>
 </section>
 
-<!-- ── STORY ── -->
-<section id="story">
-  <div class="lt-section-header">
-    <span class="lt-eyebrow">their journey</span>
-    <h2><i class="fa-solid fa-book-heart"></i> Our Story</h2>
-  </div>
-  <div class="lt-content">
-    <p class="lt-story-text reveal">What started as a simple hello grew into a love story written by God's hand. Through the years, Fred and Chem held on to each other through every season — through laughter and tears, through distance and closeness, through ordinary days that became extraordinary because they faced them together.</p>
-    <br>
-    <p class="lt-story-text reveal">Love is not just found in life's happiest moments, but in the quiet strength of choosing each other every single day. And now, after years of faith, patience, and countless blessings, they stand together — ready to say <em>"I do"</em> and begin forever. 🥹</p>
-    <p class="lt-story-quote reveal">"Two are better than one, because they have a good return for their labor: If either of them falls down, one can help the other up." — Ecclesiastes 4:9–10</p>
-  </div>
-</section>
-
-<!-- ── GALLERY ── -->
-<section id="gallery">
-  <div class="lt-section-header">
-    <span class="lt-eyebrow">moments together</span>
-    <h2><i class="fa-solid fa-images"></i> Gallery</h2>
-  </div>
-  <div class="lt-content">
-    <div class="lt-gallery-grid">
-      <div class="gallery-item reveal"><i class="fa-regular fa-image gallery-item-icon"></i><span class="gallery-item-label">Photo 1</span></div>
-      <div class="gallery-item reveal"><i class="fa-regular fa-image gallery-item-icon"></i><span class="gallery-item-label">Photo 2</span></div>
-      <div class="gallery-item reveal"><i class="fa-regular fa-image gallery-item-icon"></i><span class="gallery-item-label">Photo 3</span></div>
-      <div class="gallery-item reveal"><i class="fa-regular fa-image gallery-item-icon"></i><span class="gallery-item-label">Photo 4</span></div>
-      <div class="gallery-item reveal"><i class="fa-regular fa-image gallery-item-icon"></i><span class="gallery-item-label">Photo 5</span></div>
-      <div class="gallery-item reveal"><i class="fa-regular fa-image gallery-item-icon"></i><span class="gallery-item-label">Photo 6</span></div>
-    </div>
-    <p style="text-align:center;font-size:0.72rem;color:rgba(200,230,208,0.4);margin-top:1.2rem;letter-spacing:0.1em;">📸 Photos coming soon</p>
-  </div>
-</section>
-
-<!-- ── RSVP ── -->
-<section id="lt-rsvp">
-  <div class="lt-section-header"><h2><i class="fa-solid fa-envelope-open-text"></i> RSVP</h2></div>
-  <div class="lt-rsvp-content">
-    <div class="rsvp-card reveal">
-      <p class="rsvp-question">Are you coming? 🥺</p>
-      <p class="rsvp-sub">Enter your name then tap your answer below!</p>
-      <div class="rsvp-name-wrap">
-        <input class="rsvp-name-input" id="rsvpName" type="text" placeholder="Your full name" maxlength="80" autocomplete="name"/>
-      </div>
-      <div class="rsvp-btns" id="rsvpBtns">
-        <button class="rsvp-yes" onclick="rsvpAnswer(true)"><i class="fa-solid fa-heart"></i> Yes, I'll Be There! 🎉</button>
-        <button class="rsvp-no" onclick="rsvpAnswer(false)"><i class="fa-regular fa-face-sad-cry"></i> Can't Make It 😢</button>
-      </div>
-      <div class="rsvp-response yes-resp" id="yesResp">
-        <div class="rsvp-resp-emoji">🎊💚🎉</div>
-        <div class="rsvp-resp-text" id="yesRespText">Yay! We can't wait to see you!</div>
-        <div class="rsvp-resp-sub">Please also confirm via the contact details below. See you on September 5! 🥂</div>
-        <button class="rsvp-change-btn" onclick="resetRsvp()"><i class="fa-solid fa-rotate-left"></i> Change my answer</button>
-      </div>
-      <div class="rsvp-response no-resp" id="noResp">
-        <div class="rsvp-resp-emoji">😢💔</div>
-        <div class="rsvp-resp-text" id="noRespText">Aww, we'll miss you so much!</div>
-        <div class="rsvp-resp-sub">We'll be thinking of you on our big day. Thank you for letting us know! 🙏</div>
-        <button class="rsvp-change-btn" onclick="resetRsvp()"><i class="fa-solid fa-rotate-left"></i> Change my answer</button>
-      </div>
-    </div>
-    <p class="lt-rsvp-deadline reveal"><i class="fa-regular fa-calendar-check"></i> &nbsp; Kindly confirm on or before August 20, 2026</p>
-    <div class="lt-rsvp-contacts reveal">
-      <div class="lt-rsvp-contact"><strong>Fred (Groom)</strong><span><i class="fa-solid fa-phone"></i> 0995 738 4128</span></div>
-      <div class="lt-rsvp-contact"><strong>Chem (Bride)</strong><span><i class="fa-solid fa-phone"></i> 0910 343 3223</span></div>
-    </div>
-  </div>
-</section>
-
 <!-- ── FAQ ── -->
 <section id="faq" style="scroll-margin-top:80px;background:linear-gradient(160deg,#f9fdf9 0%,#edf7f0 50%,#f9fdf9 100%);">
   <div class="lt-section-header">
@@ -673,12 +740,82 @@
       </details>
       <details class="faq-item reveal">
         <summary class="faq-q"><i class="fa-solid fa-circle-dot" style="color:var(--rose);font-size:0.7rem;margin-right:0.5rem"></i>When is the RSVP deadline?</summary>
-        <p class="faq-a">Kindly confirm your attendance on or before <strong>August 20, 2026</strong>. Contact Fred at 0995 738 4128 or Chem at 0910 343 3223.</p>
+        <p class="faq-a">Kindly confirm your attendance on or before <strong>July 3, 2026</strong>. Contact Robijeane Malig-on at 09460729546 or Roberto Canobida Jr at 09389805498.</p>
       </details>
       <details class="faq-item reveal">
         <summary class="faq-q"><i class="fa-solid fa-circle-dot" style="color:var(--rose);font-size:0.7rem;margin-right:0.5rem"></i>Are kids welcome?</summary>
-        <p class="faq-a">We love little ones! Kids are very welcome at our celebration. 👶💚</p>
+        <p class="faq-a">We love kids, but for this special occasion we kindly request that it remain an adult celebration. We appreciate your understanding! 🙏</p>
       </details>
+    </div>
+  </div>
+</section>
+
+<!-- ── RSVP ── -->
+<section id="lt-rsvp">
+  <div class="lt-section-header"><h2><i class="fa-solid fa-envelope-open-text"></i> RSVP</h2></div>
+  <div class="lt-rsvp-content" style="padding: 2.5rem 1rem;">
+    <div class="rsvp-card-new reveal">
+      <div class="rsvp-card-header">
+        <span class="rsvp-card-header-title">RSVP</span>
+        <span class="rsvp-card-header-leaf"><i class="fa-solid fa-leaf"></i></span>
+      </div>
+      <div class="rsvp-card-body">
+        <div class="rsvp-title-block">
+          <div class="rsvp-title-big">RSVP</div>
+          <div class="rsvp-deadline">on or before <strong>July 3, 2026</strong></div>
+        </div>
+
+        <div class="rsvp-rule"></div>
+
+        <!-- Response form -->
+        <div id="rsvpForm" style="display:flex;flex-direction:column;align-items:center;gap:1.4rem;width:100%;">
+          <p class="rsvp-attending-label">Will you be attending? <span>*</span></p>
+          <div class="rsvp-attend-btns">
+            <button class="rsvp-attend-btn yes-btn" id="yesBtn" onclick="selectAttend(true)">
+              <i class="fa-solid fa-heart"></i>
+              <span class="btn-label">Joyfully<br>Accepts</span>
+            </button>
+            <button class="rsvp-attend-btn no-btn" id="noBtn" onclick="selectAttend(false)">
+              <i class="fa-solid fa-xmark"></i>
+              <span class="btn-label">Regretfully<br>Decline</span>
+            </button>
+          </div>
+
+          <div class="rsvp-field-wrap">
+            <label class="rsvp-field-label">Full name <span>*</span></label>
+            <input class="rsvp-input" id="rsvpName" type="text" placeholder="Enter your name" maxlength="80" autocomplete="name"/>
+          </div>
+
+          <div class="rsvp-field-wrap">
+            <label class="rsvp-field-label">Message to the Couple <span style="color:var(--text-mid);font-weight:400;">(optional)</span></label>
+            <textarea class="rsvp-input" id="rsvpMessage" placeholder="Your answer" rows="3"></textarea>
+          </div>
+
+          <button class="rsvp-submit-btn" id="rsvpSubmitBtn" onclick="submitRsvp()">Submit</button>
+        </div>
+
+        <!-- Response states -->
+        <div class="rsvp-response yes-resp" id="yesResp">
+          <div class="rsvp-resp-emoji">🎊💚🎉</div>
+          <div class="rsvp-resp-text" id="yesRespText">Yay! We can't wait to see you!</div>
+          <div class="rsvp-resp-sub">Please also confirm via the contact details below. See you on September 5! 🥂</div>
+          <button class="rsvp-change-btn" onclick="resetRsvp()"><i class="fa-solid fa-rotate-left"></i> Change my answer</button>
+        </div>
+        <div class="rsvp-response no-resp" id="noResp">
+          <div class="rsvp-resp-emoji">😢💔</div>
+          <div class="rsvp-resp-text" id="noRespText">Aww, we'll miss you so much!</div>
+          <div class="rsvp-resp-sub">We'll be thinking of you on our big day. Thank you for letting us know! 🙏</div>
+          <button class="rsvp-change-btn" onclick="resetRsvp()"><i class="fa-solid fa-rotate-left"></i> Change my answer</button>
+        </div>
+
+        <div class="rsvp-rule"></div>
+
+        <div class="rsvp-contact-block">
+          <p class="contact-label">Contact Person</p>
+          <p class="contact-name">Robijeane Malig-on or Roberto Canobida Jr</p>
+          <p class="contact-num" style="margin-top:0.2rem;">09460729546 / 09389805498</p>
+        </div>
+      </div>
     </div>
   </div>
 </section>
@@ -746,13 +883,12 @@
 
 <script>
 // ── YOUTUBE MUSIC ──
-// Mobile: autoplay is blocked until user interaction. We start paused on mobile.
 let musicPlaying = false, ytPlayer = null, ytReady = false;
 const isMobile = /Mobi|Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
 
 function autoPlayMusic(){
   if(!ytPlayer || !ytReady){ setTimeout(autoPlayMusic, 300); return; }
-  ytPlayer.seekTo(82);
+  ytPlayer.seekTo(0);
   ytPlayer.playVideo();
   let vol = 0;
   const fade = setInterval(()=>{ vol = Math.min(vol+2, 40); ytPlayer.setVolume(vol); if(vol>=40) clearInterval(fade); }, 120);
@@ -764,11 +900,11 @@ function autoPlayMusic(){
 
 function onYouTubeIframeAPIReady(){
   ytPlayer = new YT.Player('yt-player', {
-    videoId: 'R5Dl5m6_ePU',
-    playerVars:{ autoplay:0, controls:0, disablekb:1, fs:0, iv_load_policy:3, modestbranding:1, rel:0, start:82, loop:1, playlist:'R5Dl5m6_ePU' },
+    videoId: 'ZucRZH4FoM8',
+    playerVars:{ autoplay:0, controls:0, disablekb:1, fs:0, iv_load_policy:3, modestbranding:1, rel:0, start:0, loop:1, playlist:'ZucRZH4FoM8' },
     events:{
       onReady: function(e){ ytReady = true; e.target.setVolume(0); },
-      onStateChange: function(e){ if(e.data === YT.PlayerState.ENDED){ ytPlayer.seekTo(82); ytPlayer.playVideo(); } }
+      onStateChange: function(e){ if(e.data === YT.PlayerState.ENDED){ ytPlayer.seekTo(0); ytPlayer.playVideo(); } }
     }
   });
 }
@@ -816,15 +952,10 @@ function burstCelebration(){
 window.addEventListener('load', ()=>{
   setTimeout(()=>{
     burstCelebration();
-    if(!isMobile){
-      // Desktop: try to autoplay
-      autoPlayMusic();
-    }
-    // Mobile: wait for first user touch to start music
+    if(!isMobile){ autoPlayMusic(); }
   }, 400);
 });
 
-// On mobile, start music on first tap anywhere
 if(isMobile){
   const startOnTouch = () => {
     if(ytReady && !musicPlaying) autoPlayMusic();
@@ -871,24 +1002,42 @@ function tick(){
 }
 tick(); setInterval(tick, 1000);
 
-// ── RSVP ──
-async function rsvpAnswer(attending){
+// ── RSVP (new flow) ──
+let attendingChoice = null;
+
+function selectAttend(yes){
+  attendingChoice = yes;
+  document.getElementById('yesBtn').classList.toggle('selected', yes);
+  document.getElementById('noBtn').classList.toggle('selected', !yes);
+}
+
+async function submitRsvp(){
   const nameInput = document.getElementById('rsvpName');
   const name = nameInput ? nameInput.value.trim() : '';
+  const message = document.getElementById('rsvpMessage') ? document.getElementById('rsvpMessage').value.trim() : '';
+
+  if(attendingChoice === null){
+    // Highlight the buttons
+    document.getElementById('yesBtn').style.borderColor = '#e74c3c';
+    document.getElementById('noBtn').style.borderColor = '#e74c3c';
+    setTimeout(()=>{ document.getElementById('yesBtn').style.borderColor=''; document.getElementById('noBtn').style.borderColor=''; }, 2500);
+    return;
+  }
   if(!name){
     nameInput.style.borderColor = '#e74c3c';
     nameInput.placeholder = 'Please enter your name first!';
     nameInput.focus();
-    setTimeout(()=>{ nameInput.style.borderColor=''; nameInput.placeholder='Your full name'; }, 2500);
+    setTimeout(()=>{ nameInput.style.borderColor=''; nameInput.placeholder='Enter your name'; }, 2500);
     return;
   }
 
-  // Disable buttons while submitting
-  document.querySelectorAll('.rsvp-yes,.rsvp-no').forEach(b=>b.disabled=true);
-  document.getElementById('rsvpBtns').style.display = 'none';
+  const btn = document.getElementById('rsvpSubmitBtn');
+  btn.disabled = true;
+  btn.textContent = 'Submitting...';
 
-  // Show response
-  if(attending){
+  document.getElementById('rsvpForm').style.display = 'none';
+
+  if(attendingChoice){
     document.getElementById('yesRespText').textContent = `Yay, ${name}! We can't wait to see you! 🎉`;
     document.getElementById('yesResp').classList.add('show');
     launchConfetti();
@@ -897,25 +1046,29 @@ async function rsvpAnswer(attending){
     document.getElementById('noResp').classList.add('show');
   }
 
-  // Submit to API (non-blocking)
   try {
     await fetch('/api/rsvp', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ name, attending, timestamp: new Date().toISOString() })
+      body: JSON.stringify({ name, attending: attendingChoice, message, timestamp: new Date().toISOString() })
     });
   } catch(e) {
-    // Silent fail — RSVP still shown to user
     console.warn('RSVP submit failed:', e);
   }
 }
 
 function resetRsvp(){
+  attendingChoice = null;
   document.getElementById('yesResp').classList.remove('show');
   document.getElementById('noResp').classList.remove('show');
-  document.getElementById('rsvpBtns').style.display = '';
-  document.querySelectorAll('.rsvp-yes,.rsvp-no').forEach(b=>b.disabled=false);
+  document.getElementById('rsvpForm').style.display = '';
+  document.getElementById('yesBtn').classList.remove('selected');
+  document.getElementById('noBtn').classList.remove('selected');
   document.getElementById('rsvpName').value = '';
+  document.getElementById('rsvpMessage').value = '';
+  const btn = document.getElementById('rsvpSubmitBtn');
+  btn.disabled = false;
+  btn.textContent = 'Submit';
 }
 
 function launchConfetti(){
@@ -947,7 +1100,7 @@ setTimeout(()=>{ document.body.classList.add('content-ready'); }, 1200);
 
 // ── ACTIVE NAV ──
 const navLinks = document.querySelectorAll('#pill-nav a[href^="#"]');
-const sectionIds = ['welcome','details','entourage','story','gallery','lt-rsvp','faq','save-the-date'];
+const sectionIds = ['welcome','welcome-msg','story','gallery','details','entourage','faq','lt-rsvp','save-the-date'];
 const sections = sectionIds.map(id=>document.getElementById(id)).filter(Boolean);
 const navIO = new IntersectionObserver(entries=>{
   entries.forEach(e=>{ e.target._ratio = e.intersectionRatio; });
@@ -955,7 +1108,9 @@ const navIO = new IntersectionObserver(entries=>{
   sections.forEach(s=>{ const r=s._ratio||0; if(r>bestR){bestR=r;best=s;} });
   if(best && bestR>0){
     navLinks.forEach(a=>a.classList.remove('active'));
-    const match = document.querySelector(`#pill-nav a[href="#${best.id}"]`);
+    // Map welcome-msg back to the #welcome nav link
+    const targetId = best.id === 'welcome-msg' ? 'welcome' : best.id;
+    const match = document.querySelector(`#pill-nav a[href="#${targetId}"]`);
     if(match) match.classList.add('active');
   }
 }, { threshold:[0,0.05,0.1,0.15,0.2,0.3,0.5], rootMargin:'-80px 0px -10% 0px' });
