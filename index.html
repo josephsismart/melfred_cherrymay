@@ -224,6 +224,16 @@
     }
     .sheet-cta:active { transform: scale(0.97); box-shadow: 0 4px 12px rgba(74,122,90,0.3); }
 
+    .sheet-close {
+      position: absolute; top: 16px; right: 18px;
+      background: rgba(200,230,208,0.1); border: none;
+      color: rgba(200,230,208,0.5); font-size: 1.1rem;
+      width: 30px; height: 30px; border-radius: 50%;
+      cursor: pointer; display: flex; align-items: center; justify-content: center;
+      transition: background 0.2s, color 0.2s;
+    }
+    .sheet-close:hover { background: rgba(200,230,208,0.2); color: rgba(200,230,208,0.9); }
+
     @keyframes burstHeart { 0%{transform:translate(0,0) scale(1);opacity:1} 100%{transform:translate(var(--dx),var(--dy)) scale(0.3);opacity:0} }
     @media(max-width:600px) { .corner-svg { width:140px; } }
   </style>
@@ -284,6 +294,7 @@
 <div id="invite-sheet">
   <div class="scrim" id="scrim"></div>
   <div class="sheet-card">
+    <button class="sheet-close" id="sheetClose">✕</button>
     <div class="sheet-handle"></div>
     <p class="sheet-tag">✦ You're Invited ✦</p>
     <div class="sheet-photo">
@@ -304,12 +315,22 @@ const inviteSheet  = document.getElementById('invite-sheet');
 const viewDetailsBtn = document.getElementById('viewDetailsBtn');
 let envClicked = false;
 
+function closeSheet() {
+  // 1. Slide sheet down
+  inviteSheet.classList.remove('show');
+  // 2. After sheet is gone, close the envelope
+  setTimeout(() => {
+    envBtn.classList.remove('opened');
+    // Allow re-opening after envelope closes
+    setTimeout(() => { envClicked = false; }, 700);
+  }, 450);
+}
+
 // Tap envelope → open flap + show bottom sheet after flap animation
 envBtn.addEventListener('click', function() {
   if(envClicked) return;
   envClicked = true;
   this.classList.add('opened');
-  // Show the bottom sheet after flap finishes
   setTimeout(() => { inviteSheet.classList.add('show'); }, 700);
 });
 
@@ -318,10 +339,11 @@ viewDetailsBtn.addEventListener('click', () => {
   window.location.href = '/invitation.html';
 });
 
-// Tap scrim → close sheet (optional)
-document.getElementById('scrim').addEventListener('click', () => {
-  inviteSheet.classList.remove('show');
-});
+// Tap scrim → close sheet AND reset envelope
+document.getElementById('scrim').addEventListener('click', closeSheet);
+
+document.querySelector('.sheet-handle').addEventListener('click', closeSheet);
+document.getElementById('sheetClose').addEventListener('click', closeSheet);
 
 // ── STARS ──
 const starsEl = document.getElementById('stars');
