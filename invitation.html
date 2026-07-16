@@ -888,7 +888,7 @@ const isMobile = /Mobi|Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
 
 function autoPlayMusic(){
   if(!ytPlayer || !ytReady){ setTimeout(autoPlayMusic, 300); return; }
-  ytPlayer.seekTo(0);
+  ytPlayer.seekTo(29);
   ytPlayer.playVideo();
   let vol = 0;
   const fade = setInterval(()=>{ vol = Math.min(vol+2, 40); ytPlayer.setVolume(vol); if(vol>=40) clearInterval(fade); }, 120);
@@ -901,10 +901,10 @@ function autoPlayMusic(){
 function onYouTubeIframeAPIReady(){
   ytPlayer = new YT.Player('yt-player', {
     videoId: 'ZucRZH4FoM8',
-    playerVars:{ autoplay:0, controls:0, disablekb:1, fs:0, iv_load_policy:3, modestbranding:1, rel:0, start:0, loop:1, playlist:'ZucRZH4FoM8' },
+    playerVars:{ autoplay:0, controls:0, disablekb:1, fs:0, iv_load_policy:3, modestbranding:1, rel:0, start:29, loop:1, playlist:'ZucRZH4FoM8' },
     events:{
       onReady: function(e){ ytReady = true; e.target.setVolume(0); },
-      onStateChange: function(e){ if(e.data === YT.PlayerState.ENDED){ ytPlayer.seekTo(0); ytPlayer.playVideo(); } }
+      onStateChange: function(e){ if(e.data === YT.PlayerState.ENDED){ ytPlayer.seekTo(29); ytPlayer.playVideo(); } }
     }
   });
 }
