@@ -1,8 +1,12 @@
-[
-  {
-    "name": "JOSEPH SISMAR",
-    "attending": true,
-    "message": "LEZZ GOOO!!",
-    "submitted": "2026-07-17 12:51:57 PHT"
-  }
-]
+{
+  "rsvps": [],
+  "trash": [
+    {
+      "name": "JOSEPH SISMAR",
+      "attending": true,
+      "message": "LEZZ GOOO!!",
+      "submitted": "2026-07-17 12:51:57 PHT",
+      "deletedAt": "2026-07-17 15:52:07 PHT"
+    }
+  ]
+}
