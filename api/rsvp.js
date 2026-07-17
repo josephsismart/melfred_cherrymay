@@ -1,65 +1,93 @@
-/**
- * RSVP API — Vercel Serverless Function
- *
- * SETUP (one-time, ~2 minutes):
- * 1. In Vercel Dashboard → your project → Storage tab
- * 2. Click "Create Database" → choose KV (Redis) → name it anything → Create
- * 3. Click "Connect to Project" → select your project → done!
- *    (Vercel auto-adds KV_URL and KV_REST_API_* env vars)
- *
- * Then redeploy — RSVP data will persist across submissions.
- * View guest list at: https://mc-wedding-2026.vercel.app/guests.html
- */
+// api/rsvp.js — stores RSVPs in rsvps.json in the GitHub repo (no database needed!)
+// Each RSVP is saved as a row in rsvps.json with name, attending, message, and date/time submitted.
 
-const { kv } = require('@vercel/kv');
+const OWNER     = 'josephsismart';
+const REPO      = 'melfred_cherrymay';
+const FILE      = 'rsvps.json';
+const ADMIN_CODE = 'melchem2026';
+const API_URL   = `https://api.github.com/repos/${OWNER}/${REPO}/contents/${FILE}`;
 
-const PASSCODE = 'melchem2026';
+// Philippines timezone offset = UTC+8
+function phTime() {
+  return new Date(Date.now() + 8 * 60 * 60 * 1000)
+    .toISOString()
+    .replace('T', ' ')
+    .replace(/\.\d+Z$/, ' PHT');
+}
+
+async function readFile() {
+  const res = await fetch(API_URL, {
+    headers: {
+      Authorization: `token ${process.env.GITHUB_TOKEN}`,
+      Accept: 'application/vnd.github.v3+json',
+      'User-Agent': 'mc-wedding-rsvp'
+    }
+  });
+  if (!res.ok) throw new Error(`GitHub read error ${res.status}: ${await res.text()}`);
+  const data = await res.json();
+  const content = Buffer.from(data.content, 'base64').toString('utf-8');
+  return { list: JSON.parse(content), sha: data.sha };
+}
+
+async function writeFile(list, sha) {
+  const content = Buffer.from(JSON.stringify(list, null, 2)).toString('base64');
+  const res = await fetch(API_URL, {
+    method: 'PUT',
+    headers: {
+      Authorization: `token ${process.env.GITHUB_TOKEN}`,
+      Accept: 'application/vnd.github.v3+json',
+      'Content-Type': 'application/json',
+      'User-Agent': 'mc-wedding-rsvp'
+    },
+    body: JSON.stringify({
+      message: `RSVP: ${list[list.length - 1]?.name || 'new entry'}`,
+      content,
+      sha
+    })
+  });
+  if (!res.ok) throw new Error(`GitHub write error ${res.status}: ${await res.text()}`);
+}
 
 module.exports = async function handler(req, res) {
   res.setHeader('Access-Control-Allow-Origin', '*');
   res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS');
   res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
+  if (req.method === 'OPTIONS') return res.status(200).end();
 
-  if (req.method === 'OPTIONS') {
-    return res.status(200).end();
+  if (!process.env.GITHUB_TOKEN) {
+    return res.status(500).json({
+      error: 'GITHUB_TOKEN not configured. See setup instructions.'
+    });
   }
 
   try {
+    // ── POST: submit new RSVP ──
     if (req.method === 'POST') {
-      const { name, attending, timestamp } = req.body || {};
-      if (!name || !name.trim()) {
-        return res.status(400).json({ error: 'Name is required' });
-      }
-      const entry = JSON.stringify({
-        name: name.trim(),
-        attending: Boolean(attending),
-        timestamp: timestamp || new Date().toISOString(),
+      const { name, attending, message } = req.body || {};
+      if (!name?.trim()) return res.status(400).json({ error: 'Name is required.' });
+
+      const { list, sha } = await readFile();
+      list.unshift({                         // newest first
+        name:      name.trim(),
+        attending: attending === true || attending === 'true',
+        message:   (message || '').trim(),
+        submitted: phTime()                  // e.g. "2026-07-17 09:03:45 PHT"
       });
-      await kv.lpush('rsvps', entry);
-      return res.status(200).json({ ok: true, message: 'RSVP saved!' });
+      await writeFile(list, sha);
+      return res.status(200).json({ ok: true, total: list.length });
     }
 
+    // ── GET: read all RSVPs (admin passcode required) ──
     if (req.method === 'GET') {
       const { code } = req.query;
-      if (code !== PASSCODE) {
-        return res.status(401).json({ error: 'Invalid passcode' });
-      }
-      const items = await kv.lrange('rsvps', 0, -1);
-      const rsvps = items.map(item => {
-        try { return typeof item === 'string' ? JSON.parse(item) : item; }
-        catch(e) { return null; }
-      }).filter(Boolean);
-      rsvps.sort((a, b) => new Date(b.timestamp) - new Date(a.timestamp));
-      return res.status(200).json(rsvps);
+      if (code !== ADMIN_CODE) return res.status(401).json({ error: 'Unauthorized' });
+      const { list } = await readFile();
+      return res.status(200).json({ rsvps: list });
     }
 
-    return res.status(405).json({ error: 'Method not allowed' });
-
+    res.status(405).json({ error: 'Method not allowed' });
   } catch (err) {
-    console.error('RSVP API error:', err);
-    if (req.method === 'POST') {
-      return res.status(200).json({ ok: true, note: 'Saved (KV not configured yet)' });
-    }
-    return res.status(503).json({ error: 'Storage not configured. Set up Vercel KV in your dashboard.' });
+    console.error(err);
+    res.status(500).json({ error: err.message });
   }
 };
