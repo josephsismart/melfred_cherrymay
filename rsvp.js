@@ -1,0 +1,93 @@
+// api/rsvp.js — stores RSVPs in rsvps.json in the GitHub repo (no database needed!)
+// Each RSVP is saved as a row in rsvps.json with name, attending, message, and date/time submitted.
+
+const OWNER     = 'josephsismart';
+const REPO      = 'melfred_cherrymay';
+const FILE      = 'rsvps.json';
+const ADMIN_CODE = 'melchem2026';
+const API_URL   = `https://api.github.com/repos/${OWNER}/${REPO}/contents/${FILE}`;
+
+// Philippines timezone offset = UTC+8
+function phTime() {
+  return new Date(Date.now() + 8 * 60 * 60 * 1000)
+    .toISOString()
+    .replace('T', ' ')
+    .replace(/\.\d+Z$/, ' PHT');
+}
+
+async function readFile() {
+  const res = await fetch(API_URL, {
+    headers: {
+      Authorization: `token ${process.env.GITHUB_TOKEN}`,
+      Accept: 'application/vnd.github.v3+json',
+      'User-Agent': 'mc-wedding-rsvp'
+    }
+  });
+  if (!res.ok) throw new Error(`GitHub read error ${res.status}: ${await res.text()}`);
+  const data = await res.json();
+  const content = Buffer.from(data.content, 'base64').toString('utf-8');
+  return { list: JSON.parse(content), sha: data.sha };
+}
+
+async function writeFile(list, sha) {
+  const content = Buffer.from(JSON.stringify(list, null, 2)).toString('base64');
+  const res = await fetch(API_URL, {
+    method: 'PUT',
+    headers: {
+      Authorization: `token ${process.env.GITHUB_TOKEN}`,
+      Accept: 'application/vnd.github.v3+json',
+      'Content-Type': 'application/json',
+      'User-Agent': 'mc-wedding-rsvp'
+    },
+    body: JSON.stringify({
+      message: `RSVP: ${list[list.length - 1]?.name || 'new entry'}`,
+      content,
+      sha
+    })
+  });
+  if (!res.ok) throw new Error(`GitHub write error ${res.status}: ${await res.text()}`);
+}
+
+module.exports = async function handler(req, res) {
+  res.setHeader('Access-Control-Allow-Origin', '*');
+  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS');
+  res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
+  if (req.method === 'OPTIONS') return res.status(200).end();
+
+  if (!process.env.GITHUB_TOKEN) {
+    return res.status(500).json({
+      error: 'GITHUB_TOKEN not configured. See setup instructions.'
+    });
+  }
+
+  try {
+    // ── POST: submit new RSVP ──
+    if (req.method === 'POST') {
+      const { name, attending, message } = req.body || {};
+      if (!name?.trim()) return res.status(400).json({ error: 'Name is required.' });
+
+      const { list, sha } = await readFile();
+      list.unshift({                         // newest first
+        name:      name.trim(),
+        attending: attending === true || attending === 'true',
+        message:   (message || '').trim(),
+        submitted: phTime()                  // e.g. "2026-07-17 09:03:45 PHT"
+      });
+      await writeFile(list, sha);
+      return res.status(200).json({ ok: true, total: list.length });
+    }
+
+    // ── GET: read all RSVPs (admin passcode required) ──
+    if (req.method === 'GET') {
+      const { code } = req.query;
+      if (code !== ADMIN_CODE) return res.status(401).json({ error: 'Unauthorized' });
+      const { list } = await readFile();
+      return res.status(200).json({ rsvps: list });
+    }
+
+    res.status(405).json({ error: 'Method not allowed' });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: err.message });
+  }
+};

@@ -253,7 +253,10 @@ async function loadGuests(){
 
     loading.style.display = 'none';
 
-    if(!Array.isArray(data) || data.length === 0){
+    // API returns { rsvps: [...] }
+    const list = Array.isArray(data) ? data : (data.rsvps || []);
+
+    if(list.length === 0){
       empty.style.display = 'block';
       document.getElementById('statTotal').textContent = '0';
       document.getElementById('statComing').textContent = '0';
@@ -261,13 +264,13 @@ async function loadGuests(){
       return;
     }
 
-    const coming = data.filter(r=>r.attending).length;
-    const notComing = data.filter(r=>!r.attending).length;
-    document.getElementById('statTotal').textContent = data.length;
-    document.getElementById('statComing').textContent = coming;
+    const coming    = list.filter(r=>r.attending).length;
+    const notComing = list.filter(r=>!r.attending).length;
+    document.getElementById('statTotal').textContent    = list.length;
+    document.getElementById('statComing').textContent   = coming;
     document.getElementById('statNotComing').textContent = notComing;
 
-    body.innerHTML = data.map((r,i) => `
+    body.innerHTML = list.map((r,i) => `
       <tr>
         <td style="color:rgba(200,230,208,0.3);font-size:0.72rem;">${i+1}</td>
         <td style="font-weight:500;color:#fff;">${escHtml(r.name || '—')}</td>
@@ -276,7 +279,7 @@ async function loadGuests(){
             ? '<span class="badge badge-yes"><i class="fa-solid fa-check"></i> Coming</span>'
             : '<span class="badge badge-no"><i class="fa-solid fa-xmark"></i> Can\'t Make It</span>'}
         </td>
-        <td style="font-size:0.72rem;color:rgba(200,230,208,0.4);">${formatDate(r.timestamp)}</td>
+        <td style="font-size:0.72rem;color:rgba(200,230,208,0.55);">${escHtml(r.submitted || formatDate(r.timestamp) || '—')}</td>
       </tr>
     `).join('');
 
