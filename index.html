@@ -25,11 +25,12 @@
       --dark:        #051a0a;
       --dark-mid:    #0d3322;
     }
-    html, body { min-height: 100%; overflow-x: hidden; font-family: 'Poppins', sans-serif; }
+    html { height: 100%; overflow-x: hidden; font-family: 'Poppins', sans-serif; }
     body {
       background: linear-gradient(160deg, #051a0a 0%, #0d3322 45%, #162e1f 75%, #051a0a 100%);
       display: flex; flex-direction: column; align-items: center; justify-content: center;
-      min-height: 100dvh; position: relative; overflow: hidden;
+      height: 100dvh; min-height: 100dvh; position: relative; overflow: hidden;
+      font-family: 'Poppins', sans-serif;
     }
 
     /* ── CANVAS / STARS ── */
@@ -624,7 +625,7 @@ envScene.addEventListener('click', function () {
 });
 
 document.getElementById('viewDetailsBtn').addEventListener('click', () => {
-  window.location.href = '/invitation.html';
+  window.location.href = '/invitation.html?play=1';
 });
 
 // ── STARS ──
