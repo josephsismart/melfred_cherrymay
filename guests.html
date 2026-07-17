@@ -177,6 +177,7 @@
           <th>#</th>
           <th>Name</th>
           <th>Attending</th>
+          <th>Message</th>
           <th>Submitted</th>
         </tr>
       </thead>
@@ -279,6 +280,7 @@ async function loadGuests(){
             ? '<span class="badge badge-yes"><i class="fa-solid fa-check"></i> Coming</span>'
             : '<span class="badge badge-no"><i class="fa-solid fa-xmark"></i> Can\'t Make It</span>'}
         </td>
+        <td style="font-size:0.8rem;color:rgba(200,230,208,0.7);font-style:italic;">${r.message ? escHtml(r.message) : '<span style="color:rgba(200,230,208,0.25);">—</span>'}</td>
         <td style="font-size:0.72rem;color:rgba(200,230,208,0.55);">${escHtml(r.submitted || formatDate(r.timestamp) || '—')}</td>
       </tr>
     `).join('');
