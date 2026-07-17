@@ -1,13 +1,12 @@
-// api/rsvp.js — stores RSVPs in rsvps.json in the GitHub repo (no database needed!)
-// Each RSVP is saved as a row in rsvps.json with name, attending, message, and date/time submitted.
+// api/rsvp.js — stores RSVPs in rsvps.json in the GitHub repo
+// Format: { "rsvps": [...], "trash": [...] }
 
-const OWNER     = 'josephsismart';
-const REPO      = 'melfred_cherrymay';
-const FILE      = 'rsvps.json';
+const OWNER      = 'josephsismart';
+const REPO       = 'melfred_cherrymay';
+const FILE       = 'rsvps.json';
 const ADMIN_CODE = 'melchem2026';
-const API_URL   = `https://api.github.com/repos/${OWNER}/${REPO}/contents/${FILE}`;
+const API_URL    = `https://api.github.com/repos/${OWNER}/${REPO}/contents/${FILE}`;
 
-// Philippines timezone offset = UTC+8
 function phTime() {
   return new Date(Date.now() + 8 * 60 * 60 * 1000)
     .toISOString()
@@ -25,12 +24,15 @@ async function readFile() {
   });
   if (!res.ok) throw new Error(`GitHub read error ${res.status}: ${await res.text()}`);
   const data = await res.json();
-  const content = Buffer.from(data.content, 'base64').toString('utf-8');
-  return { list: JSON.parse(content), sha: data.sha };
+  const raw = JSON.parse(Buffer.from(data.content, 'base64').toString('utf-8'));
+  // migrate from old plain-array format
+  const parsed = Array.isArray(raw) ? { rsvps: raw, trash: [] } : raw;
+  if (!parsed.trash) parsed.trash = [];
+  return { rsvps: parsed.rsvps, trash: parsed.trash, sha: data.sha };
 }
 
-async function writeFile(list, sha) {
-  const content = Buffer.from(JSON.stringify(list, null, 2)).toString('base64');
+async function writeFile(rsvps, trash, sha, commitMsg) {
+  const content = Buffer.from(JSON.stringify({ rsvps, trash }, null, 2)).toString('base64');
   const res = await fetch(API_URL, {
     method: 'PUT',
     headers: {
@@ -39,25 +41,19 @@ async function writeFile(list, sha) {
       'Content-Type': 'application/json',
       'User-Agent': 'mc-wedding-rsvp'
     },
-    body: JSON.stringify({
-      message: `RSVP: ${list[list.length - 1]?.name || 'new entry'}`,
-      content,
-      sha
-    })
+    body: JSON.stringify({ message: commitMsg, content, sha })
   });
   if (!res.ok) throw new Error(`GitHub write error ${res.status}: ${await res.text()}`);
 }
 
 module.exports = async function handler(req, res) {
   res.setHeader('Access-Control-Allow-Origin', '*');
-  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS');
+  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, DELETE, OPTIONS');
   res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
   if (req.method === 'OPTIONS') return res.status(200).end();
 
   if (!process.env.GITHUB_TOKEN) {
-    return res.status(500).json({
-      error: 'GITHUB_TOKEN not configured. See setup instructions.'
-    });
+    return res.status(500).json({ error: 'GITHUB_TOKEN not configured.' });
   }
 
   try {
@@ -66,23 +62,41 @@ module.exports = async function handler(req, res) {
       const { name, attending, message } = req.body || {};
       if (!name?.trim()) return res.status(400).json({ error: 'Name is required.' });
 
-      const { list, sha } = await readFile();
-      list.unshift({                         // newest first
+      const { rsvps, trash, sha } = await readFile();
+      rsvps.unshift({
         name:      name.trim(),
         attending: attending === true || attending === 'true',
         message:   (message || '').trim(),
-        submitted: phTime()                  // e.g. "2026-07-17 09:03:45 PHT"
+        submitted: phTime()
       });
-      await writeFile(list, sha);
-      return res.status(200).json({ ok: true, total: list.length });
+      await writeFile(rsvps, trash, sha, `RSVP: ${rsvps[0].name}`);
+      return res.status(200).json({ ok: true, total: rsvps.length });
     }
 
-    // ── GET: read all RSVPs (admin passcode required) ──
+    // ── GET: read all RSVPs (admin only) ──
     if (req.method === 'GET') {
       const { code } = req.query;
       if (code !== ADMIN_CODE) return res.status(401).json({ error: 'Unauthorized' });
-      const { list } = await readFile();
-      return res.status(200).json({ rsvps: list });
+      const { rsvps, trash } = await readFile();
+      return res.status(200).json({ rsvps, trash });
+    }
+
+    // ── DELETE: move an RSVP to trash (admin only) ──
+    if (req.method === 'DELETE') {
+      const { code, index } = req.query;
+      if (code !== ADMIN_CODE) return res.status(401).json({ error: 'Unauthorized' });
+      const idx = parseInt(index, 10);
+      if (isNaN(idx)) return res.status(400).json({ error: 'Invalid index.' });
+
+      const { rsvps, trash, sha } = await readFile();
+      if (idx < 0 || idx >= rsvps.length) return res.status(404).json({ error: 'Entry not found.' });
+
+      const [removed] = rsvps.splice(idx, 1);
+      removed.deletedAt = phTime();
+      trash.unshift(removed);
+
+      await writeFile(rsvps, trash, sha, `Delete RSVP: ${removed.name}`);
+      return res.status(200).json({ ok: true, deleted: removed });
     }
 
     res.status(405).json({ error: 'Method not allowed' });
