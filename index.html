@@ -5,93 +5,136 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Fred &amp; Chem — Forever Begins Here | Sept 5, 2026</title>
   <meta property="og:title" content="💍 Fred &amp; Chem — Forever Begins Here"/>
-  <meta property="og:description" content="You're invited! Join us as Fred and Chem say 'I Do' on September 5, 2026 in Butuan City, Philippines. Click to open your digital invitation 💌"/>
+  <meta property="og:description" content="You're invited! Join us as Fred and Chem say 'I Do' on September 5, 2026 in Butuan City, Philippines."/>
   <meta property="og:type" content="website"/>
   <meta property="og:url" content="https://mc-wedding-2026.vercel.app/"/>
   <meta property="og:image" content="https://mc-wedding-2026.vercel.app/og-image.jpg"/>
-  <meta property="og:image:width" content="1200"/>
-  <meta property="og:image:height" content="630"/>
-  <meta property="og:image:type" content="image/jpeg"/>
   <meta property="og:site_name" content="Fred &amp; Chem Wedding"/>
   <meta name="twitter:card" content="summary_large_image"/>
-  <meta name="twitter:image" content="https://mc-wedding-2026.vercel.app/og-image.jpg"/>
   <link rel="icon" type="image/png" href="/favicon.png"/>
   <link rel="apple-touch-icon" href="/apple-touch-icon.png"/>
   <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     :root {
-      --green: #4a7a5a; --green-light: #6aaa7a; --blush: #c8e6d0;
-      --gold: #d4a84b; --dark: #051a0a; --dark-mid: #0d3322;
+      --green:       #4a7a5a;
+      --green-light: #6aaa7a;
+      --green-pale:  #c8e6d0;
+      --gold:        #d4a84b;
+      --dark:        #051a0a;
+      --dark-mid:    #0d3322;
     }
     html, body { min-height: 100%; overflow-x: hidden; font-family: 'Poppins', sans-serif; }
     body {
       background: linear-gradient(160deg, #051a0a 0%, #0d3322 45%, #162e1f 75%, #051a0a 100%);
       display: flex; flex-direction: column; align-items: center; justify-content: center;
-      min-height: 100dvh; position: relative;
-      overflow: hidden;
+      min-height: 100dvh; position: relative; overflow: hidden;
     }
 
-    /* ── STARS ── */
+    /* ── CANVAS / STARS ── */
     #hearts-canvas { position: fixed; inset: 0; z-index: 0; pointer-events: none; }
     .stars { position: fixed; inset: 0; z-index: 0; pointer-events: none; }
-    .star {
-      position: absolute; border-radius: 50%; background: rgba(255,255,255,0.7);
-      animation: twinkle var(--dur,3s) var(--delay,0s) infinite alternate;
-    }
+    .star { position: absolute; border-radius: 50%; background: rgba(255,255,255,0.7);
+            animation: twinkle var(--dur,3s) var(--delay,0s) infinite alternate; }
     @keyframes twinkle { 0%{opacity:0.1;transform:scale(0.8)} 100%{opacity:0.9;transform:scale(1.2)} }
 
-    /* ══════════════════════════════════════
-       ENVELOPE — CENTER STAGE
-    ══════════════════════════════════════ */
-    .env-wrap {
-      position: relative; z-index: 10;
-      display: flex; flex-direction: column; align-items: center;
-      gap: 1.2rem;
-      transition: opacity 0.5s ease, transform 0.5s ease;
+    /* ══════════════════════════════════════════
+       BIG CORNER FLOWERS  — CSS petal flowers
+       themed in greens + gold
+    ══════════════════════════════════════════ */
+    .corner-wrap {
+      position: fixed; z-index: 5; pointer-events: none;
+      width: clamp(130px, 32vw, 210px);
+      height: clamp(130px, 32vw, 210px);
+      opacity: 0;
+      transition: opacity 0.4s ease;
     }
-    .env-wrap.hide {
-      opacity: 0; transform: scale(0.85) translateY(-20px);
-      pointer-events: none;
+    .corner-wrap.show { opacity: 1; }
+    .corner-wrap.tl { top: 0; left: 0; }
+    .corner-wrap.tr { top: 0; right: 0; transform: scaleX(-1); }
+    .corner-wrap.bl { bottom: 0; left: 0; transform: scaleY(-1); }
+    .corner-wrap.br { bottom: 0; right: 0; transform: scale(-1,-1); }
+
+    /* One CSS flower */
+    .cflower {
+      position: absolute;
+      width: var(--fs, 60px); height: var(--fs, 60px);
+      opacity: 0; transform: scale(0) rotate(0deg);
+      transition: opacity 0.5s var(--td,0s) cubic-bezier(0.34,1.6,0.64,1),
+                  transform 0.5s var(--td,0s) cubic-bezier(0.34,1.6,0.64,1);
+    }
+    .corner-wrap.show .cflower {
+      opacity: 1;
+      transform: scale(1) rotate(var(--rot,0deg));
+      animation: cfloat var(--fdur,4s) var(--fdelay,0s) ease-in-out infinite;
+    }
+    @keyframes cfloat {
+      0%,100%{transform:scale(1) rotate(var(--rot,0deg)) translateY(0)}
+      50%{transform:scale(1.07) rotate(var(--rot,0deg)) translateY(-5px)}
     }
 
-    /* Wiggle */
-    @keyframes envWiggle {
-      0%,55%,100% { transform: rotate(0deg) scale(1); }
-      58%  { transform: rotate(-6deg) scale(1.04); }
-      63%  { transform: rotate(6deg)  scale(1.04); }
-      68%  { transform: rotate(-4deg) scale(1.02); }
-      73%  { transform: rotate(4deg)  scale(1.02); }
-      78%  { transform: rotate(-2deg) scale(1.01); }
-      83%  { transform: rotate(2deg)  scale(1.01); }
-      88%  { transform: rotate(0deg)  scale(1); }
+    /* Petal flower SVG rendered via CSS */
+    .cflower svg { width: 100%; height: 100%; }
+
+    /* Positions within each corner box */
+    .cflower:nth-child(1) { top:-2%; left:-2%;  --fs:clamp(70px,19vw,115px); --rot:-10deg; --td:0.05s; --fdur:4s; --fdelay:0s;   }
+    .cflower:nth-child(2) { top:-2%; left:38%;  --fs:clamp(45px,12vw,75px);  --rot:8deg;  --td:0.15s; --fdur:5s; --fdelay:0.4s; }
+    .cflower:nth-child(3) { top:38%; left:-2%;  --fs:clamp(50px,14vw,85px);  --rot:-5deg; --td:0.25s; --fdur:4.5s; --fdelay:0.8s;}
+    .cflower:nth-child(4) { top:22%; left:22%;  --fs:clamp(35px,9vw,55px);   --rot:15deg; --td:0.35s; --fdur:3.8s; --fdelay:0.3s;}
+    .cflower:nth-child(5) { top:5%;  left:62%;  --fs:clamp(30px,7vw,45px);   --rot:-15deg;--td:0.1s;  --fdur:4.2s; --fdelay:0.6s;}
+
+    /* ══════════════════════════════════════════
+       ENVELOPE
+    ══════════════════════════════════════════ */
+    .env-wrap {
+      position: relative; z-index: 10;
+      display: flex; flex-direction: column; align-items: center; gap: 1rem;
+      transition: opacity 0.5s ease, transform 0.5s ease;
+    }
+    .env-wrap.hide { opacity: 0; transform: scale(0.82) translateY(-22px); pointer-events: none; }
+
+    /* SHAKE — runs immediately and loops */
+    @keyframes envShake {
+      0%,100%  { transform: rotate(0deg) scale(1); }
+      10%      { transform: rotate(-7deg) scale(1.04); }
+      20%      { transform: rotate(7deg)  scale(1.04); }
+      30%      { transform: rotate(-5deg) scale(1.03); }
+      40%      { transform: rotate(5deg)  scale(1.03); }
+      50%      { transform: rotate(-3deg) scale(1.02); }
+      60%      { transform: rotate(3deg)  scale(1.02); }
+      70%      { transform: rotate(-1deg) scale(1.01); }
+      80%      { transform: rotate(1deg)  scale(1.01); }
+      90%,100% { transform: rotate(0deg) scale(1); }
     }
     @keyframes envGlow {
-      0%,100%{filter:drop-shadow(0 12px 36px rgba(74,122,90,0.45))}
-      50%{filter:drop-shadow(0 20px 56px rgba(106,170,122,0.8))}
+      0%,100%{ filter:drop-shadow(0 12px 36px rgba(74,122,90,0.5)); }
+      50%    { filter:drop-shadow(0 22px 58px rgba(106,170,122,0.85)); }
     }
 
     .env-scene {
       position: relative;
-      width: clamp(310px, 86vw, 430px);
+      width: clamp(310px, 86vw, 440px);
       perspective: 900px;
-      animation: envWiggle 3.2s 1.5s infinite, envGlow 2.6s 2s infinite;
+      /* shake every 2.5 s, short sharp burst */
+      animation: envShake 0.7s 1.2s ease-in-out, envShake 0.7s 3.5s ease-in-out,
+                 envShake 0.7s 5.8s ease-in-out, envShake 0.7s 8.1s ease-in-out,
+                 envGlow 2.8s 1s infinite;
       transform-origin: center center;
       cursor: pointer; -webkit-tap-highlight-color: transparent;
     }
-    .env-scene.opened { animation: envGlow 2.6s infinite; }
+    .env-scene.opened { animation: envGlow 2.8s infinite; }
 
     .env-body {
       width: 100%; aspect-ratio: 1.55/1;
       border-radius: 6px 6px 20px 20px; position: relative;
-      box-shadow: 0 28px 80px rgba(0,0,0,0.55), 0 6px 22px rgba(0,0,0,0.35);
+      box-shadow: 0 28px 80px rgba(0,0,0,0.55), 0 6px 22px rgba(0,0,0,0.3);
       overflow: hidden;
       background: linear-gradient(150deg,#dff2e6,#c2e0cc);
     }
     .env-v { position:absolute;inset:0;background:linear-gradient(160deg,#aacfb8,#8fc0a0);clip-path:polygon(0 100%,50% 54%,100% 100%);border-radius:0 0 20px 20px; }
     .env-l { position:absolute;inset:0;background:linear-gradient(145deg,#c8e8d2,#aacfb8);clip-path:polygon(0 0,0 100%,50% 54%); }
     .env-r { position:absolute;inset:0;background:linear-gradient(145deg,#c0e2ca,#a2c8b0);clip-path:polygon(100% 0,100% 100%,50% 54%); }
-
     .env-peek {
       position:absolute; bottom:0; left:12%; right:12%; height:65%;
       background:linear-gradient(170deg,#fff,#f2fbf5);
@@ -102,7 +145,7 @@
       z-index:6;
       display:flex; flex-direction:column; align-items:center; justify-content:center; gap:5px; padding:12px;
     }
-    .env-peek::before { content:'F & C'; font-family:'Great Vibes',cursive; font-size:1.7rem; color:rgba(74,122,90,0.4); }
+    .env-peek::before { content:'F & C'; font-family:'Great Vibes',cursive; font-size:1.8rem; color:rgba(74,122,90,0.4); }
     .env-peek-line { height:2px; background:rgba(74,122,90,0.15); border-radius:2px; width:80%; }
     .env-peek-line:nth-child(3){width:60%;}
     .env-peek-line:nth-child(4){width:72%;}
@@ -124,7 +167,6 @@
     .env-flap-inner { position:absolute;inset:0;background:linear-gradient(160deg,#d0ecda,#b4d4c0);clip-path:polygon(0 0,100% 0,50% 88%);border-radius:6px 6px 0 0; }
     .env-flap-inner::after { content:'';position:absolute;inset:0;background:linear-gradient(160deg,rgba(255,255,255,0.28),transparent 60%);clip-path:polygon(0 0,100% 0,50% 88%); }
 
-    /* OPENED states */
     .env-scene.opened .env-flap { transform:rotateX(-175deg); z-index:4; }
     .env-scene.opened .env-peek { transform:translateY(-30%); opacity:1; }
     .env-scene.opened .env-seal { transform:translateX(-50%) scale(0.8); opacity:0; }
@@ -134,119 +176,54 @@
       font-size:clamp(0.68rem,2.2vw,0.82rem); letter-spacing:0.22em; text-transform:uppercase;
       color:rgba(200,230,208,0.7); transition:opacity 0.4s;
     }
+    .env-label i { margin-right: 6px; color: var(--gold); }
     .env-tap-hint {
-      display:flex; align-items:center; gap:0.4rem;
-      font-size:0.82rem; color:rgba(200,230,208,0.4);
+      display:flex; align-items:center; gap:0.5rem;
+      font-size:0.82rem; color:rgba(200,230,208,0.45);
       animation:tapPulse 1.8s ease-in-out infinite;
     }
-    .tap-finger { animation:fingerBounce 1.8s ease-in-out infinite; font-size:1.3rem; }
-    @keyframes tapPulse { 0%,100%{opacity:0.4} 50%{opacity:1} }
-    @keyframes fingerBounce { 0%,100%{transform:translateY(0)} 50%{transform:translateY(5px)} }
+    .env-tap-hint i { font-size:1.1rem; animation:fingerBounce 1.8s ease-in-out infinite; }
+    @keyframes tapPulse   { 0%,100%{opacity:0.4} 50%{opacity:1} }
+    @keyframes fingerBounce{ 0%,100%{transform:translateY(0)} 50%{transform:translateY(5px)} }
 
-    /* ══════════════════════════════════════
-       CORNER FLOWER BORDERS
-       Each corner has a cluster of flowers
-       that animate in after envelope opens
-    ══════════════════════════════════════ */
-    .corner-border {
-      position: fixed; z-index: 30; pointer-events: none;
-      width: clamp(100px, 28vw, 180px);
-      height: clamp(100px, 28vw, 180px);
-      opacity: 0;
-      transition: opacity 0.3s;
-    }
-    .corner-border.tl { top: 0; left: 0; }
-    .corner-border.tr { top: 0; right: 0; transform: scaleX(-1); }
-    .corner-border.bl { bottom: 0; left: 0; transform: scaleY(-1); }
-    .corner-border.br { bottom: 0; right: 0; transform: scale(-1); }
-    .corner-border.show { opacity: 1; }
-
-    .corner-border .cf {
-      position: absolute;
-      font-size: clamp(1.2rem, 3.5vw, 2rem);
-      opacity: 0;
-      transform: scale(0) rotate(0deg);
-      transition: opacity 0.4s, transform 0.5s cubic-bezier(0.34,1.56,0.64,1);
-    }
-    .corner-border.show .cf { opacity: 1; transform: scale(1) rotate(var(--r, 0deg)); }
-
-    /* Flower positions for TL corner (others are mirrored via CSS transform) */
-    .cf:nth-child(1)  { top:0;   left:0;   --r:-15deg; transition-delay: 0.05s; }
-    .cf:nth-child(2)  { top:0;   left:30%; --r:5deg;   transition-delay: 0.1s; }
-    .cf:nth-child(3)  { top:0;   left:58%; --r:-8deg;  transition-delay: 0.15s; }
-    .cf:nth-child(4)  { top:25%; left:0;   --r:10deg;  transition-delay: 0.2s; }
-    .cf:nth-child(5)  { top:20%; left:28%; --r:-20deg; transition-delay: 0.25s; }
-    .cf:nth-child(6)  { top:18%; left:52%; --r:15deg;  transition-delay: 0.3s; }
-    .cf:nth-child(7)  { top:48%; left:0;   --r:-5deg;  transition-delay: 0.35s; }
-    .cf:nth-child(8)  { top:44%; left:24%; --r:25deg;  transition-delay: 0.4s; }
-    .cf:nth-child(9)  { top:68%; left:0;   --r:10deg;  transition-delay: 0.45s; }
-    .cf:nth-child(10) { top:38%; left:46%; --r:-18deg; transition-delay: 0.5s; }
-
-    /* Float animation after bloom */
-    @keyframes cfFloat {
-      0%,100%{transform:scale(1) rotate(var(--r,0deg)) translateY(0)}
-      50%{transform:scale(1.08) rotate(var(--r,0deg)) translateY(-4px)}
-    }
-    .corner-border.show .cf { animation: cfFloat 3s var(--fdelay,0s) ease-in-out infinite; }
-    .cf:nth-child(1)  { --fdelay:0s; }
-    .cf:nth-child(2)  { --fdelay:0.3s; }
-    .cf:nth-child(3)  { --fdelay:0.6s; }
-    .cf:nth-child(4)  { --fdelay:0.9s; }
-    .cf:nth-child(5)  { --fdelay:1.2s; }
-    .cf:nth-child(6)  { --fdelay:0.4s; }
-    .cf:nth-child(7)  { --fdelay:0.7s; }
-    .cf:nth-child(8)  { --fdelay:1.0s; }
-    .cf:nth-child(9)  { --fdelay:0.2s; }
-    .cf:nth-child(10) { --fdelay:0.5s; }
-
-    /* ══════════════════════════════════════
-       CENTER REVEAL — couple photo + details
-    ══════════════════════════════════════ */
+    /* ══════════════════════════════════════════
+       CENTER REVEAL CARD
+    ══════════════════════════════════════════ */
     #reveal-card {
       position: fixed; inset: 0; z-index: 20;
       display: flex; flex-direction: column; align-items: center; justify-content: center;
       padding: 1rem;
-      opacity: 0; transform: scale(0.9);
-      transition: opacity 0.6s ease, transform 0.6s cubic-bezier(0.34,1.2,0.64,1);
+      opacity: 0; transform: scale(0.88);
+      transition: opacity 0.65s ease, transform 0.65s cubic-bezier(0.34,1.2,0.64,1);
       pointer-events: none;
     }
-    #reveal-card.show {
-      opacity: 1; transform: scale(1);
-      pointer-events: all;
-    }
+    #reveal-card.show { opacity: 1; transform: scale(1); pointer-events: all; }
 
-    /* Couple photo — arched portrait */
     .couple-photo-wrap {
-      width: clamp(110px, 30vw, 160px);
-      height: clamp(140px, 38vw, 200px);
+      width: clamp(110px, 30vw, 160px); height: clamp(140px, 38vw, 200px);
       border-radius: 100px 100px 70px 70px;
       border: 3px solid rgba(200,230,208,0.35);
-      box-shadow: 0 12px 50px rgba(0,0,0,0.55), 0 0 0 8px rgba(74,122,90,0.12), 0 0 30px rgba(106,170,122,0.3);
+      box-shadow: 0 12px 50px rgba(0,0,0,0.6), 0 0 0 8px rgba(74,122,90,0.12);
       overflow: hidden;
       background: linear-gradient(135deg, #1e5238, #0d3322);
       display: flex; align-items: center; justify-content: center;
-      margin-bottom: 1.2rem;
-      animation: photoGlow 3s ease-in-out infinite;
-    }
-    @keyframes photoGlow {
-      0%,100%{box-shadow:0 12px 50px rgba(0,0,0,0.55),0 0 0 8px rgba(74,122,90,0.12),0 0 30px rgba(106,170,122,0.3)}
-      50%{box-shadow:0 12px 50px rgba(0,0,0,0.55),0 0 0 8px rgba(74,122,90,0.2),0 0 50px rgba(106,170,122,0.5)}
+      margin-bottom: 1.1rem;
     }
     .couple-photo-wrap img { width:100%; height:100%; object-fit:cover; display:none; }
     .couple-photo-placeholder {
-      font-family:'Great Vibes',cursive;
-      font-size:2.6rem; color:rgba(200,230,208,0.5);
+      font-family:'Great Vibes',cursive; font-size:2.6rem; color:rgba(200,230,208,0.5);
     }
 
     .reveal-tag {
       font-size:0.58rem; letter-spacing:0.3em; text-transform:uppercase;
-      color:var(--gold); margin-bottom:0.6rem; opacity:0.9;
+      color:var(--gold); margin-bottom:0.5rem;
     }
+    .reveal-tag i { margin: 0 4px; }
 
     .reveal-names {
       font-family:'Great Vibes',cursive;
-      font-size:clamp(2.8rem,11vw,4rem);
-      color:#c8e6d0; line-height:1; margin-bottom:0.5rem;
+      font-size:clamp(2.8rem,11vw,3.8rem);
+      color:#c8e6d0; line-height:1; margin-bottom:0.45rem;
       text-shadow:0 0 60px rgba(106,170,122,0.5);
     }
     .reveal-amp { color:var(--gold); }
@@ -254,19 +231,15 @@
     .reveal-divider {
       width:70px; height:1px;
       background:linear-gradient(90deg,transparent,rgba(212,168,75,0.6),transparent);
-      margin:0 auto 0.8rem;
+      margin:0 auto 0.85rem;
     }
 
-    .reveal-details {
-      display:flex; flex-direction:column; gap:4px; margin-bottom:1.4rem;
-      text-align:center;
-    }
+    .reveal-details { display:flex; flex-direction:column; gap:5px; margin-bottom:1.4rem; text-align:center; }
     .reveal-detail-row {
-      font-size:clamp(0.68rem,2vw,0.78rem);
-      color:rgba(200,230,208,0.72); letter-spacing:0.04em;
+      font-size:clamp(0.68rem,2vw,0.78rem); color:rgba(200,230,208,0.72); letter-spacing:0.03em;
     }
+    .reveal-detail-row i { color:var(--gold); margin-right:6px; width:14px; }
     .reveal-detail-row strong { color:rgba(200,230,208,0.95); font-weight:600; }
-    .reveal-detail-row .di { color:var(--gold); margin-right:4px; }
 
     .reveal-cta {
       display:block; width:100%; max-width:300px;
@@ -279,13 +252,13 @@
       box-shadow:0 8px 28px rgba(74,122,90,0.5);
       animation:ctaPulse 2s 0.5s ease-in-out infinite;
     }
+    .reveal-cta i { margin-left: 8px; }
     @keyframes ctaPulse {
       0%,100%{box-shadow:0 8px 28px rgba(74,122,90,0.5)}
       50%{box-shadow:0 8px 44px rgba(106,170,122,0.75),0 0 0 6px rgba(74,122,90,0.15)}
     }
     .reveal-cta:active { transform:scale(0.97); }
 
-    @keyframes fadeIn { from{opacity:0;transform:translateY(18px)} to{opacity:1;transform:translateY(0)} }
     @keyframes burstHeart { 0%{transform:translate(0,0) scale(1);opacity:1} 100%{transform:translate(var(--dx),var(--dy)) scale(0.3);opacity:0} }
   </style>
 </head>
@@ -293,35 +266,279 @@
 <canvas id="hearts-canvas"></canvas>
 <div class="stars" id="stars"></div>
 
-<!-- ══ 4 CORNER FLOWER BORDERS ══ -->
-<div class="corner-border tl" id="cb-tl">
-  <span class="cf">🌸</span><span class="cf">🌺</span><span class="cf">🌷</span>
-  <span class="cf">🌹</span><span class="cf">🌸</span><span class="cf">🌺</span>
-  <span class="cf">🍀</span><span class="cf">🌿</span><span class="cf">🌸</span><span class="cf">🌷</span>
+<!-- ══ BIG CORNER FLOWER CLUSTERS ══ -->
+<!-- Each corner: 5 SVG flowers, sized large, green/gold theme -->
+
+<!-- TOP LEFT -->
+<div class="corner-wrap tl" id="cb-tl">
+  <!-- Large bloom -->
+  <div class="cflower" style="--fs:clamp(75px,20vw,120px);--rot:-12deg;--td:0.05s;--fdur:4s;--fdelay:0s;top:-4%;left:-4%">
+    <svg viewBox="0 0 100 100"><g transform="translate(50,50)">
+      <ellipse rx="10" ry="26" fill="#4a7a5a" opacity=".9" transform="rotate(0)"/>
+      <ellipse rx="10" ry="26" fill="#3d6b4d" opacity=".9" transform="rotate(45)"/>
+      <ellipse rx="10" ry="26" fill="#5a8a6a" opacity=".9" transform="rotate(90)"/>
+      <ellipse rx="10" ry="26" fill="#3d6b4d" opacity=".9" transform="rotate(135)"/>
+      <ellipse rx="10" ry="26" fill="#4a7a5a" opacity=".9" transform="rotate(180)"/>
+      <ellipse rx="10" ry="26" fill="#5a8a6a" opacity=".9" transform="rotate(225)"/>
+      <ellipse rx="10" ry="26" fill="#4a7a5a" opacity=".9" transform="rotate(270)"/>
+      <ellipse rx="10" ry="26" fill="#3d6b4d" opacity=".9" transform="rotate(315)"/>
+      <circle r="11" fill="#d4a84b"/>
+      <circle r="7" fill="#f0c870"/>
+    </g></svg>
+  </div>
+  <!-- Medium accent -->
+  <div class="cflower" style="--fs:clamp(48px,13vw,80px);--rot:8deg;--td:0.15s;--fdur:5s;--fdelay:0.5s;top:0%;left:42%">
+    <svg viewBox="0 0 100 100"><g transform="translate(50,50)">
+      <ellipse rx="9" ry="24" fill="#6aaa7a" opacity=".9" transform="rotate(0)"/>
+      <ellipse rx="9" ry="24" fill="#5a9a6a" opacity=".9" transform="rotate(60)"/>
+      <ellipse rx="9" ry="24" fill="#7aba8a" opacity=".9" transform="rotate(120)"/>
+      <ellipse rx="9" ry="24" fill="#6aaa7a" opacity=".9" transform="rotate(180)"/>
+      <ellipse rx="9" ry="24" fill="#5a9a6a" opacity=".9" transform="rotate(240)"/>
+      <ellipse rx="9" ry="24" fill="#7aba8a" opacity=".9" transform="rotate(300)"/>
+      <circle r="10" fill="#c8960a"/>
+      <circle r="6" fill="#d4a84b"/>
+    </g></svg>
+  </div>
+  <!-- Side bloom -->
+  <div class="cflower" style="--fs:clamp(52px,14vw,88px);--rot:-5deg;--td:0.25s;--fdur:4.5s;--fdelay:0.9s;top:42%;left:-4%">
+    <svg viewBox="0 0 100 100"><g transform="translate(50,50)">
+      <ellipse rx="9" ry="24" fill="#3d6b4d" opacity=".9" transform="rotate(0)"/>
+      <ellipse rx="9" ry="24" fill="#4a7a5a" opacity=".9" transform="rotate(45)"/>
+      <ellipse rx="9" ry="24" fill="#2e5c3e" opacity=".9" transform="rotate(90)"/>
+      <ellipse rx="9" ry="24" fill="#4a7a5a" opacity=".9" transform="rotate(135)"/>
+      <ellipse rx="9" ry="24" fill="#3d6b4d" opacity=".9" transform="rotate(180)"/>
+      <ellipse rx="9" ry="24" fill="#5a8a6a" opacity=".9" transform="rotate(225)"/>
+      <ellipse rx="9" ry="24" fill="#4a7a5a" opacity=".9" transform="rotate(270)"/>
+      <ellipse rx="9" ry="24" fill="#3d6b4d" opacity=".9" transform="rotate(315)"/>
+      <circle r="10" fill="#d4a84b"/>
+      <circle r="6"  fill="#f0d890"/>
+    </g></svg>
+  </div>
+  <!-- Small inner -->
+  <div class="cflower" style="--fs:clamp(35px,9vw,55px);--rot:18deg;--td:0.35s;--fdur:3.8s;--fdelay:0.3s;top:26%;left:26%">
+    <svg viewBox="0 0 100 100"><g transform="translate(50,50)">
+      <ellipse rx="9" ry="22" fill="#c8e6d0" opacity=".8" transform="rotate(0)"/>
+      <ellipse rx="9" ry="22" fill="#aad4b8" opacity=".8" transform="rotate(72)"/>
+      <ellipse rx="9" ry="22" fill="#c8e6d0" opacity=".8" transform="rotate(144)"/>
+      <ellipse rx="9" ry="22" fill="#aad4b8" opacity=".8" transform="rotate(216)"/>
+      <ellipse rx="9" ry="22" fill="#c8e6d0" opacity=".8" transform="rotate(288)"/>
+      <circle r="9" fill="#d4a84b"/>
+      <circle r="5" fill="#fff8e0"/>
+    </g></svg>
+  </div>
+  <!-- Tiny accent -->
+  <div class="cflower" style="--fs:clamp(28px,7vw,42px);--rot:-20deg;--td:0.1s;--fdur:4.2s;--fdelay:0.7s;top:4%;left:68%">
+    <svg viewBox="0 0 100 100"><g transform="translate(50,50)">
+      <ellipse rx="10" ry="22" fill="#6aaa7a" opacity=".85" transform="rotate(0)"/>
+      <ellipse rx="10" ry="22" fill="#4a7a5a" opacity=".85" transform="rotate(90)"/>
+      <ellipse rx="10" ry="22" fill="#6aaa7a" opacity=".85" transform="rotate(180)"/>
+      <ellipse rx="10" ry="22" fill="#4a7a5a" opacity=".85" transform="rotate(270)"/>
+      <circle r="9" fill="#c8960a"/>
+      <circle r="5" fill="#d4a84b"/>
+    </g></svg>
+  </div>
 </div>
-<div class="corner-border tr" id="cb-tr">
-  <span class="cf">🌺</span><span class="cf">🌸</span><span class="cf">🌹</span>
-  <span class="cf">🌷</span><span class="cf">🌺</span><span class="cf">🌸</span>
-  <span class="cf">🌿</span><span class="cf">🍀</span><span class="cf">🌺</span><span class="cf">🌸</span>
+
+<!-- TOP RIGHT (mirrored via scaleX) -->
+<div class="corner-wrap tr" id="cb-tr">
+  <div class="cflower" style="--fs:clamp(75px,20vw,120px);--rot:10deg;--td:0.08s;--fdur:4.2s;--fdelay:0.1s;top:-4%;left:-4%">
+    <svg viewBox="0 0 100 100"><g transform="translate(50,50)">
+      <ellipse rx="10" ry="26" fill="#5a8a6a" opacity=".9" transform="rotate(0)"/>
+      <ellipse rx="10" ry="26" fill="#4a7a5a" opacity=".9" transform="rotate(45)"/>
+      <ellipse rx="10" ry="26" fill="#3d6b4d" opacity=".9" transform="rotate(90)"/>
+      <ellipse rx="10" ry="26" fill="#5a8a6a" opacity=".9" transform="rotate(135)"/>
+      <ellipse rx="10" ry="26" fill="#4a7a5a" opacity=".9" transform="rotate(180)"/>
+      <ellipse rx="10" ry="26" fill="#6aaa7a" opacity=".9" transform="rotate(225)"/>
+      <ellipse rx="10" ry="26" fill="#4a7a5a" opacity=".9" transform="rotate(270)"/>
+      <ellipse rx="10" ry="26" fill="#3d6b4d" opacity=".9" transform="rotate(315)"/>
+      <circle r="11" fill="#c8960a"/>
+      <circle r="7"  fill="#f0c870"/>
+    </g></svg>
+  </div>
+  <div class="cflower" style="--fs:clamp(48px,13vw,80px);--rot:-8deg;--td:0.18s;--fdur:5.2s;--fdelay:0.55s;top:0%;left:42%">
+    <svg viewBox="0 0 100 100"><g transform="translate(50,50)">
+      <ellipse rx="9" ry="24" fill="#c8e6d0" opacity=".85" transform="rotate(0)"/>
+      <ellipse rx="9" ry="24" fill="#aad4b8" opacity=".85" transform="rotate(60)"/>
+      <ellipse rx="9" ry="24" fill="#c8e6d0" opacity=".85" transform="rotate(120)"/>
+      <ellipse rx="9" ry="24" fill="#aad4b8" opacity=".85" transform="rotate(180)"/>
+      <ellipse rx="9" ry="24" fill="#c8e6d0" opacity=".85" transform="rotate(240)"/>
+      <ellipse rx="9" ry="24" fill="#aad4b8" opacity=".85" transform="rotate(300)"/>
+      <circle r="10" fill="#d4a84b"/>
+      <circle r="6"  fill="#f0d890"/>
+    </g></svg>
+  </div>
+  <div class="cflower" style="--fs:clamp(52px,14vw,88px);--rot:6deg;--td:0.28s;--fdur:4.8s;--fdelay:0.95s;top:42%;left:-4%">
+    <svg viewBox="0 0 100 100"><g transform="translate(50,50)">
+      <ellipse rx="9" ry="24" fill="#4a7a5a" opacity=".9" transform="rotate(0)"/>
+      <ellipse rx="9" ry="24" fill="#6aaa7a" opacity=".9" transform="rotate(45)"/>
+      <ellipse rx="9" ry="24" fill="#3d6b4d" opacity=".9" transform="rotate(90)"/>
+      <ellipse rx="9" ry="24" fill="#5a8a6a" opacity=".9" transform="rotate(135)"/>
+      <ellipse rx="9" ry="24" fill="#4a7a5a" opacity=".9" transform="rotate(180)"/>
+      <ellipse rx="9" ry="24" fill="#6aaa7a" opacity=".9" transform="rotate(225)"/>
+      <ellipse rx="9" ry="24" fill="#4a7a5a" opacity=".9" transform="rotate(270)"/>
+      <ellipse rx="9" ry="24" fill="#3d6b4d" opacity=".9" transform="rotate(315)"/>
+      <circle r="10" fill="#d4a84b"/>
+      <circle r="6"  fill="#f0c870"/>
+    </g></svg>
+  </div>
+  <div class="cflower" style="--fs:clamp(35px,9vw,55px);--rot:-18deg;--td:0.38s;--fdur:4s;--fdelay:0.35s;top:26%;left:26%">
+    <svg viewBox="0 0 100 100"><g transform="translate(50,50)">
+      <ellipse rx="9" ry="22" fill="#6aaa7a" opacity=".85" transform="rotate(0)"/>
+      <ellipse rx="9" ry="22" fill="#4a7a5a" opacity=".85" transform="rotate(72)"/>
+      <ellipse rx="9" ry="22" fill="#5a8a6a" opacity=".85" transform="rotate(144)"/>
+      <ellipse rx="9" ry="22" fill="#3d6b4d" opacity=".85" transform="rotate(216)"/>
+      <ellipse rx="9" ry="22" fill="#6aaa7a" opacity=".85" transform="rotate(288)"/>
+      <circle r="9" fill="#c8960a"/>
+      <circle r="5" fill="#f0d890"/>
+    </g></svg>
+  </div>
+  <div class="cflower" style="--fs:clamp(28px,7vw,42px);--rot:20deg;--td:0.12s;--fdur:4.5s;--fdelay:0.75s;top:4%;left:68%">
+    <svg viewBox="0 0 100 100"><g transform="translate(50,50)">
+      <ellipse rx="10" ry="22" fill="#c8e6d0" opacity=".8" transform="rotate(0)"/>
+      <ellipse rx="10" ry="22" fill="#aad4b8" opacity=".8" transform="rotate(90)"/>
+      <ellipse rx="10" ry="22" fill="#c8e6d0" opacity=".8" transform="rotate(180)"/>
+      <ellipse rx="10" ry="22" fill="#aad4b8" opacity=".8" transform="rotate(270)"/>
+      <circle r="9" fill="#d4a84b"/>
+      <circle r="5" fill="#fff0a0"/>
+    </g></svg>
+  </div>
 </div>
-<div class="corner-border bl" id="cb-bl">
-  <span class="cf">🌷</span><span class="cf">🌹</span><span class="cf">🌸</span>
-  <span class="cf">🌺</span><span class="cf">🌷</span><span class="cf">🌹</span>
-  <span class="cf">🍀</span><span class="cf">🌿</span><span class="cf">🌸</span><span class="cf">🌺</span>
+
+<!-- BOTTOM LEFT (scaleY mirror) -->
+<div class="corner-wrap bl" id="cb-bl">
+  <div class="cflower" style="--fs:clamp(75px,20vw,120px);--rot:8deg;--td:0.06s;--fdur:4.1s;--fdelay:0.05s;top:-4%;left:-4%">
+    <svg viewBox="0 0 100 100"><g transform="translate(50,50)">
+      <ellipse rx="10" ry="26" fill="#3d6b4d" opacity=".9" transform="rotate(0)"/>
+      <ellipse rx="10" ry="26" fill="#4a7a5a" opacity=".9" transform="rotate(45)"/>
+      <ellipse rx="10" ry="26" fill="#5a8a6a" opacity=".9" transform="rotate(90)"/>
+      <ellipse rx="10" ry="26" fill="#4a7a5a" opacity=".9" transform="rotate(135)"/>
+      <ellipse rx="10" ry="26" fill="#3d6b4d" opacity=".9" transform="rotate(180)"/>
+      <ellipse rx="10" ry="26" fill="#6aaa7a" opacity=".9" transform="rotate(225)"/>
+      <ellipse rx="10" ry="26" fill="#4a7a5a" opacity=".9" transform="rotate(270)"/>
+      <ellipse rx="10" ry="26" fill="#5a8a6a" opacity=".9" transform="rotate(315)"/>
+      <circle r="11" fill="#d4a84b"/>
+      <circle r="7"  fill="#f0d890"/>
+    </g></svg>
+  </div>
+  <div class="cflower" style="--fs:clamp(48px,13vw,80px);--rot:-6deg;--td:0.16s;--fdur:5.1s;--fdelay:0.45s;top:0%;left:42%">
+    <svg viewBox="0 0 100 100"><g transform="translate(50,50)">
+      <ellipse rx="9" ry="24" fill="#4a7a5a" opacity=".9" transform="rotate(0)"/>
+      <ellipse rx="9" ry="24" fill="#6aaa7a" opacity=".9" transform="rotate(60)"/>
+      <ellipse rx="9" ry="24" fill="#3d6b4d" opacity=".9" transform="rotate(120)"/>
+      <ellipse rx="9" ry="24" fill="#5a8a6a" opacity=".9" transform="rotate(180)"/>
+      <ellipse rx="9" ry="24" fill="#4a7a5a" opacity=".9" transform="rotate(240)"/>
+      <ellipse rx="9" ry="24" fill="#6aaa7a" opacity=".9" transform="rotate(300)"/>
+      <circle r="10" fill="#c8960a"/>
+      <circle r="6"  fill="#f0c870"/>
+    </g></svg>
+  </div>
+  <div class="cflower" style="--fs:clamp(52px,14vw,88px);--rot:12deg;--td:0.26s;--fdur:4.6s;--fdelay:0.85s;top:42%;left:-4%">
+    <svg viewBox="0 0 100 100"><g transform="translate(50,50)">
+      <ellipse rx="9" ry="24" fill="#c8e6d0" opacity=".85" transform="rotate(0)"/>
+      <ellipse rx="9" ry="24" fill="#aad4b8" opacity=".85" transform="rotate(45)"/>
+      <ellipse rx="9" ry="24" fill="#c8e6d0" opacity=".85" transform="rotate(90)"/>
+      <ellipse rx="9" ry="24" fill="#aad4b8" opacity=".85" transform="rotate(135)"/>
+      <ellipse rx="9" ry="24" fill="#c8e6d0" opacity=".85" transform="rotate(180)"/>
+      <ellipse rx="9" ry="24" fill="#aad4b8" opacity=".85" transform="rotate(225)"/>
+      <ellipse rx="9" ry="24" fill="#c8e6d0" opacity=".85" transform="rotate(270)"/>
+      <ellipse rx="9" ry="24" fill="#aad4b8" opacity=".85" transform="rotate(315)"/>
+      <circle r="10" fill="#d4a84b"/>
+      <circle r="6"  fill="#fff0a0"/>
+    </g></svg>
+  </div>
+  <div class="cflower" style="--fs:clamp(35px,9vw,55px);--rot:22deg;--td:0.36s;--fdur:3.9s;--fdelay:0.25s;top:26%;left:26%">
+    <svg viewBox="0 0 100 100"><g transform="translate(50,50)">
+      <ellipse rx="9" ry="22" fill="#6aaa7a" opacity=".85" transform="rotate(0)"/>
+      <ellipse rx="9" ry="22" fill="#5a9a6a" opacity=".85" transform="rotate(72)"/>
+      <ellipse rx="9" ry="22" fill="#4a7a5a" opacity=".85" transform="rotate(144)"/>
+      <ellipse rx="9" ry="22" fill="#6aaa7a" opacity=".85" transform="rotate(216)"/>
+      <ellipse rx="9" ry="22" fill="#5a9a6a" opacity=".85" transform="rotate(288)"/>
+      <circle r="9" fill="#d4a84b"/>
+      <circle r="5" fill="#f0c870"/>
+    </g></svg>
+  </div>
+  <div class="cflower" style="--fs:clamp(28px,7vw,42px);--rot:-16deg;--td:0.11s;--fdur:4.3s;--fdelay:0.65s;top:4%;left:68%">
+    <svg viewBox="0 0 100 100"><g transform="translate(50,50)">
+      <ellipse rx="10" ry="22" fill="#4a7a5a" opacity=".85" transform="rotate(0)"/>
+      <ellipse rx="10" ry="22" fill="#3d6b4d" opacity=".85" transform="rotate(90)"/>
+      <ellipse rx="10" ry="22" fill="#5a8a6a" opacity=".85" transform="rotate(180)"/>
+      <ellipse rx="10" ry="22" fill="#4a7a5a" opacity=".85" transform="rotate(270)"/>
+      <circle r="9" fill="#c8960a"/>
+      <circle r="5" fill="#d4a84b"/>
+    </g></svg>
+  </div>
 </div>
-<div class="corner-border br" id="cb-br">
-  <span class="cf">🌹</span><span class="cf">🌷</span><span class="cf">🌺</span>
-  <span class="cf">🌸</span><span class="cf">🌹</span><span class="cf">🌷</span>
-  <span class="cf">🌿</span><span class="cf">🍀</span><span class="cf">🌺</span><span class="cf">🌹</span>
+
+<!-- BOTTOM RIGHT (scale -1,-1 mirror) -->
+<div class="corner-wrap br" id="cb-br">
+  <div class="cflower" style="--fs:clamp(75px,20vw,120px);--rot:-8deg;--td:0.07s;--fdur:4.3s;--fdelay:0.15s;top:-4%;left:-4%">
+    <svg viewBox="0 0 100 100"><g transform="translate(50,50)">
+      <ellipse rx="10" ry="26" fill="#6aaa7a" opacity=".9" transform="rotate(0)"/>
+      <ellipse rx="10" ry="26" fill="#4a7a5a" opacity=".9" transform="rotate(45)"/>
+      <ellipse rx="10" ry="26" fill="#5a8a6a" opacity=".9" transform="rotate(90)"/>
+      <ellipse rx="10" ry="26" fill="#3d6b4d" opacity=".9" transform="rotate(135)"/>
+      <ellipse rx="10" ry="26" fill="#4a7a5a" opacity=".9" transform="rotate(180)"/>
+      <ellipse rx="10" ry="26" fill="#6aaa7a" opacity=".9" transform="rotate(225)"/>
+      <ellipse rx="10" ry="26" fill="#4a7a5a" opacity=".9" transform="rotate(270)"/>
+      <ellipse rx="10" ry="26" fill="#5a8a6a" opacity=".9" transform="rotate(315)"/>
+      <circle r="11" fill="#c8960a"/>
+      <circle r="7"  fill="#d4a84b"/>
+    </g></svg>
+  </div>
+  <div class="cflower" style="--fs:clamp(48px,13vw,80px);--rot:10deg;--td:0.2s;--fdur:4.9s;--fdelay:0.6s;top:0%;left:42%">
+    <svg viewBox="0 0 100 100"><g transform="translate(50,50)">
+      <ellipse rx="9" ry="24" fill="#c8e6d0" opacity=".85" transform="rotate(0)"/>
+      <ellipse rx="9" ry="24" fill="#6aaa7a" opacity=".85" transform="rotate(60)"/>
+      <ellipse rx="9" ry="24" fill="#aad4b8" opacity=".85" transform="rotate(120)"/>
+      <ellipse rx="9" ry="24" fill="#c8e6d0" opacity=".85" transform="rotate(180)"/>
+      <ellipse rx="9" ry="24" fill="#6aaa7a" opacity=".85" transform="rotate(240)"/>
+      <ellipse rx="9" ry="24" fill="#aad4b8" opacity=".85" transform="rotate(300)"/>
+      <circle r="10" fill="#d4a84b"/>
+      <circle r="6"  fill="#f0d890"/>
+    </g></svg>
+  </div>
+  <div class="cflower" style="--fs:clamp(52px,14vw,88px);--rot:-12deg;--td:0.3s;--fdur:4.7s;--fdelay:1s;top:42%;left:-4%">
+    <svg viewBox="0 0 100 100"><g transform="translate(50,50)">
+      <ellipse rx="9" ry="24" fill="#4a7a5a" opacity=".9" transform="rotate(0)"/>
+      <ellipse rx="9" ry="24" fill="#5a8a6a" opacity=".9" transform="rotate(45)"/>
+      <ellipse rx="9" ry="24" fill="#3d6b4d" opacity=".9" transform="rotate(90)"/>
+      <ellipse rx="9" ry="24" fill="#6aaa7a" opacity=".9" transform="rotate(135)"/>
+      <ellipse rx="9" ry="24" fill="#4a7a5a" opacity=".9" transform="rotate(180)"/>
+      <ellipse rx="9" ry="24" fill="#5a8a6a" opacity=".9" transform="rotate(225)"/>
+      <ellipse rx="9" ry="24" fill="#4a7a5a" opacity=".9" transform="rotate(270)"/>
+      <ellipse rx="9" ry="24" fill="#3d6b4d" opacity=".9" transform="rotate(315)"/>
+      <circle r="10" fill="#d4a84b"/>
+      <circle r="6"  fill="#f0c870"/>
+    </g></svg>
+  </div>
+  <div class="cflower" style="--fs:clamp(35px,9vw,55px);--rot:-22deg;--td:0.4s;--fdur:4.1s;--fdelay:0.4s;top:26%;left:26%">
+    <svg viewBox="0 0 100 100"><g transform="translate(50,50)">
+      <ellipse rx="9" ry="22" fill="#4a7a5a" opacity=".85" transform="rotate(0)"/>
+      <ellipse rx="9" ry="22" fill="#6aaa7a" opacity=".85" transform="rotate(72)"/>
+      <ellipse rx="9" ry="22" fill="#3d6b4d" opacity=".85" transform="rotate(144)"/>
+      <ellipse rx="9" ry="22" fill="#5a8a6a" opacity=".85" transform="rotate(216)"/>
+      <ellipse rx="9" ry="22" fill="#4a7a5a" opacity=".85" transform="rotate(288)"/>
+      <circle r="9" fill="#c8960a"/>
+      <circle r="5" fill="#f0d890"/>
+    </g></svg>
+  </div>
+  <div class="cflower" style="--fs:clamp(28px,7vw,42px);--rot:16deg;--td:0.13s;--fdur:4.4s;--fdelay:0.8s;top:4%;left:68%">
+    <svg viewBox="0 0 100 100"><g transform="translate(50,50)">
+      <ellipse rx="10" ry="22" fill="#c8e6d0" opacity=".8" transform="rotate(0)"/>
+      <ellipse rx="10" ry="22" fill="#6aaa7a" opacity=".8" transform="rotate(90)"/>
+      <ellipse rx="10" ry="22" fill="#aad4b8" opacity=".8" transform="rotate(180)"/>
+      <ellipse rx="10" ry="22" fill="#5a8a6a" opacity=".8" transform="rotate(270)"/>
+      <circle r="9" fill="#d4a84b"/>
+      <circle r="5" fill="#f0c870"/>
+    </g></svg>
+  </div>
 </div>
 
 <!-- ══ ENVELOPE ══ -->
 <div class="env-wrap" id="envWrap">
   <div class="env-scene" id="envScene">
     <div class="env-body">
-      <div class="env-l"></div>
-      <div class="env-r"></div>
-      <div class="env-v"></div>
+      <div class="env-l"></div><div class="env-r"></div><div class="env-v"></div>
       <div class="env-peek">
         <div class="env-peek-line"></div>
         <div class="env-peek-line"></div>
@@ -336,33 +553,47 @@
       </svg>
     </div>
   </div>
-  <span class="env-label">✉ &nbsp; You Have a Special Invitation</span>
+  <span class="env-label"><i class="fa-regular fa-envelope"></i>You Have a Special Invitation</span>
   <div class="env-tap-hint">
-    <span class="tap-finger">👆</span>
+    <i class="fa-solid fa-hand-pointer"></i>
     <span>Tap to open</span>
   </div>
 </div>
 
-<!-- ══ CENTER REVEAL (couple + details) ══ -->
+<!-- ══ CENTER REVEAL ══ -->
 <div id="reveal-card">
   <div class="couple-photo-wrap">
     <img id="couplePhoto" src="" alt="Fred &amp; Chem"/>
     <div class="couple-photo-placeholder">F&C</div>
   </div>
 
-  <p class="reveal-tag">✦ &nbsp; You're Invited &nbsp; ✦</p>
+  <p class="reveal-tag">
+    <i class="fa-solid fa-star"></i> You're Invited <i class="fa-solid fa-star"></i>
+  </p>
   <div class="reveal-names">Fred <span class="reveal-amp">&amp;</span> Chem</div>
   <div class="reveal-divider"></div>
 
   <div class="reveal-details">
-    <div class="reveal-detail-row"><span class="di">📅</span><strong>September 5, 2026</strong> &nbsp;·&nbsp; Saturday, 1:00 PM</div>
-    <div class="reveal-detail-row"><span class="di">⛪</span>Birhen sa Kasilak Mindanao Shrine Parish</div>
-    <div class="reveal-detail-row"><span class="di">🥂</span>The Pavilion at the Watergate</div>
-    <div class="reveal-detail-row"><span class="di">📍</span>Butuan City, Agusan del Norte, Philippines</div>
+    <div class="reveal-detail-row">
+      <i class="fa-regular fa-calendar-days"></i>
+      <strong>September 5, 2026</strong> &nbsp;·&nbsp; Saturday, 1:00 PM
+    </div>
+    <div class="reveal-detail-row">
+      <i class="fa-solid fa-church"></i>
+      Birhen sa Kasilak Mindanao Shrine Parish
+    </div>
+    <div class="reveal-detail-row">
+      <i class="fa-solid fa-champagne-glasses"></i>
+      The Pavilion at the Watergate
+    </div>
+    <div class="reveal-detail-row">
+      <i class="fa-solid fa-location-dot"></i>
+      Butuan City, Agusan del Norte, Philippines
+    </div>
   </div>
 
   <button class="reveal-cta" id="viewDetailsBtn">
-    Tap to View Invitation &nbsp; →
+    Tap to View Invitation <i class="fa-solid fa-arrow-right"></i>
   </button>
 </div>
 
@@ -377,21 +608,19 @@ envScene.addEventListener('click', function () {
   if (opened) return;
   opened = true;
 
-  // 1. Flap opens
+  // 1. Flap opens + stop shake
   envScene.classList.add('opened');
 
-  // 2. Flower corners bloom in (staggered per corner)
+  // 2. Corner flower clusters bloom in (stagger each corner by 80ms)
   setTimeout(() => {
-    corners.forEach((c, i) => {
-      setTimeout(() => c.classList.add('show'), i * 80);
-    });
+    corners.forEach((c, i) => setTimeout(() => c.classList.add('show'), i * 80));
   }, 200);
 
   // 3. Envelope fades out
   setTimeout(() => envWrap.classList.add('hide'), 500);
 
-  // 4. Couple reveal fades in center
-  setTimeout(() => revealCard.classList.add('show'), 700);
+  // 4. Couple photo + details fade in center
+  setTimeout(() => revealCard.classList.add('show'), 750);
 });
 
 document.getElementById('viewDetailsBtn').addEventListener('click', () => {
@@ -430,7 +659,7 @@ document.addEventListener('click', (e) => {
   if (now - lastTap < 400) {
     for (let i = 0; i < 10; i++) {
       const h = document.createElement('span');
-      h.textContent = ['💚','🌿','✨','💗','🌸','🌺'][Math.floor(Math.random()*6)];
+      h.textContent = ['💚','🌿','✨','💗','⭐'][Math.floor(Math.random()*5)];
       h.style.cssText = `position:fixed;left:${e.clientX}px;top:${e.clientY}px;font-size:${1+Math.random()*1.5}rem;pointer-events:none;z-index:9999;animation:burstHeart 0.9s ease forwards;--dx:${(Math.random()-0.5)*120}px;--dy:${-(Math.random()*100+40)}px;`;
       document.body.appendChild(h);
       setTimeout(() => h.remove(), 950);
