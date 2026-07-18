@@ -880,16 +880,19 @@
 
 <script>
 // ── YOUTUBE MUSIC ──
-let musicPlaying = false, ytPlayer = null, ytReady = false;
-const isMobile = /Mobi|Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
+// Strategy: player loads muted (autoplay:0). On FIRST user gesture (touch or click),
+// we synchronously call unMute()+playVideo() — this is the only reliable way to get
+// audio in Messenger/Facebook in-app browsers and all mobile webviews.
+let musicPlaying = false, ytPlayer = null, ytReady = false, userUnlocked = false;
 
-function autoPlayMusic(){
-  if(!ytPlayer || !ytReady){ setTimeout(autoPlayMusic, 300); return; }
+function startMusic(){
+  // Must be called synchronously from a user gesture, or after ytReady when userUnlocked
   ytPlayer.unMute();
+  ytPlayer.setVolume(0);
   ytPlayer.seekTo(29);
   ytPlayer.playVideo();
   let vol = 0;
-  const fade = setInterval(()=>{ ytPlayer.unMute(); vol = Math.min(vol+2, 40); ytPlayer.setVolume(vol); if(vol>=40) clearInterval(fade); }, 120);
+  const fade = setInterval(()=>{ ytPlayer.unMute(); vol = Math.min(vol+3, 40); ytPlayer.setVolume(vol); if(vol>=40) clearInterval(fade); }, 100);
   musicPlaying = true;
   document.getElementById('musicIcon').className = 'fa-solid fa-pause';
   const btn = document.getElementById('musicBtn');
@@ -899,13 +902,27 @@ function autoPlayMusic(){
 function onYouTubeIframeAPIReady(){
   ytPlayer = new YT.Player('yt-player', {
     videoId: 'ZucRZH4FoM8',
-    playerVars:{ autoplay:1, controls:0, disablekb:1, fs:0, iv_load_policy:3, modestbranding:1, rel:0, start:29, loop:1, playlist:'ZucRZH4FoM8', mute:0 },
+    playerVars:{ autoplay:0, controls:0, disablekb:1, fs:0, iv_load_policy:3, modestbranding:1, rel:0, start:29, loop:1, playlist:'ZucRZH4FoM8', mute:1 },
     events:{
-      onReady: function(e){ ytReady = true; e.target.setVolume(0); },
+      onReady: function(e){
+        ytReady = true;
+        e.target.setVolume(0);
+        // If user already tapped before player was ready, play now
+        if(userUnlocked && !musicPlaying) startMusic();
+      },
       onStateChange: function(e){ if(e.data === YT.PlayerState.ENDED){ ytPlayer.seekTo(29); ytPlayer.playVideo(); } }
     }
   });
 }
+
+// First user gesture — unlock audio context synchronously
+function unlockAndPlay(){
+  userUnlocked = true;
+  if(ytPlayer && ytReady && !musicPlaying) startMusic();
+  // If ytReady not yet, onReady handler above will call startMusic()
+}
+document.addEventListener('touchstart', unlockAndPlay, { passive:true, once:true });
+document.addEventListener('click', unlockAndPlay, { once:true });
 
 function toggleMusic(){
   const icon = document.getElementById('musicIcon');
@@ -917,13 +934,7 @@ function toggleMusic(){
     if(btn) btn.classList.remove('playing');
     musicPlaying = false;
   } else {
-    ytPlayer.unMute();
-    ytPlayer.playVideo();
-    let vol = 0;
-    const fade = setInterval(()=>{ ytPlayer.unMute(); vol = Math.min(vol+2, 40); ytPlayer.setVolume(vol); if(vol>=40) clearInterval(fade); }, 100);
-    icon.className = 'fa-solid fa-pause';
-    if(btn) btn.classList.add('playing');
-    musicPlaying = true;
+    startMusic();
   }
 }
 
@@ -949,27 +960,8 @@ function burstCelebration(){
 }
 
 window.addEventListener('load', ()=>{
-  setTimeout(()=>{
-    burstCelebration();
-    // Always try autoplay — on mobile, the tap from index.html counts as a user gesture
-    // ?play=1 signals the user just tapped, so autoplay is allowed by most browsers
-    const fromTap = new URLSearchParams(window.location.search).get('play') === '1';
-    if (!isMobile || fromTap) { autoPlayMusic(); }
-  }, 400);
+  setTimeout(()=>{ burstCelebration(); }, 400);
 });
-
-// On first touch/click, always try to unmute + play (handles silent autoplay in Messenger/webview)
-const unlockAudio = () => {
-  if(ytPlayer && ytReady){
-    ytPlayer.unMute();
-    if(!musicPlaying) autoPlayMusic();
-    else ytPlayer.setVolume(40);
-  } else {
-    setTimeout(unlockAudio, 300);
-  }
-};
-document.addEventListener('touchstart', unlockAudio, { passive: true, once: true });
-document.addEventListener('click', unlockAudio, { once: true });
 
 // ── WELCOME STARS ──
 const wsEl = document.getElementById('welcomeStars');
