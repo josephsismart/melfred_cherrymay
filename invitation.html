@@ -915,11 +915,39 @@ function onYouTubeIframeAPIReady(){
   });
 }
 
+// Detect iOS (iPhone/iPad) — strictest autoplay policy
+const isIOS = /iPhone|iPad|iPod/i.test(navigator.userAgent);
+
+// Show tap-to-play hint on iOS only
+if(isIOS){
+  const hint = document.createElement('div');
+  hint.id = 'ios-music-hint';
+  hint.innerHTML = '<i class="fa-solid fa-music" style="margin-right:0.4rem;"></i> Tap anywhere to play music';
+  hint.style.cssText = `
+    position:fixed; bottom:1.4rem; left:50%; transform:translateX(-50%);
+    background:rgba(13,51,34,0.88); color:rgba(200,230,208,0.9);
+    font-family:'Poppins',sans-serif; font-size:0.75rem; font-weight:500;
+    padding:0.55rem 1.2rem; border-radius:50px;
+    border:1px solid rgba(200,230,208,0.18);
+    backdrop-filter:blur(10px); z-index:99999;
+    pointer-events:none; letter-spacing:0.05em;
+    animation:hintPulse 2s ease-in-out infinite;
+  `;
+  document.head.insertAdjacentHTML('beforeend', `<style>
+    @keyframes hintPulse { 0%,100%{opacity:0.7} 50%{opacity:1} }
+    #ios-music-hint.hide { opacity:0; transition:opacity 0.5s; }
+  </style>`);
+  document.addEventListener('DOMContentLoaded', ()=> document.body.appendChild(hint));
+}
+
 // First user gesture — unlock audio context synchronously
 function unlockAndPlay(){
   userUnlocked = true;
   if(ytPlayer && ytReady && !musicPlaying) startMusic();
   // If ytReady not yet, onReady handler above will call startMusic()
+  // Hide iOS hint
+  const hint = document.getElementById('ios-music-hint');
+  if(hint){ hint.classList.add('hide'); setTimeout(()=>hint.remove(), 500); }
 }
 document.addEventListener('touchstart', unlockAndPlay, { passive:true, once:true });
 document.addEventListener('click', unlockAndPlay, { once:true });
