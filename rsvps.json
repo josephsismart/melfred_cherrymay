@@ -1,13 +1,13 @@
 {
-  "rsvps": [
+  "rsvps": [],
+  "trash": [
     {
       "name": "JOSEPH SISMAR",
       "attending": true,
       "message": "Congrats Bay!",
-      "submitted": "2026-07-18 21:07:47 PHT"
-    }
-  ],
-  "trash": [
+      "submitted": "2026-07-18 21:07:47 PHT",
+      "deletedAt": "2026-07-18 21:09:12 PHT"
+    },
     {
       "name": "Fredo",
       "attending": false,
