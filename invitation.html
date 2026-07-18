@@ -167,7 +167,7 @@
     #story::after { content:''; position:absolute; top:0; left:0; right:0; bottom:0; background-image:radial-gradient(circle at 15% 25%,rgba(200,230,208,0.4) 0%,transparent 50%),radial-gradient(circle at 85% 75%,rgba(106,170,122,0.12) 0%,transparent 50%); pointer-events:none; z-index:0; }
     #story>.lt-section-header,#story>.lt-content { position:relative; z-index:1; }
     .lt-story-text { font-size:clamp(0.9rem,2vw,1rem); line-height:1.9; color:var(--text-mid); }
-    .lt-story-quote { font-family:'Poppins',sans-serif; font-style:normal; font-size:clamp(0.88rem,2vw,1rem); color:var(--rose); text-align:center; margin-top:1.5rem; padding-top:1.5rem; border-top:1px solid rgba(74,122,90,0.15); }
+    .lt-story-quote { font-family:'Poppins',sans-serif; font-style:italic; font-size:clamp(0.88rem,2vw,1rem); color:var(--rose); text-align:center; margin-top:1.5rem; padding-top:1.5rem; border-top:1px solid rgba(74,122,90,0.15); }
 
     /* ── GALLERY ── */
     #gallery { background:linear-gradient(160deg,#051a0a 0%,#0d3322 40%,#1a4d30 70%,#071a0e 100%); position:relative; overflow:hidden; }
@@ -439,7 +439,7 @@
 
   <!-- Music button -->
   <div class="music-btn-wrap reveal" style="cursor:pointer;" onclick="toggleMusic()" title="Toggle music">
-    <span class="music-arc-text"><i class="fa-solid fa-music"></i> &nbsp; To The Bone · Pamungkas</span>
+    <span class="music-arc-text"><i class="fa-solid fa-music"></i></span>
     <div class="music-btn" id="musicBtn"><i class="fa-solid fa-play" id="musicIcon"></i></div>
   </div>
 
@@ -885,10 +885,11 @@ const isMobile = /Mobi|Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
 
 function autoPlayMusic(){
   if(!ytPlayer || !ytReady){ setTimeout(autoPlayMusic, 300); return; }
+  ytPlayer.unMute();
   ytPlayer.seekTo(29);
   ytPlayer.playVideo();
   let vol = 0;
-  const fade = setInterval(()=>{ vol = Math.min(vol+2, 40); ytPlayer.setVolume(vol); if(vol>=40) clearInterval(fade); }, 120);
+  const fade = setInterval(()=>{ ytPlayer.unMute(); vol = Math.min(vol+2, 40); ytPlayer.setVolume(vol); if(vol>=40) clearInterval(fade); }, 120);
   musicPlaying = true;
   document.getElementById('musicIcon').className = 'fa-solid fa-pause';
   const btn = document.getElementById('musicBtn');
@@ -916,9 +917,10 @@ function toggleMusic(){
     if(btn) btn.classList.remove('playing');
     musicPlaying = false;
   } else {
+    ytPlayer.unMute();
     ytPlayer.playVideo();
     let vol = 0;
-    const fade = setInterval(()=>{ vol = Math.min(vol+2, 40); ytPlayer.setVolume(vol); if(vol>=40) clearInterval(fade); }, 100);
+    const fade = setInterval(()=>{ ytPlayer.unMute(); vol = Math.min(vol+2, 40); ytPlayer.setVolume(vol); if(vol>=40) clearInterval(fade); }, 100);
     icon.className = 'fa-solid fa-pause';
     if(btn) btn.classList.add('playing');
     musicPlaying = true;
@@ -956,13 +958,18 @@ window.addEventListener('load', ()=>{
   }, 400);
 });
 
-if(isMobile){
-  const startOnTouch = () => {
-    if(ytReady && !musicPlaying) autoPlayMusic();
-    document.removeEventListener('touchstart', startOnTouch);
-  };
-  document.addEventListener('touchstart', startOnTouch, { passive: true, once: true });
-}
+// On first touch/click, always try to unmute + play (handles silent autoplay in Messenger/webview)
+const unlockAudio = () => {
+  if(ytPlayer && ytReady){
+    ytPlayer.unMute();
+    if(!musicPlaying) autoPlayMusic();
+    else ytPlayer.setVolume(40);
+  } else {
+    setTimeout(unlockAudio, 300);
+  }
+};
+document.addEventListener('touchstart', unlockAudio, { passive: true, once: true });
+document.addEventListener('click', unlockAudio, { once: true });
 
 // ── WELCOME STARS ──
 const wsEl = document.getElementById('welcomeStars');
