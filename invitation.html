@@ -988,7 +988,14 @@ function burstCelebration(){
 }
 
 window.addEventListener('load', ()=>{
-  setTimeout(()=>{ burstCelebration(); }, 400);
+  setTimeout(()=>{
+    burstCelebration();
+    // ?play=1 means user just tapped the envelope on index.html —
+    // that tap counts as a user gesture so we can autoplay with sound
+    if(new URLSearchParams(window.location.search).get('play') === '1'){
+      unlockAndPlay();
+    }
+  }, 400);
 });
 
 // ── WELCOME STARS ──
