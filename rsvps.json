@@ -1,5 +1,12 @@
 {
-  "rsvps": [],
+  "rsvps": [
+    {
+      "name": "JOSEPH SISMAR",
+      "attending": true,
+      "message": "Congrats Bay!",
+      "submitted": "2026-07-18 21:07:47 PHT"
+    }
+  ],
   "trash": [
     {
       "name": "Fredo",
