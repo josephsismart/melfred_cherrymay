@@ -5,15 +5,16 @@
       "attending": false,
       "message": "Sprakak",
       "submitted": "2026-07-18 11:54:43 PHT"
-    },
+    }
+  ],
+  "trash": [
     {
       "name": "Fredo",
       "attending": true,
       "message": "Sprakak",
-      "submitted": "2026-07-18 11:54:07 PHT"
-    }
-  ],
-  "trash": [
+      "submitted": "2026-07-18 11:54:07 PHT",
+      "deletedAt": "2026-07-18 11:56:29 PHT"
+    },
     {
       "name": "JOSEPH SISMAR",
       "attending": true,
