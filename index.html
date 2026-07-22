@@ -555,38 +555,6 @@
   </div>
 </div>
 
-<!-- ══ CENTER REVEAL ══ -->
-<div id="reveal-card">
-
-  <p class="reveal-tag">
-    <i class="fa-solid fa-star"></i> You're Invited <i class="fa-solid fa-star"></i>
-  </p>
-  <div class="reveal-names">Fred <span class="reveal-amp">&amp;</span> Chem</div>
-  <div class="reveal-divider"></div>
-
-  <div class="reveal-details">
-    <div class="reveal-detail-row">
-      <i class="fa-regular fa-calendar-days"></i>
-      <strong>September 5, 2026</strong> &nbsp;·&nbsp; Saturday, 1:00 PM
-    </div>
-    <div class="reveal-detail-row">
-      <i class="fa-solid fa-church"></i>
-      Birhen sa Kasilak Mindanao Shrine Parish
-    </div>
-    <div class="reveal-detail-row">
-      <i class="fa-solid fa-champagne-glasses"></i>
-      The Pavilion at the Watergate
-    </div>
-    <div class="reveal-detail-row">
-      <i class="fa-solid fa-location-dot"></i>
-      Butuan City, Agusan del Norte, Philippines
-    </div>
-  </div>
-
-  <button class="reveal-cta" id="viewDetailsBtn">
-    Tap to View Invitation <i class="fa-solid fa-arrow-right"></i>
-  </button>
-</div>
 
 <script>
 const envScene   = document.getElementById('envScene');
@@ -599,23 +567,18 @@ envScene.addEventListener('click', function () {
   if (opened) return;
   opened = true;
 
-  // 1. Flap opens + stop shake
+  // 1. Flap opens
   envScene.classList.add('opened');
 
-  // 2. Corner flower clusters bloom in (stagger each corner by 80ms)
+  // 2. Corner flower clusters bloom in
   setTimeout(() => {
     corners.forEach((c, i) => setTimeout(() => c.classList.add('show'), i * 80));
   }, 200);
 
-  // 3. Envelope fades out
-  setTimeout(() => envWrap.classList.add('hide'), 500);
-
-  // 4. Couple photo + details fade in center
-  setTimeout(() => revealCard.classList.add('show'), 750);
-});
-
-document.getElementById('viewDetailsBtn').addEventListener('click', () => {
-  window.location.href = '/invitation.html?play=1';
+  // 3. Navigate directly to invitation
+  setTimeout(() => {
+    window.location.href = '/invitation.html?play=1';
+  }, 700);
 });
 
 // ── STARS ──
