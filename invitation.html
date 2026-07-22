@@ -175,7 +175,7 @@
     #gallery .lt-section-header h2 { color:#d0eedd; }
     #gallery .lt-content { color:rgba(200,230,208,0.85); }
     #gallery .lt-eyebrow { color:var(--rose-light); }
-    .lt-gallery-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:0.8rem; }
+    .lt-gallery-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:0.5rem; }
     .gallery-item { border-radius:14px; overflow:hidden; aspect-ratio:1; background:linear-gradient(135deg,rgba(74,122,90,0.2),rgba(30,82,56,0.3)); border:1px solid rgba(74,122,90,0.2); display:flex; flex-direction:column; align-items:center; justify-content:center; gap:0.4rem; }
     .gallery-item img { width:100%; height:100%; object-fit:cover; display:none; }
     .gallery-item-icon { font-size:1.5rem; opacity:0.4; color:#c8e6d0; }
@@ -430,7 +430,7 @@
 
   <!-- Couple Photo -->
   <div class="welcome-photo-wrap reveal">
-    <img id="couple-photo" src="" alt="Fred &amp; Chem"/>
+    <img id="couple-photo" src="/img_1699.jpg" alt="Fred &amp; Chem" style="display:block;"/>
     <div class="welcome-photo-placeholder" id="photo-placeholder-text">
       <i class="fa-regular fa-image"></i>
       <span style="font-size:0.75rem;font-weight:500;">Photo of<br><strong style="color:rgba(200,230,208,0.5);">Fred &amp;<br>Chem</strong><br><span style="font-size:0.6rem;opacity:0.5;">(coming soon)</span></span>
@@ -453,8 +453,6 @@
 <!-- ── WELCOME MESSAGE ── -->
 <section id="welcome-msg">
   <div class="welcome-msg-body">
-    <span class="welcome-msg-tag reveal"><i class="fa-solid fa-leaf"></i> &nbsp; A Message from the Couple &nbsp; <i class="fa-solid fa-leaf"></i></span>
-    <p class="welcome-msg-script reveal">With Love &amp; Gratitude</p>
     <div class="welcome-msg-divider reveal"><span>✦</span></div>
     <p class="welcome-msg-text reveal">
       With hearts full of gratitude, we warmly invite you to witness and celebrate the love we have found from the beautiful gift of friendship.
@@ -493,20 +491,23 @@
 
 <!-- ── GALLERY ── -->
 <section id="gallery">
-  <div class="lt-section-header">
-    <span class="lt-eyebrow">moments together</span>
-    <h2><i class="fa-solid fa-images"></i> Gallery</h2>
-  </div>
   <div class="lt-content">
     <div class="lt-gallery-grid">
-      <div class="gallery-item reveal"><i class="fa-regular fa-image gallery-item-icon"></i><span class="gallery-item-label">Photo 1</span></div>
-      <div class="gallery-item reveal"><i class="fa-regular fa-image gallery-item-icon"></i><span class="gallery-item-label">Photo 2</span></div>
-      <div class="gallery-item reveal"><i class="fa-regular fa-image gallery-item-icon"></i><span class="gallery-item-label">Photo 3</span></div>
-      <div class="gallery-item reveal"><i class="fa-regular fa-image gallery-item-icon"></i><span class="gallery-item-label">Photo 4</span></div>
-      <div class="gallery-item reveal"><i class="fa-regular fa-image gallery-item-icon"></i><span class="gallery-item-label">Photo 5</span></div>
-      <div class="gallery-item reveal"><i class="fa-regular fa-image gallery-item-icon"></i><span class="gallery-item-label">Photo 6</span></div>
+      <div class="gallery-item reveal"><img src="/img_0154.jpg" alt="Fred &amp; Chem" style="width:100%;height:100%;object-fit:cover;display:block;"/></div>
+      <div class="gallery-item reveal"><img src="/img_0396.jpg" alt="Fred &amp; Chem" style="width:100%;height:100%;object-fit:cover;display:block;"/></div>
+      <div class="gallery-item reveal"><img src="/img_0524.jpg" alt="Fred &amp; Chem" style="width:100%;height:100%;object-fit:cover;display:block;"/></div>
+      <div class="gallery-item reveal"><img src="/img_0629.jpg" alt="Fred &amp; Chem" style="width:100%;height:100%;object-fit:cover;display:block;"/></div>
+      <div class="gallery-item reveal"><img src="/img_0832.jpg" alt="Fred &amp; Chem" style="width:100%;height:100%;object-fit:cover;display:block;"/></div>
+      <div class="gallery-item reveal"><img src="/img_0856.jpg" alt="Fred &amp; Chem" style="width:100%;height:100%;object-fit:cover;display:block;"/></div>
+      <div class="gallery-item reveal"><img src="/img_0977.jpg" alt="Fred &amp; Chem" style="width:100%;height:100%;object-fit:cover;display:block;"/></div>
+      <div class="gallery-item reveal"><img src="/img_1223.jpg" alt="Fred &amp; Chem" style="width:100%;height:100%;object-fit:cover;display:block;"/></div>
+      <div class="gallery-item reveal"><img src="/img_1307.jpg" alt="Fred &amp; Chem" style="width:100%;height:100%;object-fit:cover;display:block;"/></div>
+      <div class="gallery-item reveal"><img src="/img_1699.jpg" alt="Fred &amp; Chem" style="width:100%;height:100%;object-fit:cover;display:block;"/></div>
+      <div class="gallery-item reveal"><img src="/img_4796.jpg" alt="Fred &amp; Chem" style="width:100%;height:100%;object-fit:cover;display:block;"/></div>
+      <div class="gallery-item reveal"><img src="/img_5062.jpg" alt="Fred &amp; Chem" style="width:100%;height:100%;object-fit:cover;display:block;"/></div>
+      <div class="gallery-item reveal"><img src="/img_5155.jpg" alt="Fred &amp; Chem" style="width:100%;height:100%;object-fit:cover;display:block;"/></div>
+      <div class="gallery-item reveal"><img src="/iphone_3670.jpg" alt="Fred &amp; Chem" style="width:100%;height:100%;object-fit:cover;display:block;"/></div>
     </div>
-    <p style="text-align:center;font-size:0.72rem;color:rgba(200,230,208,0.4);margin-top:1.2rem;letter-spacing:0.1em;">📸 Photos coming soon</p>
   </div>
 </section>
 
@@ -585,7 +586,6 @@
           </div>
           <p style="font-size:0.72rem;color:var(--text-mid);font-style:italic;margin-top:0.3rem;">Any shade of green is most welcome!</p>
         </div>
-        <p class="attire-note"><i class="fa-solid fa-ban" style="color:#c0392b;margin-right:0.4rem;"></i><strong>Please avoid white</strong> — reserved for the bride.</p>
         <p class="attire-text" style="font-size:0.78rem;"><i class="fa-solid fa-star" style="color:var(--gold);margin-right:0.3rem;"></i>Dress Code: <strong>Smart Casual to Formal</strong></p>
       </div>
     </div>
@@ -630,20 +630,20 @@
       <div class="ent-rule reveal"></div>
 
       <!-- Secondary Sponsors -->
-      <div class="reveal" style="display:flex;flex-direction:column;align-items:center;gap:0.8rem;width:100%;">
+      <div class="reveal" style="display:flex;flex-direction:column;align-items:center;gap:1rem;width:100%;">
         <p class="ent-sponsor-title"><i class="fa-solid fa-link"></i> &nbsp; SECONDARY SPONSORS</p>
-        <div class="ent-secondary">
-          <div class="ent-sec-block">
-            <span class="ent-sec-label">Cord</span>
-            <span class="ent-sec-name">Mr. Ariel Amora<br>&amp; Mrs. Carenna Amora</span>
+        <div style="display:flex;flex-direction:column;align-items:center;gap:0.9rem;width:100%;">
+          <div style="text-align:center;">
+            <p style="font-family:'Great Vibes',cursive;font-size:1.3rem;color:var(--rose);margin-bottom:0.2rem;">To bind us together</p>
+            <p style="font-size:0.85rem;color:var(--text);line-height:1.7;">Mr. Ariel Amora &nbsp;&amp;&nbsp; Mrs. Carenna Amora</p>
           </div>
-          <div class="ent-sec-block">
-            <span class="ent-sec-label">Veil</span>
-            <span class="ent-sec-name">Mr. Jared Culdora<br>&amp; Mrs. Amor Culdora</span>
+          <div style="text-align:center;">
+            <p style="font-family:'Great Vibes',cursive;font-size:1.3rem;color:var(--rose);margin-bottom:0.2rem;">To clothe us as one</p>
+            <p style="font-size:0.85rem;color:var(--text);line-height:1.7;">Mr. Jared Culdora &nbsp;&amp;&nbsp; Mrs. Amor Culdora</p>
           </div>
-          <div class="ent-sec-block">
-            <span class="ent-sec-label">Candle</span>
-            <span class="ent-sec-name">Mr. Malvin Malig-on<br>&amp; Mrs. Nadine Vera Malig-on</span>
+          <div style="text-align:center;">
+            <p style="font-family:'Great Vibes',cursive;font-size:1.3rem;color:var(--rose);margin-bottom:0.2rem;">To light our path</p>
+            <p style="font-size:0.85rem;color:var(--text);line-height:1.7;">Mr. Malvin Malig-on &nbsp;&amp;&nbsp; Mrs. Nadine Vera Malig-on</p>
           </div>
         </div>
       </div>
@@ -702,7 +702,7 @@
         </div>
         <div class="ent-kid-block" style="grid-column:1/-1;">
           <span class="ent-kid-label">Bible Bearer</span>
-          <span class="ent-kid-name">Bennison Paul Malig-on</span>
+          <span class="ent-kid-name">Benison Paul Malig-on</span>
         </div>
         </div>
         <div class="ent-kid-block">
@@ -725,7 +725,7 @@
     <div style="display:flex;flex-direction:column;gap:1rem;">
       <details class="faq-item reveal" open>
         <summary class="faq-q"><i class="fa-solid fa-circle-dot" style="color:var(--rose);font-size:0.7rem;margin-right:0.5rem"></i>What is the dress code?</summary>
-        <p class="faq-a">Smart casual or formal attire is preferred. Kindly avoid white as it is reserved for the bride. We'd love to see you in our theme color — shades of <strong>green</strong>! 💚</p>
+        <p class="faq-a">Smart casual or formal attire is preferred. We'd love to see you in our theme color — shades of <strong>green</strong>! 💚</p>
       </details>
       <details class="faq-item reveal">
         <summary class="faq-q"><i class="fa-solid fa-circle-dot" style="color:var(--rose);font-size:0.7rem;margin-right:0.5rem"></i>Is the reception seat assigned?</summary>
@@ -733,7 +733,7 @@
       </details>
       <details class="faq-item reveal">
         <summary class="faq-q"><i class="fa-solid fa-circle-dot" style="color:var(--rose);font-size:0.7rem;margin-right:0.5rem"></i>Can I bring a plus-one?</summary>
-        <p class="faq-a">Please let us know in advance when you RSVP if you plan to bring a guest so we can make the proper arrangements.</p>
+        <p class="faq-a">Due to limited space, we are unable to accommodate PLUS ONE. We hope for your kind understanding.</p>
       </details>
       <details class="faq-item reveal">
         <summary class="faq-q"><i class="fa-solid fa-circle-dot" style="color:var(--rose);font-size:0.7rem;margin-right:0.5rem"></i>Is there parking available?</summary>
@@ -794,14 +794,16 @@
         <!-- Response states -->
         <div class="rsvp-response yes-resp" id="yesResp">
           <div class="rsvp-resp-emoji">🎊💚🎉</div>
-          <div class="rsvp-resp-text" id="yesRespText">Yay! We can't wait to see you!</div>
-          <div class="rsvp-resp-sub">Please also confirm via the contact details below. See you on September 5! 🥂</div>
+          <div class="rsvp-resp-text" id="yesRespText">Thank you so much!</div>
+          <div class="rsvp-resp-sub">We're so happy you'll be joining us on our special day. We can't wait to celebrate with you!</div>
+          <div class="rsvp-resp-sub" style="margin-top:0.5rem;font-style:italic;color:var(--text-mid);font-size:0.78rem;">Your love, prayers, and presence are the greatest gifts we could ask for. However, should you wish to bless us further, a monetary gift towards our new beginning would be sincerely appreciated.</div>
           <button class="rsvp-change-btn" onclick="resetRsvp()"><i class="fa-solid fa-rotate-left"></i> Change my answer</button>
         </div>
         <div class="rsvp-response no-resp" id="noResp">
-          <div class="rsvp-resp-emoji">😢💔</div>
-          <div class="rsvp-resp-text" id="noRespText">Aww, we'll miss you so much!</div>
-          <div class="rsvp-resp-sub">We'll be thinking of you on our big day. Thank you for letting us know! 🙏</div>
+          <div class="rsvp-resp-emoji">🙏💚</div>
+          <div class="rsvp-resp-text" id="noRespText">Thank you so much for letting us know.</div>
+          <div class="rsvp-resp-sub">We completely understand and appreciate you taking the time to respond. We hope to see you another time. Wishing you all the best!</div>
+          <div class="rsvp-resp-sub" style="margin-top:0.5rem;font-style:italic;color:var(--text-mid);font-size:0.78rem;">Your love, prayers, and presence are the greatest gifts we could ask for. However, should you wish to bless us further, a monetary gift towards our new beginning would be sincerely appreciated.</div>
           <button class="rsvp-change-btn" onclick="resetRsvp()"><i class="fa-solid fa-rotate-left"></i> Change my answer</button>
         </div>
 
@@ -855,10 +857,7 @@
       </div>
     </div>
     <div class="std-photo-area">
-      <div class="std-photo-placeholder">
-        <i class="fa-regular fa-image"></i>
-        <span>Couple Photo</span>
-      </div>
+      <img src="/img_1699.jpg" alt="Fred &amp; Chem" style="width:100%;height:100%;object-fit:cover;display:block;"/>
     </div>
   </div>
   <div style="text-align:center;padding-bottom:2rem;">
