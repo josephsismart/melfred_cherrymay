@@ -199,12 +199,21 @@
     #gallery .lt-section-header h2 { color:#d0eedd; }
     #gallery .lt-content { color:rgba(200,230,208,0.85); }
     #gallery .lt-eyebrow { color:var(--rose-light); }
-    .lt-gallery-grid { display:grid; grid-template-columns:repeat(6,1fr); gap:0.45rem; }
-    .gallery-item { border-radius:12px; overflow:hidden; aspect-ratio:1; grid-column:span 2; }
+    .lt-gallery-grid { display:grid; grid-template-columns:repeat(6,1fr); gap:0; }
+    .gallery-item { border-radius:0; overflow:hidden; aspect-ratio:1; grid-column:span 2; cursor:pointer; position:relative; }
     .gallery-item.wide { grid-column:span 3; aspect-ratio:4/3; }
-    .gallery-item img { width:100%; height:100%; object-fit:cover; display:block; }
+    .gallery-item img { width:100%; height:100%; object-fit:cover; display:block; transition:transform 0.3s ease; }
+    .gallery-item:hover img { transform:scale(1.04); }
     .gallery-item-icon { font-size:1.5rem; opacity:0.4; color:#c8e6d0; }
     .gallery-item-label { font-size:0.55rem; letter-spacing:0.15em; text-transform:uppercase; color:rgba(200,230,208,0.45); }
+    /* Gallery modal */
+    #gallery-modal { display:none; position:fixed; inset:0; z-index:9999; background:rgba(0,0,0,0.92); align-items:center; justify-content:center; }
+    #gallery-modal.open { display:flex; }
+    #gallery-modal img { max-width:94vw; max-height:90vh; object-fit:contain; border-radius:8px; }
+    #gallery-modal-close { position:absolute; top:1rem; right:1.2rem; font-size:2rem; color:#fff; cursor:pointer; line-height:1; background:none; border:none; }
+    #gallery-modal-prev, #gallery-modal-next { position:absolute; top:50%; transform:translateY(-50%); font-size:2rem; color:#fff; cursor:pointer; background:rgba(255,255,255,0.1); border:none; border-radius:50%; width:44px; height:44px; display:flex; align-items:center; justify-content:center; }
+    #gallery-modal-prev { left:0.8rem; }
+    #gallery-modal-next { right:0.8rem; }
 
     /* ── DETAILS ── */
     #details { background:linear-gradient(160deg,#f4faf5 0%,#edf7f0 50%,#f4faf5 100%); }
@@ -408,7 +417,7 @@
       .detail-row { gap:0.6rem; }
       .detail-side-photo { flex:0 0 36%; }
       .lt-detail-card { padding:1rem 0.8rem; }
-      .lt-gallery-grid { grid-template-columns:repeat(6,1fr); gap:0.35rem; }
+      .lt-gallery-grid { grid-template-columns:repeat(6,1fr); gap:0; }
       .rsvp-card-body { padding: 1.5rem 1.2rem 2rem; }
       .rsvp-attend-btns { flex-direction: row; }
       .std-body { padding:2rem 1rem; }
@@ -536,22 +545,32 @@
 
 <!-- ── GALLERY ── -->
 <section id="gallery">
-  <div class="lt-content">
-    <div class="lt-gallery-grid">
-      <!-- Row 1: 3 photos -->
-      <div class="gallery-item reveal"><img src="/img_0154.jpg" alt="Fred &amp; Chem"/></div>
-      <div class="gallery-item reveal"><img src="/img_0524.jpg" alt="Fred &amp; Chem"/></div>
-      <div class="gallery-item reveal"><img src="/img_0629.jpg" alt="Fred &amp; Chem"/></div>
-      <!-- Row 2: 3 photos -->
-      <div class="gallery-item reveal"><img src="/img_0856.jpg" alt="Fred &amp; Chem"/></div>
-      <div class="gallery-item reveal"><img src="/img_1223.jpg" alt="Fred &amp; Chem"/></div>
-      <div class="gallery-item reveal"><img src="/iphone_3670.jpg" alt="Fred &amp; Chem"/></div>
-      <!-- Row 3: 2 wider photos -->
-      <div class="gallery-item wide reveal"><img src="/img_4796.jpg" alt="Fred &amp; Chem"/></div>
-      <div class="gallery-item wide reveal"><img src="/img_5062.jpg" alt="Fred &amp; Chem"/></div>
-    </div>
+  <div class="lt-section-header">
+    <span class="lt-eyebrow">captured memories</span>
+    <h2>Glimpse of Moments Together</h2>
+  </div>
+  <div class="lt-gallery-grid">
+    <!-- Row 1: 3 photos -->
+    <div class="gallery-item" data-idx="0"><img src="/img_0154.jpg" alt="Fred &amp; Chem"/></div>
+    <div class="gallery-item" data-idx="1"><img src="/img_0524.jpg" alt="Fred &amp; Chem"/></div>
+    <div class="gallery-item" data-idx="2"><img src="/img_0629.jpg" alt="Fred &amp; Chem"/></div>
+    <!-- Row 2: 3 photos -->
+    <div class="gallery-item" data-idx="3"><img src="/img_0856.jpg" alt="Fred &amp; Chem"/></div>
+    <div class="gallery-item" data-idx="4"><img src="/img_1223.jpg" alt="Fred &amp; Chem"/></div>
+    <div class="gallery-item" data-idx="5"><img src="/iphone_3670.jpg" alt="Fred &amp; Chem"/></div>
+    <!-- Row 3: 2 wider photos -->
+    <div class="gallery-item wide" data-idx="6"><img src="/img_4796.jpg" alt="Fred &amp; Chem"/></div>
+    <div class="gallery-item wide" data-idx="7"><img src="/img_5062.jpg" alt="Fred &amp; Chem"/></div>
   </div>
 </section>
+
+<!-- Gallery Modal -->
+<div id="gallery-modal">
+  <button id="gallery-modal-close">&#x2715;</button>
+  <button id="gallery-modal-prev">&#8592;</button>
+  <img id="gallery-modal-img" src="" alt=""/>
+  <button id="gallery-modal-next">&#8594;</button>
+</div>
 
 <!-- ── DETAILS ── -->
 <section id="details">
@@ -1189,6 +1208,26 @@ const io = new IntersectionObserver(entries=>{
 }, { threshold: 0.05 });
 reveals.forEach(el=>io.observe(el));
 setTimeout(()=>{ document.body.classList.add('content-ready'); }, 1200);
+
+// ── GALLERY MODAL ──
+(function(){
+  const imgs = ['/img_0154.jpg','/img_0524.jpg','/img_0629.jpg','/img_0856.jpg','/img_1223.jpg','/iphone_3670.jpg','/img_4796.jpg','/img_5062.jpg'];
+  const modal = document.getElementById('gallery-modal');
+  const modalImg = document.getElementById('gallery-modal-img');
+  let cur = 0;
+  function open(idx){ cur=idx; modalImg.src=imgs[cur]; modal.classList.add('open'); document.body.style.overflow='hidden'; }
+  function close(){ modal.classList.remove('open'); document.body.style.overflow=''; }
+  function prev(){ cur=(cur-1+imgs.length)%imgs.length; modalImg.src=imgs[cur]; }
+  function next(){ cur=(cur+1)%imgs.length; modalImg.src=imgs[cur]; }
+  document.querySelectorAll('.gallery-item').forEach(el=>{
+    el.addEventListener('click',()=>open(parseInt(el.dataset.idx)));
+  });
+  document.getElementById('gallery-modal-close').addEventListener('click',close);
+  document.getElementById('gallery-modal-prev').addEventListener('click',prev);
+  document.getElementById('gallery-modal-next').addEventListener('click',next);
+  modal.addEventListener('click',e=>{ if(e.target===modal) close(); });
+  document.addEventListener('keydown',e=>{ if(!modal.classList.contains('open')) return; if(e.key==='Escape') close(); if(e.key==='ArrowLeft') prev(); if(e.key==='ArrowRight') next(); });
+})();
 
 // ── ACTIVE NAV ──
 const navLinks = document.querySelectorAll('#pill-nav a[href^="#"]');
