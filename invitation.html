@@ -101,15 +101,16 @@
     .welcome-date { font-family:'Playfair Display',serif; font-size:clamp(0.9rem,2.5vw,1.2rem); color:rgba(200,230,208,0.85); font-weight:700; letter-spacing:0.1em; }
     .welcome-loc { font-size:clamp(0.6rem,1.8vw,0.75rem); color:rgba(200,230,208,0.5); letter-spacing:0.2em; text-transform:uppercase; }
     .welcome-photo-wrap {
-      width: min(240px,68vw); height: min(300px,82vw);
-      border-radius: 160px 160px 140px 140px;
-      overflow: hidden; border: 3px solid rgba(200,230,208,0.25);
-      box-shadow: 0 16px 50px rgba(0,0,0,0.4), 0 0 0 6px rgba(74,122,90,0.15);
-      background: linear-gradient(135deg,rgba(74,122,90,0.3),rgba(13,51,34,0.5));
-      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      width: min(320px,88vw); height: min(380px,100vw);
+      overflow: hidden; position: relative;
+      background: transparent;
     }
-    .welcome-photo-wrap img { width:100%; height:100%; object-fit:cover; display:none; }
-    .welcome-photo-placeholder { display:flex; flex-direction:column; align-items:center; gap:0.5rem; color:rgba(200,230,208,0.3); text-align:center; padding:1rem; font-size:0.75rem; }
+    .welcome-photo-wrap img {
+      width:100%; height:100%; object-fit:cover; display:block;
+      -webkit-mask-image: radial-gradient(ellipse 90% 85% at 50% 45%, black 40%, transparent 80%);
+      mask-image: radial-gradient(ellipse 90% 85% at 50% 45%, black 40%, transparent 80%);
+    }
+    .welcome-photo-placeholder { display:none; }
     .welcome-photo-placeholder i { font-size:2.5rem; }
     .music-btn-wrap { display:flex; flex-direction:column; align-items:center; gap:0.4rem; }
     .music-arc-text { font-size:0.58rem; font-weight:600; letter-spacing:0.28em; color:rgba(200,230,208,0.55); text-transform:uppercase; }
@@ -168,6 +169,24 @@
     #story>.lt-section-header,#story>.lt-content { position:relative; z-index:1; }
     .lt-story-text { font-size:clamp(0.9rem,2vw,1rem); line-height:1.9; color:var(--text-mid); }
     .lt-story-quote { font-family:'Poppins',sans-serif; font-style:italic; font-size:clamp(0.88rem,2vw,1rem); color:var(--rose); text-align:center; margin-top:1.5rem; padding-top:1.5rem; border-top:1px solid rgba(74,122,90,0.15); }
+    /* Story photo-text pairs */
+    .story-pair {
+      display: flex; align-items: center; gap: 1.4rem;
+      margin-bottom: 2.2rem;
+    }
+    .story-pair.reverse { flex-direction: row-reverse; }
+    .story-pair-photo {
+      flex: 0 0 38%; max-width: 160px;
+      border-radius: 14px; overflow: hidden;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.12);
+    }
+    .story-pair-photo img { width:100%; height:100%; object-fit:cover; display:block; aspect-ratio:3/4; }
+    .story-pair-text { flex: 1; }
+    .story-closing {
+      text-align:center; padding-top:1rem;
+      font-size:clamp(0.88rem,2vw,0.95rem); line-height:1.9;
+      color:var(--rose); font-style:italic; font-weight:500;
+    }
 
     /* ── GALLERY ── */
     #gallery { background:linear-gradient(160deg,#051a0a 0%,#0d3322 40%,#1a4d30 70%,#071a0e 100%); position:relative; overflow:hidden; }
@@ -175,20 +194,27 @@
     #gallery .lt-section-header h2 { color:#d0eedd; }
     #gallery .lt-content { color:rgba(200,230,208,0.85); }
     #gallery .lt-eyebrow { color:var(--rose-light); }
-    .lt-gallery-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:0.5rem; }
-    .gallery-item { border-radius:14px; overflow:hidden; aspect-ratio:1; background:linear-gradient(135deg,rgba(74,122,90,0.2),rgba(30,82,56,0.3)); border:1px solid rgba(74,122,90,0.2); display:flex; flex-direction:column; align-items:center; justify-content:center; gap:0.4rem; }
-    .gallery-item img { width:100%; height:100%; object-fit:cover; display:none; }
+    .lt-gallery-grid { display:grid; grid-template-columns:repeat(6,1fr); gap:0.45rem; }
+    .gallery-item { border-radius:12px; overflow:hidden; aspect-ratio:1; grid-column:span 2; }
+    .gallery-item.wide { grid-column:span 3; aspect-ratio:4/3; }
+    .gallery-item img { width:100%; height:100%; object-fit:cover; display:block; }
     .gallery-item-icon { font-size:1.5rem; opacity:0.4; color:#c8e6d0; }
     .gallery-item-label { font-size:0.55rem; letter-spacing:0.15em; text-transform:uppercase; color:rgba(200,230,208,0.45); }
 
     /* ── DETAILS ── */
     #details { background:linear-gradient(160deg,#f4faf5 0%,#edf7f0 50%,#f4faf5 100%); }
-    .lt-details-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:1.2rem; }
-    .lt-detail-card { background:#fff; border-radius:20px; padding:1.8rem 1.2rem; text-align:center; box-shadow:0 8px 30px rgba(74,122,90,0.08); border:1px solid rgba(74,122,90,0.1); display:flex; flex-direction:column; align-items:center; gap:0.7rem; }
-    .lt-detail-card-icon { width:52px; height:52px; border-radius:50%; background:linear-gradient(135deg,var(--rose),var(--wine)); color:#fff; display:flex; align-items:center; justify-content:center; font-size:1.2rem; }
+    .lt-details-grid { display:flex; flex-direction:column; gap:1rem; }
+    .detail-row { display:flex; gap:0.8rem; align-items:stretch; }
+    .detail-row .lt-detail-card { flex:1; }
+    .detail-side-photo { flex:0 0 38%; border-radius:16px; overflow:hidden; min-height:160px; }
+    .detail-side-photo img { width:100%; height:100%; object-fit:cover; display:block; }
+    .lt-detail-card { background:#fff; border-radius:20px; padding:1.4rem 1rem; text-align:center; box-shadow:0 8px 30px rgba(74,122,90,0.08); border:1px solid rgba(74,122,90,0.1); display:flex; flex-direction:column; align-items:center; gap:0.6rem; position:relative; overflow:hidden; }
+    .detail-card-bg { position:absolute; inset:0; width:100%; height:100%; object-fit:cover; opacity:0.12; z-index:0; }
+    .lt-detail-card > *:not(.detail-card-bg) { position:relative; z-index:1; }
+    .lt-detail-card-icon { width:48px; height:48px; border-radius:50%; background:linear-gradient(135deg,var(--rose),var(--wine)); color:#fff; display:flex; align-items:center; justify-content:center; font-size:1.1rem; }
     .lt-detail-card-title { font-size:0.6rem; font-weight:700; letter-spacing:0.2em; text-transform:uppercase; color:var(--rose); }
-    .lt-detail-card-name { font-family:'Playfair Display',serif; font-size:clamp(0.95rem,2vw,1.1rem); font-weight:700; color:var(--wine); line-height:1.3; }
-    .lt-detail-card-addr { font-size:0.78rem; color:var(--text-mid); line-height:1.6; }
+    .lt-detail-card-name { font-family:'Playfair Display',serif; font-size:clamp(0.9rem,2vw,1.05rem); font-weight:700; color:var(--wine); line-height:1.3; }
+    .lt-detail-card-addr { font-size:0.75rem; color:var(--text-mid); line-height:1.6; }
     .lt-timeline { display:flex; flex-direction:column; gap:0.8rem; margin-top:1.5rem; width:100%; max-width:500px; }
     .lt-timeline-item { display:flex; align-items:center; gap:0.8rem; padding:0.7rem 1rem; background:#fff; border-radius:12px; box-shadow:0 3px 12px rgba(74,122,90,0.06); border-left:3px solid var(--rose-light); }
     .lt-timeline-time { font-size:0.65rem; font-weight:700; color:var(--rose); min-width:68px; letter-spacing:0.05em; }
@@ -318,7 +344,7 @@
     /* ── SAVE THE DATE ── */
     #save-the-date { background:linear-gradient(160deg,#f4faf5 0%,#edf7f0 50%,#f0faf4 100%); position:relative; overflow:hidden; }
     .std-header { background:var(--wine); color:#fff; text-align:center; font-family:'Poppins',sans-serif; font-size:clamp(0.8rem,2.5vw,1.1rem); font-weight:800; letter-spacing:0.35em; text-transform:uppercase; padding:1.1rem 2rem; }
-    .std-body { display:flex; flex-wrap:wrap; align-items:center; justify-content:center; gap:2rem; padding:3rem 2rem; position:relative; min-height:460px; max-width:900px; margin:0 auto; }
+    .std-body { display:flex; flex-direction:column; align-items:center; gap:2rem; padding:3rem 2rem 2rem; position:relative; max-width:680px; margin:0 auto; }
     .std-spark { position:absolute; color:var(--wine); font-size:1rem; opacity:0.4; animation:sparkPulse 2s infinite alternate; }
     .std-spark.s2 { font-size:1.8rem; opacity:0.2; }
     @keyframes sparkPulse { 0%{opacity:0.15;transform:scale(0.8)} 100%{opacity:0.6;transform:scale(1.2)} }
@@ -340,8 +366,9 @@
     .std-cd-num { font-family:'Playfair Display',serif; font-size:clamp(1.3rem,3vw,1.8rem); font-weight:700; color:var(--wine); line-height:1; }
     .std-cd-lbl { font-size:0.43rem; letter-spacing:0.1em; text-transform:uppercase; color:var(--text-mid); }
     .std-cd-sep { font-size:1.1rem; color:var(--rose); font-weight:700; margin-bottom:0.8rem; }
-    .std-photo-area { flex:0 0 auto; width:min(240px,65vw); height:min(310px,82vw); border-radius:140px 140px 120px 120px; overflow:hidden; box-shadow:0 12px 40px rgba(13,51,34,0.12); border:3px solid rgba(74,122,90,0.18); position:relative; z-index:1; }
-    .std-photo-placeholder { width:100%; height:100%; background:linear-gradient(135deg,#c8e6d0,#edf7f0); display:flex; flex-direction:column; align-items:center; justify-content:center; gap:0.5rem; color:rgba(13,51,34,0.3); font-size:0.75rem; }
+    .std-photo-area { width:100%; max-width:600px; border-radius:16px; overflow:hidden; position:relative; z-index:1; aspect-ratio:16/9; }
+    .std-photo-area img { width:100%; height:100%; object-fit:cover; display:block; -webkit-mask-image:linear-gradient(to bottom, transparent 0%, black 12%, black 88%, transparent 100%); mask-image:linear-gradient(to bottom, transparent 0%, black 12%, black 88%, transparent 100%); }
+    .std-photo-placeholder { display:none; }
     .std-photo-placeholder i { font-size:2rem; }
     .std-top-btn { display:flex; margin:0 auto 1.5rem; width:44px; height:44px; border-radius:50%; background:var(--wine); color:#fff; border:none; cursor:pointer; font-size:1rem; align-items:center; justify-content:center; box-shadow:0 4px 16px rgba(13,51,34,0.25); transition:transform 0.3s; }
     .std-top-btn:hover { transform:translateY(-3px); }
@@ -372,14 +399,15 @@
       .lt-section-header { padding:1.4rem 1rem 0.8rem; }
       #welcome { padding:2rem 1rem 2rem; gap:0.8rem; }
       .welcome-script { font-size:clamp(2.8rem,13vw,4rem); }
-      .lt-details-grid { grid-template-columns:1fr !important; gap:0.8rem; }
-      .lt-detail-card { padding:1.2rem 1rem; }
-      .lt-gallery-grid { grid-template-columns:1fr 1fr; gap:0.5rem; }
+      .detail-row { gap:0.6rem; }
+      .detail-side-photo { flex:0 0 36%; }
+      .lt-detail-card { padding:1rem 0.8rem; }
+      .lt-gallery-grid { grid-template-columns:repeat(6,1fr); gap:0.35rem; }
       .rsvp-card-body { padding: 1.5rem 1.2rem 2rem; }
       .rsvp-attend-btns { flex-direction: row; }
-      .std-body { flex-direction:column; align-items:center; padding:2rem 1rem; min-height:auto; }
+      .std-body { padding:2rem 1rem; }
       .std-inner { align-items:center; text-align:center; }
-      .std-photo-area { width:min(200px,60vw); height:min(260px,78vw); }
+      .std-photo-area { max-width:100%; }
       .ent-kids-grid { grid-template-columns:repeat(2,1fr); }
       .ent-secondary { grid-template-columns:1fr; }
       .ent-side-by-side { grid-template-columns:1fr; }
@@ -430,11 +458,7 @@
 
   <!-- Couple Photo -->
   <div class="welcome-photo-wrap reveal">
-    <img id="couple-photo" src="/img_1699.jpg" alt="Fred &amp; Chem" style="display:block;"/>
-    <div class="welcome-photo-placeholder" id="photo-placeholder-text">
-      <i class="fa-regular fa-image"></i>
-      <span style="font-size:0.75rem;font-weight:500;">Photo of<br><strong style="color:rgba(200,230,208,0.5);">Fred &amp;<br>Chem</strong><br><span style="font-size:0.6rem;opacity:0.5;">(coming soon)</span></span>
-    </div>
+    <img id="couple-photo" src="/img_1699.jpg" alt="Fred &amp; Chem"/>
   </div>
 
   <!-- Music button -->
@@ -472,15 +496,43 @@
     <h2><i class="fa-solid fa-book-heart"></i> Our Story</h2>
   </div>
   <div class="lt-content">
-    <p class="lt-story-text reveal">Our story began with a simple friendship. We were just two people who shared laughter, hopes, dreams, and even life's challenges together.</p>
-    <br>
-    <p class="lt-story-text reveal">Without realizing it, those ordinary moments became our most treasured memories. The person who was once simply a friend became the one we turned to in every season of life.</p>
-    <br>
-    <p class="lt-story-text reveal">In each other, we found space where our hearts felt safe. We didn't simply fall in love — we fell in love with the way we could be completely ourselves.</p>
-    <br>
-    <p class="lt-story-text reveal">Today, we are grateful not only for the love that brought us here, but also for the journey that shaped it. Every step, every shared experience, and every shared moment has led us into something deeper.</p>
-    <br>
-    <p class="lt-story-text reveal" style="color:var(--rose);font-family:'Poppins',sans-serif;font-style:normal;">
+    <div class="story-pair reveal">
+      <div class="story-pair-photo">
+        <img src="/img_1307.jpg" alt="Fred &amp; Chem"/>
+      </div>
+      <div class="story-pair-text">
+        <p class="lt-story-text">Our story began with a simple friendship. We were just two people who shared laughter, hopes, dreams, and even life's challenges together.</p>
+      </div>
+    </div>
+
+    <div class="story-pair reverse reveal">
+      <div class="story-pair-photo">
+        <img src="/img_0977.jpg" alt="Fred &amp; Chem"/>
+      </div>
+      <div class="story-pair-text">
+        <p class="lt-story-text">Without realizing it, those ordinary moments became our most treasured memories. The person who was once simply a friend became the one we turned to in every season of life.</p>
+      </div>
+    </div>
+
+    <div class="story-pair reveal">
+      <div class="story-pair-photo">
+        <img src="/img_5062.jpg" alt="Fred &amp; Chem"/>
+      </div>
+      <div class="story-pair-text">
+        <p class="lt-story-text">In each other, we found space where our hearts felt safe. We didn't simply fall in love — we fell in love with the way we could be completely ourselves.</p>
+      </div>
+    </div>
+
+    <div class="story-pair reverse reveal">
+      <div class="story-pair-photo">
+        <img src="/img_4796.jpg" alt="Fred &amp; Chem"/>
+      </div>
+      <div class="story-pair-text">
+        <p class="lt-story-text">Today, we are grateful not only for the love that brought us here, but also for the journey that shaped it. Every step, every shared experience, and every shared moment has led us into something deeper.</p>
+      </div>
+    </div>
+
+    <p class="story-closing reveal">
       From friendship came trust.<br>
       From trust came love.<br>
       And from love comes a lifetime of beautiful moments yet to unfold.
@@ -493,20 +545,17 @@
 <section id="gallery">
   <div class="lt-content">
     <div class="lt-gallery-grid">
-      <div class="gallery-item reveal"><img src="/img_0154.jpg" alt="Fred &amp; Chem" style="width:100%;height:100%;object-fit:cover;display:block;"/></div>
-      <div class="gallery-item reveal"><img src="/img_0396.jpg" alt="Fred &amp; Chem" style="width:100%;height:100%;object-fit:cover;display:block;"/></div>
-      <div class="gallery-item reveal"><img src="/img_0524.jpg" alt="Fred &amp; Chem" style="width:100%;height:100%;object-fit:cover;display:block;"/></div>
-      <div class="gallery-item reveal"><img src="/img_0629.jpg" alt="Fred &amp; Chem" style="width:100%;height:100%;object-fit:cover;display:block;"/></div>
-      <div class="gallery-item reveal"><img src="/img_0832.jpg" alt="Fred &amp; Chem" style="width:100%;height:100%;object-fit:cover;display:block;"/></div>
-      <div class="gallery-item reveal"><img src="/img_0856.jpg" alt="Fred &amp; Chem" style="width:100%;height:100%;object-fit:cover;display:block;"/></div>
-      <div class="gallery-item reveal"><img src="/img_0977.jpg" alt="Fred &amp; Chem" style="width:100%;height:100%;object-fit:cover;display:block;"/></div>
-      <div class="gallery-item reveal"><img src="/img_1223.jpg" alt="Fred &amp; Chem" style="width:100%;height:100%;object-fit:cover;display:block;"/></div>
-      <div class="gallery-item reveal"><img src="/img_1307.jpg" alt="Fred &amp; Chem" style="width:100%;height:100%;object-fit:cover;display:block;"/></div>
-      <div class="gallery-item reveal"><img src="/img_1699.jpg" alt="Fred &amp; Chem" style="width:100%;height:100%;object-fit:cover;display:block;"/></div>
-      <div class="gallery-item reveal"><img src="/img_4796.jpg" alt="Fred &amp; Chem" style="width:100%;height:100%;object-fit:cover;display:block;"/></div>
-      <div class="gallery-item reveal"><img src="/img_5062.jpg" alt="Fred &amp; Chem" style="width:100%;height:100%;object-fit:cover;display:block;"/></div>
-      <div class="gallery-item reveal"><img src="/img_5155.jpg" alt="Fred &amp; Chem" style="width:100%;height:100%;object-fit:cover;display:block;"/></div>
-      <div class="gallery-item reveal"><img src="/iphone_3670.jpg" alt="Fred &amp; Chem" style="width:100%;height:100%;object-fit:cover;display:block;"/></div>
+      <!-- Row 1: 3 photos -->
+      <div class="gallery-item reveal"><img src="/img_0154.jpg" alt="Fred &amp; Chem"/></div>
+      <div class="gallery-item reveal"><img src="/img_0524.jpg" alt="Fred &amp; Chem"/></div>
+      <div class="gallery-item reveal"><img src="/img_0629.jpg" alt="Fred &amp; Chem"/></div>
+      <!-- Row 2: 3 photos -->
+      <div class="gallery-item reveal"><img src="/img_0856.jpg" alt="Fred &amp; Chem"/></div>
+      <div class="gallery-item reveal"><img src="/img_1223.jpg" alt="Fred &amp; Chem"/></div>
+      <div class="gallery-item reveal"><img src="/iphone_3670.jpg" alt="Fred &amp; Chem"/></div>
+      <!-- Row 3: 2 wider photos -->
+      <div class="gallery-item wide reveal"><img src="/img_4796.jpg" alt="Fred &amp; Chem"/></div>
+      <div class="gallery-item wide reveal"><img src="/img_5062.jpg" alt="Fred &amp; Chem"/></div>
     </div>
   </div>
 </section>
@@ -519,32 +568,50 @@
   </div>
   <div class="lt-content" style="display:flex;flex-direction:column;align-items:center;gap:2rem;">
     <div class="lt-details-grid reveal" style="width:100%;">
-      <!-- Date & Time FIRST -->
-      <div class="lt-detail-card">
-        <div class="lt-detail-card-icon"><i class="fa-solid fa-clock"></i></div>
-        <div class="lt-detail-card-title">Date &amp; Time</div>
-        <div class="lt-detail-card-name">September 5, 2026</div>
-        <div class="lt-detail-card-addr">Saturday<br>Ceremony at 1:00 PM</div>
+      <!-- Date & Time -->
+      <div class="detail-row">
+        <div class="lt-detail-card">
+          <img class="detail-card-bg" src="/img_0396.jpg" alt=""/>
+          <div class="lt-detail-card-icon"><i class="fa-solid fa-clock"></i></div>
+          <div class="lt-detail-card-title">Date &amp; Time</div>
+          <div class="lt-detail-card-name">September 5, 2026</div>
+          <div class="lt-detail-card-addr">Saturday<br>Ceremony at 1:00 PM</div>
+        </div>
+        <div class="detail-side-photo">
+          <img src="/img_0832.jpg" alt="Fred &amp; Chem"/>
+        </div>
       </div>
-      <!-- Ceremony SECOND -->
-      <div class="lt-detail-card">
-        <div class="lt-detail-card-icon"><i class="fa-solid fa-church"></i></div>
-        <div class="lt-detail-card-title">Ceremony</div>
-        <div class="lt-detail-card-name">Birhen sa Kasilak<br>Mindanao Shrine Parish</div>
-        <div class="lt-detail-card-addr">Butuan City, Agusan del Norte<br>Philippines</div>
-        <a href="https://www.google.com/maps/place/XG9M%2BQHP+BIrhen+Sa+Kasilak+Shrine,+Butuan+City,+8600+Agusan+del+Norte/@8.970787,125.5357054,193a,35y,220.69h,45t/data=!3m1!1e3!4m6!3m5!1s0x3301c077695e8de3:0x446cb1e7585eb1c!8m2!3d8.9694034!4d125.533805!16s%2Fg%2F11bvtgsmhd?entry=ttu" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:0.4rem;margin-top:0.5rem;font-size:0.7rem;font-weight:600;color:var(--rose);text-decoration:none;padding:0.35rem 0.9rem;border:1.5px solid rgba(74,122,90,0.25);border-radius:50px;transition:all 0.2s;" onmouseover="this.style.background='var(--rose)';this.style.color='#fff'" onmouseout="this.style.background='';this.style.color='var(--rose)'">
-          <i class="fa-solid fa-location-dot"></i> Get Directions
-        </a>
+      <!-- Ceremony -->
+      <div class="detail-row">
+        <div class="lt-detail-card">
+          <img class="detail-card-bg" src="/img_1223.jpg" alt=""/>
+          <div class="lt-detail-card-icon"><i class="fa-solid fa-church"></i></div>
+          <div class="lt-detail-card-title">Ceremony</div>
+          <div class="lt-detail-card-name">Birhen sa Kasilak<br>Mindanao Shrine Parish</div>
+          <div class="lt-detail-card-addr">Butuan City, Agusan del Norte<br>Philippines</div>
+          <a href="https://www.google.com/maps/place/XG9M%2BQHP+BIrhen+Sa+Kasilak+Shrine,+Butuan+City,+8600+Agusan+del+Norte/@8.970787,125.5357054,193a,35y,220.69h,45t/data=!3m1!1e3!4m6!3m5!1s0x3301c077695e8de3:0x446cb1e7585eb1c!8m2!3d8.9694034!4d125.533805!16s%2Fg%2F11bvtgsmhd?entry=ttu" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:0.4rem;margin-top:0.5rem;font-size:0.7rem;font-weight:600;color:var(--rose);text-decoration:none;padding:0.35rem 0.9rem;border:1.5px solid rgba(74,122,90,0.25);border-radius:50px;transition:all 0.2s;" onmouseover="this.style.background='var(--rose)';this.style.color='#fff'" onmouseout="this.style.background='';this.style.color='var(--rose)'">
+            <i class="fa-solid fa-location-dot"></i> Get Directions
+          </a>
+        </div>
+        <div class="detail-side-photo">
+          <img src="/img_1307.jpg" alt="Fred &amp; Chem"/>
+        </div>
       </div>
-      <!-- Reception THIRD -->
-      <div class="lt-detail-card">
-        <div class="lt-detail-card-icon"><i class="fa-solid fa-champagne-glasses"></i></div>
-        <div class="lt-detail-card-title">Reception</div>
-        <div class="lt-detail-card-name">The Pavilion<br>at the Watergate</div>
-        <div class="lt-detail-card-addr">Butuan City<br>Philippines</div>
-        <a href="https://www.google.com/maps/place/The+Pavilion+at+the+Watergate/@8.9505747,125.5286355,214m/data=!3m1!1e3!4m6!3m5!1s0x3301c1d1dd7590b3:0x7840633b2e090768!8m2!3d8.9505241!4d125.5286754!16s%2Fg%2F11fq8jj_hm?entry=ttu" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:0.4rem;margin-top:0.5rem;font-size:0.7rem;font-weight:600;color:var(--rose);text-decoration:none;padding:0.35rem 0.9rem;border:1.5px solid rgba(74,122,90,0.25);border-radius:50px;transition:all 0.2s;" onmouseover="this.style.background='var(--rose)';this.style.color='#fff'" onmouseout="this.style.background='';this.style.color='var(--rose)'">
-          <i class="fa-solid fa-location-dot"></i> Get Directions
-        </a>
+      <!-- Reception -->
+      <div class="detail-row">
+        <div class="lt-detail-card">
+          <img class="detail-card-bg" src="/img_5155.jpg" alt=""/>
+          <div class="lt-detail-card-icon"><i class="fa-solid fa-champagne-glasses"></i></div>
+          <div class="lt-detail-card-title">Reception</div>
+          <div class="lt-detail-card-name">The Pavilion<br>at the Watergate</div>
+          <div class="lt-detail-card-addr">Butuan City<br>Philippines</div>
+          <a href="https://www.google.com/maps/place/The+Pavilion+at+the+Watergate/@8.9505747,125.5286355,214m/data=!3m1!1e3!4m6!3m5!1s0x3301c1d1dd7590b3:0x7840633b2e090768!8m2!3d8.9505241!4d125.5286754!16s%2Fg%2F11fq8jj_hm?entry=ttu" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:0.4rem;margin-top:0.5rem;font-size:0.7rem;font-weight:600;color:var(--rose);text-decoration:none;padding:0.35rem 0.9rem;border:1.5px solid rgba(74,122,90,0.25);border-radius:50px;transition:all 0.2s;" onmouseover="this.style.background='var(--rose)';this.style.color='#fff'" onmouseout="this.style.background='';this.style.color='var(--rose)'">
+            <i class="fa-solid fa-location-dot"></i> Get Directions
+          </a>
+        </div>
+        <div class="detail-side-photo">
+          <img src="/img_5155.jpg" alt="Fred &amp; Chem"/>
+        </div>
       </div>
     </div>
 
@@ -601,49 +668,55 @@
   <div class="ent-card-wrap">
     <div class="ent-card">
 
-      <!-- Parents -->
-      <div class="reveal" style="display:flex;flex-direction:column;align-items:center;gap:0.6rem;width:100%;">
-        <p class="ent-script">Parents of the Groom</p>
-        <p class="ent-name-line">Mr. Freddie T. Espijon &amp; Mrs. Imelda J. Espijon</p>
-        <div class="ent-rule"></div>
-        <p class="ent-script">Parents of the Bride</p>
-        <p class="ent-name-line">Mr. Rogelio G. Malig-on<br>and the late Mrs. Josephine B. Malig-on</p>
-      </div>
-
-      <div class="ent-rule reveal"></div>
-
-      <!-- Principal Sponsors -->
-      <div class="reveal" style="display:flex;flex-direction:column;align-items:center;gap:0.8rem;width:100%;">
-        <p class="ent-sponsor-title"><i class="fa-solid fa-crown"></i> &nbsp; PRINCIPAL SPONSORS</p>
-        <div class="ent-two-col" style="max-width:480px;">
-          <p class="ent-two-col-header">Ninong</p>
-          <p class="ent-two-col-header">Ninang</p>
-          <p class="ent-two-col-name">Gregorio Amora</p><p class="ent-two-col-name">Cecilia Amora</p>
-          <p class="ent-two-col-name">Dominador Cabiguing</p><p class="ent-two-col-name">Flordeliza Cabiguing</p>
-          <p class="ent-two-col-name">Jonathan Tiongson</p><p class="ent-two-col-name">Rebecca Gingo</p>
-          <p class="ent-two-col-name">Feliciano Culdora</p><p class="ent-two-col-name">Lorna Culdora</p>
-          <p class="ent-two-col-name">Fernan Rivero</p><p class="ent-two-col-name">Nathalie Pasa</p>
-          <p class="ent-two-col-name">Romulo Bayotas</p><p class="ent-two-col-name">Marichu Cabiguin</p>
+      <!-- Parents — side by side -->
+      <div class="reveal ent-side-by-side" style="align-items:start;gap:1.2rem;">
+        <div class="ent-role-block">
+          <span class="ent-script" style="font-size:clamp(1.1rem,3.5vw,1.5rem);">Parents of the Groom</span>
+          <span class="ent-name-line" style="margin-top:0.4rem;">Mr. Freddie T. Espijon<br>Mrs. Imelda J. Espijon</span>
+        </div>
+        <div class="ent-role-block">
+          <span class="ent-script" style="font-size:clamp(1.1rem,3.5vw,1.5rem);">Parents of the Bride</span>
+          <span class="ent-name-line" style="margin-top:0.4rem;">Mr. Rogelio G. Malig-on<br>Mrs. Josephine B. Malig-on<sup style="font-size:0.7em;">†</sup></span>
         </div>
       </div>
 
       <div class="ent-rule reveal"></div>
 
-      <!-- Secondary Sponsors -->
+      <!-- Principal Sponsors — no Ninong/Ninang labels -->
+      <div class="reveal" style="display:flex;flex-direction:column;align-items:center;gap:0.8rem;width:100%;">
+        <p class="ent-script" style="font-size:clamp(1.2rem,4vw,1.7rem);">Principal Sponsors</p>
+        <div class="ent-two-col" style="max-width:480px;">
+          <p class="ent-two-col-name">Mr. Gregorio Amora</p><p class="ent-two-col-name">Mrs. Cecilia Amora</p>
+          <p class="ent-two-col-name">Mr. Dominador Cabiguing</p><p class="ent-two-col-name">Mrs. Flordeliza Cabiguing</p>
+          <p class="ent-two-col-name">Mr. Jonathan Tiongson</p><p class="ent-two-col-name">Mrs. Rebecca Gingo</p>
+          <p class="ent-two-col-name">Mr. Feliciano Culdora</p><p class="ent-two-col-name">Mrs. Lorna Culdora</p>
+          <p class="ent-two-col-name">Mr. Fernan Rivero</p><p class="ent-two-col-name">Mrs. Nathalie Pasa</p>
+          <p class="ent-two-col-name">Mr. Romulo Bayotas</p><p class="ent-two-col-name">Mrs. Marichu Cabiguin</p>
+        </div>
+      </div>
+
+      <div class="ent-rule reveal"></div>
+
+      <!-- Secondary Sponsors — script label + 2-col names -->
       <div class="reveal" style="display:flex;flex-direction:column;align-items:center;gap:1rem;width:100%;">
-        <p class="ent-sponsor-title"><i class="fa-solid fa-link"></i> &nbsp; SECONDARY SPONSORS</p>
-        <div style="display:flex;flex-direction:column;align-items:center;gap:0.9rem;width:100%;">
-          <div style="text-align:center;">
-            <p style="font-family:'Great Vibes',cursive;font-size:1.3rem;color:var(--rose);margin-bottom:0.2rem;">To bind us together</p>
-            <p style="font-size:0.85rem;color:var(--text);line-height:1.7;">Mr. Ariel Amora &nbsp;&amp;&nbsp; Mrs. Carenna Amora</p>
+        <div style="display:flex;flex-direction:column;align-items:center;gap:1.1rem;width:100%;">
+          <div style="width:100%;text-align:center;">
+            <p style="font-family:'Great Vibes',cursive;font-size:1.4rem;color:#1e5238;margin-bottom:0.4rem;">To light our path</p>
+            <div class="ent-two-col" style="max-width:380px;margin:0 auto;">
+              <p class="ent-two-col-name">Mr. Malvin Malig-on</p><p class="ent-two-col-name">Mrs. Nadine Vera Malig-on</p>
+            </div>
           </div>
-          <div style="text-align:center;">
-            <p style="font-family:'Great Vibes',cursive;font-size:1.3rem;color:var(--rose);margin-bottom:0.2rem;">To clothe us as one</p>
-            <p style="font-size:0.85rem;color:var(--text);line-height:1.7;">Mr. Jared Culdora &nbsp;&amp;&nbsp; Mrs. Amor Culdora</p>
+          <div style="width:100%;text-align:center;">
+            <p style="font-family:'Great Vibes',cursive;font-size:1.4rem;color:#1e5238;margin-bottom:0.4rem;">To clothe us as one</p>
+            <div class="ent-two-col" style="max-width:380px;margin:0 auto;">
+              <p class="ent-two-col-name">Mr. Jared Culdora</p><p class="ent-two-col-name">Mrs. Amor Culdora</p>
+            </div>
           </div>
-          <div style="text-align:center;">
-            <p style="font-family:'Great Vibes',cursive;font-size:1.3rem;color:var(--rose);margin-bottom:0.2rem;">To light our path</p>
-            <p style="font-size:0.85rem;color:var(--text);line-height:1.7;">Mr. Malvin Malig-on &nbsp;&amp;&nbsp; Mrs. Nadine Vera Malig-on</p>
+          <div style="width:100%;text-align:center;">
+            <p style="font-family:'Great Vibes',cursive;font-size:1.4rem;color:#1e5238;margin-bottom:0.4rem;">To bind us together</p>
+            <div class="ent-two-col" style="max-width:380px;margin:0 auto;">
+              <p class="ent-two-col-name">Mr. Ariel Amora</p><p class="ent-two-col-name">Mrs. Carenna Amora</p>
+            </div>
           </div>
         </div>
       </div>
