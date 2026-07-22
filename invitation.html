@@ -101,14 +101,16 @@
     .welcome-date { font-family:'Playfair Display',serif; font-size:clamp(0.9rem,2.5vw,1.2rem); color:rgba(200,230,208,0.85); font-weight:700; letter-spacing:0.1em; }
     .welcome-loc { font-size:clamp(0.6rem,1.8vw,0.75rem); color:rgba(200,230,208,0.5); letter-spacing:0.2em; text-transform:uppercase; }
     .welcome-photo-wrap {
-      width: min(320px,88vw); height: min(380px,100vw);
+      width: min(360px,96vw);
       overflow: hidden; position: relative;
       background: transparent;
     }
     .welcome-photo-wrap img {
-      width:100%; height:100%; object-fit:cover; display:block;
-      -webkit-mask-image: radial-gradient(ellipse 90% 85% at 50% 45%, black 40%, transparent 80%);
-      mask-image: radial-gradient(ellipse 90% 85% at 50% 45%, black 40%, transparent 80%);
+      width:100%; height:auto; display:block; object-fit:contain;
+    }
+    .welcome-photo-wrap::after {
+      content:''; position:absolute; inset:0; pointer-events:none;
+      background: rgba(5,26,10,0.3);
     }
     .welcome-photo-placeholder { display:none; }
     .welcome-photo-placeholder i { font-size:2.5rem; }
@@ -169,19 +171,22 @@
     #story>.lt-section-header,#story>.lt-content { position:relative; z-index:1; }
     .lt-story-text { font-size:clamp(0.9rem,2vw,1rem); line-height:1.9; color:var(--text-mid); }
     .lt-story-quote { font-family:'Poppins',sans-serif; font-style:italic; font-size:clamp(0.88rem,2vw,1rem); color:var(--rose); text-align:center; margin-top:1.5rem; padding-top:1.5rem; border-top:1px solid rgba(74,122,90,0.15); }
-    /* Story photo-text pairs */
-    .story-pair {
-      display: flex; align-items: center; gap: 1.4rem;
-      margin-bottom: 2.2rem;
+    /* Story two-column layout */
+    .story-layout {
+      display: flex; gap: 1.6rem; align-items: flex-start;
     }
-    .story-pair.reverse { flex-direction: row-reverse; }
-    .story-pair-photo {
-      flex: 0 0 38%; max-width: 160px;
+    .story-text-col {
+      flex: 1; display: flex; flex-direction: column; gap: 1rem;
+    }
+    .story-photos-col {
+      flex: 0 0 42%; max-width: 180px;
+      display: flex; flex-direction: column; gap: 0;
       border-radius: 14px; overflow: hidden;
-      box-shadow: 0 8px 24px rgba(0,0,0,0.12);
+      box-shadow: 0 8px 28px rgba(0,0,0,0.15);
     }
-    .story-pair-photo img { width:100%; height:100%; object-fit:cover; display:block; aspect-ratio:3/4; }
-    .story-pair-text { flex: 1; }
+    .story-photos-col img {
+      width: 100%; display: block; object-fit: cover; aspect-ratio: 3/4;
+    }
     .story-closing {
       text-align:center; padding-top:1rem;
       font-size:clamp(0.88rem,2vw,0.95rem); line-height:1.9;
@@ -233,13 +238,17 @@
     .ent-name-line { font-size:clamp(0.78rem,2vw,0.92rem); color:#1e5238; text-align:center; line-height:1.6; }
     .ent-rule { width:min(260px,70%); height:1px; background:linear-gradient(to right,transparent,rgba(74,122,90,0.3),transparent); }
     .ent-sponsor-title { font-size:0.62rem; font-weight:700; letter-spacing:0.25em; text-transform:uppercase; color:#1e5238; text-align:center; }
-    .ent-two-col { display:grid; grid-template-columns:1fr 1fr; gap:0.3rem 2rem; width:100%; }
+    .ent-two-col { display:grid; grid-template-columns:1fr 1fr; gap:0.45rem 2rem; width:100%; }
     .ent-two-col-header { font-family:'Great Vibes',cursive; font-size:1.2rem; color:#1e5238; text-align:center; grid-column:span 1; padding-bottom:0.3rem; border-bottom:1px solid rgba(74,122,90,0.2); }
-    .ent-two-col-name { font-size:0.8rem; color:#0d3322; text-align:center; padding:0.15rem 0; }
+    .ent-two-col-name { font-size:0.82rem; color:#0d3322; padding:0; line-height:1.7; }
+    .ent-two-col-name:nth-child(odd) { text-align:right; }
+    .ent-two-col-name:nth-child(even) { text-align:left; }
     .ent-side-by-side { display:grid; grid-template-columns:1fr 1fr; gap:1rem; width:100%; }
-    .ent-role-block { display:flex; flex-direction:column; align-items:center; gap:0.3rem; }
+    .ent-role-block { display:flex; flex-direction:column; gap:0.3rem; }
+    .ent-role-block:nth-child(odd) { align-items:flex-end; text-align:right; }
+    .ent-role-block:nth-child(even) { align-items:flex-start; text-align:left; }
     .ent-role-label { font-family:'Great Vibes',cursive; font-size:1.25rem; color:#1e5238; }
-    .ent-role-name { font-size:0.82rem; color:#0d3322; text-align:center; line-height:1.5; }
+    .ent-role-name { font-size:0.82rem; color:#0d3322; line-height:1.7; }
     .ent-kids-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:0.8rem; width:100%; }
     .ent-kid-block { display:flex; flex-direction:column; align-items:center; gap:0.2rem; }
     .ent-kid-label { font-family:'Great Vibes',cursive; font-size:1rem; color:#1e5238; text-align:center; }
@@ -341,7 +350,7 @@
     /* ── SAVE THE DATE ── */
     #save-the-date { background:linear-gradient(160deg,#f4faf5 0%,#edf7f0 50%,#f0faf4 100%); position:relative; overflow:hidden; }
     .std-header { background:var(--wine); color:#fff; text-align:center; font-family:'Poppins',sans-serif; font-size:clamp(0.8rem,2.5vw,1.1rem); font-weight:800; letter-spacing:0.35em; text-transform:uppercase; padding:1.1rem 2rem; }
-    .std-body { display:flex; flex-direction:column; align-items:center; gap:2rem; padding:3rem 2rem 2rem; position:relative; max-width:680px; margin:0 auto; }
+    .std-body { display:flex; flex-direction:column; align-items:center; gap:2rem; padding:3rem 2rem 0; position:relative; max-width:680px; margin:0 auto; }
     .std-spark { position:absolute; color:var(--wine); font-size:1rem; opacity:0.4; animation:sparkPulse 2s infinite alternate; }
     .std-spark.s2 { font-size:1.8rem; opacity:0.2; }
     @keyframes sparkPulse { 0%{opacity:0.15;transform:scale(0.8)} 100%{opacity:0.6;transform:scale(1.2)} }
@@ -363,8 +372,8 @@
     .std-cd-num { font-family:'Playfair Display',serif; font-size:clamp(1.3rem,3vw,1.8rem); font-weight:700; color:var(--wine); line-height:1; }
     .std-cd-lbl { font-size:0.43rem; letter-spacing:0.1em; text-transform:uppercase; color:var(--text-mid); }
     .std-cd-sep { font-size:1.1rem; color:var(--rose); font-weight:700; margin-bottom:0.8rem; }
-    .std-photo-area { width:min(300px,80vw); height:min(380px,100vw); border-radius:20px; overflow:hidden; position:relative; z-index:1; box-shadow:0 16px 50px rgba(13,51,34,0.15); }
-    .std-photo-area img { width:100%; height:100%; object-fit:cover; object-position:center top; display:block; }
+    .std-photo-area { width:100%; overflow:hidden; position:relative; z-index:1; aspect-ratio:4/3; }
+    .std-photo-area img { width:100%; height:100%; object-fit:cover; object-position:center center; display:block; }
     .std-photo-placeholder { display:none; }
     .std-photo-placeholder i { font-size:2rem; }
     .std-top-btn { display:flex; margin:0 auto 1.5rem; width:44px; height:44px; border-radius:50%; background:var(--wine); color:#fff; border:none; cursor:pointer; font-size:1rem; align-items:center; justify-content:center; box-shadow:0 4px 16px rgba(13,51,34,0.25); transition:transform 0.3s; }
@@ -455,7 +464,7 @@
 
   <!-- Couple Photo -->
   <div class="welcome-photo-wrap reveal">
-    <img id="couple-photo" src="/img_1699.jpg" alt="Fred &amp; Chem"/>
+    <img id="couple-photo" src="/img_4796.jpg" alt="Fred &amp; Chem"/>
   </div>
 
   <!-- Music button -->
@@ -474,15 +483,24 @@
 <!-- ── WELCOME MESSAGE ── -->
 <section id="welcome-msg">
   <div class="welcome-msg-body">
-    <div class="welcome-msg-divider reveal"><span>✦</span></div>
-    <p class="welcome-msg-text reveal">
-      With hearts full of gratitude, we warmly invite you to witness and celebrate the love we have found from the beautiful gift of friendship.
-    </p>
-    <p class="welcome-msg-text reveal">
-      Your presence will make this occasion even more meaningful as we begin a new chapter sealed in faith, love, and the promise of forever before God and our loved ones.
-    </p>
-    <div class="welcome-msg-divider reveal"><span>✦</span></div>
-    <p class="welcome-msg-sig reveal">Fred &amp; Chem</p>
+    <div class="reveal" style="display:flex;align-items:center;gap:1.2rem;width:100%;max-width:600px;">
+      <!-- Photo -->
+      <div style="flex:0 0 42%;border-radius:14px;overflow:hidden;box-shadow:0 8px 28px rgba(13,51,34,0.12);">
+        <img src="/img_1699.jpg" alt="Fred &amp; Chem" style="width:100%;height:100%;object-fit:cover;display:block;aspect-ratio:3/4;"/>
+      </div>
+      <!-- Text -->
+      <div style="flex:1;display:flex;flex-direction:column;gap:1rem;">
+        <div class="welcome-msg-divider"><span>✦</span></div>
+        <p class="welcome-msg-text" style="text-align:left;">
+          With hearts full of gratitude, we warmly invite you to witness and celebrate the love we have found from the beautiful gift of friendship.
+        </p>
+        <p class="welcome-msg-text" style="text-align:left;">
+          Your presence will make this occasion even more meaningful as we begin a new chapter sealed in faith, love, and the promise of forever before God and our loved ones.
+        </p>
+        <div class="welcome-msg-divider"><span>✦</span></div>
+        <p class="welcome-msg-sig">Fred &amp; Chem</p>
+      </div>
+    </div>
   </div>
 </section>
 
@@ -490,50 +508,28 @@
 <section id="story">
   <div class="lt-section-header">
     <span class="lt-eyebrow">their journey</span>
-    <h2><i class="fa-solid fa-book-heart"></i> Our Story</h2>
+    <h2>Our Journey</h2>
   </div>
   <div class="lt-content">
-    <div class="story-pair reveal">
-      <div class="story-pair-photo">
-        <img src="/img_1307.jpg" alt="Fred &amp; Chem"/>
-      </div>
-      <div class="story-pair-text">
+    <div class="story-layout reveal">
+      <!-- Left: all text -->
+      <div class="story-text-col">
         <p class="lt-story-text">Our story began with a simple friendship. We were just two people who shared laughter, hopes, dreams, and even life's challenges together.</p>
+        <p class="lt-story-text">Without realizing it, those ordinary moments became our most treasured memories. The person who was once simply a friend became the one we turned to in every season of life.</p>
+        <p class="lt-story-text">In each other, we found space where our hearts felt safe. We didn't simply fall in love — we fell in love with the way we could be completely ourselves.</p>
+        <p class="lt-story-text">Today, we are grateful not only for the love that brought us here, but also for the journey that shaped it. Every step, every shared experience, and every shared moment has led us into something deeper.</p>
+        <p class="story-closing">
+          From friendship came trust.<br>
+          From trust came love.<br>
+          And from love comes a lifetime of beautiful moments yet to unfold.
+        </p>
       </div>
-    </div>
-
-    <div class="story-pair reverse reveal">
-      <div class="story-pair-photo">
+      <!-- Right: 2 photos stacked/merged -->
+      <div class="story-photos-col">
+        <img src="/img_1307.jpg" alt="Fred &amp; Chem"/>
         <img src="/img_0977.jpg" alt="Fred &amp; Chem"/>
       </div>
-      <div class="story-pair-text">
-        <p class="lt-story-text">Without realizing it, those ordinary moments became our most treasured memories. The person who was once simply a friend became the one we turned to in every season of life.</p>
-      </div>
     </div>
-
-    <div class="story-pair reveal">
-      <div class="story-pair-photo">
-        <img src="/img_5062.jpg" alt="Fred &amp; Chem"/>
-      </div>
-      <div class="story-pair-text">
-        <p class="lt-story-text">In each other, we found space where our hearts felt safe. We didn't simply fall in love — we fell in love with the way we could be completely ourselves.</p>
-      </div>
-    </div>
-
-    <div class="story-pair reverse reveal">
-      <div class="story-pair-photo">
-        <img src="/img_4796.jpg" alt="Fred &amp; Chem"/>
-      </div>
-      <div class="story-pair-text">
-        <p class="lt-story-text">Today, we are grateful not only for the love that brought us here, but also for the journey that shaped it. Every step, every shared experience, and every shared moment has led us into something deeper.</p>
-      </div>
-    </div>
-
-    <p class="story-closing reveal">
-      From friendship came trust.<br>
-      From trust came love.<br>
-      And from love comes a lifetime of beautiful moments yet to unfold.
-    </p>
     <p class="lt-story-quote reveal">"So they are no longer two but one flesh. What therefore God has joined together, let not man separate." — Matthew 19:6</p>
   </div>
 </section>
@@ -656,55 +652,47 @@
   <div class="ent-card-wrap">
     <div class="ent-card">
 
-      <!-- Parents — side by side -->
-      <div class="reveal ent-side-by-side" style="align-items:start;gap:1.2rem;">
-        <div class="ent-role-block">
-          <span class="ent-script" style="font-size:clamp(1.1rem,3.5vw,1.5rem);">Parents of the Groom</span>
-          <span class="ent-name-line" style="margin-top:0.4rem;">Mr. Freddie T. Espijon<br>Mrs. Imelda J. Espijon</span>
-        </div>
-        <div class="ent-role-block">
-          <span class="ent-script" style="font-size:clamp(1.1rem,3.5vw,1.5rem);">Parents of the Bride</span>
-          <span class="ent-name-line" style="margin-top:0.4rem;">Mr. Rogelio G. Malig-on<br>Mrs. Josephine B. Malig-on<sup style="font-size:0.7em;">†</sup></span>
-        </div>
+      <!-- Parents — stacked, centered -->
+      <div class="reveal" style="display:flex;flex-direction:column;align-items:center;gap:0.6rem;width:100%;text-align:center;">
+        <p class="ent-script">Parents of the Groom</p>
+        <p class="ent-name-line">Mr. Freddie T. Espijon &amp; Mrs. Imelda J. Espijon</p>
+        <div class="ent-rule" style="margin:0.4rem 0;"></div>
+        <p class="ent-script">Parents of the Bride</p>
+        <p class="ent-name-line">Mr. Rogelio G. Malig-on<br>and the late Mrs. Josephine B. Malig-on</p>
       </div>
 
       <div class="ent-rule reveal"></div>
 
-      <!-- Principal Sponsors — no Ninong/Ninang labels -->
+      <!-- Principal Sponsors — no Ninong/Ninang -->
       <div class="reveal" style="display:flex;flex-direction:column;align-items:center;gap:0.8rem;width:100%;">
-        <p class="ent-script" style="font-size:clamp(1.2rem,4vw,1.7rem);">Principal Sponsors</p>
+        <p class="ent-sponsor-title"><i class="fa-solid fa-crown"></i> &nbsp; PRINCIPAL SPONSORS</p>
         <div class="ent-two-col" style="max-width:480px;">
-          <p class="ent-two-col-name">Mr. Gregorio Amora</p><p class="ent-two-col-name">Mrs. Cecilia Amora</p>
-          <p class="ent-two-col-name">Mr. Dominador Cabiguing</p><p class="ent-two-col-name">Mrs. Flordeliza Cabiguing</p>
-          <p class="ent-two-col-name">Mr. Jonathan Tiongson</p><p class="ent-two-col-name">Mrs. Rebecca Gingo</p>
-          <p class="ent-two-col-name">Mr. Feliciano Culdora</p><p class="ent-two-col-name">Mrs. Lorna Culdora</p>
-          <p class="ent-two-col-name">Mr. Fernan Rivero</p><p class="ent-two-col-name">Mrs. Nathalie Pasa</p>
-          <p class="ent-two-col-name">Mr. Romulo Bayotas</p><p class="ent-two-col-name">Mrs. Marichu Cabiguin</p>
+          <p class="ent-two-col-name">Gregorio Amora</p><p class="ent-two-col-name">Cecilia Amora</p>
+          <p class="ent-two-col-name">Dominador Cabiguing</p><p class="ent-two-col-name">Flordeliza Cabiguing</p>
+          <p class="ent-two-col-name">Jonathan Tiongson</p><p class="ent-two-col-name">Rebecca Gingo</p>
+          <p class="ent-two-col-name">Feliciano Culdora</p><p class="ent-two-col-name">Lorna Culdora</p>
+          <p class="ent-two-col-name">Fernan Rivero</p><p class="ent-two-col-name">Nathalie Pasa</p>
+          <p class="ent-two-col-name">Romulo Bayotas</p><p class="ent-two-col-name">Marichu Cabiguin</p>
         </div>
       </div>
 
       <div class="ent-rule reveal"></div>
 
-      <!-- Secondary Sponsors — script label + 2-col names -->
-      <div class="reveal" style="display:flex;flex-direction:column;align-items:center;gap:1rem;width:100%;">
-        <div style="display:flex;flex-direction:column;align-items:center;gap:1.1rem;width:100%;">
-          <div style="width:100%;text-align:center;">
-            <p style="font-family:'Great Vibes',cursive;font-size:1.4rem;color:#1e5238;margin-bottom:0.4rem;">To light our path</p>
-            <div class="ent-two-col" style="max-width:380px;margin:0 auto;">
-              <p class="ent-two-col-name">Mr. Malvin Malig-on</p><p class="ent-two-col-name">Mrs. Nadine Vera Malig-on</p>
-            </div>
+      <!-- Secondary Sponsors — script label + centered name pair -->
+      <div class="reveal" style="display:flex;flex-direction:column;align-items:center;gap:0.8rem;width:100%;">
+        <p class="ent-sponsor-title"><i class="fa-solid fa-link"></i> &nbsp; SECONDARY SPONSORS</p>
+        <div style="display:flex;flex-direction:column;align-items:center;gap:1rem;width:100%;text-align:center;">
+          <div>
+            <p style="font-family:'Great Vibes',cursive;font-size:1.35rem;color:#1e5238;margin-bottom:0.3rem;">To bind us together</p>
+            <p class="ent-name-line">Mr. Ariel Amora &amp; Mrs. Carenna Amora</p>
           </div>
-          <div style="width:100%;text-align:center;">
-            <p style="font-family:'Great Vibes',cursive;font-size:1.4rem;color:#1e5238;margin-bottom:0.4rem;">To clothe us as one</p>
-            <div class="ent-two-col" style="max-width:380px;margin:0 auto;">
-              <p class="ent-two-col-name">Mr. Jared Culdora</p><p class="ent-two-col-name">Mrs. Amor Culdora</p>
-            </div>
+          <div>
+            <p style="font-family:'Great Vibes',cursive;font-size:1.35rem;color:#1e5238;margin-bottom:0.3rem;">To clothe us as one</p>
+            <p class="ent-name-line">Mr. Jared Culdora &amp; Mrs. Amor Culdora</p>
           </div>
-          <div style="width:100%;text-align:center;">
-            <p style="font-family:'Great Vibes',cursive;font-size:1.4rem;color:#1e5238;margin-bottom:0.4rem;">To bind us together</p>
-            <div class="ent-two-col" style="max-width:380px;margin:0 auto;">
-              <p class="ent-two-col-name">Mr. Ariel Amora</p><p class="ent-two-col-name">Mrs. Carenna Amora</p>
-            </div>
+          <div>
+            <p style="font-family:'Great Vibes',cursive;font-size:1.35rem;color:#1e5238;margin-bottom:0.3rem;">To light our path</p>
+            <p class="ent-name-line">Mr. Malvin Malig-on &amp; Mrs. Nadine Vera Malig-on</p>
           </div>
         </div>
       </div>
@@ -917,11 +905,12 @@
         </div>
       </div>
     </div>
-    <div class="std-photo-area">
-      <img src="/img_1699.jpg" alt="Fred &amp; Chem" style="width:100%;height:100%;object-fit:cover;display:block;"/>
-    </div>
   </div>
-  <div style="text-align:center;padding-bottom:2rem;">
+  <!-- Full-width photo, no border, no radius -->
+  <div class="std-photo-area">
+    <img src="/img_1699.jpg" alt="Fred &amp; Chem"/>
+  </div>
+  <div style="text-align:center;padding:1.5rem 0 2rem;">
     <button class="std-top-btn" onclick="window.scrollTo({top:0,behavior:'smooth'})">
       <i class="fa-solid fa-chevron-up"></i>
     </button>
