@@ -248,14 +248,15 @@
     .ent-rule { width:min(260px,70%); height:1px; background:linear-gradient(to right,transparent,rgba(74,122,90,0.3),transparent); }
     .ent-sponsor-title { font-size:0.62rem; font-weight:700; letter-spacing:0.25em; text-transform:uppercase; color:#1e5238; text-align:center; }
     .ent-two-col { display:grid; grid-template-columns:1fr 1fr; gap:0.45rem 2rem; width:100%; }
-    .ent-two-col-header { font-family:'Great Vibes',cursive; font-size:1.2rem; color:#1e5238; text-align:center; grid-column:span 1; padding-bottom:0.3rem; border-bottom:1px solid rgba(74,122,90,0.2); }
+    .ent-two-col-header { font-family:'Great Vibes',cursive; font-size:1.2rem; color:#1e5238; grid-column:span 1; padding-bottom:0.3rem; border-bottom:1px solid rgba(74,122,90,0.2); }
+    .ent-two-col-header:nth-child(odd) { text-align:right; }
+    .ent-two-col-header:nth-child(even) { text-align:left; }
     .ent-two-col-name { font-size:0.82rem; color:#0d3322; padding:0; line-height:1.7; }
     .ent-two-col-name:nth-child(odd) { text-align:right; }
     .ent-two-col-name:nth-child(even) { text-align:left; }
-    .ent-side-by-side { display:grid; grid-template-columns:1fr 1fr; gap:1rem; width:100%; }
-    .ent-role-block { display:flex; flex-direction:column; gap:0.3rem; }
-    .ent-role-block:nth-child(odd) { align-items:flex-end; text-align:right; }
-    .ent-role-block:nth-child(even) { align-items:flex-start; text-align:left; }
+    .ent-side-by-side { display:grid; grid-template-columns:1fr 1fr; gap:1rem; width:100%; position:relative; }
+    .ent-side-by-side::before { content:''; position:absolute; left:50%; top:8%; bottom:8%; width:1px; background:rgba(74,122,90,0.2); transform:translateX(-50%); }
+    .ent-role-block { display:flex; flex-direction:column; gap:0.3rem; align-items:center; text-align:center; }
     .ent-role-label { font-family:'Great Vibes',cursive; font-size:1.25rem; color:#1e5238; }
     .ent-role-name { font-size:0.82rem; color:#0d3322; line-height:1.7; }
     .ent-kids-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:0.8rem; width:100%; }
@@ -719,28 +720,29 @@
       <div class="ent-rule reveal"></div>
 
       <!-- Best Man & Maid of Honor -->
-      <div class="reveal ent-side-by-side">
-        <div class="ent-role-block">
-          <span class="ent-role-label">Best Man</span>
-          <span class="ent-role-name">Gilbert Gaballo</span>
-        </div>
-        <div class="ent-role-block">
-          <span class="ent-role-label">Maid of Honor</span>
-          <span class="ent-role-name">Charise Malig-on</span>
+      <div class="reveal" style="display:flex;flex-direction:column;align-items:center;gap:0.5rem;width:100%;">
+        <div class="ent-two-col" style="max-width:480px;">
+          <p class="ent-two-col-header ent-role-label">Best Man</p>
+          <p class="ent-two-col-header ent-role-label">Maid of Honor</p>
+          <p class="ent-two-col-name">Gilbert Gaballo</p>
+          <p class="ent-two-col-name">Charise Malig-on</p>
         </div>
       </div>
 
       <div class="ent-rule reveal"></div>
 
       <!-- Groomsmen & Bridesmaids -->
-      <div class="reveal ent-side-by-side" style="align-items:start;">
-        <div class="ent-role-block">
-          <span class="ent-role-label">Groomsmen</span>
-          <span class="ent-role-name">Gyro Culdora<br>Jay Mclain Digamon<br>Ronald Estrada<br>Richie Tampan<br>Frenzel Bluez Malig-on<br>Ralph Gorgonio<br>John Jewell Diño</span>
-        </div>
-        <div class="ent-role-block">
-          <span class="ent-role-label">Bridesmaids</span>
-          <span class="ent-role-name">Joliza Navin Malig-on<br>Faye Sibayan<br>Dianna Rose Castillo<br>Rose Ann Baron<br>Mary Grace Ramira<br>Emmylou Grace Berdera<br>Jeandy Espijon</span>
+      <div class="reveal" style="display:flex;flex-direction:column;align-items:center;gap:0.5rem;width:100%;">
+        <div class="ent-two-col" style="max-width:480px;">
+          <p class="ent-two-col-header ent-role-label">Groomsmen</p>
+          <p class="ent-two-col-header ent-role-label">Bridesmaids</p>
+          <p class="ent-two-col-name">Gyro Culdora</p><p class="ent-two-col-name">Joliza Navin Malig-on</p>
+          <p class="ent-two-col-name">Jay Mclain Digamon</p><p class="ent-two-col-name">Faye Sibayan</p>
+          <p class="ent-two-col-name">Ronald Estrada</p><p class="ent-two-col-name">Dianna Rose Castillo</p>
+          <p class="ent-two-col-name">Richie Tampan</p><p class="ent-two-col-name">Rose Ann Baron</p>
+          <p class="ent-two-col-name">Frenzel Bluez Malig-on</p><p class="ent-two-col-name">Mary Grace Ramira</p>
+          <p class="ent-two-col-name">Ralph Gorgonio</p><p class="ent-two-col-name">Emmylou Grace Berdera</p>
+          <p class="ent-two-col-name">John Jewell Diño</p><p class="ent-two-col-name">Jeandy Espijon</p>
         </div>
       </div>
 
@@ -775,7 +777,7 @@
         </div>
         <div class="ent-kid-block">
           <span class="ent-kid-label">Flower Girls</span>
-          <span class="ent-kid-name">Salina Noelle Nutiu &nbsp;·&nbsp; Ameerah Olivia Homecillo &nbsp;·&nbsp; Ma.&nbsp;Celestine&nbsp;Aurea&nbsp;Cabusao</span>
+          <span class="ent-kid-name">Salina Noelle Nutiu<br>Ameerah Olivia Homecillo<br>Ma. Celestine Aurea Cabusao</span>
         </div>
       </div>
 
