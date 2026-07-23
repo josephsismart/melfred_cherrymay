@@ -2,44 +2,45 @@
 <html>
 <head>
 <meta charset="UTF-8"/>
+<link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Playfair+Display:wght@400;700&family=Poppins:wght@300;400;600&family=Lora:ital@1&display=swap" rel="stylesheet"/>
 <style>
 * { margin:0; padding:0; box-sizing:border-box; }
-@import url('https://fonts.googleapis.com/css2?family=Great+Vibes&family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Poppins:wght@300;400;500;600&family=Lora:ital@1&display=swap');
-body { width:1200px; height:630px; background:#f4faf5; font-family:'Poppins',sans-serif; overflow:hidden; }
-.wrap { width:1200px; height:630px; display:flex; flex-direction:column; background:linear-gradient(160deg,#f4faf5 0%,#edf7f0 50%,#f0faf4 100%); }
-.text-area { flex:0 0 380px; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:0; padding:20px 40px 10px; position:relative; }
-.tag { font-size:11px; font-weight:600; letter-spacing:0.3em; text-transform:uppercase; color:rgba(74,122,90,0.55); margin-bottom:2px; }
-.script-name { font-family:'Great Vibes',cursive; font-size:100px; color:#0d3322; line-height:1; }
-.amp { font-family:'Great Vibes',cursive; font-size:40px; color:#4a7a5a; line-height:1; }
-.divider { display:flex; align-items:center; gap:12px; width:500px; margin:10px 0; }
-.divider::before,.divider::after { content:''; flex:1; height:1px; background:rgba(74,122,90,0.25); }
-.divider span { color:#c8a84b; font-size:10px; }
-.date { font-size:18px; font-weight:700; letter-spacing:0.2em; color:#0d3322; text-transform:uppercase; }
-.church { font-family:'Playfair Display',serif; font-size:22px; font-weight:700; color:#0d3322; text-align:center; margin-top:6px; }
-.loc { font-family:'Playfair Display',serif; font-size:15px; color:#1e5238; text-align:center; margin-top:3px; }
-.star { position:absolute; color:#4a7a5a; opacity:0.4; font-size:12px; }
-.photo-area { flex:1; overflow:hidden; }
-.photo-area img { width:100%; height:100%; object-fit:cover; object-position:center 30%; }
+body { width:1200px; height:630px; overflow:hidden; background:#f4faf5; }
+.wrap { width:1200px; height:630px; display:flex; flex-direction:column; background:linear-gradient(160deg,#f4faf5 0%,#edf7f0 60%,#f0faf4 100%); }
+.top { height:370px; display:flex; flex-direction:column; align-items:center; justify-content:center; padding:10px 60px; position:relative; }
+.tag { font-family:'Lora',serif; font-style:italic; font-size:14px; color:rgba(74,122,90,0.7); letter-spacing:0.05em; margin-bottom:0; }
+.fred { font-family:'Great Vibes',cursive; font-size:110px; color:#0d3322; line-height:1.05; }
+.and  { font-family:'Great Vibes',cursive; font-size:42px; color:#4a7a5a; line-height:0.8; }
+.chem { font-family:'Great Vibes',cursive; font-size:110px; color:#0d3322; line-height:1.05; }
+.div  { display:flex; align-items:center; gap:14px; width:460px; margin:8px 0; }
+.div::before,.div::after { content:''; flex:1; height:1px; background:rgba(74,122,90,0.2); }
+.div span { color:#c8a84b; font-size:9px; }
+.date { font-family:'Poppins',sans-serif; font-size:16px; font-weight:600; letter-spacing:0.22em; color:#0d3322; text-transform:uppercase; }
+.church { font-family:'Playfair Display',serif; font-size:20px; font-weight:700; color:#0d3322; text-align:center; margin-top:4px; }
+.loc { font-family:'Playfair Display',serif; font-size:14px; color:#1e5238; text-align:center; margin-top:2px; }
+.star { position:absolute; font-size:11px; color:rgba(74,122,90,0.45); font-family:'Poppins',sans-serif; }
+.photo { height:260px; overflow:hidden; }
+.photo img { width:100%; height:100%; object-fit:cover; object-position:center 35%; }
 </style>
 </head>
 <body>
 <div class="wrap">
-  <div class="text-area">
-    <span class="star" style="top:18px;left:60px">✦</span>
-    <span class="star" style="top:18px;right:60px">✦</span>
-    <span class="star" style="bottom:18px;left:60px">✦</span>
-    <span class="star" style="bottom:18px;right:60px">✦</span>
+  <div class="top">
+    <span class="star" style="top:16px;left:52px">✦</span>
+    <span class="star" style="top:16px;right:52px">✦</span>
+    <span class="star" style="bottom:16px;left:52px">✦</span>
+    <span class="star" style="bottom:16px;right:52px">✦</span>
     <p class="tag">The Wedding of</p>
-    <p class="script-name">Fred</p>
-    <p class="amp">and</p>
-    <p class="script-name">Chem</p>
-    <div class="divider"><span>✦</span></div>
+    <p class="fred">Fred</p>
+    <p class="and">and</p>
+    <p class="chem">Chem</p>
+    <div class="div"><span>✦</span></div>
     <p class="date">September &nbsp; 5, &nbsp; 2026</p>
-    <div class="divider"><span>✦</span></div>
+    <div class="div"><span>✦</span></div>
     <p class="church">Birhen sa Kasilak Mindanao Shrine Parish</p>
     <p class="loc">Butuan City, Agusan del Norte, Philippines</p>
   </div>
-  <div class="photo-area">
+  <div class="photo">
     <img src="https://mc-wedding-2026.vercel.app/img_5155.jpg"/>
   </div>
 </div>
