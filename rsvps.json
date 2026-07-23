@@ -2,6 +2,12 @@
   "rsvps": [
     {
       "name": "JOSEPH SISMAR",
+      "attending": false,
+      "message": "sorry bay",
+      "submitted": "2026-07-23 14:12:36 PHT"
+    },
+    {
+      "name": "JOSEPH SISMAR",
       "attending": true,
       "message": "Lez gooooo",
       "submitted": "2026-07-23 14:09:02 PHT"
