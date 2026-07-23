@@ -255,8 +255,7 @@
     .ent-two-col-name { font-size:0.82rem; color:#0d3322; padding:0; line-height:1.7; }
     .ent-two-col-name:nth-child(odd) { text-align:right; }
     .ent-two-col-name:nth-child(even) { text-align:left; }
-    .ent-side-by-side { display:grid; grid-template-columns:1fr 1fr; gap:1rem; width:100%; position:relative; }
-    .ent-side-by-side::before { content:''; position:absolute; left:50%; top:8%; bottom:8%; width:1px; background:rgba(74,122,90,0.2); transform:translateX(-50%); }
+    .ent-side-by-side { display:grid; grid-template-columns:1fr 1fr; gap:1rem; width:100%; }
     .ent-role-block { display:flex; flex-direction:column; gap:0.3rem; align-items:center; text-align:center; }
     .ent-role-label { font-family:'Great Vibes',cursive; font-size:1.25rem; color:#1e5238; }
     .ent-role-name { font-size:0.82rem; color:#0d3322; line-height:1.7; }
@@ -865,13 +864,11 @@
         <div class="rsvp-response yes-resp" id="yesResp">
           <div class="rsvp-resp-text" id="yesRespText">Thank you so much!</div>
           <div class="rsvp-resp-sub">We're so happy you'll be joining us on our special day. We can't wait to celebrate with you!</div>
-          <div class="rsvp-resp-sub" style="margin-top:0.5rem;font-style:italic;color:var(--text-mid);font-size:0.78rem;">Your love, prayers, and presence are the greatest gifts we could ask for. However, should you wish to bless us further, a monetary gift towards our new beginning would be sincerely appreciated.</div>
           <button class="rsvp-change-btn" onclick="resetRsvp()"><i class="fa-solid fa-rotate-left"></i> Change my answer</button>
         </div>
         <div class="rsvp-response no-resp" id="noResp">
           <div class="rsvp-resp-text" id="noRespText">Thank you so much for letting us know.</div>
           <div class="rsvp-resp-sub">We completely understand and appreciate you taking the time to respond. We hope to see you another time. Wishing you all the best!</div>
-          <div class="rsvp-resp-sub" style="margin-top:0.5rem;font-style:italic;color:var(--text-mid);font-size:0.78rem;">Your love, prayers, and presence are the greatest gifts we could ask for. However, should you wish to bless us further, a monetary gift towards our new beginning would be sincerely appreciated.</div>
           <button class="rsvp-change-btn" onclick="resetRsvp()"><i class="fa-solid fa-rotate-left"></i> Change my answer</button>
         </div>
 
@@ -1167,7 +1164,7 @@ async function submitRsvp(){
   document.getElementById('rsvpForm').style.display = 'none';
 
   if(attendingChoice){
-    document.getElementById('yesRespText').textContent = `Yay, ${name}! We can't wait to see you! 🎉`;
+    document.getElementById('yesRespText').textContent = `Thank you so much!`;
     document.getElementById('yesResp').classList.add('show');
     launchConfetti();
   } else {
