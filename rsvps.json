@@ -1,6 +1,12 @@
 {
   "rsvps": [
     {
+      "name": "e",
+      "attending": false,
+      "message": "",
+      "submitted": "2026-07-23 14:41:13 PHT"
+    },
+    {
       "name": "s",
       "attending": true,
       "message": "",
