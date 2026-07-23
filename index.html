@@ -29,8 +29,9 @@
     body {
       background: linear-gradient(160deg, #051a0a 0%, #0d3322 45%, #162e1f 75%, #051a0a 100%);
       display: flex; flex-direction: column; align-items: center; justify-content: center;
-      height: 100dvh; min-height: 100dvh; position: relative; overflow: hidden;
+      min-height: 100dvh; position: relative; overflow: hidden;
       font-family: 'Poppins', sans-serif;
+      padding: max(env(safe-area-inset-top, 0px), 1.5rem) 1rem max(env(safe-area-inset-bottom, 0px), 1rem);
     }
 
     /* ── CANVAS / STARS ── */
@@ -115,7 +116,7 @@
 
     .env-scene {
       position: relative;
-      width: clamp(310px, 86vw, 440px);
+      width: clamp(270px, 80vw, 400px);
       perspective: 900px;
       /* shake every 2.5 s, short sharp burst */
       animation: envShake 0.7s 1.2s ease-in-out, envShake 0.7s 3.5s ease-in-out,
@@ -142,11 +143,11 @@
       border-radius:4px 4px 0 0;
       box-shadow:0 -4px 16px rgba(0,0,0,0.1);
       opacity:0; transform:translateY(100%);
-      transition: transform 0.7s 0.2s cubic-bezier(0.34,1.3,0.64,1), opacity 0.2s 0.25s;
+      transition: transform 1.2s 0.35s cubic-bezier(0.34,1.1,0.64,1), opacity 0.3s 0.4s;
       z-index:6;
       display:flex; flex-direction:column; align-items:center; justify-content:center; gap:5px; padding:12px;
     }
-    .env-peek::before { content:'F & C'; font-family:'Great Vibes',cursive; font-size:1.8rem; color:rgba(74,122,90,0.4); }
+    .env-peek::before { content:'Fred & Chem'; font-family:'Great Vibes',cursive; font-size:clamp(1.6rem,5vw,2.2rem); color:#1e5238; text-shadow:0 1px 6px rgba(200,230,208,0.5); font-weight:400; }
     .env-peek-line { height:2px; background:rgba(74,122,90,0.15); border-radius:2px; width:80%; }
     .env-peek-line:nth-child(3){width:60%;}
     .env-peek-line:nth-child(4){width:72%;}
@@ -163,13 +164,13 @@
     .env-flap {
       position:absolute; top:0; left:0; right:0; height:54%;
       transform-origin:top center;
-      transition:transform 0.65s cubic-bezier(0.4,0,0.2,1); z-index:15;
+      transition:transform 1.0s cubic-bezier(0.4,0,0.2,1); z-index:15;
     }
     .env-flap-inner { position:absolute;inset:0;background:linear-gradient(160deg,#d0ecda,#b4d4c0);clip-path:polygon(0 0,100% 0,50% 88%);border-radius:6px 6px 0 0; }
     .env-flap-inner::after { content:'';position:absolute;inset:0;background:linear-gradient(160deg,rgba(255,255,255,0.28),transparent 60%);clip-path:polygon(0 0,100% 0,50% 88%); }
 
     .env-scene.opened .env-flap { transform:rotateX(-175deg); z-index:4; }
-    .env-scene.opened .env-peek { transform:translateY(-30%); opacity:1; }
+    .env-scene.opened .env-peek { transform:translateY(-42%); opacity:1; }
     .env-scene.opened .env-seal { transform:translateX(-50%) scale(0.8); opacity:0; }
 
     /* Tap label */
@@ -575,10 +576,10 @@ envScene.addEventListener('click', function () {
     corners.forEach((c, i) => setTimeout(() => c.classList.add('show'), i * 80));
   }, 200);
 
-  // 3. Navigate directly to invitation
+  // 3. Navigate directly to invitation (delay so user sees the card peek)
   setTimeout(() => {
     window.location.href = '/invitation.html?play=1';
-  }, 700);
+  }, 2200);
 });
 
 // ── STARS ──
