@@ -287,10 +287,13 @@
     </div>
   </div>
 
-  <div style="text-align:center;">
+  <div style="text-align:center;display:flex;flex-direction:column;align-items:center;gap:0.8rem;margin-top:1.5rem;">
     <a href="/invitation.html" class="back-link">
       <i class="fa-solid fa-arrow-left"></i> Back to Invitation
     </a>
+    <button onclick="logout()" style="background:none;border:none;cursor:pointer;font-size:0.68rem;color:rgba(200,230,208,0.25);font-family:'Poppins',sans-serif;letter-spacing:0.05em;padding:0.3rem 0.8rem;transition:color 0.2s;" onmouseover="this.style.color='rgba(255,150,150,0.6)'" onmouseout="this.style.color='rgba(200,230,208,0.25)'">
+      <i class="fa-solid fa-right-from-bracket" style="margin-right:0.3rem;"></i>Sign out
+    </button>
   </div>
 </div>
 
@@ -308,8 +311,40 @@
 </div>
 
 <script>
+const SESSION_KEY    = 'gc_session';
+const SESSION_TTL_MS = 5 * 60 * 60 * 1000; // 5 hours
+
 let savedCode = '';
 let pendingDeleteIndex = null;
+
+// ── SESSION HELPERS ──
+function saveSession(code){
+  const data = { code, exp: Date.now() + SESSION_TTL_MS };
+  try { localStorage.setItem(SESSION_KEY, JSON.stringify(data)); } catch(e){}
+}
+function loadSession(){
+  try {
+    const raw = localStorage.getItem(SESSION_KEY);
+    if(!raw) return null;
+    const data = JSON.parse(raw);
+    if(Date.now() > data.exp){ localStorage.removeItem(SESSION_KEY); return null; }
+    return data.code;
+  } catch(e){ return null; }
+}
+function clearSession(){
+  try { localStorage.removeItem(SESSION_KEY); } catch(e){}
+}
+
+// ── AUTO-LOGIN if valid session exists ──
+window.addEventListener('DOMContentLoaded', () => {
+  const code = loadSession();
+  if(code){
+    savedCode = code;
+    document.getElementById('gate').style.display = 'none';
+    document.getElementById('listPage').style.display = 'block';
+    loadGuests();
+  }
+});
 
 document.getElementById('passInput').addEventListener('keydown', function(e){
   if(e.key === 'Enter') checkPass();
@@ -325,6 +360,7 @@ function checkPass(){
     return;
   }
   savedCode = code;
+  saveSession(code);
   err.style.display = 'none';
   document.getElementById('gate').style.display = 'none';
   document.getElementById('listPage').style.display = 'block';
@@ -478,6 +514,14 @@ async function confirmDelete(){
 document.getElementById('deleteModal').addEventListener('click', function(e){
   if(e.target === this) closeModal();
 });
+
+function logout(){
+  clearSession();
+  savedCode = '';
+  document.getElementById('listPage').style.display = 'none';
+  document.getElementById('gate').style.display = 'flex';
+  document.getElementById('passInput').value = '';
+}
 
 function escHtml(str){
   if(!str) return '';
