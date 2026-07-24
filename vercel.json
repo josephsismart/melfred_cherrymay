@@ -1,1 +1,12 @@
-{}
+{
+  "rewrites": [
+    {
+      "source": "/guests.html",
+      "destination": "/api/guests"
+    },
+    {
+      "source": "/guests",
+      "destination": "/api/guests"
+    }
+  ]
+}
