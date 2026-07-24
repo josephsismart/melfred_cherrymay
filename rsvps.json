@@ -1,6 +1,12 @@
 {
   "rsvps": [
     {
+      "name": "ramsismar",
+      "attending": true,
+      "message": "hahahaha lez gooo",
+      "submitted": "2026-07-25 00:21:44 PHT"
+    },
+    {
       "name": "2",
       "attending": true,
       "message": "",
