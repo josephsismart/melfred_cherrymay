@@ -657,9 +657,9 @@ const revealCard = document.getElementById('reveal-card');
 const corners    = ['cb-tl','cb-tr','cb-bl','cb-br'].map(id => document.getElementById(id));
 let opened = false;
 
-// ── REWIND: if coming back from invitation ──
-// Triggered by ?rewind=1 param (Home button) OR browser back (sessionStorage flag)
+// ── REWIND: letter goes back into envelope ──
 function doRewind() {
+  // Make sure envelope shows as open first, then animate close
   opened = true;
   envScene.classList.add('opened');
   setTimeout(() => {
@@ -667,17 +667,31 @@ function doRewind() {
     setTimeout(() => { opened = false; }, 1400);
   }, 700);
 }
+
 const urlRewind = new URLSearchParams(window.location.search).get('rewind') === '1';
 if (urlRewind) {
   doRewind();
   history.replaceState(null, '', '/');
 }
-// pageshow fires on both normal load and browser back (bfcache restore)
+
+// pageshow fires on BOTH normal load AND browser back button (bfcache restore)
 window.addEventListener('pageshow', function(e) {
-  const backFlag = sessionStorage.getItem('fromInvitation') === '1';
-  if (backFlag && !urlRewind) {
-    sessionStorage.removeItem('fromInvitation');
-    doRewind();
+  if (e.persisted) {
+    // Browser back restored page from bfcache — envelope is already visually open
+    // Just animate it closed after a short pause
+    if (opened) {
+      setTimeout(() => {
+        envScene.classList.remove('opened');
+        setTimeout(() => { opened = false; }, 1400);
+      }, 600);
+    }
+  } else {
+    // Normal/fresh load — check sessionStorage flag set by invitation.html
+    const backFlag = sessionStorage.getItem('fromInvitation') === '1';
+    if (backFlag && !urlRewind) {
+      sessionStorage.removeItem('fromInvitation');
+      doRewind();
+    }
   }
 });
 
