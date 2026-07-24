@@ -10,12 +10,6 @@
       "name": "sdf",
       "attending": true,
       "message": "sdf",
-      "submitted": "2026-07-25 01:03:26 PHT"
-    },
-    {
-      "name": "sdf",
-      "attending": true,
-      "message": "sdf",
       "submitted": "2026-07-25 00:50:07 PHT"
     },
     {
@@ -98,6 +92,13 @@
     }
   ],
   "trash": [
+    {
+      "name": "sdf",
+      "attending": true,
+      "message": "sdf",
+      "submitted": "2026-07-25 01:03:26 PHT",
+      "deletedAt": "2026-07-25 01:21:22 PHT"
+    },
     {
       "name": "12",
       "attending": false,
