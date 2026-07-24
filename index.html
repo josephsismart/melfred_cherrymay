@@ -42,49 +42,21 @@
     @keyframes twinkle { 0%{opacity:0.1;transform:scale(0.8)} 100%{opacity:0.9;transform:scale(1.2)} }
 
     /* ══════════════════════════════════════════
-       BIG CORNER FLOWERS  — CSS petal flowers
-       themed in greens + gold
+       CORNER VINE / LEAF DECORATIONS
     ══════════════════════════════════════════ */
     .corner-wrap {
       position: fixed; z-index: 5; pointer-events: none;
-      width: clamp(130px, 32vw, 210px);
-      height: clamp(130px, 32vw, 210px);
+      width: clamp(160px, 38vw, 260px);
+      height: clamp(160px, 38vw, 260px);
       opacity: 0;
-      transition: opacity 0.4s ease;
+      transition: opacity 0.8s ease;
     }
     .corner-wrap.show { opacity: 1; }
     .corner-wrap.tl { top: 0; left: 0; }
     .corner-wrap.tr { top: 0; right: 0; transform: scaleX(-1); }
     .corner-wrap.bl { bottom: 0; left: 0; transform: scaleY(-1); }
     .corner-wrap.br { bottom: 0; right: 0; transform: scale(-1,-1); }
-
-    /* One CSS flower */
-    .cflower {
-      position: absolute;
-      width: var(--fs, 60px); height: var(--fs, 60px);
-      opacity: 0; transform: scale(0) rotate(0deg);
-      transition: opacity 0.5s var(--td,0s) cubic-bezier(0.34,1.6,0.64,1),
-                  transform 0.5s var(--td,0s) cubic-bezier(0.34,1.6,0.64,1);
-    }
-    .corner-wrap.show .cflower {
-      opacity: 1;
-      transform: scale(1) rotate(var(--rot,0deg));
-      animation: cfloat var(--fdur,4s) var(--fdelay,0s) ease-in-out infinite;
-    }
-    @keyframes cfloat {
-      0%,100%{transform:scale(1) rotate(var(--rot,0deg)) translateY(0)}
-      50%{transform:scale(1.07) rotate(var(--rot,0deg)) translateY(-5px)}
-    }
-
-    /* Petal flower SVG rendered via CSS */
-    .cflower svg { width: 100%; height: 100%; }
-
-    /* Positions within each corner box */
-    .cflower:nth-child(1) { top:-2%; left:-2%;  --fs:clamp(70px,19vw,115px); --rot:-10deg; --td:0.05s; --fdur:4s; --fdelay:0s;   }
-    .cflower:nth-child(2) { top:-2%; left:38%;  --fs:clamp(45px,12vw,75px);  --rot:8deg;  --td:0.15s; --fdur:5s; --fdelay:0.4s; }
-    .cflower:nth-child(3) { top:38%; left:-2%;  --fs:clamp(50px,14vw,85px);  --rot:-5deg; --td:0.25s; --fdur:4.5s; --fdelay:0.8s;}
-    .cflower:nth-child(4) { top:22%; left:22%;  --fs:clamp(35px,9vw,55px);   --rot:15deg; --td:0.35s; --fdur:3.8s; --fdelay:0.3s;}
-    .cflower:nth-child(5) { top:5%;  left:62%;  --fs:clamp(30px,7vw,45px);   --rot:-15deg;--td:0.1s;  --fdur:4.2s; --fdelay:0.6s;}
+    .corner-wrap svg { width: 100%; height: 100%; }
 
     /* ══════════════════════════════════════════
        ENVELOPE
@@ -268,272 +240,96 @@
 <canvas id="hearts-canvas"></canvas>
 <div class="stars" id="stars"></div>
 
-<!-- ══ BIG CORNER FLOWER CLUSTERS ══ -->
-<!-- Each corner: 5 SVG flowers, sized large, green/gold theme -->
+<!-- ══ CORNER VINE DECORATIONS ══ -->
+<!-- Elegant leaf/vine SVG for each corner -->
 
 <!-- TOP LEFT -->
 <div class="corner-wrap tl" id="cb-tl">
-  <!-- Large bloom -->
-  <div class="cflower" style="--fs:clamp(75px,20vw,120px);--rot:-12deg;--td:0.05s;--fdur:4s;--fdelay:0s;top:-4%;left:-4%">
-    <svg viewBox="0 0 100 100"><g transform="translate(50,50)">
-      <ellipse rx="10" ry="26" fill="#4a7a5a" opacity=".9" transform="rotate(0)"/>
-      <ellipse rx="10" ry="26" fill="#3d6b4d" opacity=".9" transform="rotate(45)"/>
-      <ellipse rx="10" ry="26" fill="#5a8a6a" opacity=".9" transform="rotate(90)"/>
-      <ellipse rx="10" ry="26" fill="#3d6b4d" opacity=".9" transform="rotate(135)"/>
-      <ellipse rx="10" ry="26" fill="#4a7a5a" opacity=".9" transform="rotate(180)"/>
-      <ellipse rx="10" ry="26" fill="#5a8a6a" opacity=".9" transform="rotate(225)"/>
-      <ellipse rx="10" ry="26" fill="#4a7a5a" opacity=".9" transform="rotate(270)"/>
-      <ellipse rx="10" ry="26" fill="#3d6b4d" opacity=".9" transform="rotate(315)"/>
-      <circle r="11" fill="#d4a84b"/>
-      <circle r="7" fill="#f0c870"/>
-    </g></svg>
-  </div>
-  <!-- Medium accent -->
-  <div class="cflower" style="--fs:clamp(48px,13vw,80px);--rot:8deg;--td:0.15s;--fdur:5s;--fdelay:0.5s;top:0%;left:42%">
-    <svg viewBox="0 0 100 100"><g transform="translate(50,50)">
-      <ellipse rx="9" ry="24" fill="#6aaa7a" opacity=".9" transform="rotate(0)"/>
-      <ellipse rx="9" ry="24" fill="#5a9a6a" opacity=".9" transform="rotate(60)"/>
-      <ellipse rx="9" ry="24" fill="#7aba8a" opacity=".9" transform="rotate(120)"/>
-      <ellipse rx="9" ry="24" fill="#6aaa7a" opacity=".9" transform="rotate(180)"/>
-      <ellipse rx="9" ry="24" fill="#5a9a6a" opacity=".9" transform="rotate(240)"/>
-      <ellipse rx="9" ry="24" fill="#7aba8a" opacity=".9" transform="rotate(300)"/>
-      <circle r="10" fill="#c8960a"/>
-      <circle r="6" fill="#d4a84b"/>
-    </g></svg>
-  </div>
-  <!-- Side bloom -->
-  <div class="cflower" style="--fs:clamp(52px,14vw,88px);--rot:-5deg;--td:0.25s;--fdur:4.5s;--fdelay:0.9s;top:42%;left:-4%">
-    <svg viewBox="0 0 100 100"><g transform="translate(50,50)">
-      <ellipse rx="9" ry="24" fill="#3d6b4d" opacity=".9" transform="rotate(0)"/>
-      <ellipse rx="9" ry="24" fill="#4a7a5a" opacity=".9" transform="rotate(45)"/>
-      <ellipse rx="9" ry="24" fill="#2e5c3e" opacity=".9" transform="rotate(90)"/>
-      <ellipse rx="9" ry="24" fill="#4a7a5a" opacity=".9" transform="rotate(135)"/>
-      <ellipse rx="9" ry="24" fill="#3d6b4d" opacity=".9" transform="rotate(180)"/>
-      <ellipse rx="9" ry="24" fill="#5a8a6a" opacity=".9" transform="rotate(225)"/>
-      <ellipse rx="9" ry="24" fill="#4a7a5a" opacity=".9" transform="rotate(270)"/>
-      <ellipse rx="9" ry="24" fill="#3d6b4d" opacity=".9" transform="rotate(315)"/>
-      <circle r="10" fill="#d4a84b"/>
-      <circle r="6"  fill="#f0d890"/>
-    </g></svg>
-  </div>
-  <!-- Small inner -->
-  <div class="cflower" style="--fs:clamp(35px,9vw,55px);--rot:18deg;--td:0.35s;--fdur:3.8s;--fdelay:0.3s;top:26%;left:26%">
-    <svg viewBox="0 0 100 100"><g transform="translate(50,50)">
-      <ellipse rx="9" ry="22" fill="#c8e6d0" opacity=".8" transform="rotate(0)"/>
-      <ellipse rx="9" ry="22" fill="#aad4b8" opacity=".8" transform="rotate(72)"/>
-      <ellipse rx="9" ry="22" fill="#c8e6d0" opacity=".8" transform="rotate(144)"/>
-      <ellipse rx="9" ry="22" fill="#aad4b8" opacity=".8" transform="rotate(216)"/>
-      <ellipse rx="9" ry="22" fill="#c8e6d0" opacity=".8" transform="rotate(288)"/>
-      <circle r="9" fill="#d4a84b"/>
-      <circle r="5" fill="#fff8e0"/>
-    </g></svg>
-  </div>
-  <!-- Tiny accent -->
-  <div class="cflower" style="--fs:clamp(28px,7vw,42px);--rot:-20deg;--td:0.1s;--fdur:4.2s;--fdelay:0.7s;top:4%;left:68%">
-    <svg viewBox="0 0 100 100"><g transform="translate(50,50)">
-      <ellipse rx="10" ry="22" fill="#6aaa7a" opacity=".85" transform="rotate(0)"/>
-      <ellipse rx="10" ry="22" fill="#4a7a5a" opacity=".85" transform="rotate(90)"/>
-      <ellipse rx="10" ry="22" fill="#6aaa7a" opacity=".85" transform="rotate(180)"/>
-      <ellipse rx="10" ry="22" fill="#4a7a5a" opacity=".85" transform="rotate(270)"/>
-      <circle r="9" fill="#c8960a"/>
-      <circle r="5" fill="#d4a84b"/>
-    </g></svg>
-  </div>
+<svg viewBox="0 0 260 260" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Main stem -->
+  <path d="M10 10 Q40 80 20 160" stroke="#3d7a52" stroke-width="1.8" fill="none" opacity="0.6"/>
+  <path d="M10 10 Q90 40 170 20" stroke="#3d7a52" stroke-width="1.8" fill="none" opacity="0.6"/>
+  <!-- Leaves on vertical stem -->
+  <ellipse cx="22" cy="55" rx="14" ry="7" fill="#4a8a5f" opacity="0.5" transform="rotate(-35 22 55)"/>
+  <ellipse cx="16" cy="95" rx="16" ry="7" fill="#3d7a52" opacity="0.45" transform="rotate(20 16 95)"/>
+  <ellipse cx="24" cy="130" rx="13" ry="6" fill="#5a9a6a" opacity="0.4" transform="rotate(-25 24 130)"/>
+  <ellipse cx="15" cy="160" rx="11" ry="5" fill="#4a8a5f" opacity="0.35" transform="rotate(15 15 160)"/>
+  <!-- Leaves on horizontal stem -->
+  <ellipse cx="60" cy="16" rx="14" ry="6" fill="#4a8a5f" opacity="0.5" transform="rotate(-10 60 16)"/>
+  <ellipse cx="100" cy="12" rx="16" ry="6" fill="#3d7a52" opacity="0.45" transform="rotate(8 100 12)"/>
+  <ellipse cx="140" cy="16" rx="13" ry="6" fill="#5a9a6a" opacity="0.4" transform="rotate(-12 140 16)"/>
+  <ellipse cx="175" cy="14" rx="10" ry="5" fill="#4a8a5f" opacity="0.35" transform="rotate(5 175 14)"/>
+  <!-- Small accent leaves -->
+  <ellipse cx="35" cy="40" rx="8" ry="4" fill="#6aaa7a" opacity="0.3" transform="rotate(-50 35 40)"/>
+  <ellipse cx="50" cy="30" rx="7" ry="3.5" fill="#6aaa7a" opacity="0.3" transform="rotate(40 50 30)"/>
+  <!-- Tiny dots/berries -->
+  <circle cx="45" cy="22" r="2.5" fill="#4a8a5f" opacity="0.35"/>
+  <circle cx="18" cy="75" r="2" fill="#5a9a6a" opacity="0.3"/>
+  <circle cx="22" cy="112" r="2" fill="#4a8a5f" opacity="0.3"/>
+</svg>
 </div>
 
-<!-- TOP RIGHT (mirrored via scaleX) -->
+<!-- TOP RIGHT -->
 <div class="corner-wrap tr" id="cb-tr">
-  <div class="cflower" style="--fs:clamp(75px,20vw,120px);--rot:10deg;--td:0.08s;--fdur:4.2s;--fdelay:0.1s;top:-4%;left:-4%">
-    <svg viewBox="0 0 100 100"><g transform="translate(50,50)">
-      <ellipse rx="10" ry="26" fill="#5a8a6a" opacity=".9" transform="rotate(0)"/>
-      <ellipse rx="10" ry="26" fill="#4a7a5a" opacity=".9" transform="rotate(45)"/>
-      <ellipse rx="10" ry="26" fill="#3d6b4d" opacity=".9" transform="rotate(90)"/>
-      <ellipse rx="10" ry="26" fill="#5a8a6a" opacity=".9" transform="rotate(135)"/>
-      <ellipse rx="10" ry="26" fill="#4a7a5a" opacity=".9" transform="rotate(180)"/>
-      <ellipse rx="10" ry="26" fill="#6aaa7a" opacity=".9" transform="rotate(225)"/>
-      <ellipse rx="10" ry="26" fill="#4a7a5a" opacity=".9" transform="rotate(270)"/>
-      <ellipse rx="10" ry="26" fill="#3d6b4d" opacity=".9" transform="rotate(315)"/>
-      <circle r="11" fill="#c8960a"/>
-      <circle r="7"  fill="#f0c870"/>
-    </g></svg>
-  </div>
-  <div class="cflower" style="--fs:clamp(48px,13vw,80px);--rot:-8deg;--td:0.18s;--fdur:5.2s;--fdelay:0.55s;top:0%;left:42%">
-    <svg viewBox="0 0 100 100"><g transform="translate(50,50)">
-      <ellipse rx="9" ry="24" fill="#c8e6d0" opacity=".85" transform="rotate(0)"/>
-      <ellipse rx="9" ry="24" fill="#aad4b8" opacity=".85" transform="rotate(60)"/>
-      <ellipse rx="9" ry="24" fill="#c8e6d0" opacity=".85" transform="rotate(120)"/>
-      <ellipse rx="9" ry="24" fill="#aad4b8" opacity=".85" transform="rotate(180)"/>
-      <ellipse rx="9" ry="24" fill="#c8e6d0" opacity=".85" transform="rotate(240)"/>
-      <ellipse rx="9" ry="24" fill="#aad4b8" opacity=".85" transform="rotate(300)"/>
-      <circle r="10" fill="#d4a84b"/>
-      <circle r="6"  fill="#f0d890"/>
-    </g></svg>
-  </div>
-  <div class="cflower" style="--fs:clamp(52px,14vw,88px);--rot:6deg;--td:0.28s;--fdur:4.8s;--fdelay:0.95s;top:42%;left:-4%">
-    <svg viewBox="0 0 100 100"><g transform="translate(50,50)">
-      <ellipse rx="9" ry="24" fill="#4a7a5a" opacity=".9" transform="rotate(0)"/>
-      <ellipse rx="9" ry="24" fill="#6aaa7a" opacity=".9" transform="rotate(45)"/>
-      <ellipse rx="9" ry="24" fill="#3d6b4d" opacity=".9" transform="rotate(90)"/>
-      <ellipse rx="9" ry="24" fill="#5a8a6a" opacity=".9" transform="rotate(135)"/>
-      <ellipse rx="9" ry="24" fill="#4a7a5a" opacity=".9" transform="rotate(180)"/>
-      <ellipse rx="9" ry="24" fill="#6aaa7a" opacity=".9" transform="rotate(225)"/>
-      <ellipse rx="9" ry="24" fill="#4a7a5a" opacity=".9" transform="rotate(270)"/>
-      <ellipse rx="9" ry="24" fill="#3d6b4d" opacity=".9" transform="rotate(315)"/>
-      <circle r="10" fill="#d4a84b"/>
-      <circle r="6"  fill="#f0c870"/>
-    </g></svg>
-  </div>
-  <div class="cflower" style="--fs:clamp(35px,9vw,55px);--rot:-18deg;--td:0.38s;--fdur:4s;--fdelay:0.35s;top:26%;left:26%">
-    <svg viewBox="0 0 100 100"><g transform="translate(50,50)">
-      <ellipse rx="9" ry="22" fill="#6aaa7a" opacity=".85" transform="rotate(0)"/>
-      <ellipse rx="9" ry="22" fill="#4a7a5a" opacity=".85" transform="rotate(72)"/>
-      <ellipse rx="9" ry="22" fill="#5a8a6a" opacity=".85" transform="rotate(144)"/>
-      <ellipse rx="9" ry="22" fill="#3d6b4d" opacity=".85" transform="rotate(216)"/>
-      <ellipse rx="9" ry="22" fill="#6aaa7a" opacity=".85" transform="rotate(288)"/>
-      <circle r="9" fill="#c8960a"/>
-      <circle r="5" fill="#f0d890"/>
-    </g></svg>
-  </div>
-  <div class="cflower" style="--fs:clamp(28px,7vw,42px);--rot:20deg;--td:0.12s;--fdur:4.5s;--fdelay:0.75s;top:4%;left:68%">
-    <svg viewBox="0 0 100 100"><g transform="translate(50,50)">
-      <ellipse rx="10" ry="22" fill="#c8e6d0" opacity=".8" transform="rotate(0)"/>
-      <ellipse rx="10" ry="22" fill="#aad4b8" opacity=".8" transform="rotate(90)"/>
-      <ellipse rx="10" ry="22" fill="#c8e6d0" opacity=".8" transform="rotate(180)"/>
-      <ellipse rx="10" ry="22" fill="#aad4b8" opacity=".8" transform="rotate(270)"/>
-      <circle r="9" fill="#d4a84b"/>
-      <circle r="5" fill="#fff0a0"/>
-    </g></svg>
-  </div>
+<svg viewBox="0 0 260 260" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <path d="M10 10 Q40 80 20 160" stroke="#3d7a52" stroke-width="1.8" fill="none" opacity="0.6"/>
+  <path d="M10 10 Q90 40 170 20" stroke="#3d7a52" stroke-width="1.8" fill="none" opacity="0.6"/>
+  <ellipse cx="22" cy="55" rx="14" ry="7" fill="#4a8a5f" opacity="0.5" transform="rotate(-35 22 55)"/>
+  <ellipse cx="16" cy="95" rx="16" ry="7" fill="#3d7a52" opacity="0.45" transform="rotate(20 16 95)"/>
+  <ellipse cx="24" cy="130" rx="13" ry="6" fill="#5a9a6a" opacity="0.4" transform="rotate(-25 24 130)"/>
+  <ellipse cx="15" cy="160" rx="11" ry="5" fill="#4a8a5f" opacity="0.35" transform="rotate(15 15 160)"/>
+  <ellipse cx="60" cy="16" rx="14" ry="6" fill="#4a8a5f" opacity="0.5" transform="rotate(-10 60 16)"/>
+  <ellipse cx="100" cy="12" rx="16" ry="6" fill="#3d7a52" opacity="0.45" transform="rotate(8 100 12)"/>
+  <ellipse cx="140" cy="16" rx="13" ry="6" fill="#5a9a6a" opacity="0.4" transform="rotate(-12 140 16)"/>
+  <ellipse cx="175" cy="14" rx="10" ry="5" fill="#4a8a5f" opacity="0.35" transform="rotate(5 175 14)"/>
+  <ellipse cx="35" cy="40" rx="8" ry="4" fill="#6aaa7a" opacity="0.3" transform="rotate(-50 35 40)"/>
+  <ellipse cx="50" cy="30" rx="7" ry="3.5" fill="#6aaa7a" opacity="0.3" transform="rotate(40 50 30)"/>
+  <circle cx="45" cy="22" r="2.5" fill="#4a8a5f" opacity="0.35"/>
+  <circle cx="18" cy="75" r="2" fill="#5a9a6a" opacity="0.3"/>
+  <circle cx="22" cy="112" r="2" fill="#4a8a5f" opacity="0.3"/>
+</svg>
 </div>
 
-<!-- BOTTOM LEFT (scaleY mirror) -->
+<!-- BOTTOM LEFT -->
 <div class="corner-wrap bl" id="cb-bl">
-  <div class="cflower" style="--fs:clamp(75px,20vw,120px);--rot:8deg;--td:0.06s;--fdur:4.1s;--fdelay:0.05s;top:-4%;left:-4%">
-    <svg viewBox="0 0 100 100"><g transform="translate(50,50)">
-      <ellipse rx="10" ry="26" fill="#3d6b4d" opacity=".9" transform="rotate(0)"/>
-      <ellipse rx="10" ry="26" fill="#4a7a5a" opacity=".9" transform="rotate(45)"/>
-      <ellipse rx="10" ry="26" fill="#5a8a6a" opacity=".9" transform="rotate(90)"/>
-      <ellipse rx="10" ry="26" fill="#4a7a5a" opacity=".9" transform="rotate(135)"/>
-      <ellipse rx="10" ry="26" fill="#3d6b4d" opacity=".9" transform="rotate(180)"/>
-      <ellipse rx="10" ry="26" fill="#6aaa7a" opacity=".9" transform="rotate(225)"/>
-      <ellipse rx="10" ry="26" fill="#4a7a5a" opacity=".9" transform="rotate(270)"/>
-      <ellipse rx="10" ry="26" fill="#5a8a6a" opacity=".9" transform="rotate(315)"/>
-      <circle r="11" fill="#d4a84b"/>
-      <circle r="7"  fill="#f0d890"/>
-    </g></svg>
-  </div>
-  <div class="cflower" style="--fs:clamp(48px,13vw,80px);--rot:-6deg;--td:0.16s;--fdur:5.1s;--fdelay:0.45s;top:0%;left:42%">
-    <svg viewBox="0 0 100 100"><g transform="translate(50,50)">
-      <ellipse rx="9" ry="24" fill="#4a7a5a" opacity=".9" transform="rotate(0)"/>
-      <ellipse rx="9" ry="24" fill="#6aaa7a" opacity=".9" transform="rotate(60)"/>
-      <ellipse rx="9" ry="24" fill="#3d6b4d" opacity=".9" transform="rotate(120)"/>
-      <ellipse rx="9" ry="24" fill="#5a8a6a" opacity=".9" transform="rotate(180)"/>
-      <ellipse rx="9" ry="24" fill="#4a7a5a" opacity=".9" transform="rotate(240)"/>
-      <ellipse rx="9" ry="24" fill="#6aaa7a" opacity=".9" transform="rotate(300)"/>
-      <circle r="10" fill="#c8960a"/>
-      <circle r="6"  fill="#f0c870"/>
-    </g></svg>
-  </div>
-  <div class="cflower" style="--fs:clamp(52px,14vw,88px);--rot:12deg;--td:0.26s;--fdur:4.6s;--fdelay:0.85s;top:42%;left:-4%">
-    <svg viewBox="0 0 100 100"><g transform="translate(50,50)">
-      <ellipse rx="9" ry="24" fill="#c8e6d0" opacity=".85" transform="rotate(0)"/>
-      <ellipse rx="9" ry="24" fill="#aad4b8" opacity=".85" transform="rotate(45)"/>
-      <ellipse rx="9" ry="24" fill="#c8e6d0" opacity=".85" transform="rotate(90)"/>
-      <ellipse rx="9" ry="24" fill="#aad4b8" opacity=".85" transform="rotate(135)"/>
-      <ellipse rx="9" ry="24" fill="#c8e6d0" opacity=".85" transform="rotate(180)"/>
-      <ellipse rx="9" ry="24" fill="#aad4b8" opacity=".85" transform="rotate(225)"/>
-      <ellipse rx="9" ry="24" fill="#c8e6d0" opacity=".85" transform="rotate(270)"/>
-      <ellipse rx="9" ry="24" fill="#aad4b8" opacity=".85" transform="rotate(315)"/>
-      <circle r="10" fill="#d4a84b"/>
-      <circle r="6"  fill="#fff0a0"/>
-    </g></svg>
-  </div>
-  <div class="cflower" style="--fs:clamp(35px,9vw,55px);--rot:22deg;--td:0.36s;--fdur:3.9s;--fdelay:0.25s;top:26%;left:26%">
-    <svg viewBox="0 0 100 100"><g transform="translate(50,50)">
-      <ellipse rx="9" ry="22" fill="#6aaa7a" opacity=".85" transform="rotate(0)"/>
-      <ellipse rx="9" ry="22" fill="#5a9a6a" opacity=".85" transform="rotate(72)"/>
-      <ellipse rx="9" ry="22" fill="#4a7a5a" opacity=".85" transform="rotate(144)"/>
-      <ellipse rx="9" ry="22" fill="#6aaa7a" opacity=".85" transform="rotate(216)"/>
-      <ellipse rx="9" ry="22" fill="#5a9a6a" opacity=".85" transform="rotate(288)"/>
-      <circle r="9" fill="#d4a84b"/>
-      <circle r="5" fill="#f0c870"/>
-    </g></svg>
-  </div>
-  <div class="cflower" style="--fs:clamp(28px,7vw,42px);--rot:-16deg;--td:0.11s;--fdur:4.3s;--fdelay:0.65s;top:4%;left:68%">
-    <svg viewBox="0 0 100 100"><g transform="translate(50,50)">
-      <ellipse rx="10" ry="22" fill="#4a7a5a" opacity=".85" transform="rotate(0)"/>
-      <ellipse rx="10" ry="22" fill="#3d6b4d" opacity=".85" transform="rotate(90)"/>
-      <ellipse rx="10" ry="22" fill="#5a8a6a" opacity=".85" transform="rotate(180)"/>
-      <ellipse rx="10" ry="22" fill="#4a7a5a" opacity=".85" transform="rotate(270)"/>
-      <circle r="9" fill="#c8960a"/>
-      <circle r="5" fill="#d4a84b"/>
-    </g></svg>
-  </div>
+<svg viewBox="0 0 260 260" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <path d="M10 10 Q40 80 20 160" stroke="#3d7a52" stroke-width="1.8" fill="none" opacity="0.6"/>
+  <path d="M10 10 Q90 40 170 20" stroke="#3d7a52" stroke-width="1.8" fill="none" opacity="0.6"/>
+  <ellipse cx="22" cy="55" rx="14" ry="7" fill="#4a8a5f" opacity="0.5" transform="rotate(-35 22 55)"/>
+  <ellipse cx="16" cy="95" rx="16" ry="7" fill="#3d7a52" opacity="0.45" transform="rotate(20 16 95)"/>
+  <ellipse cx="24" cy="130" rx="13" ry="6" fill="#5a9a6a" opacity="0.4" transform="rotate(-25 24 130)"/>
+  <ellipse cx="15" cy="160" rx="11" ry="5" fill="#4a8a5f" opacity="0.35" transform="rotate(15 15 160)"/>
+  <ellipse cx="60" cy="16" rx="14" ry="6" fill="#4a8a5f" opacity="0.5" transform="rotate(-10 60 16)"/>
+  <ellipse cx="100" cy="12" rx="16" ry="6" fill="#3d7a52" opacity="0.45" transform="rotate(8 100 12)"/>
+  <ellipse cx="140" cy="16" rx="13" ry="6" fill="#5a9a6a" opacity="0.4" transform="rotate(-12 140 16)"/>
+  <ellipse cx="175" cy="14" rx="10" ry="5" fill="#4a8a5f" opacity="0.35" transform="rotate(5 175 14)"/>
+  <ellipse cx="35" cy="40" rx="8" ry="4" fill="#6aaa7a" opacity="0.3" transform="rotate(-50 35 40)"/>
+  <ellipse cx="50" cy="30" rx="7" ry="3.5" fill="#6aaa7a" opacity="0.3" transform="rotate(40 50 30)"/>
+  <circle cx="45" cy="22" r="2.5" fill="#4a8a5f" opacity="0.35"/>
+  <circle cx="18" cy="75" r="2" fill="#5a9a6a" opacity="0.3"/>
+  <circle cx="22" cy="112" r="2" fill="#4a8a5f" opacity="0.3"/>
+</svg>
 </div>
 
-<!-- BOTTOM RIGHT (scale -1,-1 mirror) -->
+<!-- BOTTOM RIGHT -->
 <div class="corner-wrap br" id="cb-br">
-  <div class="cflower" style="--fs:clamp(75px,20vw,120px);--rot:-8deg;--td:0.07s;--fdur:4.3s;--fdelay:0.15s;top:-4%;left:-4%">
-    <svg viewBox="0 0 100 100"><g transform="translate(50,50)">
-      <ellipse rx="10" ry="26" fill="#6aaa7a" opacity=".9" transform="rotate(0)"/>
-      <ellipse rx="10" ry="26" fill="#4a7a5a" opacity=".9" transform="rotate(45)"/>
-      <ellipse rx="10" ry="26" fill="#5a8a6a" opacity=".9" transform="rotate(90)"/>
-      <ellipse rx="10" ry="26" fill="#3d6b4d" opacity=".9" transform="rotate(135)"/>
-      <ellipse rx="10" ry="26" fill="#4a7a5a" opacity=".9" transform="rotate(180)"/>
-      <ellipse rx="10" ry="26" fill="#6aaa7a" opacity=".9" transform="rotate(225)"/>
-      <ellipse rx="10" ry="26" fill="#4a7a5a" opacity=".9" transform="rotate(270)"/>
-      <ellipse rx="10" ry="26" fill="#5a8a6a" opacity=".9" transform="rotate(315)"/>
-      <circle r="11" fill="#c8960a"/>
-      <circle r="7"  fill="#d4a84b"/>
-    </g></svg>
-  </div>
-  <div class="cflower" style="--fs:clamp(48px,13vw,80px);--rot:10deg;--td:0.2s;--fdur:4.9s;--fdelay:0.6s;top:0%;left:42%">
-    <svg viewBox="0 0 100 100"><g transform="translate(50,50)">
-      <ellipse rx="9" ry="24" fill="#c8e6d0" opacity=".85" transform="rotate(0)"/>
-      <ellipse rx="9" ry="24" fill="#6aaa7a" opacity=".85" transform="rotate(60)"/>
-      <ellipse rx="9" ry="24" fill="#aad4b8" opacity=".85" transform="rotate(120)"/>
-      <ellipse rx="9" ry="24" fill="#c8e6d0" opacity=".85" transform="rotate(180)"/>
-      <ellipse rx="9" ry="24" fill="#6aaa7a" opacity=".85" transform="rotate(240)"/>
-      <ellipse rx="9" ry="24" fill="#aad4b8" opacity=".85" transform="rotate(300)"/>
-      <circle r="10" fill="#d4a84b"/>
-      <circle r="6"  fill="#f0d890"/>
-    </g></svg>
-  </div>
-  <div class="cflower" style="--fs:clamp(52px,14vw,88px);--rot:-12deg;--td:0.3s;--fdur:4.7s;--fdelay:1s;top:42%;left:-4%">
-    <svg viewBox="0 0 100 100"><g transform="translate(50,50)">
-      <ellipse rx="9" ry="24" fill="#4a7a5a" opacity=".9" transform="rotate(0)"/>
-      <ellipse rx="9" ry="24" fill="#5a8a6a" opacity=".9" transform="rotate(45)"/>
-      <ellipse rx="9" ry="24" fill="#3d6b4d" opacity=".9" transform="rotate(90)"/>
-      <ellipse rx="9" ry="24" fill="#6aaa7a" opacity=".9" transform="rotate(135)"/>
-      <ellipse rx="9" ry="24" fill="#4a7a5a" opacity=".9" transform="rotate(180)"/>
-      <ellipse rx="9" ry="24" fill="#5a8a6a" opacity=".9" transform="rotate(225)"/>
-      <ellipse rx="9" ry="24" fill="#4a7a5a" opacity=".9" transform="rotate(270)"/>
-      <ellipse rx="9" ry="24" fill="#3d6b4d" opacity=".9" transform="rotate(315)"/>
-      <circle r="10" fill="#d4a84b"/>
-      <circle r="6"  fill="#f0c870"/>
-    </g></svg>
-  </div>
-  <div class="cflower" style="--fs:clamp(35px,9vw,55px);--rot:-22deg;--td:0.4s;--fdur:4.1s;--fdelay:0.4s;top:26%;left:26%">
-    <svg viewBox="0 0 100 100"><g transform="translate(50,50)">
-      <ellipse rx="9" ry="22" fill="#4a7a5a" opacity=".85" transform="rotate(0)"/>
-      <ellipse rx="9" ry="22" fill="#6aaa7a" opacity=".85" transform="rotate(72)"/>
-      <ellipse rx="9" ry="22" fill="#3d6b4d" opacity=".85" transform="rotate(144)"/>
-      <ellipse rx="9" ry="22" fill="#5a8a6a" opacity=".85" transform="rotate(216)"/>
-      <ellipse rx="9" ry="22" fill="#4a7a5a" opacity=".85" transform="rotate(288)"/>
-      <circle r="9" fill="#c8960a"/>
-      <circle r="5" fill="#f0d890"/>
-    </g></svg>
-  </div>
-  <div class="cflower" style="--fs:clamp(28px,7vw,42px);--rot:16deg;--td:0.13s;--fdur:4.4s;--fdelay:0.8s;top:4%;left:68%">
-    <svg viewBox="0 0 100 100"><g transform="translate(50,50)">
-      <ellipse rx="10" ry="22" fill="#c8e6d0" opacity=".8" transform="rotate(0)"/>
-      <ellipse rx="10" ry="22" fill="#6aaa7a" opacity=".8" transform="rotate(90)"/>
-      <ellipse rx="10" ry="22" fill="#aad4b8" opacity=".8" transform="rotate(180)"/>
-      <ellipse rx="10" ry="22" fill="#5a8a6a" opacity=".8" transform="rotate(270)"/>
-      <circle r="9" fill="#d4a84b"/>
-      <circle r="5" fill="#f0c870"/>
-    </g></svg>
-  </div>
+<svg viewBox="0 0 260 260" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <path d="M10 10 Q40 80 20 160" stroke="#3d7a52" stroke-width="1.8" fill="none" opacity="0.6"/>
+  <path d="M10 10 Q90 40 170 20" stroke="#3d7a52" stroke-width="1.8" fill="none" opacity="0.6"/>
+  <ellipse cx="22" cy="55" rx="14" ry="7" fill="#4a8a5f" opacity="0.5" transform="rotate(-35 22 55)"/>
+  <ellipse cx="16" cy="95" rx="16" ry="7" fill="#3d7a52" opacity="0.45" transform="rotate(20 16 95)"/>
+  <ellipse cx="24" cy="130" rx="13" ry="6" fill="#5a9a6a" opacity="0.4" transform="rotate(-25 24 130)"/>
+  <ellipse cx="15" cy="160" rx="11" ry="5" fill="#4a8a5f" opacity="0.35" transform="rotate(15 15 160)"/>
+  <ellipse cx="60" cy="16" rx="14" ry="6" fill="#4a8a5f" opacity="0.5" transform="rotate(-10 60 16)"/>
+  <ellipse cx="100" cy="12" rx="16" ry="6" fill="#3d7a52" opacity="0.45" transform="rotate(8 100 12)"/>
+  <ellipse cx="140" cy="16" rx="13" ry="6" fill="#5a9a6a" opacity="0.4" transform="rotate(-12 140 16)"/>
+  <ellipse cx="175" cy="14" rx="10" ry="5" fill="#4a8a5f" opacity="0.35" transform="rotate(5 175 14)"/>
+  <ellipse cx="35" cy="40" rx="8" ry="4" fill="#6aaa7a" opacity="0.3" transform="rotate(-50 35 40)"/>
+  <ellipse cx="50" cy="30" rx="7" ry="3.5" fill="#6aaa7a" opacity="0.3" transform="rotate(40 50 30)"/>
+  <circle cx="45" cy="22" r="2.5" fill="#4a8a5f" opacity="0.35"/>
+  <circle cx="18" cy="75" r="2" fill="#5a9a6a" opacity="0.3"/>
+  <circle cx="22" cy="112" r="2" fill="#4a8a5f" opacity="0.3"/>
+</svg>
 </div>
 
 <!-- ══ ENVELOPE ══ -->
@@ -564,6 +360,22 @@ const revealCard = document.getElementById('reveal-card');
 const corners    = ['cb-tl','cb-tr','cb-bl','cb-br'].map(id => document.getElementById(id));
 let opened = false;
 
+// ── REWIND: if coming back from invitation, play close animation ──
+const fromInvitation = document.referrer && document.referrer.includes('invitation');
+if (fromInvitation) {
+  opened = true; // prevent re-open click during rewind
+  // Start in opened state
+  envScene.classList.add('opened');
+  corners.forEach(c => c.classList.add('show'));
+  // After short pause, remove 'opened' to reverse the animation (flap closes, peek slides down)
+  setTimeout(() => {
+    envScene.classList.remove('opened');
+    corners.forEach(c => c.classList.remove('show'));
+    // Re-enable clicking after rewind finishes
+    setTimeout(() => { opened = false; }, 1400);
+  }, 600);
+}
+
 envScene.addEventListener('click', function () {
   if (opened) return;
   opened = true;
@@ -571,12 +383,12 @@ envScene.addEventListener('click', function () {
   // 1. Flap opens
   envScene.classList.add('opened');
 
-  // 2. Corner flower clusters bloom in
+  // 2. Corner vines bloom in
   setTimeout(() => {
     corners.forEach((c, i) => setTimeout(() => c.classList.add('show'), i * 80));
   }, 200);
 
-  // 3. Navigate directly to invitation (delay so user sees the card peek)
+  // 3. Navigate to invitation
   setTimeout(() => {
     window.location.href = '/invitation.html?play=1';
   }, 2200);
