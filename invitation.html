@@ -496,7 +496,7 @@
   <div class="welcome-stars" id="welcomeStars"></div>
 
   <!-- Photo fills full height, tag + names + music overlaid -->
-  <div class="welcome-photo-wrap reveal">
+  <div class="welcome-photo-wrap">
     <img id="couple-photo" src="/img_4796.jpg" alt="Fred &amp; Chem"/>
     <!-- Tag overlaid at top of photo -->
     <div style="position:absolute;top:max(env(safe-area-inset-top,0px),1rem);left:50%;transform:translateX(-50%);z-index:3;">
@@ -962,12 +962,11 @@
       </div>
     </div>
   </div>
-  <!-- Full-width photo, no border, no radius -->
-  <div class="std-photo-area">
+  <!-- Full-width photo with floating go-to-top button -->
+  <div class="std-photo-area" style="position:relative;">
     <img src="/img_5155.jpg" alt="Fred &amp; Chem"/>
-  </div>
-  <div style="text-align:center;padding:1.5rem 0 2rem;">
-    <button class="std-top-btn" onclick="window.scrollTo({top:0,behavior:'smooth'})">
+    <button class="std-top-btn" onclick="window.scrollTo({top:0,behavior:'smooth'})"
+      style="position:absolute;bottom:1.5rem;left:50%;transform:translateX(-50%);margin:0;">
       <i class="fa-solid fa-chevron-up"></i>
     </button>
   </div>
@@ -1006,7 +1005,7 @@ function startMusic(){
 function onYouTubeIframeAPIReady(){
   ytPlayer = new YT.Player('yt-player', {
     videoId: 'ZucRZH4FoM8',
-    playerVars:{ autoplay:0, controls:0, disablekb:1, fs:0, iv_load_policy:3, modestbranding:1, rel:0, start:29, loop:1, playlist:'ZucRZH4FoM8', mute:1 },
+    playerVars:{ autoplay:1, controls:0, disablekb:1, fs:0, iv_load_policy:3, modestbranding:1, rel:0, start:29, loop:1, playlist:'ZucRZH4FoM8', mute:1 },
     events:{
       onReady: function(e){ ytReady = true; e.target.setVolume(0); },
       onStateChange: function(e){ if(e.data === YT.PlayerState.ENDED){ ytPlayer.seekTo(29); ytPlayer.playVideo(); } }
