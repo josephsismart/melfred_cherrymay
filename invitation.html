@@ -489,6 +489,33 @@
     @media(max-width:380px) {
       #pill-nav a { font-size:0.4rem; padding:0.22rem 0.4rem; }
     }
+  
+    /* ── FORCE OUR COLORS IN DARK MODE (beats Brave forced dark) ── */
+    @media (prefers-color-scheme: dark) {
+      html, body { background: var(--cream) !important; color: var(--text) !important; }
+      #lt-rsvp { background: linear-gradient(160deg,#edf7f0 0%,#d0eedd 100%) !important; }
+      .rsvp-card-new { background: #fff !important; color: var(--text) !important; }
+      .rsvp-card-header { background: var(--wine) !important; }
+      .rsvp-attend-btn { background: #fff !important; color: var(--text) !important; border-color: rgba(74,122,90,0.25) !important; }
+      .rsvp-attend-btn.yes-btn.selected { background: rgba(74,122,90,0.06) !important; }
+      .rsvp-attend-btn.no-btn.selected { background: rgba(192,57,43,0.04) !important; }
+      .rsvp-input { background: #fafff9 !important; color: var(--text) !important; border-color: rgba(74,122,90,0.2) !important; }
+      .rsvp-label { color: var(--text) !important; }
+      .rsvp-optional { color: rgba(74,122,90,0.55) !important; }
+      .rsvp-submit-btn { background: var(--wine) !important; color: #fff !important; }
+      #story, #details, #attire, #save-the-date, #entourage, #faq { filter: none !important; }
+      #story { background: linear-gradient(180deg,#f0fff4 0%,#f4faf5 50%,#eef8f0 100%) !important; }
+      #details { background: linear-gradient(160deg,#f4faf5 0%,#edf7f0 50%,#f4faf5 100%) !important; }
+      #attire { background: linear-gradient(160deg,#edf7f0 0%,#f4faf5 50%,#edf7f0 100%) !important; }
+      #save-the-date { background: linear-gradient(160deg,#f4faf5 0%,#edf7f0 50%,#f0faf4 100%) !important; }
+      .faq-item { background: #fff !important; color: var(--text) !important; }
+      .lt-detail-card { background: #0d3322 !important; }
+      .attire-card { background: #fff !important; color: var(--text) !important; }
+      .lt-timeline-item { background: #f4faf5 !important; color: var(--text) !important; }
+      .ent-card { background: rgba(255,255,255,0.92) !important; color: var(--text) !important; }
+      input, textarea, select { background: #fafff9 !important; color: var(--text) !important; }
+    }
+
   </style>
 </head>
 <body>
