@@ -1013,7 +1013,7 @@ function onYouTubeIframeAPIReady(){
         e.target.setVolume(0);
         e.target.playVideo(); // muted autoplay — works on Android Chrome
 
-        // After 3s, try to unmute (Android) — if blocked (iOS), toast appears
+        // After 0.5s, try to unmute (Android) — if blocked (iOS), toast appears
         setTimeout(function(){
           if(musicPlaying) return;
           try {
@@ -1036,7 +1036,7 @@ function onYouTubeIframeAPIReady(){
               if(!musicPlaying) showMusicToast(); // iOS fallback
             }, 800);
           } catch(err){ showMusicToast(); }
-        }, 3000);
+        }, 500);
       },
       onStateChange: function(e){ if(e.data === YT.PlayerState.ENDED){ ytPlayer.seekTo(29); ytPlayer.playVideo(); } }
     }
