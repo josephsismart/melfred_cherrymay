@@ -46,12 +46,11 @@
     ══════════════════════════════════════════ */
     .corner-wrap {
       position: fixed; z-index: 5; pointer-events: none;
-      width: clamp(160px, 38vw, 260px);
-      height: clamp(160px, 38vw, 260px);
-      opacity: 0;
+      width: clamp(220px, 48vw, 340px);
+      height: clamp(220px, 48vw, 340px);
+      opacity: 1;
       transition: opacity 0.8s ease;
     }
-    .corner-wrap.show { opacity: 1; }
     .corner-wrap.tl { top: 0; left: 0; }
     .corner-wrap.tr { top: 0; right: 0; transform: scaleX(-1); }
     .corner-wrap.bl { bottom: 0; left: 0; transform: scaleY(-1); }
@@ -360,20 +359,19 @@ const revealCard = document.getElementById('reveal-card');
 const corners    = ['cb-tl','cb-tr','cb-bl','cb-br'].map(id => document.getElementById(id));
 let opened = false;
 
-// ── REWIND: if coming back from invitation, play close animation ──
-const fromInvitation = document.referrer && document.referrer.includes('invitation');
+// ── REWIND: if coming back from invitation via ?rewind=1 ──
+const fromInvitation = new URLSearchParams(window.location.search).get('rewind') === '1';
 if (fromInvitation) {
-  opened = true; // prevent re-open click during rewind
-  // Start in opened state
+  opened = true;
+  // Start with envelope open
   envScene.classList.add('opened');
-  corners.forEach(c => c.classList.add('show'));
-  // After short pause, remove 'opened' to reverse the animation (flap closes, peek slides down)
+  // Short pause then rewind — flap closes, letter slides back in
   setTimeout(() => {
     envScene.classList.remove('opened');
-    corners.forEach(c => c.classList.remove('show'));
-    // Re-enable clicking after rewind finishes
     setTimeout(() => { opened = false; }, 1400);
-  }, 600);
+  }, 700);
+  // Clean URL without reloading
+  history.replaceState(null, '', '/');
 }
 
 envScene.addEventListener('click', function () {
