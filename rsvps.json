@@ -1,12 +1,6 @@
 {
   "rsvps": [
     {
-      "name": "jJa",
-      "attending": true,
-      "message": "",
-      "submitted": "2026-07-24 22:45:51 PHT"
-    },
-    {
       "name": "Ramsismar",
       "attending": true,
       "message": "Lez go",
@@ -92,6 +86,13 @@
     }
   ],
   "trash": [
+    {
+      "name": "jJa",
+      "attending": true,
+      "message": "",
+      "submitted": "2026-07-24 22:45:51 PHT",
+      "deletedAt": "2026-07-24 23:41:14 PHT"
+    },
     {
       "name": "1",
       "attending": true,
