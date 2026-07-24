@@ -1210,7 +1210,7 @@ function selectAttend(yes){
 
 async function submitRsvp(){
   const nameInput = document.getElementById('rsvpName');
-  const name = nameInput ? nameInput.value.trim() : '';
+  const name = nameInput ? nameInput.value.trim().replace(/\b\w/g, c => c.toUpperCase()) : '';
   const message = document.getElementById('rsvpMessage') ? document.getElementById('rsvpMessage').value.trim() : '';
 
   if(attendingChoice === null){
