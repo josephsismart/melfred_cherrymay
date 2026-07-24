@@ -212,7 +212,15 @@
     <div class="gate-sub">Fred &amp; Chem · Sept 5, 2026</div>
   </div>
   <p style="font-size:0.8rem;color:rgba(200,230,208,0.5);">Enter passcode to view the RSVP responses</p>
-  <input class="gate-input" id="passInput" type="password" placeholder="Enter passcode" autocomplete="off"/>
+  <div style="position:relative;width:100%;">
+    <input class="gate-input" id="passInput" type="password" placeholder="Enter passcode"
+      autocomplete="off" autocorrect="off" autocapitalize="none" spellcheck="false"
+      style="padding-right:3rem;width:100%;box-sizing:border-box;"/>
+    <button onclick="toggleShow()" type="button"
+      style="position:absolute;right:0.8rem;top:50%;transform:translateY(-50%);background:none;border:none;cursor:pointer;color:rgba(200,230,208,0.5);font-size:1rem;padding:0.2rem;">
+      <i class="fa-regular fa-eye" id="eyeIcon"></i>
+    </button>
+  </div>
   <button class="gate-btn" onclick="checkPass()">
     <i class="fa-solid fa-unlock-keyhole"></i> &nbsp; Access Guest List
   </button>
@@ -360,6 +368,17 @@ document.getElementById('passInput').addEventListener('keydown', function(e){
   if(e.key === 'Enter') checkPass();
 });
 
+function toggleShow(){
+  const inp = document.getElementById('passInput');
+  const ico = document.getElementById('eyeIcon');
+  if(inp.type === 'password'){
+    inp.type = 'text';
+    ico.className = 'fa-regular fa-eye-slash';
+  } else {
+    inp.type = 'password';
+    ico.className = 'fa-regular fa-eye';
+  }
+}
 function checkPass(){
   const code = document.getElementById('passInput').value.trim();
   const err = document.getElementById('gateError');
