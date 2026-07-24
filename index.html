@@ -44,38 +44,33 @@
     /* ══════════════════════════════════════════
        CORNER VINE / LEAF DECORATIONS
     ══════════════════════════════════════════ */
-    /* ── corner leaf animations ── */
+    /* ── corner leaf fade-in ── */
     @keyframes leafFadeIn {
       0%   { opacity: 0; }
       100% { opacity: 1; }
     }
-    @keyframes leafFloat {
-      0%,100% { transform: translateY(0px); }
-      50%      { transform: translateY(-10px); }
-    }
-    /* corner-wrap: position only, no transform (avoids animation conflict) */
     .corner-wrap {
       position: fixed; z-index: 5; pointer-events: none;
-      width: clamp(160px, 35vw, 260px);
+      width: clamp(220px, 45vw, 340px);
       height: auto;
       opacity: 0;
       animation: leafFadeIn 1.2s ease forwards;
+      overflow: visible;
     }
-    /* inner div handles the flip — totally separate from animation */
     .corner-wrap .c-inner { width: 100%; display: block; }
-    .corner-wrap.tl { top: 0; left: 0; animation-delay: 0.1s; }
+    /* TL: overflow top-left — shift image so it bleeds off corner */
+    .corner-wrap.tl { top: -5%; left: -5%; animation-delay: 0.1s; }
     .corner-wrap.tl .c-inner { transform: scaleY(-1); }
-    .corner-wrap.tr { top: 0; right: 0; animation-delay: 0.3s; }
-    .corner-wrap.tr .c-inner { transform: scale(-1, -1); }
-    .corner-wrap.bl { bottom: 0; left: 0; animation-delay: 0.5s; }
+    /* TR: overflow top-right */
+    .corner-wrap.tr { top: -5%; right: -5%; animation-delay: 0.3s; }
+    .corner-wrap.tr .c-inner { transform: scale(-1,-1); }
+    /* BL: overflow bottom-left */
+    .corner-wrap.bl { bottom: -5%; left: -5%; animation-delay: 0.5s; }
     .corner-wrap.bl .c-inner { transform: none; }
-    .corner-wrap.br { bottom: 0; right: 0; animation-delay: 0.7s; }
+    /* BR: overflow bottom-right */
+    .corner-wrap.br { bottom: -5%; right: -5%; animation-delay: 0.7s; }
     .corner-wrap.br .c-inner { transform: scaleX(-1); }
-    /* float animation on the img itself */
-    .corner-wrap img {
-      width: 100%; height: auto; display: block;
-      animation: leafFloat 5s ease-in-out 1.4s infinite;
-    }
+    .corner-wrap img { width: 100%; height: auto; display: block; }
 
     /* ══════════════════════════════════════════
        ENVELOPE
