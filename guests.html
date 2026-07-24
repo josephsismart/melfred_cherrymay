@@ -522,28 +522,9 @@ async function loadGuests(){
     document.getElementById('statComing').textContent    = coming;
     document.getElementById('statNotComing').textContent = notComing;
 
-    body.innerHTML = list.map((r, i) => `
-      <tr id="row-${i}">
-        <td style="color:rgba(200,230,208,0.3);font-size:0.72rem;">${i+1}</td>
-        <td style="font-weight:500;color:#fff;">${escHtml(r.name || '—')}</td>
-        <td>
-          ${r.attending
-            ? '<span class="badge badge-yes"><i class="fa-solid fa-check"></i> Coming</span>'
-            : '<span class="badge badge-no"><i class="fa-solid fa-xmark"></i> Can\'t Make It</span>'}
-        </td>
-        <td style="font-size:0.8rem;font-style:italic;color:rgba(200,230,208,0.7);">
-          ${r.message ? escHtml(r.message) : '<span style="color:rgba(200,230,208,0.25);">—</span>'}
-        </td>
-        <td style="font-size:0.72rem;color:rgba(200,230,208,0.55);">${escHtml(r.submitted || formatDate(r.timestamp) || '—')}</td>
-        <td>
-          <button class="del-btn" onclick="openModal(${i}, '${escAttr(r.name)}')">
-            <i class="fa-solid fa-trash-can"></i>
-          </button>
-        </td>
-      </tr>
-    `).join('');
-
+    window._guestList = list;
     table.style.display = 'table';
+    renderPage(1);
 
   } catch(err) {
     loading.innerHTML = `<i class="fa-solid fa-triangle-exclamation" style="color:#ff8888"></i> ${err.message}`;
