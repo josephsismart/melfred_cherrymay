@@ -506,11 +506,14 @@
       <span class="welcome-script">Fred</span>
       <span class="welcome-amp">&amp;</span>
       <span class="welcome-script">Chem</span>
+      <!-- Date & location right below names -->
+      <div style="margin-top:0.6rem;display:flex;flex-direction:column;align-items:center;gap:0.2rem;">
+        <div class="welcome-date">September 5, 2026</div>
+        <div class="welcome-loc"><i class="fa-solid fa-location-dot" style="color:#fff;margin-right:0.3rem;font-size:0.7em"></i>Butuan City, Philippines</div>
+      </div>
     </div>
-    <!-- Bottom overlay inside photo: date, location, music, scroll -->
+    <!-- Bottom overlay: music + scroll only -->
     <div style="position:absolute;bottom:0;left:0;right:0;z-index:3;padding:1.2rem 1rem 1.4rem;background:linear-gradient(to top,rgba(5,26,10,0.75) 0%,transparent 100%);display:flex;flex-direction:column;align-items:center;gap:0.3rem;">
-      <div class="welcome-date">September 5, 2026</div>
-      <div class="welcome-loc"><i class="fa-solid fa-location-dot" style="color:#fff;margin-right:0.3rem;font-size:0.7em"></i>Butuan City, Philippines</div>
       <div class="music-btn-wrap" style="cursor:pointer;margin-top:0.4rem;" onclick="toggleMusic()" title="Toggle music">
         <span class="music-arc-text"><i class="fa-solid fa-music"></i></span>
         <div class="music-btn" id="musicBtn"><i class="fa-solid fa-play" id="musicIcon"></i></div>
