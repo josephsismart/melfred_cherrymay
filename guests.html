@@ -104,11 +104,21 @@
 
     /* Delete button */
     .del-btn {
-      background: none; border: 1px solid rgba(255,100,100,0.25); color: rgba(255,120,120,0.6);
-      border-radius: 50px; cursor: pointer; padding: 0.3rem 0.6rem;
-      font-size: 0.7rem; transition: all 0.2s; line-height: 1;
+      background: rgba(255,80,80,0.10); border: 1.5px solid rgba(255,100,100,0.45); color: rgba(255,140,140,0.9);
+      border-radius: 50%; cursor: pointer; padding: 0; width: 34px; height: 34px;
+      font-size: 0.85rem; transition: all 0.2s; line-height: 1;
+      display: flex; align-items: center; justify-content: center; flex-shrink: 0;
     }
-    .del-btn:hover { background: rgba(255,80,80,0.12); border-color: rgba(255,100,100,0.6); color: #ff8888; }
+    .del-btn:hover, .del-btn:active { background: rgba(255,80,80,0.25); border-color: rgba(255,100,100,0.9); color: #ff8888; }
+
+    /* Pagination */
+    .pagination { display:flex; gap:0.4rem; justify-content:center; align-items:center; margin-top:1rem; flex-wrap:wrap; }
+    .page-btn { background:none; border:1.5px solid rgba(200,230,208,0.2); color:rgba(200,230,208,0.6);
+      font-family:'Poppins',sans-serif; font-size:0.75rem; padding:0.35rem 0.75rem;
+      border-radius:50px; cursor:pointer; transition:all 0.2s; min-width:36px; }
+    .page-btn.active { background:var(--rose-light); border-color:var(--rose-light); color:#fff; font-weight:600; }
+    .page-btn:hover:not(.active) { border-color:rgba(200,230,208,0.5); color:rgba(200,230,208,0.9); }
+    .page-info { font-size:0.72rem; color:rgba(200,230,208,0.4); margin:0 0.3rem; }
 
     /* Refresh / back */
     .list-refresh { margin-top: 1.5rem; text-align: center; }
@@ -373,6 +383,61 @@ function formatDate(iso){
     return d.toLocaleDateString('en-PH',{month:'short',day:'numeric',year:'numeric'})
       + ' ' + d.toLocaleTimeString('en-PH',{hour:'2-digit',minute:'2-digit'});
   } catch(e){ return iso || '—'; }
+}
+
+const PAGE_SIZE = 10;
+
+function renderPage(page){
+  const list = window._guestList || [];
+  const body = document.getElementById('guestBody');
+  const total = list.length;
+  const totalPages = Math.ceil(total / PAGE_SIZE);
+  window._currentPage = page;
+
+  const start = (page - 1) * PAGE_SIZE;
+  const slice = list.slice(start, start + PAGE_SIZE);
+
+  body.innerHTML = slice.map((r, idx) => {
+    const i = start + idx; // real index in full list
+    return `<tr id="row-${i}">
+      <td style="color:rgba(200,230,208,0.3);font-size:0.72rem;">${i+1}</td>
+      <td style="font-weight:500;color:#fff;">${escHtml(r.name || '—')}</td>
+      <td>${r.attending
+        ? '<span class="badge badge-yes"><i class="fa-solid fa-check"></i> Coming</span>'
+        : '<span class="badge badge-no"><i class="fa-solid fa-xmark"></i> Can't Make It</span>'}
+      </td>
+      <td style="font-size:0.8rem;font-style:italic;color:rgba(200,230,208,0.7);">
+        ${r.message ? escHtml(r.message) : '<span style="color:rgba(200,230,208,0.25);">—</span>'}
+      </td>
+      <td style="font-size:0.72rem;color:rgba(200,230,208,0.55);">${escHtml(r.submitted || formatDate(r.timestamp) || '—')}</td>
+      <td><button class="del-btn" onclick="openModal(${i}, '${escAttr(r.name)}')" title="Delete">
+        <i class="fa-solid fa-trash-can"></i>
+      </button></td>
+    </tr>`;
+  }).join('');
+
+  // Render pagination
+  let pag = document.getElementById('guestPagination');
+  if(!pag){
+    pag = document.createElement('div');
+    pag.id = 'guestPagination';
+    pag.className = 'pagination';
+    document.getElementById('guestTable').after(pag);
+  }
+  if(totalPages <= 1){ pag.innerHTML = ''; return; }
+
+  let btns = '';
+  if(page > 1) btns += `<button class="page-btn" onclick="renderPage(${page-1})">&#8592;</button>`;
+  for(let p = 1; p <= totalPages; p++){
+    if(p === 1 || p === totalPages || Math.abs(p - page) <= 1){
+      btns += `<button class="page-btn${p===page?' active':''}" onclick="renderPage(${p})">${p}</button>`;
+    } else if(Math.abs(p - page) === 2){
+      btns += `<span class="page-info">…</span>`;
+    }
+  }
+  if(page < totalPages) btns += `<button class="page-btn" onclick="renderPage(${page+1})">&#8594;</button>`;
+  btns += `<span class="page-info">${start+1}–${Math.min(start+PAGE_SIZE,total)} of ${total}</span>`;
+  pag.innerHTML = btns;
 }
 
 async function loadGuests(){
