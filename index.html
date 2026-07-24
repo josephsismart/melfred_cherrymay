@@ -46,30 +46,36 @@
     ══════════════════════════════════════════ */
     /* ── corner leaf animations ── */
     @keyframes leafFadeIn {
-      0%   { opacity: 0; transform: scale(0.7) rotate(-8deg); }
-      60%  { opacity: 1; transform: scale(1.04) rotate(1deg); }
-      100% { opacity: 1; transform: scale(1) rotate(0deg); }
+      0%   { opacity: 0; }
+      100% { opacity: 1; }
     }
     @keyframes leafFloat {
-      0%,100% { transform: translateY(0px) rotate(0deg); }
-      50%      { transform: translateY(-8px) rotate(1.5deg); }
+      0%,100% { transform: translateY(0px); }
+      50%      { transform: translateY(-10px); }
     }
+    /* corner-wrap: position only, no transform (avoids animation conflict) */
     .corner-wrap {
       position: fixed; z-index: 5; pointer-events: none;
-      width: clamp(150px, 38vw, 260px);
+      width: clamp(160px, 35vw, 260px);
       height: auto;
       opacity: 0;
       animation: leafFadeIn 1.2s ease forwards;
     }
+    /* inner div handles the flip — totally separate from animation */
+    .corner-wrap .c-inner { width: 100%; display: block; }
+    .corner-wrap.tl { top: 0; left: 0; animation-delay: 0.1s; }
+    .corner-wrap.tl .c-inner { transform: scaleY(-1); }
+    .corner-wrap.tr { top: 0; right: 0; animation-delay: 0.3s; }
+    .corner-wrap.tr .c-inner { transform: scale(-1, -1); }
+    .corner-wrap.bl { bottom: 0; left: 0; animation-delay: 0.5s; }
+    .corner-wrap.bl .c-inner { transform: none; }
+    .corner-wrap.br { bottom: 0; right: 0; animation-delay: 0.7s; }
+    .corner-wrap.br .c-inner { transform: scaleX(-1); }
+    /* float animation on the img itself */
     .corner-wrap img {
       width: 100%; height: auto; display: block;
-      animation: leafFloat 5s ease-in-out infinite;
-      animation-delay: 1.2s;
+      animation: leafFloat 5s ease-in-out 1.4s infinite;
     }
-    .corner-wrap.tl { top: 0; left: 0; animation-delay: 0.2s; }
-    .corner-wrap.tr { top: 0; right: 0; transform: scaleX(-1); animation-delay: 0.4s; }
-    .corner-wrap.bl { bottom: 0; left: 0; transform: scaleY(-1); animation-delay: 0.6s; }
-    .corner-wrap.br { bottom: 0; right: 0; transform: scale(-1,-1); animation-delay: 0.8s; }
 
     /* ══════════════════════════════════════════
        ENVELOPE
@@ -254,10 +260,10 @@
 <div class="stars" id="stars"></div>
 
 <!-- ══ CORNER VINE DECORATIONS ══ -->
-<div class="corner-wrap tl" id="cb-tl"><img src="/leaves.png" alt=""/></div>
-<div class="corner-wrap tr" id="cb-tr"><img src="/leaves.png" alt=""/></div>
-<div class="corner-wrap bl" id="cb-bl"><img src="/leaves.png" alt=""/></div>
-<div class="corner-wrap br" id="cb-br"><img src="/leaves.png" alt=""/></div>
+<div class="corner-wrap tl" id="cb-tl"><div class="c-inner"><img src="/leaves.png" alt=""/></div></div>
+<div class="corner-wrap tr" id="cb-tr"><div class="c-inner"><img src="/leaves.png" alt=""/></div></div>
+<div class="corner-wrap bl" id="cb-bl"><div class="c-inner"><img src="/leaves.png" alt=""/></div></div>
+<div class="corner-wrap br" id="cb-br"><div class="c-inner"><img src="/leaves.png" alt=""/></div></div>
 
 <!-- ══ ENVELOPE ══ -->
 <div class="env-wrap" id="envWrap">
