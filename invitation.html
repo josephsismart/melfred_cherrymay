@@ -397,6 +397,10 @@
     .rsvp-resp-sub { font-size:0.85rem; color:var(--text-mid); text-align:center; }
     .rsvp-change-btn { margin-top:0.6rem; background:none; border:1.5px solid rgba(74,122,90,0.3); color:var(--rose); font-family:'Poppins',sans-serif; font-size:0.75rem; font-weight:600; padding:0.45rem 1.2rem; border-radius:50px; cursor:pointer; transition:all 0.25s; }
     .rsvp-gift-msg { margin-top:0.8rem; padding:0.9rem 1rem; border:1px solid rgba(74,122,90,0.25); border-radius:10px; font-family:'Poppins',sans-serif; font-size:0.78rem; color:var(--text-mid); text-align:center; line-height:1.7; background:rgba(74,122,90,0.05); width:100%; }
+    .rsvp-qr-row { display:flex; gap:1rem; justify-content:center; align-items:flex-start; margin-top:1rem; flex-wrap:wrap; }
+    .rsvp-qr-card { display:flex; flex-direction:column; align-items:center; gap:0.4rem; }
+    .rsvp-qr-card img { width:130px; height:130px; object-fit:contain; border-radius:8px; border:1.5px solid rgba(74,122,90,0.2); background:#fff; padding:4px; }
+    .rsvp-qr-label { font-family:'Poppins',sans-serif; font-size:0.68rem; font-weight:600; color:var(--wine); letter-spacing:0.08em; text-transform:uppercase; }
 
     /* ── SAVE THE DATE ── */
     #save-the-date { background:linear-gradient(160deg,#f4faf5 0%,#edf7f0 50%,#f0faf4 100%); position:relative; overflow:hidden; }
@@ -907,12 +911,32 @@
           <div class="rsvp-resp-sub">We're so happy you'll be joining us on our special day. We can't wait to celebrate with you!</div>
           <button class="rsvp-change-btn" onclick="resetRsvp()"><i class="fa-solid fa-rotate-left"></i> Change my answer</button>
           <div class="rsvp-gift-msg">Your love, prayers, and presence are the greatest gifts we could ask for. However, should you wish to bless us further, a monetary gift towards our new beginning would be sincerely appreciated.</div>
+          <div class="rsvp-qr-row">
+            <div class="rsvp-qr-card">
+              <div class="rsvp-qr-label">Globe / GCash</div>
+              <img src="/qr-globe.png" alt="Globe InstaPay QR"/>
+            </div>
+            <div class="rsvp-qr-card">
+              <div class="rsvp-qr-label">BPI</div>
+              <img src="/qr-bpi.png" alt="BPI InstaPay QR"/>
+            </div>
+          </div>
         </div>
         <div class="rsvp-response no-resp" id="noResp">
           <div class="rsvp-resp-text" id="noRespText">Thank you so much for letting us know.</div>
           <div class="rsvp-resp-sub">We completely understand and appreciate you taking the time to respond. We hope to see you another time. Wishing you all the best!</div>
           <button class="rsvp-change-btn" onclick="resetRsvp()"><i class="fa-solid fa-rotate-left"></i> Change my answer</button>
           <div class="rsvp-gift-msg">Your love, prayers, and presence are the greatest gifts we could ask for. However, should you wish to bless us further, a monetary gift towards our new beginning would be sincerely appreciated.</div>
+          <div class="rsvp-qr-row">
+            <div class="rsvp-qr-card">
+              <div class="rsvp-qr-label">Globe / GCash</div>
+              <img src="/qr-globe.png" alt="Globe InstaPay QR"/>
+            </div>
+            <div class="rsvp-qr-card">
+              <div class="rsvp-qr-label">BPI</div>
+              <img src="/qr-bpi.png" alt="BPI InstaPay QR"/>
+            </div>
+          </div>
         </div>
 
         <div class="rsvp-rule"></div>
