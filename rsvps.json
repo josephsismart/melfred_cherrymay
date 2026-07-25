@@ -1,6 +1,12 @@
 {
   "rsvps": [
     {
+      "name": "Frenzel Blues Malig-On",
+      "attending": true,
+      "message": "",
+      "submitted": "2026-07-25 21:00:01 PHT"
+    },
+    {
       "name": "Ronald Estrada",
       "attending": true,
       "message": "",
