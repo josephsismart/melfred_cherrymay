@@ -1,6 +1,12 @@
 {
   "rsvps": [
     {
+      "name": "Rosh Abellanosa",
+      "attending": true,
+      "message": "Best wishes to the couple!",
+      "submitted": "2026-07-25 11:27:31 PHT"
+    },
+    {
       "name": "Richelle Tuyak",
       "attending": true,
       "message": "",
