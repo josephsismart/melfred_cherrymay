@@ -1,6 +1,12 @@
 {
   "rsvps": [
     {
+      "name": "John Eric Homecillo",
+      "attending": true,
+      "message": "Salamat sa pag invite Fred❤️chem",
+      "submitted": "2026-07-25 20:50:36 PHT"
+    },
+    {
       "name": "Nestor Jr",
       "attending": true,
       "message": "",
