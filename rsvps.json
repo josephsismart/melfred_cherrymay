@@ -1,6 +1,12 @@
 {
   "rsvps": [
     {
+      "name": "Gyro Culdora",
+      "attending": true,
+      "message": "",
+      "submitted": "2026-07-25 20:59:37 PHT"
+    },
+    {
       "name": "John Jewell",
       "attending": true,
       "message": "",
