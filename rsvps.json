@@ -1,6 +1,12 @@
 {
   "rsvps": [
     {
+      "name": "Jared Culdora",
+      "attending": true,
+      "message": "F",
+      "submitted": "2026-07-25 21:05:59 PHT"
+    },
+    {
       "name": "Carrena Amora",
       "attending": true,
       "message": "F",
