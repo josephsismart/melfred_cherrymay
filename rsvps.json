@@ -1,12 +1,6 @@
 {
   "rsvps": [
     {
-      "name": "F",
-      "attending": true,
-      "message": "",
-      "submitted": "2026-07-25 20:12:10 PHT"
-    },
-    {
       "name": "Jennifer Villanueva",
       "attending": true,
       "message": "",
@@ -278,6 +272,13 @@
     }
   ],
   "trash": [
+    {
+      "name": "F",
+      "attending": true,
+      "message": "",
+      "submitted": "2026-07-25 20:12:10 PHT",
+      "deletedAt": "2026-07-25 20:12:21 PHT"
+    },
     {
       "name": "Joliza Navin C. Malig-On",
       "attending": true,
