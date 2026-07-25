@@ -1,6 +1,12 @@
 {
   "rsvps": [
     {
+      "name": "Carrena Amora",
+      "attending": true,
+      "message": "F",
+      "submitted": "2026-07-25 21:05:49 PHT"
+    },
+    {
       "name": "Nika Freddie",
       "attending": true,
       "message": "F",
