@@ -263,8 +263,12 @@
   
     /* ── FORCE OUR COLORS IN DARK MODE ── */
     @media (prefers-color-scheme: dark) {
-      html, body { background: #fff !important; }
-      .env-scene, .env-front, .env-back, .env-flap { filter: none !important; }
+      html, body {
+        background: linear-gradient(160deg, #051a0a 0%, #0d3322 45%, #162e1f 75%, #051a0a 100%) !important;
+        color: rgba(200,230,208,0.85) !important;
+      }
+      .env-label, .env-tap { color: rgba(200,230,208,0.7) !important; }
+      .env-scene, .env-body, .env-flap, .env-flap-inner { filter: none !important; }
     }
 
   </style>
