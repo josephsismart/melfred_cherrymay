@@ -313,12 +313,6 @@
       "submitted": "2026-07-25 20:29:57 PHT"
     },
     {
-      "name": "Imelda B .Espijon",
-      "attending": true,
-      "message": "",
-      "submitted": "2026-07-25 20:29:47 PHT"
-    },
-    {
       "name": "Criselda Bongolto",
       "attending": true,
       "message": "",
@@ -632,6 +626,13 @@
     }
   ],
   "trash": [
+    {
+      "name": "Imelda B .Espijon",
+      "attending": true,
+      "message": "",
+      "submitted": "2026-07-25 20:29:47 PHT",
+      "deletedAt": "2026-08-02 23:45:55 PHT"
+    },
     {
       "name": "Nadine Malig-On",
       "attending": true,
