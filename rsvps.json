@@ -1,6 +1,12 @@
 {
   "rsvps": [
     {
+      "name": "Mark Enem",
+      "attending": true,
+      "message": "",
+      "submitted": "2026-08-03 18:19:29 PHT"
+    },
+    {
       "name": "Evangeline Paqueo",
       "attending": true,
       "message": "Best wishes!",
