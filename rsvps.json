@@ -13,12 +13,6 @@
       "submitted": "2026-08-05 20:19:29 PHT"
     },
     {
-      "name": "JARED POLANGCO CULDORA",
-      "attending": true,
-      "message": "Congrats Yot! 🎉🎉",
-      "submitted": "2026-08-05 14:03:49 PHT"
-    },
-    {
       "name": "Jacinto Paqueo Jr",
       "attending": true,
       "message": "",
@@ -656,6 +650,13 @@
     }
   ],
   "trash": [
+    {
+      "name": "JARED POLANGCO CULDORA",
+      "attending": true,
+      "message": "Congrats Yot! 🎉🎉",
+      "submitted": "2026-08-05 14:03:49 PHT",
+      "deletedAt": "2026-08-06 22:31:31 PHT"
+    },
     {
       "name": "Carenna Murillo-Amora",
       "attending": true,
