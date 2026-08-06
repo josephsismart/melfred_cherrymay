@@ -13,12 +13,6 @@
       "submitted": "2026-08-05 20:19:29 PHT"
     },
     {
-      "name": "Jacinto Paqueo Jr",
-      "attending": true,
-      "message": "",
-      "submitted": "2026-08-03 21:26:22 PHT"
-    },
-    {
       "name": "Mark Enem",
       "attending": true,
       "message": "",
@@ -650,6 +644,13 @@
     }
   ],
   "trash": [
+    {
+      "name": "Jacinto Paqueo Jr",
+      "attending": true,
+      "message": "",
+      "submitted": "2026-08-03 21:26:22 PHT",
+      "deletedAt": "2026-08-06 22:31:50 PHT"
+    },
     {
       "name": "JARED POLANGCO CULDORA",
       "attending": true,
