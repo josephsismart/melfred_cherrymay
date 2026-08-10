@@ -7,12 +7,6 @@
       "submitted": "2026-08-08 23:49:35 PHT"
     },
     {
-      "name": "Jacinto Paqueo Jr",
-      "attending": true,
-      "message": "-",
-      "submitted": "2026-08-06 22:33:25 PHT"
-    },
-    {
       "name": "Nathalie Pasa",
       "attending": true,
       "message": "Hope to meet you both at least a day before the wedding! :-)",
@@ -656,6 +650,13 @@
     }
   ],
   "trash": [
+    {
+      "name": "Jacinto Paqueo Jr",
+      "attending": true,
+      "message": "-",
+      "submitted": "2026-08-06 22:33:25 PHT",
+      "deletedAt": "2026-08-10 11:08:36 PHT"
+    },
     {
       "name": "Joeme F. Razon",
       "attending": true,
