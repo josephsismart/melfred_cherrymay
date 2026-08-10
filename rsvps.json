@@ -1,6 +1,12 @@
 {
   "rsvps": [
     {
+      "name": "Joeme Razon",
+      "attending": true,
+      "message": "-",
+      "submitted": "2026-08-10 11:10:07 PHT"
+    },
+    {
       "name": "Jacinto Paqueo",
       "attending": true,
       "message": "-",
