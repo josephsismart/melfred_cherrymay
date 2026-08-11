@@ -1,6 +1,12 @@
 {
   "rsvps": [
     {
+      "name": "Princes Cabiguing",
+      "attending": true,
+      "message": "",
+      "submitted": "2026-08-11 17:09:56 PHT"
+    },
+    {
       "name": "Joeme Razon",
       "attending": true,
       "message": "-",
