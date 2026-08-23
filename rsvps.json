@@ -1,6 +1,12 @@
 {
   "rsvps": [
     {
+      "name": "Steven Bico",
+      "attending": true,
+      "message": "",
+      "submitted": "2026-08-23 14:00:11 PHT"
+    },
+    {
       "name": "Mr And Mrs Fel Marven Bico",
       "attending": true,
       "message": "",
